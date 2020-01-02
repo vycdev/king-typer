@@ -1,0 +1,46 @@
+{
+    "name": "king-typer",
+    "version": "1.0.0",
+    "description": "A project for the infoeducatie contest and a future typing website for everyone.",
+    "main": "src/index.ts",
+    "scripts": {
+        "dev": "nodemon",
+        "build": "tsc",
+        "start:dev": "node -r ./register.js ./src/index.ts",
+        "start": "node ./dist/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vyctor661/king-typer.git"
+    },
+    "author": "Sandu Victor",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Vyctor661/king-typer/issues"
+    },
+    "homepage": "https://github.com/Vyctor661/king-typer#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.14.0",
+        "@typescript-eslint/parser": "^2.14.0",
+        "dotenv": "^8.2.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.7.0",
+        "eslint-config-standard": "^14.1.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-node": "^10.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.17.0",
+        "eslint-plugin-standard": "^4.0.1",
+        "nodemon": "^2.0.2",
+        "prettier": "^1.19.1",
+        "ts-node": "^8.5.4",
+        "typescript": "^3.7.4"
+    },
+    "dependencies": {
+        "@types/koa": "^2.11.0",
+        "@types/react": "^16.9.17",
+        "koa": "^2.11.0",
+        "react": "^16.12.0"
+    }
+}
