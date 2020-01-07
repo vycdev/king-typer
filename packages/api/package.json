@@ -8,8 +8,10 @@
     "license": "GPL-3.0",
     "private": true,
     "scripts": {
-        "start": "node -r ./register.js src/index.ts",
-        "dev": "nodemon"
+        "start:dev": "node -r ./register.js src/index.ts",
+        "dev": "nodemon",
+        "start": "node ./dist/src/index.js",
+        "build": "tsc "
     },
     "dependencies": {
         "@king-typer/shared": "0.0.1",
