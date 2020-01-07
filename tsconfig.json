@@ -1,24 +1,19 @@
 {
-    "compileOnSave": true,
     "compilerOptions": {
-        "module": "commonjs",
-        "strict": true,
-        "baseUrl": "./",
-        "outDir": "./dist",
-        "noImplicitAny": true,
-        "sourceMap": true,
-        "jsx": "react",
-        "removeComments": true,
-        "experimentalDecorators": true,
-        "target": "es6",
-        "emitDecoratorMetadata": true,
+        "module": "esnext",
+        "target": "esnext",
         "moduleResolution": "node",
-        "importHelpers": true,
+        "alwaysStrict": true,
+        "downlevelIteration": true,
+        "strictNullChecks": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
         "esModuleInterop": true,
-        "lib": ["ES2015", "ES2017", "DOM"],
-        "allowJs": true,
-        "paths": { "components/*": ["src/web/components/*"] }
+        "strictPropertyInitialization": true,
+        "importHelpers": true,
+        "sourceMap": true,
+        "jsx": "preserve"
     },
-    "include": ["./src/**/*.ts"],
-    "exclude": ["./src/**/*.test.ts", "./src/public/", "node_modules", ".tsx"]
+    "exclude": ["node_modules"],
+    "include": ["packages/**/*", "typings/**/*"]
 }
