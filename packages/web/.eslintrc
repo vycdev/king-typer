@@ -1,0 +1,20 @@
+{
+    "extends": ["plugin:react/recommended", "../../.eslintrc"],
+    "plugins": ["react", "emotion"],
+    "env": {
+        "node": false
+    },
+    "rules": {
+        "react/prop-types": 0,
+        "react/display-name": 0,
+        "emotion/styled-import": 2,
+        "emotion/no-vanilla": 2,
+        "import/named": 0
+    },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "16.11.0"
+        }
+    }
+}
