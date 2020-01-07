@@ -1,63 +1,27 @@
 {
     "name": "king-typer",
-    "version": "1.0.0",
-    "description": "A project for the infoeducatie contest and a future typing website for everyone.",
-    "main": "register.js",
+    "version": "0.0.1",
     "scripts": {
-        "dev:web": "webpack-dev-server --mode development --open --hot",
-        "build": "tsc && webpack --mode production",
-        "start:web": "node ./dist/index.html",
-        "dev:api": "nodemon",
-        "start:dev:api": "node -r ./register.js src/server.ts",
-        "start:api": "node ./dist/src/server.js"
+        "dev": "pnpm recursive run dev --filter @king-typer/* --workspace-concurrency Infinity",
+        "build": "pnpm run build --filter @king-typer/*",
+        "test": "pnpm run test --filter @king-typer/*",
+        "lint": "eslint './packages/**/*.{ts,tsx}'"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Vyctor661/king-typer.git"
-    },
-    "author": "",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Vyctor661/king-typer/issues"
-    },
-    "homepage": "https://github.com/Vyctor661/king-typer#readme",
     "devDependencies": {
-        "@types/node": "^13.1.2",
-        "@typescript-eslint/eslint-plugin": "^2.8.0",
-        "@typescript-eslint/parser": "^2.8.0",
-        "awesome-typescript-loader": "^5.2.1",
-        "dotenv": "^8.2.0",
-        "eslint": "^6.7.0",
-        "eslint-config-prettier": "^6.7.0",
-        "eslint-config-standard": "^14.1.0",
-        "eslint-plugin-import": "^2.18.2",
+        "@types/node": "^12.12.24",
+        "@typescript-eslint/eslint-plugin": "^2.15.0",
+        "@typescript-eslint/parser": "^2.15.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-config-react": "^1.1.7",
+        "eslint-plugin-emotion": "^10.0.27",
+        "eslint-plugin-import": "^2.19.1",
         "eslint-plugin-node": "^10.0.0",
-        "eslint-plugin-prettier": "^3.1.1",
+        "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.1",
-        "html-webpack-plugin": "^3.2.0",
-        "nodemon": "^2.0.2",
+        "eslint-plugin-react": "^7.17.0",
         "prettier": "^1.19.1",
-        "ts-node": "^8.5.2",
-        "typescript": "^3.7.2",
-        "webpack": "^4.41.5",
-        "webpack-cli": "^3.3.10",
-        "webpack-dev-server": "^3.10.1"
-    },
-    "dependencies": {
-        "@types/knex": "^0.16.1",
-        "@types/koa": "^2.11.0",
-        "@types/koa-logger": "^3.1.1",
-        "@types/koa-router": "^7.0.42",
-        "@types/pg": "^7.14.1",
-        "@types/react": "^16.9.17",
-        "@types/react-dom": "^16.9.4",
-        "knex": "^0.20.7",
-        "koa": "^2.11.0",
-        "koa-logger": "^3.2.1",
-        "koa-router": "^7.4.0",
-        "pg": "^7.17.0",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0"
+        "tslib": "^1.10.0",
+        "typescript": "^3.7.4"
     }
 }
