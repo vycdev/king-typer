@@ -1,0 +1,27 @@
+{
+    "name": "@king-typer/api",
+    "version": "0.0.1",
+    "description": "Back end for king typer",
+    "main": "src/index.ts",
+    "repository": "https://github.com/Vyctor661/king-typer",
+    "author": "Sandu Victor",
+    "license": "GPL-3.0",
+    "private": true,
+    "scripts": {
+        "start": "node -r ./register.js src/index.ts",
+        "dev": "nodemon"
+    },
+    "dependencies": {
+        "@king-typer/shared": "0.0.1",
+        "dotenv": "^8.2.0",
+        "knex": "^0.20.1",
+        "koa": "^2.11.0",
+        "pg": "^7.12.1",
+        "sqlite3": "^4.1.0"
+    },
+    "devDependencies": {
+        "@types/koa": "^2.0.51",
+        "nodemon": "^1.19.4",
+        "ts-node": "^8.4.1"
+    }
+}
