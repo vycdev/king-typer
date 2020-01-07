@@ -19,6 +19,6 @@
         "allowJs": true,
         "paths": { "components/*": ["src/web/components/*"] }
     },
-    "include": ["./src/**/*.ts", "src/index.tsx"],
-    "exclude": ["./src/**/*.test.ts", "./src/public/", "node_modules"]
+    "include": ["./src/**/*.ts"],
+    "exclude": ["./src/**/*.test.ts", "./src/public/", "node_modules", ".tsx"]
 }
