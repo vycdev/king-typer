@@ -5,11 +5,10 @@
     "main": "register.js",
     "scripts": {
         "dev:web": "webpack-dev-server --mode development --open --hot",
-        "build:web": "webpack --mode production",
+        "build": "tsc && webpack --mode production",
         "start:web": "node ./dist/index.html",
         "dev:api": "nodemon",
         "start:dev:api": "node -r ./register.js src/server.ts",
-        "build: api": "tsc",
         "start:api": "node ./dist/src/server.js"
     },
     "repository": {
