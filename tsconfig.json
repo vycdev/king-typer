@@ -17,7 +17,7 @@
         "esModuleInterop": true,
         "lib": ["ES2015", "ES2017", "DOM"],
         "allowJs": true,
-        "paths": { "components/*": ["src/components/*"] }
+        "paths": { "components/*": ["src/web/components/*"] }
     },
     "include": ["./src/**/*.ts", "src/index.tsx"],
     "exclude": ["./src/**/*.test.ts", "./src/public/", "node_modules"]
