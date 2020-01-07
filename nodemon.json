@@ -1,6 +1,14 @@
 {
-    "ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        ".git",
+        "node_modules",
+        ".tsx",
+        ".html",
+        "./src/web/"
+    ],
     "watch": ["src"],
-    "exec": "npm run start:dev",
+    "exec": "npm run start:dev:api",
     "ext": "ts"
 }
