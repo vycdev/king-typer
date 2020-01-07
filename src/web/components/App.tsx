@@ -1,6 +1,8 @@
 import * as React from "react";
 
-import PageInterface from "../PageInterface";
+interface PageInterface {
+    color: string;
+}
 
 class App extends React.Component<PageInterface, {}> {
     render() {
