@@ -4,9 +4,13 @@
     "description": "A project for the infoeducatie contest and a future typing website for everyone.",
     "main": "register.js",
     "scripts": {
-        "dev": "webpack-dev-server --mode development --open --hot",
-        "build": "webpack --mode production",
-        "start": "node ./dist/index.html"
+        "dev:web": "webpack-dev-server --mode development --open --hot",
+        "build:web": "webpack --mode production",
+        "start:web": "node ./dist/index.html",
+        "dev:api": "nodemon",
+        "start:dev:api": "node -r ./register.js src/server.ts",
+        "build: api": "tsc",
+        "start:api": "node ./dist/src/server.js"
     },
     "repository": {
         "type": "git",
@@ -33,6 +37,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.1",
         "html-webpack-plugin": "^3.2.0",
+        "nodemon": "^2.0.2",
         "prettier": "^1.19.1",
         "ts-node": "^8.5.2",
         "typescript": "^3.7.2",
@@ -41,10 +46,18 @@
         "webpack-dev-server": "^3.10.1"
     },
     "dependencies": {
+        "@types/knex": "^0.16.1",
         "@types/koa": "^2.11.0",
+        "@types/koa-logger": "^3.1.1",
+        "@types/koa-router": "^7.0.42",
+        "@types/pg": "^7.14.1",
         "@types/react": "^16.9.17",
         "@types/react-dom": "^16.9.4",
+        "knex": "^0.20.7",
         "koa": "^2.11.0",
+        "koa-logger": "^3.2.1",
+        "koa-router": "^7.4.0",
+        "pg": "^7.17.0",
         "react": "^16.12.0",
         "react-dom": "^16.12.0"
     }
