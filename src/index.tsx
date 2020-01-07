@@ -1,8 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import App from "./components/App";
+import App from "./web/components/App";
 
-import { server } from "./server";
-
-ReactDOM.render(<App color="Blue" />, document.getElementById("root"));
+ReactDOM.render(<App color="Yellow" />, document.getElementById("root"));
