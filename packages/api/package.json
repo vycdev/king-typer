@@ -19,7 +19,8 @@
         "knex": "^0.20.1",
         "koa": "^2.11.0",
         "pg": "^7.12.1",
-        "sqlite3": "^4.1.0"
+        "sqlite3": "^4.1.0",
+        "typescript": "^3.7.4"
     },
     "devDependencies": {
         "@types/koa": "^2.0.51",

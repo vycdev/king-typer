@@ -5,12 +5,14 @@
         "target": "ES6",
         "strict": true,
         "strictNullChecks": true,
-        "noImplicitAny": true,
         "noImplicitThis": true,
         "moduleResolution": "node",
         "esModuleInterop": true
     },
     "exclude": [
         "node_modules"
+    ],
+    "include": [
+        "src"
     ]
 }
