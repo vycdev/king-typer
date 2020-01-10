@@ -1,7 +1,17 @@
 {
-    "extends": "../../tsconfig.json",
     "compilerOptions": {
         "module": "commonjs",
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "jsx": "preserve",
+        "moduleResolution": "node",
+        "alwaysStrict": true,
+        "downlevelIteration": true,
+        "strictNullChecks": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "esModuleInterop": true,
+        "strictPropertyInitialization": true,
+        "importHelpers": true,
+        "sourceMap": true,
     }
 }
