@@ -14,7 +14,6 @@
         "build": "tsc "
     },
     "dependencies": {
-        "@king-typer/shared": "0.0.1",
         "dotenv": "^8.2.0",
         "knex": "^0.20.1",
         "koa": "^2.11.0",
