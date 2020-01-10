@@ -72,7 +72,7 @@ const devConfig = {
 
     // @ts-ignore idk how to fix this...
     devServer: {
-        hot: false,
+        hot: true,
         historyApiFallback: true
     }
 }
@@ -82,7 +82,7 @@ const prodConfig = {
     mode: "production",
 
     optimization: {
-        minimize: true,
+        minimize: false,
         nodeEnv: "production"
     },
 
@@ -108,7 +108,6 @@ const prodConfig = {
 
     performance: {
         maxAssetSize: 1000 * 500, // 500KB
-        // we only care about the size of compressed files
         assetFilter: filename => filename.endsWith(".br")
     },
 
