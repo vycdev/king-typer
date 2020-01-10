@@ -4,6 +4,7 @@
     "scripts": {
         "dev": "pnpm recursive run dev --filter @king-typer/* --workspace-concurrency Infinity",
         "build": "pnpm run build --filter @king-typer/*",
+        "start": "pnpm run start --filter @king-typer/*",
         "test": "pnpm run test --filter @king-typer/*",
         "lint": "eslint './packages/**/*.{ts,tsx}'"
     },
