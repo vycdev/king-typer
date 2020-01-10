@@ -1,1 +1,1 @@
-web: pnpm run start
+web: npm run start
