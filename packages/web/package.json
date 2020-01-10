@@ -10,17 +10,22 @@
     "sideEffects": false,
     "scripts": {
         "dev": "webpack-dev-server",
-        "build": "cross-env NODE_ENV=production webpack",
+        "build": "cross-env NODE_ENV=production webpack && tsc src/server.ts --outDir ./dist --esModuleInterop true",
         "build:dev": "webpack",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "start": "node ./dist/server.js"
     },
     "dependencies": {
         "@emotion/core": "^10.0.22",
         "@emotion/styled": "^10.0.23",
         "@emotion/styled-base": "^10.0.24",
         "@king-typer/shared": "0.0.1",
+        "@types/koa": "^2.11.0",
+        "@types/koa-static": "^4.0.1",
         "emotion-theming": "^10.0.19",
         "history": "^4.10.1",
+        "koa": "^2.11.0",
+        "koa-static": "^5.0.0",
         "mobx": "^5.14.2",
         "mobx-react-lite": "^1.5.0",
         "react": "^16.11.0",
