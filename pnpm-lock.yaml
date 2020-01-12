@@ -65,7 +65,6 @@ importers:
       '@emotion/styled-base': 10.0.24_75a3621563989c24c51854c3e0e71dec
       '@types/koa': 2.11.0
       '@types/koa-static': 4.0.1
-      emotion-theming: 10.0.19_75a3621563989c24c51854c3e0e71dec
       history: 4.10.1
       koa: 2.11.0
       koa-static: 5.0.0
@@ -131,7 +130,6 @@ importers:
       clean-webpack-plugin: ^3.0.0
       copy-webpack-plugin: ^5.0.4
       cross-env: ^6.0.3
-      emotion-theming: ^10.0.19
       fork-ts-checker-webpack-plugin: ^3.0.1
       history: ^4.10.1
       html-webpack-inline-source-plugin: ^0.0.10
@@ -3185,19 +3183,6 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha1-TapNnbAPmBmIDHn6RXrlsJof04k=
-  /emotion-theming/10.0.19_75a3621563989c24c51854c3e0e71dec:
-    dependencies:
-      '@babel/runtime': 7.7.2
-      '@emotion/core': 10.0.22_react@16.11.0
-      '@emotion/weak-memoize': 0.2.4
-      hoist-non-react-statics: 3.3.0
-      react: 16.11.0
-    dev: false
-    peerDependencies:
-      '@emotion/core': ^10.0.17
-      react: '>=16.3.0'
-    resolution:
-      integrity: sha512-dQRBPLAAQ6eA8JKhkLCIWC8fdjPbiNC1zNTdFF292h9amhZXofcNGUP7axHoHX4XesqQESYwZrXp53OPInMrKw==
   /encodeurl/1.0.2:
     engines:
       node: '>= 0.8'
@@ -4331,12 +4316,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
-  /hoist-non-react-statics/3.3.0:
-    dependencies:
-      react-is: 16.11.0
-    dev: false
-    resolution:
-      integrity: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
   /homedir-polyfill/1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -6752,10 +6731,6 @@ packages:
       react: ^16.0.0
     resolution:
       integrity: sha512-nrRyIUE1e7j8PaXSPtyRKtz+2y9ubW/ghNgqKFHHAHaeP0fpF5uXR+sq8IMRHC+ZUxw7W9NyCDTBtwWxvkb0iA==
-  /react-is/16.11.0:
-    dev: false
-    resolution:
-      integrity: sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
   /react-is/16.12.0:
     resolution:
       integrity: sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
