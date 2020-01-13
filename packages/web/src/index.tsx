@@ -2,6 +2,7 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 
 import App from "./components/App"
+import TypingBox from "./components/typingBox"
 
 import styled from "@emotion/styled"
 
@@ -23,6 +24,7 @@ class Apppp extends React.Component {
                 <Anotherone>
                     <App color="Ye dude imagine that being yellow"></App>
                 </Anotherone>
+                <TypingBox></TypingBox>
             </div>
         )
     }
