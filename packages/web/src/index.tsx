@@ -2,7 +2,7 @@ import * as React from "react"
 import * as ReactDOM from "react-dom"
 
 import App from "./components/App"
-import TypingBox from "./components/typingBox"
+import { Box } from "./components/typingBox/typingBox"
 
 import styled from "@emotion/styled"
 
@@ -14,20 +14,20 @@ const Anotherone = styled("div")`
     background-color: yellow;
 `
 
-class Apppp extends React.Component {
-    render() {
-        return (
+const Apppp = () => {
+    return (
+        <>
             <div>
                 <Apps>
-                    <App color="blue"></App>
+                    <App text="blue"></App>
                 </Apps>
                 <Anotherone>
-                    <App color="Ye dude imagine that being yellow"></App>
+                    <App text="Ye dude imagine that being yellow"></App>
                 </Anotherone>
-                <TypingBox></TypingBox>
+                <Box content="just testing"></Box>
             </div>
-        )
-    }
+        </>
+    )
 }
 
 ReactDOM.render(<Apppp />, document.getElementById("root"))
