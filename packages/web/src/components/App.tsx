@@ -1,18 +1,18 @@
 import * as React from "react"
 
-interface PageInterface {
-    color: string
+interface AppInterface {
+    text: string
 }
 
-class App extends React.Component<PageInterface, {}> {
-    render() {
-        return (
+const App = (props: AppInterface) => {
+    return (
+        <>
             <div>
-                <h1>Welcome to KING TYPER MFS</h1>
-                <p>THIS IS: {this.props.color}</p>
+                <h1>just some text</h1>
+                <p>{props.text}</p>
             </div>
-        )
-    }
+        </>
+    )
 }
 
 export default App
