@@ -5,6 +5,16 @@ const LetterElement = styled.span`
     display: inline;
 `
 
+// TODO
+
+/*
+    Make the WPM/CPM calculator work
+    Make it into individual letters
+    Make it autoscroll
+    Make it beautiful 
+    Make the code beautiful
+*/
+
 import { Wrapper, Container, Top, Text, Bottom } from "./style"
 
 let string = "" //this is just for testing things I will remove it later.
@@ -12,7 +22,7 @@ let increment = 0
 let color = "green"
 
 const getText = () => {
-    return "this is just some random text to be tested and to see how this works and I think this works fine right?"
+    return "this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right "
 }
 
 const buildTextComponentsArray = (text: string, elColor: string) => {
@@ -63,6 +73,17 @@ const onKey = (e: any, special: string = "undefined") => {
     }
     return string
 }
+
+// const timer = (startStop: boolean)=>{
+//     if(startStop){
+//         setTimeout(()={
+
+//         }, 60000)
+//     }else{
+//         return
+//     }
+// }
+
 const checkAndIncrement = () => {
     if (string === getTextToBeCompared(getText())[increment]) {
         increment++
