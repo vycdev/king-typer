@@ -24,7 +24,7 @@ const Apppp = () => {
                 <Anotherone>
                     <App text="Ye dude imagine that being yellow"></App>
                 </Anotherone>
-                <Box content="just testing"></Box>
+                <Box></Box>
             </div>
         </>
     )
