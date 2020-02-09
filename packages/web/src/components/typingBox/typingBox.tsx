@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "@emotion/styled"
 
 const LetterElement = styled.span`
@@ -8,95 +8,109 @@ const LetterElement = styled.span`
 import { Wrapper, Container, Top, Text, Bottom } from "./style"
 
 let string = "" //this is just for testing things I will remove it later.
+let increment = 0
+let color = "green"
 
 const getText = () => {
-    return "This text was changed just because I wanted it to be changed so yes"
+    return "this is just some random text to be tested and to see how this works and I think this works fine right?"
 }
 
-const buildTextComponentsArray = (
-    text: string,
-    elNum: number,
-    elColor: string
-) => {
-    return text.split(/( )/g).map((word: string, index) => {
-        if (index === elNum) {
+const buildTextComponentsArray = (text: string, elColor: string) => {
+    return text.split(" ").map((word: string, index) => {
+        if (index === increment) {
             return (
-                <LetterElement style={{ color: elColor }}>{word}</LetterElement>
+                <LetterElement style={{ color: elColor }}>
+                    {word}{" "}
+                </LetterElement>
             )
         }
-        return <LetterElement style={{ color: "blue" }}>{word}</LetterElement>
+        return <LetterElement style={{ color: "blue" }}>{word} </LetterElement>
     })
 }
 
 const getTextToBeCompared = (text: string) => {
-    return text.split(/( )/g)
+    return text.split(" ")
 }
 
-// const checkBackspaceReturn = (e: any) => {
-//     onKey(
-//         0,
-//         e.keyCode === 8
-//             ? "backspace"
-//             : e.keyCode === 13
-//             ? "enter"
-//             : e.keyCode === 32
-//             ? "space"
-//             : "undefined"
-//     )
-// }
-// const onKey = (e: any, special: string = "undefined") => {
-//     if (window.event && e != 0) {
-//         string += String.fromCharCode(e.charCode)
-//         setBottomInner(string)
-//     } else if (special == "backspace") {
-//         string = string.slice(0, -1)
-//         setBottomInner(string)
-//     } else if (special == "enter") {
-//         console.log(string) /// This log is to be removed later
-//         setBottomInner("")
-//         string = ""
-//     } else if (special == "space") {
-//         console.log(string) ///this log is to be removed later
-//         if (string === comparableText[iterateThis]) {
-//             setTypeText(() =>
-//                 buildTextComponentsArray(getText(), iterateThis, "green")
-//             )
-//             iterateThis += 2
-//             console.log(iterateThis, comparableText[iterateThis])
-//         }
-//         string = ""
-//         setBottomInner("")
-//     }
-//     console.log('"' + string + '"')
-// }
+const checkBackspaceReturn = (e: any) => {
+    onKey(
+        0,
+        e.keyCode === 8
+            ? "backspace"
+            : e.keyCode === 13
+            ? "enter"
+            : e.keyCode === 32
+            ? "space"
+            : "undefined"
+    )
+}
+const onKey = (e: any, special: string = "undefined") => {
+    if (
+        window.event &&
+        e != 0 &&
+        String.fromCharCode(e.charCode) != " " &&
+        String.fromCharCode(e.charCode) != ""
+    ) {
+        string += String.fromCharCode(e.charCode)
+    } else if (special == "backspace") {
+        string = string.slice(0, -1)
+    } else if (special == "enter") {
+        checkAndIncrement()
+        string = ""
+    } else if (special == "space") {
+        checkAndIncrement()
+        string = ""
+    }
+    return string
+}
+const checkAndIncrement = () => {
+    if (string === getTextToBeCompared(getText())[increment]) {
+        increment++
+        if (increment >= getTextToBeCompared(getText()).length) increment = 0
+        color = "green"
+    } else {
+        console.log(
+            string,
+            increment,
+            getTextToBeCompared(getText())[increment]
+        )
+        color = "red"
+    }
+}
 
 const Input = () => {
     const [inner, changeInner] = useState("")
+    let text = ""
 
-    return <Bottom value={inner} autoFocus></Bottom>
+    return (
+        <Bottom
+            value={inner}
+            onKeyPress={e => changeInner(onKey(e))}
+            onKeyDown={e => {
+                checkBackspaceReturn(e)
+                changeInner(string)
+            }}
+            onChange={() => {}}
+            autoFocus
+        ></Bottom>
+    )
 }
 
 export const Box = () => {
-    const [bottomInner, setBottomInner] = useState("")
-    const [typeText, setTypeText] = useState(
-        buildTextComponentsArray(getText(), 0, "green")
+    const [text, updateText] = useState(
+        buildTextComponentsArray(getText(), color)
     )
-
-    // setBottomInner(() => {})
 
     return (
         <Wrapper>
-            <Container>
+            <Container
+                onKeyDown={e => {
+                    updateText(buildTextComponentsArray(getText(), color))
+                }}
+            >
                 <Top>This is something;</Top>
-                <Text>{typeText}</Text>
+                <Text>{text}</Text>
                 <Input></Input>
-                <Bottom
-                // onKeyPress={onKey}
-                // onKeyDown={checkBackspaceReturn}
-                // value={bottomInner}
-                // onChange={() => {}}
-                // autoFocus
-                ></Bottom>
             </Container>
         </Wrapper>
     )
