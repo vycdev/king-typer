@@ -40,9 +40,10 @@ export const Bottom = styled.input`
     font-size: 18px;
 `
 export const Text = styled.div`
-    font-size: 18px;
+    margin-left: 10px;
 
     overflow: scroll;
+    scroll-behavior: smooth;
 
     -ms-overflow-style: none;
 

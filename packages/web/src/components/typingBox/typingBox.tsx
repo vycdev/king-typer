@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 
 const LetterElement = styled.span`
     display: inline;
+    font-size: 28px;
 `
 
 // TODO
@@ -20,26 +21,10 @@ import { Wrapper, Container, Top, Text, Bottom } from "./style"
 let string = "" //this is just for testing things I will remove it later.
 let increment = 0
 let color = "green"
+let stringFullyBackspaced = false
 
 const getText = () => {
     return "this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right "
-}
-
-const buildTextComponentsArray = (text: string, elColor: string) => {
-    return text.split(" ").map((word: string, index) => {
-        if (index === increment) {
-            return (
-                <LetterElement style={{ color: elColor }}>
-                    {word}{" "}
-                </LetterElement>
-            )
-        }
-        return <LetterElement style={{ color: "blue" }}>{word} </LetterElement>
-    })
-}
-
-const getTextToBeCompared = (text: string) => {
-    return text.split(" ")
 }
 
 const checkBackspaceReturn = (e: any) => {
@@ -62,8 +47,13 @@ const onKey = (e: any, special: string = "undefined") => {
         String.fromCharCode(e.charCode) != ""
     ) {
         string += String.fromCharCode(e.charCode)
+        stringFullyBackspaced = false
     } else if (special == "backspace") {
         string = string.slice(0, -1)
+        if (string.length === 0) {
+            stringFullyBackspaced = true
+            // console.log(stringFullyBackspaced)
+        }
     } else if (special == "enter") {
         checkAndIncrement()
         string = ""
@@ -72,6 +62,84 @@ const onKey = (e: any, special: string = "undefined") => {
         string = ""
     }
     return string
+}
+
+const buildTextComponentsArray = (text: string, elColor: string) => {
+    const splittedText = text.split(" ")
+    // console.log(string)
+
+    return splittedText.map((word: string, index) => {
+        if (index <= increment) {
+            if (index === increment) {
+                return splittedText[increment]
+                    .split("")
+                    .map((letter: string, i) => {
+                        let addSpace = ""
+                        if (word.split("").length - 1 === i) {
+                            addSpace = " "
+                        }
+                        if (
+                            string.split("")[i] === letter &&
+                            !stringFullyBackspaced
+                        ) {
+                            // console.log(stringFullyBackspaced, "1")
+
+                            return (
+                                <LetterElement
+                                    key={`${i}letter`}
+                                    style={{ color: elColor }}
+                                >
+                                    <u>{letter}</u>
+                                    {addSpace}
+                                </LetterElement>
+                            )
+                        } else {
+                            if (
+                                i <= string.split("").length - 1 &&
+                                !stringFullyBackspaced
+                            ) {
+                                return (
+                                    <LetterElement
+                                        key={`${i}letter`}
+                                        style={{ color: "red" }}
+                                    >
+                                        <u>{letter}</u>
+                                        {addSpace}
+                                    </LetterElement>
+                                )
+                            } else {
+                                if (stringFullyBackspaced)
+                                    stringFullyBackspaced = false
+                                return (
+                                    <LetterElement
+                                        key={`${i}letter`}
+                                        style={{ color: "black" }}
+                                    >
+                                        <u>{letter}</u>
+                                        {addSpace}
+                                    </LetterElement>
+                                )
+                            }
+                        }
+                    })
+            } else {
+                return (
+                    <LetterElement key={index} style={{ color: elColor }}>
+                        {word}{" "}
+                    </LetterElement>
+                )
+            }
+        }
+        return (
+            <LetterElement key={index} style={{ color: "blue" }}>
+                {word}{" "}
+            </LetterElement>
+        )
+    })
+}
+
+const getTextToBeCompared = (text: string) => {
+    return text.split(" ")
 }
 
 // const timer = (startStop: boolean)=>{
@@ -95,13 +163,11 @@ const checkAndIncrement = () => {
             increment,
             getTextToBeCompared(getText())[increment]
         )
-        color = "red"
     }
 }
 
 const Input = () => {
     const [inner, changeInner] = useState("")
-    let text = ""
 
     return (
         <Bottom
@@ -125,7 +191,10 @@ export const Box = () => {
     return (
         <Wrapper>
             <Container
-                onKeyDown={e => {
+                onKeyDown={() => {
+                    updateText(buildTextComponentsArray(getText(), color))
+                }}
+                onKeyPress={() => {
                     updateText(buildTextComponentsArray(getText(), color))
                 }}
             >
