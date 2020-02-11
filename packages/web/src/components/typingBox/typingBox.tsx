@@ -9,11 +9,9 @@ const LetterElement = styled.span`
 // TODO
 
 /*
-    Make the WPM/CPM calculator work
-    Make it into individual letters
+    Make the WPM/CPM calculator work + after calculating delete the text and replace it with some info and a restart button idk 
     Make it autoscroll
     Make it beautiful 
-    Make the code beautiful
 */
 
 import { Wrapper, Container, Top, Text, Bottom } from "./style"
@@ -22,9 +20,13 @@ let string = "" //this is just for testing things I will remove it later.
 let increment = 0
 let color = "green"
 let stringFullyBackspaced = false
+let charTyped = 0
+let correctedCharTyped = 0
+let CPM = 0
+let WPM = 0
 
 const getText = () => {
-    return "this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right this is just some random text to be tested and to see how this works and i think this works fine right "
+    return "like idea until certain always busy so music best self is world dont sentence world next river"
 }
 
 const checkBackspaceReturn = (e: any) => {
@@ -108,8 +110,10 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                                     </LetterElement>
                                 )
                             } else {
-                                if (stringFullyBackspaced)
+                                if (stringFullyBackspaced) {
                                     stringFullyBackspaced = false
+                                }
+
                                 return (
                                     <LetterElement
                                         key={`${i}letter`}
@@ -142,28 +146,26 @@ const getTextToBeCompared = (text: string) => {
     return text.split(" ")
 }
 
-// const timer = (startStop: boolean)=>{
-//     if(startStop){
-//         setTimeout(()={
-
-//         }, 60000)
-//     }else{
-//         return
-//     }
-// }
-
 const checkAndIncrement = () => {
     if (string === getTextToBeCompared(getText())[increment]) {
         increment++
-        if (increment >= getTextToBeCompared(getText()).length) increment = 0
+        if (increment >= getTextToBeCompared(getText()).length) increment = 0 /// This is if the text gets fully typed, might remove later
+        charTyped += string.length + 1
+        correctedCharTyped += string.length + 1
         color = "green"
     } else {
+        correctedCharTyped += string.length + 1
         console.log(
             string,
             increment,
             getTextToBeCompared(getText())[increment]
         )
     }
+}
+
+const setCpmWpm = (cpm: number, wpm: number) => {
+    CPM = cpm
+    WPM = wpm
 }
 
 const Input = () => {
@@ -187,6 +189,27 @@ export const Box = () => {
     const [text, updateText] = useState(
         buildTextComponentsArray(getText(), color)
     )
+    const [time, setTime] = useState(60)
+    const [cpm, setCpm] = useState(0)
+    const [wpm, setWpm] = useState(0)
+
+    if (time === 0) {
+        setCpmWpm(cpm, wpm)
+    }
+    const calculateCpmWpm = () => {
+        return time === 0
+            ? [CPM, WPM]
+            : [
+                  Math.floor(charTyped / ((60 - time) / 60)),
+                  Math.floor(charTyped / 5 / ((60 - time) / 60))
+              ]
+    }
+
+    useEffect(() => {
+        setTimeout(() => setTime(time === 0 ? 0 : time - 1), 1000)
+        setTimeout(() => setCpm(calculateCpmWpm()[0]), 1000)
+        setTimeout(() => setWpm(calculateCpmWpm()[1]), 1000)
+    })
 
     return (
         <Wrapper>
@@ -198,7 +221,16 @@ export const Box = () => {
                     updateText(buildTextComponentsArray(getText(), color))
                 }}
             >
-                <Top>This is something;</Top>
+                <Top>
+                    {"Time left: "}
+                    {time}
+                    {"   "}
+                    {"CPM:"}
+                    {cpm}
+                    {"   "}
+                    {"WPM:"}
+                    {wpm}
+                </Top>
                 <Text>{text}</Text>
                 <Input></Input>
             </Container>

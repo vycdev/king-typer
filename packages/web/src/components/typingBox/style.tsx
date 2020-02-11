@@ -16,6 +16,7 @@ export const Container = styled.div`
 `
 
 export const Top = styled.div`
+    text-align: center;
     width: 100%;
     height: 20px;
     border-bottom: 1px solid black;
@@ -40,14 +41,16 @@ export const Bottom = styled.input`
     font-size: 18px;
 `
 export const Text = styled.div`
-    margin-left: 10px;
+    margin-left: 2px;
+
+    text-align: center;
 
     overflow: scroll;
     scroll-behavior: smooth;
 
     -ms-overflow-style: none;
 
-    width: 100%;
+    width: 99%;
     height: 180px;
 
     &::-webkit-scrollbar {
