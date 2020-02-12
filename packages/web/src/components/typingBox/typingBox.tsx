@@ -16,7 +16,7 @@ const LetterElement = styled.span`
 
 import { Wrapper, Container, Top, Text, Bottom } from "./style"
 
-let string = "" //this is just for testing things I will remove it later.
+let string = "" /// I hate mutating stuff
 let increment = 0
 let color = "green"
 let stringFullyBackspaced = false
@@ -195,18 +195,30 @@ export const Box = () => {
 
     if (time === 0) {
         setCpmWpm(cpm, wpm)
+    } else if (time === 60 && cpm === 0 && CPM === 0) {
+        setCpmWpm(-1, 0)
     }
     const calculateCpmWpm = () => {
         return time === 0
             ? [CPM, WPM]
             : [
-                  Math.floor(charTyped / ((60 - time) / 60)),
-                  Math.floor(charTyped / 5 / ((60 - time) / 60))
+                  Math.floor(
+                      charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60)
+                  ),
+                  Math.floor(
+                      charTyped / 5 / ((60 - time === 0 ? 1 : 60 - time) / 60)
+                  )
               ]
     }
 
     useEffect(() => {
-        setTimeout(() => setTime(time === 0 ? 0 : time - 1), 1000)
+        setTimeout(
+            () =>
+                setTime(
+                    time === 0 ? 0 : CPM === -1 && cpm === 0 ? 60 : time - 1
+                ),
+            1000
+        )
         setTimeout(() => setCpm(calculateCpmWpm()[0]), 1000)
         setTimeout(() => setWpm(calculateCpmWpm()[1]), 1000)
     })
