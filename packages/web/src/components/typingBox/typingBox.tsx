@@ -256,7 +256,7 @@ export const Box = () => {
                     {wpm}
                     <div
                         style={{
-                            // display: showButton,
+                            display: "inline-block",
                             paddingLeft: "5px"
                         }}
                     >
