@@ -192,6 +192,7 @@ export const Box = () => {
     const [time, setTime] = useState(60)
     const [cpm, setCpm] = useState(0)
     const [wpm, setWpm] = useState(0)
+    // const [showButton, setButton] = useState("none")
 
     if (time === 0) {
         setCpmWpm(cpm, wpm)
@@ -210,6 +211,16 @@ export const Box = () => {
                   )
               ]
     }
+    const resetEverything = () => {
+        string = "" /// I hate mutating stuff
+        increment = 0
+        color = "green"
+        stringFullyBackspaced = false
+        charTyped = 0
+        correctedCharTyped = 0
+        CPM = 0
+        WPM = 0
+    }
 
     useEffect(() => {
         setTimeout(
@@ -221,6 +232,7 @@ export const Box = () => {
         )
         setTimeout(() => setCpm(calculateCpmWpm()[0]), 1000)
         setTimeout(() => setWpm(calculateCpmWpm()[1]), 1000)
+        // setButton(time === 0 ? "inline-block" : "inline-block")
     })
 
     return (
@@ -242,6 +254,26 @@ export const Box = () => {
                     {"   "}
                     {"WPM:"}
                     {wpm}
+                    <div
+                        style={{
+                            // display: showButton,
+                            paddingLeft: "5px"
+                        }}
+                    >
+                        <button
+                            onClick={() => {
+                                resetEverything()
+                                setTime(60)
+                                setCpm(0)
+                                setWpm(0)
+                                updateText(
+                                    buildTextComponentsArray(getText(), color)
+                                )
+                            }}
+                        >
+                            {"Restart"}
+                        </button>
+                    </div>
                 </Top>
                 <Text>{text}</Text>
                 <Input></Input>
