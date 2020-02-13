@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from "react"
-import styled from "@emotion/styled"
 
-const LetterElement = styled.span`
-    display: inline;
-    font-size: 28px;
-`
+import { Wrapper, Container, Top, Text, Bottom, LetterElement } from "./style"
 
-// TODO
-
-/*
-    Make the WPM/CPM calculator work + after calculating delete the text and replace it with some info and a restart button idk 
-    Make it autoscroll
-    Make it beautiful 
-*/
-
-import { Wrapper, Container, Top, Text, Bottom } from "./style"
-
-let string = "" /// I hate mutating stuff
+let string = ""
 let increment = 0
 let color = "green"
 let stringFullyBackspaced = false
@@ -54,7 +40,6 @@ const onKey = (e: any, special: string = "undefined") => {
         string = string.slice(0, -1)
         if (string.length === 0) {
             stringFullyBackspaced = true
-            // console.log(stringFullyBackspaced)
         }
     } else if (special == "enter") {
         checkAndIncrement()
@@ -68,7 +53,6 @@ const onKey = (e: any, special: string = "undefined") => {
 
 const buildTextComponentsArray = (text: string, elColor: string) => {
     const splittedText = text.split(" ")
-    // console.log(string)
 
     return splittedText.map((word: string, index) => {
         if (index <= increment) {
@@ -84,8 +68,6 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                             string.split("")[i] === letter &&
                             !stringFullyBackspaced
                         ) {
-                            // console.log(stringFullyBackspaced, "1")
-
                             return (
                                 <LetterElement
                                     key={`${i}letter`}
@@ -149,7 +131,7 @@ const getTextToBeCompared = (text: string) => {
 const checkAndIncrement = () => {
     if (string === getTextToBeCompared(getText())[increment]) {
         increment++
-        if (increment >= getTextToBeCompared(getText()).length) increment = 0 /// This is if the text gets fully typed, might remove later
+        if (increment >= getTextToBeCompared(getText()).length) increment = 0
         charTyped += string.length + 1
         correctedCharTyped += string.length + 1
         color = "green"
@@ -192,7 +174,6 @@ export const Box = () => {
     const [time, setTime] = useState(60)
     const [cpm, setCpm] = useState(0)
     const [wpm, setWpm] = useState(0)
-    // const [showButton, setButton] = useState("none")
 
     if (time === 0) {
         setCpmWpm(cpm, wpm)
@@ -212,7 +193,7 @@ export const Box = () => {
               ]
     }
     const resetEverything = () => {
-        string = "" /// I hate mutating stuff
+        string = ""
         increment = 0
         color = "green"
         stringFullyBackspaced = false
@@ -223,16 +204,11 @@ export const Box = () => {
     }
 
     useEffect(() => {
-        setTimeout(
-            () =>
-                setTime(
-                    time === 0 ? 0 : CPM === -1 && cpm === 0 ? 60 : time - 1
-                ),
-            1000
-        )
-        setTimeout(() => setCpm(calculateCpmWpm()[0]), 1000)
-        setTimeout(() => setWpm(calculateCpmWpm()[1]), 1000)
-        // setButton(time === 0 ? "inline-block" : "inline-block")
+        setTimeout(() => {
+            setTime(time === 0 ? 0 : CPM === -1 && cpm === 0 ? 60 : time - 1)
+            setCpm(calculateCpmWpm()[0])
+            setWpm(calculateCpmWpm()[1])
+        }, 1000)
     })
 
     return (
@@ -261,6 +237,9 @@ export const Box = () => {
                         }}
                     >
                         <button
+                            style={{
+                                height: "20px"
+                            }}
                             onClick={() => {
                                 resetEverything()
                                 setTime(60)
