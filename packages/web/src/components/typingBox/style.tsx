@@ -10,7 +10,7 @@ export const LetterElement = styled.span`
 
 export const Container = styled.div`
     width: 500px;
-    height: 200px;
+    height: 250px;
     position: relative;
 
     margin: auto;
@@ -55,7 +55,7 @@ export const Text = styled.div`
     -ms-overflow-style: none;
 
     width: 99%;
-    height: 180px;
+    height: 200px;
 
     &::-webkit-scrollbar {
         display: none;
