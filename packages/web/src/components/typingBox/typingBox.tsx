@@ -12,7 +12,7 @@ let CPM = 0
 let WPM = 0
 
 const getText = () => {
-    return "like idea until certain always busy so music best self is world dont sentence world next river like idea until certain always busy so music best self is world dont sentence world next river like idea until certain always busy so music best self is world dont sentence world next river "
+    return "like idea until certain always busy so music best self is world dont"
 }
 
 const checkBackspaceReturn = (e: any) => {
@@ -73,10 +73,10 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                                 <LetterElement
                                     key={`${i}letter`}
                                     style={{
-                                        color:
-                                            string.length > word.length
-                                                ? "red"
-                                                : elColor
+                                        color: elColor
+                                        // string.length > word.length
+                                        //     ? "red"
+                                        //     : elColor
                                     }}
                                 >
                                     <u>{letter}</u>
@@ -137,7 +137,6 @@ const getTextToBeCompared = (text: string) => {
 const checkAndIncrement = () => {
     if (string === getTextToBeCompared(getText())[increment]) {
         increment++
-        if (increment >= getTextToBeCompared(getText()).length) increment = 0
         charTyped += string.length + 1
         correctedCharTyped += string.length + 1
         color = "green"
@@ -211,7 +210,13 @@ export const Box = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            setTime(time === 0 ? 0 : CPM === -1 && cpm === 0 ? 60 : time - 1)
+            setTime(
+                time === 0 || increment >= getTextToBeCompared(getText()).length
+                    ? 0
+                    : CPM === -1 && cpm === 0
+                    ? 60
+                    : time - 1
+            )
             setCpm(calculateCpmWpm()[0])
             setWpm(calculateCpmWpm()[1])
         }, 1000)
