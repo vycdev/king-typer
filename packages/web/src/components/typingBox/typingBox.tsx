@@ -12,7 +12,7 @@ let CPM = 0
 let WPM = 0
 
 const getText = () => {
-    return "like idea until certain always busy so music best self is world dont"
+    return "A (from the Ancient Greek paragraphos, \"to write beside\" or \"written beside\") is a self-contained unit of a discourse in writing with a particular point or idea. A paragraph consists of one or more sentences. Though not required by the syntax of any language, paragraphs are usually an expected part of formal writing, used to organize longer prose."
 }
 
 const checkBackspaceReturn = (e: any) => {
@@ -73,10 +73,10 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                                 <LetterElement
                                     key={`${i}letter`}
                                     style={{
-                                        color: elColor
-                                        // string.length > word.length
-                                        //     ? "red"
-                                        //     : elColor
+                                        color:
+                                            string.length > word.length
+                                                ? "#e83c3c"
+                                                : elColor
                                     }}
                                 >
                                     <u>{letter}</u>
@@ -91,7 +91,7 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                                 return (
                                     <LetterElement
                                         key={`${i}letter`}
-                                        style={{ color: "red" }}
+                                        style={{ color: "#e83c3c" }}
                                     >
                                         <u>{letter}</u>
                                         {addSpace}
@@ -123,7 +123,7 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
             }
         }
         return (
-            <LetterElement key={index} style={{ color: "blue" }}>
+            <LetterElement key={index} style={{ color: "#0752e8" }}>
                 {word}{" "}
             </LetterElement>
         )
@@ -261,7 +261,7 @@ export const Box = () => {
                                 )
                             }}
                         >
-                            {"Restart"}
+                            {"Try again"}
                         </button>
                     </div>
                 </Top>

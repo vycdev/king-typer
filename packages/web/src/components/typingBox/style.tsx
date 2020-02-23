@@ -9,21 +9,21 @@ export const LetterElement = styled.span`
 `
 
 export const Container = styled.div`
-    width: 500px;
+    @import url("https://fonts.googleapis.com/css?family=Hind&display=swap");
+    font-family: "Hind";
+
+    width: 750px;
     height: 250px;
     position: relative;
 
     margin: auto;
-
-    border: 1px solid black;
-    border-radius: 3px;
 `
 
 export const Top = styled.div`
     text-align: center;
     width: 100%;
-    height: 20px;
-    border-bottom: 1px solid black;
+    height: 25px;
+    border-bottom: 1px solid #9e9e9e;
 `
 
 export const Bottom = styled.input`
@@ -31,13 +31,13 @@ export const Bottom = styled.input`
 
     border-style: solid;
     border-width: 0;
-    border-top: 1px solid grey;
+    border-top: 1px solid #9e9e9e;
 
     position: absolute;
     bottom: 0;
     left: 0px;
 
-    height: 20px;
+    height: 25px;
     text-align: center;
 
     outline: none;
