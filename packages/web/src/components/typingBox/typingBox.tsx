@@ -43,10 +43,8 @@ const onKey = (e: any, special: string = "undefined") => {
         }
     } else if (special == "enter") {
         checkAndIncrement()
-        string = ""
     } else if (special == "space") {
         checkAndIncrement()
-        string = ""
     }
     return string
 }
@@ -140,6 +138,7 @@ const checkAndIncrement = () => {
         charTyped += string.length + 1
         correctedCharTyped += string.length + 1
         color = "green"
+        string = ""
     } else {
         correctedCharTyped += string.length + 1
         console.log(
