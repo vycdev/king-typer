@@ -12,7 +12,7 @@ let CPM = 0
 let WPM = 0
 
 const getText = () => {
-    return "like idea until certain always busy so music best self is world dont sentence world next river"
+    return "like idea until certain always busy so music best self is world dont sentence world next river like idea until certain always busy so music best self is world dont sentence world next river like idea until certain always busy so music best self is world dont sentence world next river "
 }
 
 const checkBackspaceReturn = (e: any) => {
@@ -64,6 +64,7 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                         if (word.split("").length - 1 === i) {
                             addSpace = " "
                         }
+
                         if (
                             string.split("")[i] === letter &&
                             !stringFullyBackspaced
@@ -71,7 +72,12 @@ const buildTextComponentsArray = (text: string, elColor: string) => {
                             return (
                                 <LetterElement
                                     key={`${i}letter`}
-                                    style={{ color: elColor }}
+                                    style={{
+                                        color:
+                                            string.length > word.length
+                                                ? "red"
+                                                : elColor
+                                    }}
                                 >
                                     <u>{letter}</u>
                                     {addSpace}
