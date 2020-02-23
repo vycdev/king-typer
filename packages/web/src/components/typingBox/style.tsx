@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 `
 export const LetterElement = styled.span`
     display: inline;
-    font-size: 28px;
+    font-size: 23px;
 `
 
 export const Container = styled.div`
@@ -42,7 +42,7 @@ export const Bottom = styled.input`
 
     outline: none;
 
-    font-size: 18px;
+    font-size: 24px;
 `
 export const Text = styled.div`
     margin-left: 2px;
