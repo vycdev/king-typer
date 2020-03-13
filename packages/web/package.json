@@ -24,8 +24,6 @@
         "history": "^4.10.1",
         "koa": "^2.11.0",
         "koa-static": "^5.0.0",
-        "mobx": "^5.14.2",
-        "mobx-react-lite": "^1.5.0",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
         "typescript": "^3.7.4",
