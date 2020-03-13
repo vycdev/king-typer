@@ -5,7 +5,9 @@ import {
     Container,
     TitleTextButton,
     VerticallyCenteredDiv,
-    Fix
+    VerticallyCenteredText,
+    Fix,
+    Title
 } from "./style";
 
 export const Home = () => {
@@ -33,9 +35,11 @@ export const Home = () => {
                 </VerticallyCenteredDiv>
             </Fix>
             <Fix>
-                <VerticallyCenteredDiv>
-                    <TitleTextButton>test</TitleTextButton>
-                </VerticallyCenteredDiv>
+                <VerticallyCenteredText>
+                    <TitleTextButton>
+                        <Title>King Typer</Title>
+                    </TitleTextButton>
+                </VerticallyCenteredText>
             </Fix>
         </Container>
     );
