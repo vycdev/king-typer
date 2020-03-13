@@ -1,5 +1,9 @@
 import styled from "@emotion/styled";
 
+export const Fix = styled.div`
+    width: 100%;
+`;
+
 export const Ul = styled.ul`
     @import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
     font-family: "Press Start 2P", cursive;
@@ -27,5 +31,6 @@ export const Li = styled.li`
         border-top: 4px solid #fff;
         height: 10px;
         padding-top: 12px;
+        background-color: #349dfe;
     }
 `;
