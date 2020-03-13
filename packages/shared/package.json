@@ -5,6 +5,6 @@
     "main": "src/index.ts",
     "repository": "https://github.com/Vyctor661/king-typer",
     "author": "Sandu Victor",
-    "license": "GPL-3.0",
+    "license": "MIT",
     "private": true
 }
