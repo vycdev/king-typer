@@ -6,14 +6,15 @@ import {
     TitleTextButton,
     VerticallyCenteredDiv,
     VerticallyCenteredText,
-    Fix,
+    FixText,
+    FixCrown,
     Title
 } from "./style";
 
 export const Home = () => {
     return (
         <Container>
-            <Fix>
+            <FixCrown>
                 <VerticallyCenteredDiv>
                     <SvgCrown>
                         <svg
@@ -33,14 +34,14 @@ export const Home = () => {
                         </svg>
                     </SvgCrown>
                 </VerticallyCenteredDiv>
-            </Fix>
-            <Fix>
+            </FixCrown>
+            <FixText>
                 <VerticallyCenteredText>
                     <TitleTextButton>
                         <Title>King Typer</Title>
                     </TitleTextButton>
                 </VerticallyCenteredText>
-            </Fix>
+            </FixText>
         </Container>
     );
 };
