@@ -11,7 +11,7 @@ export const Navbar = () => {
                 <Link to="/">Home</Link>
             </Li>
             <Li>
-                <Link to="/type">Start typing</Link>
+                <Link to="/type">Start Typing</Link>
             </Li>
         </Ul>
     );
