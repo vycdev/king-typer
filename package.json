@@ -10,6 +10,8 @@
         "semantic-release": "semantic-release"
     },
     "devDependencies": {
+        "@semantic-release/changelog": "^5.0.1",
+        "@semantic-release/git": "^9.0.0",
         "@types/node": "^12.12.24",
         "@typescript-eslint/eslint-plugin": "^2.15.0",
         "@typescript-eslint/parser": "^2.15.0",
