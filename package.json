@@ -6,7 +6,8 @@
         "build": "pnpm run build --filter @king-typer/*",
         "start": "pnpm run start --filter @king-typer/*",
         "test": "pnpm run test --filter @king-typer/*",
-        "lint": "eslint './packages/**/*.{ts,tsx}'"
+        "lint": "eslint './packages/**/*.{ts,tsx}'",
+        "semantic-release": "semantic-release"
     },
     "devDependencies": {
         "@types/node": "^12.12.24",
@@ -22,6 +23,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.17.0",
         "prettier": "^1.19.1",
+        "semantic-release": "^17.0.4",
         "tslib": "^1.10.0",
         "typescript": "^3.7.4"
     }
