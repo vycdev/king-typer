@@ -1,4 +1,7 @@
 # King Typer
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/vyctor661/king-typer)
 ![GitHub language count](https://img.shields.io/github/languages/count/vyctor661/king-typer)
@@ -15,3 +18,23 @@ The developement for King Typer will continue even after the contest until I am 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
 You can visit the website here -> [King Typer](https://king-typer-web.herokuapp.com/)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://discordapp.com/users/270972671490129921"><img src="https://avatars0.githubusercontent.com/u/49570123?v=4" width="100px;" alt=""/><br /><sub><b>Sandu Victor</b></sub></a><br /><a href="https://github.com/Sandu Victor/King Typer/commits?author=Vyctor661" title="Code">💻</a> <a href="#design-Vyctor661" title="Design">🎨</a> <a href="#infra-Vyctor661" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/Mateiadrielrafael"><img src="https://avatars0.githubusercontent.com/u/39400800?v=4" width="100px;" alt=""/><br /><sub><b>Matei Adriel</b></sub></a><br /><a href="#ideas-Mateiadrielrafael" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Sandu Victor/King Typer/pulls?q=is%3Apr+reviewed-by%3AMateiadrielrafael" title="Reviewed Pull Requests">👀</a> <a href="#userTesting-Mateiadrielrafael" title="User Testing">📓</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

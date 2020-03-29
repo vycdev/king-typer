@@ -1,0 +1,37 @@
+{
+  "projectName": "King Typer",
+  "projectOwner": "Sandu Victor",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Vyctor661",
+      "name": "Sandu Victor",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/49570123?v=4",
+      "profile": "https://discordapp.com/users/270972671490129921",
+      "contributions": [
+        "code",
+        "design",
+        "infra"
+      ]
+    },
+    {
+      "login": "Mateiadrielrafael",
+      "name": "Matei Adriel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/39400800?v=4",
+      "profile": "https://github.com/Mateiadrielrafael",
+      "contributions": [
+        "ideas",
+        "review",
+        "userTesting"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
