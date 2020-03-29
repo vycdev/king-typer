@@ -15,6 +15,7 @@
         "@types/node": "^12.12.24",
         "@typescript-eslint/eslint-plugin": "^2.15.0",
         "@typescript-eslint/parser": "^2.15.0",
+        "all-contributors-cli": "^6.14.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.9.0",
         "eslint-config-react": "^1.1.7",
