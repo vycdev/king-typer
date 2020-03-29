@@ -1,44 +1,40 @@
-
 name: Build test.
 
 on:
-  push:
-    branches: '*'
-  pull_request:
-    branches: '*'
+    push:
+        branches: "*"
+    pull_request:
+        branches: "*"
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [10.x, 12.x]
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install pnpm
+              run: npm i -g pnpm
+            - name: Config pnpm
+              run: pnpm config set verify-store-integrity false
+            - name: Cache node_modules
+              uses: actions/cache@v1
+              with:
+                  path: ~/.pnpm-store
+                  key: ${{ hashFiles('pnpm-lock.yaml') }}
+            - name: Install dependencies
+              run: pnpm i
+            - name: Build with pnpm
+              run: pnpm run build --if-present
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install pnpm
-      run: npm i -g pnpm
-    - name: Config pnpm
-      run: pnpm config set verify-store-integrity false
-    - name: Cache node_modules
-      uses: actions/cache@v1
-      with:
-        path: ~/.pnpm-store
-        key: ${{ hashFiles('pnpm-lock.yaml') }}
-    - name: Install dependencies
-      run: pnpm i
-    - name: Build with pnpm
-      run: pnpm run build --if-present
-    - name: Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: pnpx semantic-release
-
-      env:
-        CI: true
+            - name: Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: pnpx semantic-release
