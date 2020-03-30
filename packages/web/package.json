@@ -27,6 +27,7 @@
         "koa-static": "^5.0.0",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
+        "react-rotating-text": "^1.4.1",
         "react-router-dom": "^5.1.2",
         "typescript": "^3.7.4",
         "url-pattern": "^1.0.3"
