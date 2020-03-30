@@ -1,5 +1,9 @@
 import * as React from "react";
 
+const ReactRotatingText = require("react-rotating-text");
+
+import { getRandomText } from "./randomText";
+
 import {
     SvgCrown,
     Container,
@@ -8,7 +12,11 @@ import {
     VerticallyCenteredText,
     FixText,
     FixCrown,
-    Title
+    Title,
+    RandomText,
+    Wave,
+    ButtonWrapper,
+    TypeButton
 } from "./style";
 
 export const Home = () => {
@@ -39,9 +47,34 @@ export const Home = () => {
                 <VerticallyCenteredText>
                     <TitleTextButton>
                         <Title>King Typer</Title>
+                        <RandomText>
+                            <ReactRotatingText
+                                cursor={true}
+                                pause={1000}
+                                emptyPause={300}
+                                deletingInterval={20}
+                                items={getRandomText()}
+                            />
+                        </RandomText>
+                        <ButtonWrapper>
+                            <TypeButton>Start Typing!</TypeButton>
+                        </ButtonWrapper>
                     </TitleTextButton>
                 </VerticallyCenteredText>
             </FixText>
+
+            <Wave>
+                <svg
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1920 303"
+                >
+                    <path
+                        d="M1921.5 313.056H-1v-153c50.808 20.339 585.5-12 998-114.5s924.5 0 924.5 0v267.5z"
+                        fill="#fff"
+                    />
+                </svg>
+            </Wave>
         </Container>
     );
 };
