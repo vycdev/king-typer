@@ -8,6 +8,7 @@ import { Navbar } from "./components/navbar/navBar";
 
 import { Global } from "@emotion/core";
 import { globalStyle } from "./style";
+import { Box } from "./components/typingBox/typingBox";
 
 const App = () => {
     return (
@@ -18,6 +19,9 @@ const App = () => {
                 <Switch>
                     <Route exact path="/">
                         <Home />
+                    </Route>
+                    <Route exact path="/type">
+                        <Box></Box>
                     </Route>
                 </Switch>
             </Router>
