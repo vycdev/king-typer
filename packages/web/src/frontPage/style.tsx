@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 //// CONTAINER 1
 export const Container = styled.div`
     background-color: #198cf6;
-    height: min(930px, 1444px);
+    height: 1080px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -30,7 +30,7 @@ export const VerticallyCenteredDiv = styled.div`
 //// TEXT ON THE RIGHT 1
 export const FixText = styled.div`
     position: relative;
-    flex: 2 2 450px;
+    flex: 2 2 750px;
 `;
 
 export const TitleTextButton = styled.div`
