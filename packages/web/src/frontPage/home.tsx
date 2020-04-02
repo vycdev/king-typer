@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 const ReactRotatingText = require("react-rotating-text");
 
@@ -57,7 +58,9 @@ export const Home = () => {
                             />
                         </RandomText>
                         <ButtonWrapper>
-                            <TypeButton>Start Typing!</TypeButton>
+                            <Link to="/type">
+                                <TypeButton>Start Typing!</TypeButton>
+                            </Link>
                         </ButtonWrapper>
                     </TitleTextButton>
                 </VerticallyCenteredText>
