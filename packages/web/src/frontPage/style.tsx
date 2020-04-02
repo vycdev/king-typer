@@ -95,9 +95,34 @@ export const TypeButton = styled.a`
     font-size: 18px;
     font-weight: bold;
     padding: 15px 25px;
+
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        -ms-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    &::after {
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        -ms-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    &:hover::after {
+        opacity: 1;
+    }
 `;
 
 export const ButtonWrapper = styled.div`
     width: 100%;
     padding-top: 20px;
+    a {
+        text-decoration: none;
+        color: black;
+    }
 `;
