@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/core";
+
 //// CONTAINER 1
 export const Container = styled.div`
     position: relative;
@@ -91,7 +91,7 @@ export const Wave = styled.div`
 export const TypeButton = styled.a`
     background: #fde400;
     color: black;
-    text-decorate: none;
+    text-decoration: none;
     font-size: 18px;
     font-weight: bold;
     padding: 15px 25px;
