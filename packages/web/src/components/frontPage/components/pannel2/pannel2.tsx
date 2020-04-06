@@ -37,9 +37,9 @@ export const Pannel2 = () => {
                 <VerticallyCenteredDiv>
                     <LineChart
                         width={500}
-                        height={350}
+                        height={450}
                         data={data}
-                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+                        margin={{ top: 100, right: 20, bottom: 5, left: 0 }}
                     >
                         <Line
                             name="Percentage"
@@ -57,7 +57,17 @@ export const Pannel2 = () => {
             <FixText>
                 <Text>
                     <TextStyling>
-                        <h1>Title</h1>
+                        <h2>Typing, typing, typing...</h2>
+                        As you can see in the chart the average typing speed for
+                        a person is about 40 words per minute. At that rate
+                        you’re making progress of about 200 characters per
+                        minute. Having the ability to type faster isn’t that
+                        hard as one might think. At one point in their lives,
+                        all of our expert transcriptionists were mere average
+                        typists – some even using pointer fingers only! Over
+                        time and with lots of technique and practice, you too
+                        can build up your typing skills and become more
+                        efficient every day.
                     </TextStyling>
                 </Text>
             </FixText>
