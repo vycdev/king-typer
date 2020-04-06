@@ -5,7 +5,7 @@ export const StyledPannel1 = styled.div`
     position: relative;
     background-color: #198cf6;
     height: 100vh;
-    min-height: 900px;
+    min-height: 930px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
