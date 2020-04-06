@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { StyledPannel2 } from "./style";
+import { StyledPannel2, Text, TextStyling, FixChart, FixText } from "./style";
 
 import {
     LineChart,
@@ -8,9 +8,9 @@ import {
     CartesianGrid,
     XAxis,
     YAxis,
-    Legend,
     Tooltip
 } from "recharts";
+import { VerticallyCenteredDiv } from "./style";
 
 const data = [
     { percentage: 1, wpmName: "10 WPM" },
@@ -33,23 +33,34 @@ const data = [
 export const Pannel2 = () => {
     return (
         <StyledPannel2>
-            <LineChart
-                width={500}
-                height={350}
-                data={data}
-                margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-            >
-                <Line
-                    name="Percentage"
-                    type="monotone"
-                    dataKey="percentage"
-                    stroke="#198cf6"
-                />
-                <CartesianGrid stroke="#cccc" strokeDasharray="5 5" />
-                <XAxis dataKey="wpmName" interval={2} />
-                <YAxis />
-                <Tooltip />
-            </LineChart>
+            <FixChart>
+                <VerticallyCenteredDiv>
+                    <LineChart
+                        width={500}
+                        height={350}
+                        data={data}
+                        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+                    >
+                        <Line
+                            name="Percentage"
+                            type="monotone"
+                            dataKey="percentage"
+                            stroke="#198cf6"
+                        />
+                        <CartesianGrid stroke="#cccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="wpmName" interval={2} />
+                        <YAxis />
+                        <Tooltip />
+                    </LineChart>
+                </VerticallyCenteredDiv>
+            </FixChart>
+            <FixText>
+                <Text>
+                    <TextStyling>
+                        <h1>Title</h1>
+                    </TextStyling>
+                </Text>
+            </FixText>
         </StyledPannel2>
     );
 };
