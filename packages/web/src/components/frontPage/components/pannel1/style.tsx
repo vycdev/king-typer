@@ -5,7 +5,7 @@ export const StyledPannel1 = styled.div`
     position: relative;
     background-color: #198cf6;
     height: 100vh;
-    min-height: 1000px;
+    min-height: 900px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -88,13 +88,17 @@ export const Wave = styled.div`
     width: 100%;
     bottom: -5px;
 `;
-export const TypeButton = styled.a`
+export const TypeButton = styled.div`
     background: #fde400;
     color: black;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
     padding: 15px 25px;
+
+    position: relative;
+    width: 150px;
+    margin: auto;
 
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
