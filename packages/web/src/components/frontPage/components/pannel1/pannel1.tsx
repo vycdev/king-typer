@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 const ReactRotatingText = require("react-rotating-text");
 
-import { getRandomText } from "./randomText";
+import { getRandomText } from "../../../../utils/randomText";
 
 import {
     SvgCrown,
-    Container,
+    StyledPannel1,
     TitleTextButton,
     VerticallyCenteredDiv,
     VerticallyCenteredText,
@@ -20,9 +20,9 @@ import {
     TypeButton
 } from "./style";
 
-export const Home = () => {
+export const Pannel1 = () => {
     return (
-        <Container>
+        <StyledPannel1>
             <FixCrown>
                 <VerticallyCenteredDiv>
                     <SvgCrown>
@@ -78,6 +78,6 @@ export const Home = () => {
                     />
                 </svg>
             </Wave>
-        </Container>
+        </StyledPannel1>
     );
 };

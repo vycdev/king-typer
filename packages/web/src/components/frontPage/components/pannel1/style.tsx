@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 //// CONTAINER 1
-export const Container = styled.div`
+export const StyledPannel1 = styled.div`
     position: relative;
     background-color: #198cf6;
     height: 100vh;
@@ -86,7 +86,7 @@ export const RandomText = styled.div`
 export const Wave = styled.div`
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: -5px;
 `;
 export const TypeButton = styled.a`
     background: #fde400;
