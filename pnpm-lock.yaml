@@ -72,7 +72,6 @@ importers:
       '@types/koa': 2.11.0
       '@types/koa-static': 4.0.1
       '@types/react-router-dom': 5.1.3
-      history: 4.10.1
       koa: 2.11.0
       koa-static: 5.0.0
       react: 16.11.0
@@ -80,7 +79,6 @@ importers:
       react-rotating-text: 1.4.1_react-dom@16.11.0+react@16.11.0
       react-router-dom: 5.1.2_react@16.11.0
       typescript: 3.7.4
-      url-pattern: 1.0.3
     devDependencies:
       '@babel/core': 7.6.4
       '@babel/plugin-proposal-class-properties': 7.5.5_@babel+core@7.6.4
@@ -92,7 +90,6 @@ importers:
       '@babel/preset-typescript': 7.6.0_@babel+core@7.6.4
       '@types/babel__core': 7.1.3
       '@types/copy-webpack-plugin': 5.0.0
-      '@types/history': 4.7.3
       '@types/react': 16.9.11
       '@types/react-dom': 16.9.3
       '@types/webpack': 4.39.8
@@ -124,7 +121,6 @@ importers:
       '@emotion/styled-base': ^10.0.24
       '@types/babel__core': ^7.1.3
       '@types/copy-webpack-plugin': ^5.0.0
-      '@types/history': ^4.7.3
       '@types/koa': ^2.11.0
       '@types/koa-static': ^4.0.1
       '@types/react': ^16.9.11
@@ -139,7 +135,6 @@ importers:
       copy-webpack-plugin: ^5.0.4
       cross-env: ^6.0.3
       fork-ts-checker-webpack-plugin: ^3.0.1
-      history: ^4.10.1
       html-webpack-inline-source-plugin: ^0.0.10
       html-webpack-plugin: ^3.2.0
       koa: ^2.11.0
@@ -149,7 +144,6 @@ importers:
       react-rotating-text: ^1.4.1
       react-router-dom: ^5.1.2
       typescript: ^3.7.4
-      url-pattern: ^1.0.3
       webpack: ^4.41.2
       webpack-cli: ^3.3.10
       webpack-dev-server: ^3.9.0
@@ -1537,6 +1531,7 @@ packages:
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
   /@types/history/4.7.3:
+    dev: false
     resolution:
       integrity: sha512-cS5owqtwzLN5kY+l+KgKdRJ/Cee8tlmQoGQuIE9tWnSmS3JMKzmxo2HIAk2wODMifGwO20d62xZQLYz+RLfXmw==
   /@types/http-assert/1.5.1:
@@ -9934,12 +9929,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
-  /url-pattern/1.0.3:
-    dev: false
-    engines:
-      node: '>=0.12.0'
-    resolution:
-      integrity: sha1-BAkpJHGyTyPFDWWkeTF5PStaz8E=
   /url/0.11.0:
     dependencies:
       punycode: 1.3.2
