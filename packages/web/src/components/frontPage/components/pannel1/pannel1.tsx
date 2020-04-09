@@ -71,6 +71,9 @@ export const Pannel1 = () => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 1920 303"
+                    style={{ maxHeight: "320px" }}
+                    width="100%"
+                    preserveAspectRatio="none"
                 >
                     <path
                         d="M1921.5 313.056H-1v-153c50.808 20.339 585.5-12 998-114.5s924.5 0 924.5 0v267.5z"

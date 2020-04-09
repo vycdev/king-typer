@@ -4,26 +4,28 @@ import styled from "@emotion/styled";
 export const StyledPannel1 = styled.div`
     position: relative;
     background-color: #198cf6;
-    height: 100vh;
-    min-height: 930px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-items: center;
+    min-height: 900px;
+    padding-top: 10px;
+    align-content: center;
     & > * {
-        flex: 1 1 450px;
+        flex: 1 0 450px;
     }
 `;
 //// CROWN SVG 1
 export const SvgCrown = styled.div`
-    width: 480px;
+    min-width: 480px;
 `;
 export const FixCrown = styled.div`
     position: relative;
-    flex: 1 1 500px;
+    flex: 1 0 500px;
+    min-height: 500px;
 `;
 
 export const VerticallyCenteredDiv = styled.div`
-    margin: 0;
     position: absolute;
     top: 35%;
     left: 50%;
@@ -33,8 +35,8 @@ export const VerticallyCenteredDiv = styled.div`
 //// TEXT ON THE RIGHT 1
 export const FixText = styled.div`
     position: relative;
-    flex: 2 2 750px;
-    margin-top: -100px;
+    flex: 2 0 750px;
+    min-height: 600px;
 `;
 
 export const TitleTextButton = styled.div`
@@ -42,9 +44,9 @@ export const TitleTextButton = styled.div`
     color: white;
     font-weight: bold;
     text-align: center;
+    height: auto;
 `;
 export const VerticallyCenteredText = styled.div`
-    margin: 0;
     position: absolute;
     top: 40%;
     left: 50%;
@@ -55,7 +57,7 @@ export const VerticallyCenteredText = styled.div`
 
 export const Title = styled.div`
     font-size: 110px;
-    width: auto;
+    text-align: center;
 `;
 
 export const RandomText = styled.div`

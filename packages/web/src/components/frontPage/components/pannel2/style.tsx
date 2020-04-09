@@ -2,14 +2,15 @@ import styled from "@emotion/styled";
 
 export const StyledPannel2 = styled.div`
     background: white;
-    height: 80vh;
+    height: 700px;
     display: flex;
     position: relative;
-
+    align-content: center;
+    align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
     & > * {
-        flex: 1 1 450px;
+        flex: 1 0 450px;
     }
 `;
 export const VerticallyCenteredDiv = styled.div`
@@ -22,9 +23,8 @@ export const VerticallyCenteredDiv = styled.div`
 `;
 
 export const Text = styled.div`
-    margin: 0;
     position: absolute;
-    top: 40%;
+    top: 55%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -39,10 +39,11 @@ export const TextStyling = styled.div`
 `;
 export const FixText = styled.div`
     position: relative;
-    flex: 2 2 750px;
+    flex: 2 0 850px;
+    min-height: 500px;
 `;
 export const FixChart = styled.div`
     position: relative;
-    flex: 1 1 500px;
-    height: 500px;
+    flex: 1 0 600px;
+    min-height: 600px;
 `;
