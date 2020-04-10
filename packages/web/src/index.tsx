@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Home } from "./components/frontPage/home";
 import { Navbar } from "./components/common/navbar/navBar";
+import { Footer } from "./components/common/footer/footer";
 
 import { Global } from "@emotion/core";
 import { globalStyle } from "./style";
@@ -25,6 +26,7 @@ const App = () => {
                     </Route>
                 </Switch>
             </Router>
+            <Footer></Footer>
         </>
     );
 };
