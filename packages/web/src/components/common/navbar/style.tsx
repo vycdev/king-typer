@@ -5,9 +5,8 @@ export const Fix = styled.div`
 `;
 
 export const Ul = styled.ul`
-    @import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
-    font-family: "Press Start 2P", cursive;
-    font-size: 12px;
+    font-family: "Verdana";
+    font-size: 18px;
 
     list-style-type: none;
     margin: 0;
@@ -22,15 +21,15 @@ export const Li = styled.li`
         display: block;
         color: white;
         text-align: center;
-        padding: 16px 28px;
+        padding: 18px 28px;
         text-decoration: none;
-        height: 14px;
+        height: 18px;
     }
 
     a:hover {
-        border-top: 4px solid #fff;
-        height: 10px;
-        padding-top: 12px;
+        border-top: 2px solid #fff;
+        height: 20px;
+        padding-top: 14px;
         background-color: #349dfe;
     }
 `;

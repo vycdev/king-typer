@@ -3,11 +3,14 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-![GitHub repo size](https://img.shields.io/github/repo-size/vyctor661/king-typer)
-![GitHub language count](https://img.shields.io/github/languages/count/vyctor661/king-typer)
-![GitHub top language](https://img.shields.io/github/languages/top/vyctor661/king-typer)
-![GitHub last commit](https://img.shields.io/github/last-commit/vyctor661/king-typer)
-![GitHub](https://img.shields.io/github/license/vyctor661/king-typer)
+![GitHub repo size](https://img.shields.io/github/repo-size/vyctor661/king-typer?style=flat-square)
+![GitHub language count](https://img.shields.io/github/languages/count/vyctor661/king-typer?style=flat-square)
+![GitHub top language](https://img.shields.io/github/languages/top/vyctor661/king-typer?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/vyctor661/king-typer?style=flat-square)
+![GitHub](https://img.shields.io/github/license/vyctor661/king-typer?style=flat-square)
+![GitHub Workflow Status](<https://img.shields.io/github/workflow/status/vyctor661/king-typer/Build test.?style=flat-square>)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/vyctor661/king-typer?style=flat-square)
+
 
 ## About
 
@@ -17,7 +20,7 @@ The developement for King Typer will continue even after the contest until I am 
 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
-You can visit the website here -> [King Typer](https://king-typer-web.herokuapp.com/)
+You can visit the website here -> [King Typer](https://king-typer.herokuapp.com/)
 
 ## Contributors ✨
 

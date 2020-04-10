@@ -3,11 +3,12 @@ import * as ReactDOM from "react-dom";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Home } from "./frontPage/home";
-import { Navbar } from "./components/navbar/navBar";
+import { Home } from "./components/frontPage/home";
+import { Navbar } from "./components/common/navbar/navBar";
 
 import { Global } from "@emotion/core";
 import { globalStyle } from "./style";
+import { Box } from "./components/common/typingBox/typingBox";
 
 const App = () => {
     return (
@@ -18,6 +19,9 @@ const App = () => {
                 <Switch>
                     <Route exact path="/">
                         <Home />
+                    </Route>
+                    <Route exact path="/type">
+                        <Box></Box>
                     </Route>
                 </Switch>
             </Router>

@@ -2,7 +2,8 @@ node_modules
 pnpm-debug.log
 dist
 .env
-
+.todo
 # If somones uses the wrong manager
-package.lock.json
+package-lock.json
 yarn.lock
+
