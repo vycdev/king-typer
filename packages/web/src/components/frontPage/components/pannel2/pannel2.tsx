@@ -57,17 +57,28 @@ export const Pannel2 = () => {
             <FixText>
                 <Text>
                     <TextStyling>
-                        <h2>Typing, typing, typing...</h2>
-                        As you can see in the chart the average typing speed for
-                        a person is about 40 words per minute. At that rate
-                        you’re making progress of about 200 characters per
-                        minute. Having the ability to type faster isn’t that
-                        hard as one might think. At one point in their lives,
-                        all of our expert transcriptionists were mere average
-                        typists – some even using pointer fingers only! Over
-                        time and with lots of technique and practice, you too
-                        can build up your typing skills and become more
-                        efficient every day.
+                        <h1>What is touch typing?</h1>
+                        Touch typing is a style of typing. Although the phrase
+                        refers to typing without using the sense of sight to
+                        find the keys—specifically, a touch typist will know
+                        their location on the keyboard through muscle memory,
+                        the term is often used to refer to a specific form of
+                        touch typing that involves placing the eight fingers in
+                        a horizontal row along the middle of the keyboard (the
+                        home row) and having them reach for specific other keys.
+                        (Under this usage, typists who do not look at the
+                        keyboard but do not use home row either are referred to
+                        as hybrid typists.) Both two-handed touch typing and
+                        one-handed touch typing are possible. As you can see in
+                        the chart the average typing speed for a person is about
+                        40 words per minute. At that rate you’re making progress
+                        of about 200 characters per minute. Having the ability
+                        to type faster isn’t that hard as one might think. At
+                        one point in their lives, all of our expert
+                        transcriptionists were mere average typists – some even
+                        using pointer fingers only! Over time and with lots of
+                        technique and practice, you too can build up your typing
+                        skills and become more efficient every day.
                     </TextStyling>
                 </Text>
             </FixText>
