@@ -20,7 +20,7 @@ The developement for King Typer will continue even after the contest until I am 
 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
-You can visit the website here -> [King Typer](https://king-typer-web.herokuapp.com/)
+You can visit the website here -> [King Typer](https://king-typer.herokuapp.com/)
 
 ## Contributors ✨
 
