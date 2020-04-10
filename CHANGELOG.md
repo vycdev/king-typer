@@ -1,3 +1,26 @@
+# [1.1.0](https://github.com/Vyctor661/king-typer/compare/v1.0.0...v1.1.0) (2020-04-10)
+
+
+### Bug Fixes
+
+* button is now clickable ([4a022cb](https://github.com/Vyctor661/king-typer/commit/4a022cbf9c378dc3ba0ee4fc2f46d5bcdf08717a))
+* fixed bug where the background wasnt shown on some browsers ([d54f678](https://github.com/Vyctor661/king-typer/commit/d54f67851c6bcd759674b9f1948fa11020df794a))
+* fixed react error that was produced by style file ([680dc53](https://github.com/Vyctor661/king-typer/commit/680dc53251ddad74f424b693e7360ab6115623fa))
+* fixed responsiveness on smaller and biggers screens ([a1ac2e1](https://github.com/Vyctor661/king-typer/commit/a1ac2e15f7eea354bd622f2a8d3b1c1088d560b9))
+* removed problematic packages ([b30eb41](https://github.com/Vyctor661/king-typer/commit/b30eb41ec591ec7a02f39bb48e1a0b48e09b5725))
+* typo in css ([94236a8](https://github.com/Vyctor661/king-typer/commit/94236a80653df3129fbff2cf26077a5a5e4363bd))
+
+
+### Features
+
+* added 3rd pannel and adjusted the others ([65953d2](https://github.com/Vyctor661/king-typer/commit/65953d26d32155275e070674d8666c7c202b786c))
+* added chart on front page ([c03d065](https://github.com/Vyctor661/king-typer/commit/c03d065fd661e778226c05c297ae5127b7a7f267))
+* added more random quotes fro the front page ([3ab59cd](https://github.com/Vyctor661/king-typer/commit/3ab59cd81d9a4fa4ab118b2595a7557d6d21c947))
+* added pannel 2 for home page ([a77aaca](https://github.com/Vyctor661/king-typer/commit/a77aacab0850dd11a58d7eef983d74b6ddaaea0d))
+* added react-rotating-text for the quotes ([5dc3348](https://github.com/Vyctor661/king-typer/commit/5dc3348e542d5e1b044e7e073b6365e6001ce8c3))
+* added typing box to the start typing page ([d963ddf](https://github.com/Vyctor661/king-typer/commit/d963ddf0aa15480a4f2c85e6e99a567a1c548476))
+* changed style & added random quotes & added random button & added a wave svg ([3cd6ec3](https://github.com/Vyctor661/king-typer/commit/3cd6ec3ddb6ffa9a7706dbe774d69774c67f3dfa))
+
 # 1.0.0 (2020-03-29)
 
 
