@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 
 export const FooterStyled = styled.div`
-    position: relative;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     font-family: Verdana;
-    height: 50px;
+    height: 35px;
     color: white;
     padding-top: 10px;
     text-align: center;
@@ -12,13 +13,13 @@ export const FooterStyled = styled.div`
     & a {
         text-decoration: none;
     }
-   
-    & svg{
-        width: 40px;
-        height: 40px;
+
+    & svg {
+        width: 30px;
+        height: 30px;
         fill: white;
     }
-    & svg:hover{
+    & svg:hover {
         fill: #fde400;
     }
 `;
