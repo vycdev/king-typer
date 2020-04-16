@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/Vyctor661/king-typer/compare/v1.1.0...v1.2.0) (2020-04-16)
+
+
+### Bug Fixes
+
+* fixed react warnings for the footer ([e0d64e6](https://github.com/Vyctor661/king-typer/commit/e0d64e6348fe403add6f33054b53d4ef0af1519e))
+* footer now properly displays on bottom of the page ([6473ebd](https://github.com/Vyctor661/king-typer/commit/6473ebd9e474d7650ef7b8c74213bc26736759ca))
+
+
+### Features
+
+* added footer ([b83ddd3](https://github.com/Vyctor661/king-typer/commit/b83ddd383670b3c8c8fbf7308c0e130e34e41d29))
+* added helpers for getting text ([9af262e](https://github.com/Vyctor661/king-typer/commit/9af262e9a52c2fde95586ec79a9ad3d3f3003f44))
+* added statistics for the typing test ([7d20a93](https://github.com/Vyctor661/king-typer/commit/7d20a933bcfd948da4e24e5fdd367aa92c50e3df))
+
 # [1.1.0](https://github.com/Vyctor661/king-typer/compare/v1.0.0...v1.1.0) (2020-04-10)
 
 
