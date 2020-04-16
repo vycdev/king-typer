@@ -1,22 +1,22 @@
-const webpackMerge = require("webpack-merge")
-const { resolve } = require("path")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const CopyWebpackPlugin = require("copy-webpack-plugin")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin")
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
+const webpackMerge = require("webpack-merge");
+const { resolve } = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
-const projectRoot = resolve(__dirname)
-const sourceDirectory = resolve(projectRoot, "src")
-const publicDirectory = resolve(projectRoot, "public")
-const outputDirectory = resolve(projectRoot, "dist")
-const htmlTemplateFile = resolve(publicDirectory, "index.html")
-const tsconfigPath = resolve(projectRoot, "tsconfig.json")
+const projectRoot = resolve(__dirname);
+const sourceDirectory = resolve(projectRoot, "src");
+const publicDirectory = resolve(projectRoot, "public");
+const outputDirectory = resolve(projectRoot, "dist");
+const htmlTemplateFile = resolve(publicDirectory, "index.html");
+const tsconfigPath = resolve(projectRoot, "tsconfig.json");
 
 const babelRule = {
     test: /\.(js|tsx?)$/,
     use: "babel-loader?compact=false"
-}
+};
 
 /** @type {import('webpack').Configuration} */
 const baseConfig = {
@@ -57,7 +57,7 @@ const baseConfig = {
         entrypoints: false,
         modules: false
     }
-}
+};
 
 /** @type {import('webpack').Configuration} */
 const devConfig = {
@@ -75,14 +75,14 @@ const devConfig = {
         hot: true,
         historyApiFallback: true
     }
-}
+};
 
 /** @type {import('webpack').Configuration} */
 const prodConfig = {
     mode: "production",
 
     optimization: {
-        minimize: false,
+        minimize: true,
         nodeEnv: "production"
     },
 
@@ -112,23 +112,23 @@ const prodConfig = {
     },
 
     devtool: "source-map"
-}
+};
 
 function getFinalConfig() {
     if (process.env.CI) {
-        console.info("Running CI config")
-        return baseConfig
+        console.info("Running CI config");
+        return baseConfig;
     }
 
     if (process.env.NODE_ENV === "production") {
-        console.info("Running production config")
-        return webpackMerge(baseConfig, prodConfig)
+        console.info("Running production config");
+        return webpackMerge(baseConfig, prodConfig);
     }
 
-    console.info("Running development config")
-    return webpackMerge(baseConfig, devConfig)
+    console.info("Running development config");
+    return webpackMerge(baseConfig, devConfig);
 }
 
-console.log("running webpack")
+console.log("running webpack");
 
-module.exports = getFinalConfig()
+module.exports = getFinalConfig();
