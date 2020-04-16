@@ -1,4 +1,5 @@
 import { css } from "@emotion/core";
+import styled from "@emotion/styled";
 
 export const globalStyle = css({
     body: {
@@ -8,3 +9,12 @@ export const globalStyle = css({
     },
     "body::-webkit-scrollbar": { display: "none" }
 });
+
+export const Container = styled.div`
+    position: relative;
+    min-height: 100vh;
+`;
+
+export const Content = styled.div`
+    padding-bottom: 35px;
+`;

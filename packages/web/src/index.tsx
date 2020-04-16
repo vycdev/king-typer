@@ -5,26 +5,39 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Home } from "./components/frontPage/home";
 import { Navbar } from "./components/common/navbar/navBar";
+import { Footer } from "./components/common/footer/footer";
 
 import { Global } from "@emotion/core";
-import { globalStyle } from "./style";
-import { Box } from "./components/common/typingBox/typingBox";
+import { globalStyle, Container, Content } from "./style";
+import { TypingBox } from "./components/common/typingBox/typingBox";
 
 const App = () => {
     return (
         <>
-            <Global styles={globalStyle} />
-            <Router>
-                <Navbar />
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    <Route exact path="/type">
-                        <Box></Box>
-                    </Route>
-                </Switch>
-            </Router>
+            <Container>
+                <Global styles={globalStyle} />
+                <Content>
+                    <Router>
+                        <Navbar />
+                        <Switch>
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route exact path="/type">
+                                <TypingBox
+                                    mode="easy"
+                                    colorCodes={{
+                                        wrong: "#f54242",
+                                        correct: "#4290f5",
+                                        notTyped: "black"
+                                    }}
+                                ></TypingBox>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </Content>
+                <Footer></Footer>
+            </Container>
         </>
     );
 };
