@@ -9,8 +9,7 @@ import { Footer } from "./components/common/footer/footer";
 
 import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
-import { Box } from "./components/common/typingBox/typingBox";
-import { TypingBox } from "./components/common/typingBox/yetanothertypingBox";
+import { TypingBox } from "./components/common/typingBox/typingBox";
 
 const App = () => {
     return (
@@ -25,9 +24,6 @@ const App = () => {
                                 <Home />
                             </Route>
                             <Route exact path="/type">
-                                <Box></Box>
-                            </Route>
-                            <Route exact path="/testing">
                                 <TypingBox
                                     mode="easy"
                                     colorCodes={{
