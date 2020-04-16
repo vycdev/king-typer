@@ -6,12 +6,11 @@
         "moduleResolution": "node",
         "alwaysStrict": true,
         "downlevelIteration": true,
-        "strictNullChecks": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
         "esModuleInterop": true,
-        "strictPropertyInitialization": true,
         "importHelpers": true,
-        "sourceMap": true,
-    }
+        "sourceMap": true
+    },
+    "exclude": ["node_modules"]
 }

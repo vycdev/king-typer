@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { getText } from "./helpers/gettext";
-import { typingBoxProps, typedArrayInterface } from "./helpers/interfaces";
+import {
+    typingBoxProps,
+    typedArrayInterface,
+    DataBoxType
+} from "./helpers/interfaces";
 import { DataBox } from "./dataBox";
 
 import {
@@ -16,8 +20,10 @@ import {
 export const TypingBox = (props: typingBoxProps) => {
     const [input, setInput] = useState("");
     const [text, setText] = useState(getText(props.mode));
-    const [visibleText, setVisibleText] = useState(text.join(" "));
-    const [typed, setTyped] = useState([]);
+    const [visibleText, setVisibleText] = useState([
+        <div key={"default"}></div>
+    ]);
+    const [typed, setTyped] = useState<Array<typedArrayInterface>>([]);
     const [time, setTime] = useState(60);
     const [cpm, setCpm] = useState(0);
 
@@ -120,7 +126,7 @@ export const TypingBox = (props: typingBoxProps) => {
                 <Displayer>
                     CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}
                 </Displayer>
-                {time > 0 ? "" : <DataBox data={typed}></DataBox>}
+                {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
                 {time > 0 ? (
                     ""
                 ) : (
@@ -143,7 +149,7 @@ export const TypingBox = (props: typingBoxProps) => {
                     readOnly={!(time > 0)}
                     autoFocus
                     value={input}
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    onChange={(e: any) => {
                         const timeLeft = typed.length
                             ? 60 -
                                   Math.floor(
