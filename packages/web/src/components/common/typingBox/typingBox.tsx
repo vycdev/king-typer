@@ -14,7 +14,8 @@ import {
     Displayer,
     TextBox,
     InputBox,
-    TryAgainButton
+    TryAgainButton,
+    ActuallyTyped
 } from "./style";
 
 export const TypingBox = (props: typingBoxProps) => {
@@ -124,19 +125,35 @@ export const TypingBox = (props: typingBoxProps) => {
         <Wrapper>
             <Container>
                 <Displayer>
-                    CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}
+                    CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}{" "}
+                    {time > 0 ? (
+                        ""
+                    ) : (
+                        <TryAgainButton
+                            onClick={() => {
+                                history.go(0);
+                            }}
+                        >
+                            Try again
+                        </TryAgainButton>
+                    )}
                 </Displayer>
                 {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
                 {time > 0 ? (
                     ""
                 ) : (
-                    <TryAgainButton
-                        onClick={() => {
-                            history.go(0);
-                        }}
-                    >
-                        Try again
-                    </TryAgainButton>
+                    <ActuallyTyped>
+                        {Math.floor(cpm / 5) ===
+                            Math.floor(
+                                typed[typed.length - 1].uncorrectedwpm
+                            ) && cpm != 0
+                            ? `Congratz, you typed with ${cpm /
+                                  5} WPM with no mistakes!`
+                            : `You typed ${
+                                  typed[typed.length - 1].uncorrectedwpm
+                              } WPM out of which
+                            ${cpm / 5} WPM were correct!`}
+                    </ActuallyTyped>
                 )}
                 <TextBox
                     style={{ display: time > 0 ? "" : "none" }}
@@ -188,7 +205,10 @@ export const TypingBox = (props: typingBoxProps) => {
                                           wpm: CPM / 5,
                                           uncorrectedwpm:
                                               Math.floor(
-                                                  (((CPM / getAcuracy(typed)) *
+                                                  (((CPM === 0
+                                                      ? 0
+                                                      : CPM /
+                                                        getAcuracy(typed)) *
                                                       100) /
                                                       5) *
                                                       100
