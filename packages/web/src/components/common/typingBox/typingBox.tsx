@@ -39,11 +39,11 @@ export const TypingBox = (props: typingBoxProps) => {
     ): number => {
         const charTyped = array
             .map((value: typedArrayInterface) => {
-                return value.state === "correct" ? value.word.length : 0;
+                return value.state === "correct" ? value.word.length + 1 : 0;
             })
-            .reduce((prev: number, currentValue: number) => {
-                return prev + currentValue;
-            });
+            .reduce((previous: number, current: number) => {
+                return previous + current;
+            }, 0);
 
         return Math.floor(charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60));
     };
