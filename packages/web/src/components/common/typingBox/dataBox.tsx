@@ -14,17 +14,25 @@ export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
                 margin={{ top: 30, bottom: 5 }}
             >
                 <Line
-                    name="WPM"
+                    name="Corrected WPM"
                     type="monotone"
                     dataKey="wpm"
                     stroke="#198cf6"
                     dot={<></>}
                 />
                 <Line
+                    name="WPM"
+                    type="monotone"
+                    dataKey="uncorrectedwpm"
+                    stroke="#0064a6"
+                    strokeDasharray="3 4 5 2"
+                    dot={<></>}
+                />
+                <Line
                     name="Acuracy"
                     type="monotone"
                     dataKey="acuracy"
-                    stroke="black"
+                    stroke="#00a627"
                     dot={<></>}
                 />
 

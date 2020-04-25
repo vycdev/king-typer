@@ -30,7 +30,7 @@ export const TextBox = styled.div`
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 25px;
 
     overflow-y: scroll;
     scroll-behavior: smooth;

@@ -186,6 +186,13 @@ export const TypingBox = (props: typingBoxProps) => {
                                                   : "wrong",
                                           time: performance.now() / 1000,
                                           wpm: CPM / 5,
+                                          uncorrectedwpm:
+                                              Math.floor(
+                                                  (((CPM / getAcuracy(typed)) *
+                                                      100) /
+                                                      5) *
+                                                      100
+                                              ) / 100,
                                           acuracy: getAcuracy(typed),
                                           timeUsed: 60 - timeLeft + "s"
                                       }
