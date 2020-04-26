@@ -9,12 +9,12 @@ export interface typingBoxProps {
 export interface typedArrayInterface {
     word: string;
     state: "correct" | "wrong";
-    time: number;
+    time: number | null;
     wpm: number;
-    accuracy: number;
+    acuracy: number;
     timeUsed: string;
 }
 
-export interface DataBoxType {
-    data: Array<typingBoxProps>;
+export interface DataBoxType<T> {
+    dataProp: Array<T>;
 }

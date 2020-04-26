@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
     width: 100%;
-    padding: 15px;
+    padding: 15px 0px;
 `;
 
 export const Container = styled.div`
@@ -30,7 +30,7 @@ export const TextBox = styled.div`
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 25px;
 
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -83,8 +83,32 @@ export const TryAgainButton = styled.button`
     text-align: center;
     text-decoration: none;
     color: white;
-    font-size: 18px;
-    font-weight: bold;
+    padding: 3px 6px;
+    margin-left: 5px;
+    margin-bottom: 1px;
+
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        -ms-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    &::after {
+        box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+        -ms-box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    &:hover::after {
+        opacity: 1;
+    }
+`;
+
+export const ActuallyTyped = styled.div`
     margin-top: 10px;
-    padding: 3px;
 `;

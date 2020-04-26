@@ -10,14 +10,17 @@ import {
     Displayer,
     TextBox,
     InputBox,
-    TryAgainButton
+    TryAgainButton,
+    ActuallyTyped
 } from "./style";
 
 export const TypingBox = (props: typingBoxProps) => {
     const [input, setInput] = useState("");
     const [text, setText] = useState(getText(props.mode));
-    const [visibleText, setVisibleText] = useState(text.join(" "));
-    const [typed, setTyped] = useState([]);
+    const [visibleText, setVisibleText] = useState([
+        <div key={"default"}></div>
+    ]);
+    const [typed, setTyped] = useState<Array<typedArrayInterface>>([]);
     const [time, setTime] = useState(60);
     const [cpm, setCpm] = useState(0);
 
@@ -33,16 +36,16 @@ export const TypingBox = (props: typingBoxProps) => {
     ): number => {
         const charTyped = array
             .map((value: typedArrayInterface) => {
-                return value.state === "correct" ? value.word.length : 0;
+                return value.state === "correct" ? value.word.length + 1 : 0;
             })
-            .reduce((prev: number, currentValue: number) => {
-                return prev + currentValue;
-            });
+            .reduce((previous: number, current: number) => {
+                return previous + current;
+            }, 0);
 
         return Math.floor(charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60));
     };
 
-    const getAccuracy = (array: Array<typedArrayInterface>): number => {
+    const getAcuracy = (array: Array<typedArrayInterface>): number => {
         let numberOfWrongWords = 0;
         let numberOfCorrectWords = 0;
         for (let value of array) {
@@ -118,19 +121,35 @@ export const TypingBox = (props: typingBoxProps) => {
         <Wrapper>
             <Container>
                 <Displayer>
-                    CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}
+                    CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}{" "}
+                    {time > 0 ? (
+                        ""
+                    ) : (
+                        <TryAgainButton
+                            onClick={() => {
+                                history.go(0);
+                            }}
+                        >
+                            Try again
+                        </TryAgainButton>
+                    )}
                 </Displayer>
-                {time > 0 ? "" : <DataBox data={typed}></DataBox>}
+                {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
                 {time > 0 ? (
                     ""
                 ) : (
-                    <TryAgainButton
-                        onClick={() => {
-                            history.go(0);
-                        }}
-                    >
-                        Try again
-                    </TryAgainButton>
+                    <ActuallyTyped>
+                        {Math.floor(cpm / 5) ===
+                            Math.floor(
+                                typed[typed.length - 1].uncorrectedwpm
+                            ) && cpm != 0
+                            ? `Congratz, you typed with ${cpm /
+                                  5} WPM with no mistakes!`
+                            : `You typed ${
+                                  typed[typed.length - 1].uncorrectedwpm
+                              } WPM out of which
+                            ${cpm / 5} WPM were correct!`}
+                    </ActuallyTyped>
                 )}
                 <TextBox
                     style={{ display: time > 0 ? "" : "none" }}
@@ -143,7 +162,7 @@ export const TypingBox = (props: typingBoxProps) => {
                     readOnly={!(time > 0)}
                     autoFocus
                     value={input}
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                    onChange={(e: any) => {
                         const timeLeft = typed.length
                             ? 60 -
                                   Math.floor(
@@ -180,7 +199,17 @@ export const TypingBox = (props: typingBoxProps) => {
                                                   : "wrong",
                                           time: performance.now() / 1000,
                                           wpm: CPM / 5,
-                                          accuracy: getAccuracy(typed),
+                                          uncorrectedwpm:
+                                              Math.floor(
+                                                  (((CPM === 0
+                                                      ? 0
+                                                      : CPM /
+                                                        getAcuracy(typed)) *
+                                                      100) /
+                                                      5) *
+                                                      100
+                                              ) / 100,
+                                          acuracy: getAcuracy(typed),
                                           timeUsed: 60 - timeLeft + "s"
                                       }
                                   ]
