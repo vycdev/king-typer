@@ -1,3 +1,20 @@
+# [1.3.0](https://github.com/Vyctor661/king-typer/compare/v1.2.0...v1.3.0) (2020-04-26)
+
+
+### Bug Fixes
+
+* bug where the calculated typing speed was lower than the actual typing speed ([082e348](https://github.com/Vyctor661/king-typer/commit/082e3483b2a643de700fdde094e5f1e856271adb))
+* heroku type errors (temporary fix) ([aaa80c2](https://github.com/Vyctor661/king-typer/commit/aaa80c20a882429e415b825eb900a0e70f93afb9))
+* page showing 'Not found' upon refreshing the page ([5d48487](https://github.com/Vyctor661/king-typer/commit/5d48487299968d1a2164b9513652dd974d603314))
+* pause time for typing text animation being too short is now longer ([0d15b6c](https://github.com/Vyctor661/king-typer/commit/0d15b6c933516280e9167bf79505dea2bcf71544))
+* reduced build files by minimizign the js ([a98ce54](https://github.com/Vyctor661/king-typer/commit/a98ce541b3a0399be73e31489275e1a9c22af0e4))
+
+
+### Features
+
+* added actual wpm in the chart ([c68693c](https://github.com/Vyctor661/king-typer/commit/c68693cdd3ddc346c2b62fe6d9f305e6ba8bad3e))
+* added some informative text at the bottom when you finish the text and moved the try again button ([ea58dcc](https://github.com/Vyctor661/king-typer/commit/ea58dcc866a7bf92a027f559a96d77970594ad79))
+
 # [1.2.0](https://github.com/Vyctor661/king-typer/compare/v1.1.0...v1.2.0) (2020-04-16)
 
 
