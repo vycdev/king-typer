@@ -13,6 +13,7 @@ export interface typedArrayInterface {
     wpm: number;
     acuracy: number;
     timeUsed: string;
+    uncorrectedwpm: number;
 }
 
 export interface DataBoxType<T> {
