@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { getText } from "./helpers/gettext";
-import {
-    typingBoxProps,
-    typedArrayInterface,
-    DataBoxType
-} from "./helpers/interfaces";
+import { typingBoxProps, typedArrayInterface } from "./helpers/interfaces";
 import { DataBox } from "./dataBox";
 
 import {

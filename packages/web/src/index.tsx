@@ -1,7 +1,7 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
 import { Home } from "./components/frontPage/home";
 import { Navbar } from "./components/common/navbar/navBar";
@@ -11,13 +11,13 @@ import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
 import { TypingBox } from "./components/common/typingBox/typingBox";
 
-const App = () => {
+export const App = () => {
     return (
         <>
             <Container>
                 <Global styles={globalStyle} />
                 <Content>
-                    <Router>
+                    <HashRouter>
                         <Navbar />
                         <Switch>
                             <Route exact path="/">
@@ -34,7 +34,7 @@ const App = () => {
                                 ></TypingBox>
                             </Route>
                         </Switch>
-                    </Router>
+                    </HashRouter>
                 </Content>
                 <Footer></Footer>
             </Container>
