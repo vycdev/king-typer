@@ -11,7 +11,7 @@ export interface typedArrayInterface {
     state: "correct" | "wrong";
     time: number | null;
     wpm: number;
-    acuracy: number;
+    accuracy: number;
     timeUsed: string;
     uncorrectedwpm: number;
 }

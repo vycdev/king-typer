@@ -29,9 +29,9 @@ export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
                     dot={<></>}
                 />
                 <Line
-                    name="Acuracy"
+                    name="Accuracy"
                     type="monotone"
-                    dataKey="acuracy"
+                    dataKey="accuracy"
                     stroke="#00a627"
                     dot={<></>}
                 />

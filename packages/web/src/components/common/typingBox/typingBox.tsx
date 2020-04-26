@@ -45,7 +45,7 @@ export const TypingBox = (props: typingBoxProps) => {
         return Math.floor(charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60));
     };
 
-    const getAcuracy = (array: Array<typedArrayInterface>): number => {
+    const getAccuracy = (array: Array<typedArrayInterface>): number => {
         let numberOfWrongWords = 0;
         let numberOfCorrectWords = 0;
         for (let value of array) {
@@ -204,12 +204,12 @@ export const TypingBox = (props: typingBoxProps) => {
                                                   (((CPM === 0
                                                       ? 0
                                                       : CPM /
-                                                        getAcuracy(typed)) *
+                                                        getAccuracy(typed)) *
                                                       100) /
                                                       5) *
                                                       100
                                               ) / 100,
-                                          acuracy: getAcuracy(typed),
+                                          accuracy: getAccuracy(typed),
                                           timeUsed: 60 - timeLeft + "s"
                                       }
                                   ]
