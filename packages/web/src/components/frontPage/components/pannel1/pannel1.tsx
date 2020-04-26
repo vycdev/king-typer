@@ -51,7 +51,7 @@ export const Pannel1 = () => {
                         <RandomText>
                             <ReactRotatingText
                                 cursor={true}
-                                pause={1000}
+                                pause={3000}
                                 emptyPause={300}
                                 deletingInterval={20}
                                 items={getRandomText()}
