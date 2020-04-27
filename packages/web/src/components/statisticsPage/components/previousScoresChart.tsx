@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
-import { DataBoxWrapper } from "../../common/typingBox/style";
+import { DataBoxWrapper } from "../style";
 
 import { DataBoxType, previousScoresType } from "../helpers/interfaces";
 

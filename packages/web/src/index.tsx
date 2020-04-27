@@ -31,14 +31,12 @@ export const App = () => {
                                     colorCodes={{
                                         wrong: "#f54242",
                                         correct: "#4290f5",
-                                        notTyped: "black"
+                                        notTyped: "#000"
                                     }}
                                 ></TypingBox>
-                                {/* <Footer></Footer> */}
                             </Route>
                             <Route exact path="/stats">
                                 <StatisticsPage />
-                                <Footer></Footer>
                             </Route>
                         </Switch>
                     </HashRouter>
