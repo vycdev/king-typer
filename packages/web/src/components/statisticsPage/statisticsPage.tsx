@@ -104,12 +104,14 @@ export const StatisticsPage = () => {
                 ) : (
                     <>
                         <TopBar>
-                            Best score: {bestwpm} Average WPM: {getAverageWpm()}{" "}
+                            Best score: {bestwpm}
+                            {" | "}Average WPM: {getAverageWpm()}
+                            {" | "}
                             Average Accuracy: {getAverageAccuracy()}
                         </TopBar>
                         <TopBar>
-                            Total Tests Taken: {previousScores.length} Hours
-                            Spent Typing:{" "}
+                            Total Tests Taken: {previousScores.length}
+                            {" | "}Hours Spent Typing:{" "}
                             {Math.floor((previousScores.length / 60) * 100) /
                                 100}
                             {"h"}
