@@ -201,7 +201,10 @@ export const TypingBox = (props: typingBoxProps) => {
                                 : `You typed ${
                                       typed[typed.length - 1].uncorrectedwpm
                                   } WPM out of which
-                            ${cpm / 5} WPM were correct!`}
+                            ${cpm /
+                                5} WPM were correct and you had ${getAccuracy(
+                                      typed
+                                  )}% accuracy.`}
                             {getWrongWords()}
                         </ActuallyTyped>
                     </div>
