@@ -57,12 +57,18 @@ export const StatisticsPage = () => {
         else
             for (
                 let i = previousScores.length - 10;
-                i <= previousScores.length;
+                i < previousScores.length;
                 i++
             ) {
                 sum += previousScores[i].wpm;
             }
-        return Math.floor((sum / previousScores.length) * 100) / 100;
+        return (
+            Math.floor(
+                (sum /
+                    (previousScores.length > 10 ? 10 : previousScores.length)) *
+                    100
+            ) / 100
+        );
     };
     const getAverageAccuracy = () => {
         let sum = 0;
@@ -73,12 +79,18 @@ export const StatisticsPage = () => {
         else
             for (
                 let i = previousScores.length - 10;
-                i <= previousScores.length;
+                i < previousScores.length;
                 i++
             ) {
                 sum += previousScores[i].accuracy;
             }
-        return Math.floor((sum / previousScores.length) * 100) / 100;
+        return (
+            Math.floor(
+                (sum /
+                    (previousScores.length > 10 ? 10 : previousScores.length)) *
+                    100
+            ) / 100
+        );
     };
 
     return (
