@@ -6,6 +6,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { Home } from "./components/frontPage/home";
 import { Navbar } from "./components/common/navbar/navBar";
 import { Footer } from "./components/common/footer/footer";
+import { StatisticsPage } from "./components/statisticsPage/statisticsPage";
 
 import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
@@ -22,6 +23,7 @@ export const App = () => {
                         <Switch>
                             <Route exact path="/">
                                 <Home />
+                                <Footer></Footer>
                             </Route>
                             <Route exact path="/type">
                                 <TypingBox
@@ -29,14 +31,16 @@ export const App = () => {
                                     colorCodes={{
                                         wrong: "#f54242",
                                         correct: "#4290f5",
-                                        notTyped: "black"
+                                        notTyped: "#000"
                                     }}
                                 ></TypingBox>
+                            </Route>
+                            <Route exact path="/stats">
+                                <StatisticsPage />
                             </Route>
                         </Switch>
                     </HashRouter>
                 </Content>
-                <Footer></Footer>
             </Container>
         </>
     );

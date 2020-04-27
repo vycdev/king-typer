@@ -14,6 +14,9 @@ export const Navbar = () => {
                 <Li>
                     <Link to="/type">Start Typing</Link>
                 </Li>
+                <Li>
+                    <Link to="/stats">Statistics</Link>
+                </Li>
             </Ul>
         </Fix>
     );

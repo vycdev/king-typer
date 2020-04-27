@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { getText } from "./helpers/gettext";
 import { typingBoxProps, typedArrayInterface } from "./helpers/interfaces";
-import { DataBox } from "./dataBox";
+import { previousScoresType } from "../../statisticsPage/helpers/interfaces";
+import { DataBox } from "./components/testChart";
+import { PreviousScoresChart } from "../../statisticsPage/components/previousScoresChart";
 
 import {
     Wrapper,
@@ -13,6 +15,11 @@ import {
     TryAgainButton,
     ActuallyTyped
 } from "./style";
+
+const bestwpm = JSON.parse(localStorage.getItem("bestwpm"));
+const previousScores: Array<previousScoresType> = JSON.parse(
+    localStorage.getItem("previousScores")
+);
 
 export const TypingBox = (props: typingBoxProps) => {
     const [input, setInput] = useState("");
@@ -30,6 +37,49 @@ export const TypingBox = (props: typingBoxProps) => {
         setVisibleText(generateVisibleText(input, props.mode, typed));
     }, []);
 
+    const getBestWpm = () => {
+        if (time <= 0) {
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, "0");
+            const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+            const yyyy = today.getFullYear();
+
+            previousScores.push({
+                date: `${dd}/${mm}/${yyyy}`,
+                wpm: cpm / 5,
+                uncorrectedwpm:
+                    Math.floor(
+                        (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
+                            5) *
+                            100
+                    ) / 100,
+                accuracy: getAccuracy(typed)
+            });
+
+            localStorage.setItem(
+                "previousScores",
+                JSON.stringify(previousScores)
+            );
+        }
+        if (time <= 0 && bestwpm < cpm / 5) {
+            localStorage.setItem("bestwpm", JSON.stringify(cpm / 5));
+            return cpm / 5;
+        }
+        return bestwpm;
+    };
+    const getWrongWords = () => {
+        const WrongWords = [];
+        typed.map((value: typedArrayInterface, index: number) => {
+            if (value.state === "wrong") {
+                WrongWords.push(
+                    <div key={value.word + index}>
+                        {`You typed "${text[index]}" as "${value.word}".`}
+                    </div>
+                );
+            }
+        });
+        return WrongWords;
+    };
     const getCpm = (
         array: Array<typedArrayInterface>,
         time: number
@@ -45,7 +95,7 @@ export const TypingBox = (props: typingBoxProps) => {
         return Math.floor(charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60));
     };
 
-    const getAcuracy = (array: Array<typedArrayInterface>): number => {
+    const getAccuracy = (array: Array<typedArrayInterface>): number => {
         let numberOfWrongWords = 0;
         let numberOfCorrectWords = 0;
         for (let value of array) {
@@ -121,7 +171,9 @@ export const TypingBox = (props: typingBoxProps) => {
         <Wrapper>
             <Container>
                 <Displayer>
-                    CPM: {cpm} WPM: {Math.floor(cpm / 5)} Time: {time}{" "}
+                    Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} |
+                    CPM: {cpm} | Time: {time}
+                    {"  "}
                     {time > 0 ? (
                         ""
                     ) : (
@@ -138,18 +190,24 @@ export const TypingBox = (props: typingBoxProps) => {
                 {time > 0 ? (
                     ""
                 ) : (
-                    <ActuallyTyped>
-                        {Math.floor(cpm / 5) ===
-                            Math.floor(
-                                typed[typed.length - 1].uncorrectedwpm
-                            ) && cpm != 0
-                            ? `Congratz, you typed with ${cpm /
-                                  5} WPM with no mistakes!`
-                            : `You typed ${
-                                  typed[typed.length - 1].uncorrectedwpm
-                              } WPM out of which
-                            ${cpm / 5} WPM were correct!`}
-                    </ActuallyTyped>
+                    <div>
+                        <ActuallyTyped>
+                            {Math.floor(cpm / 5) ===
+                                Math.floor(
+                                    typed[typed.length - 1].uncorrectedwpm
+                                ) && cpm != 0
+                                ? `Congratulations, you typed with ${cpm /
+                                      5} WPM with no mistakes!`
+                                : `You typed ${
+                                      typed[typed.length - 1].uncorrectedwpm
+                                  } WPM out of which
+                            ${cpm /
+                                5} WPM were correct and you had ${getAccuracy(
+                                      typed
+                                  )}% accuracy.`}
+                            {getWrongWords()}
+                        </ActuallyTyped>
+                    </div>
                 )}
                 <TextBox
                     style={{ display: time > 0 ? "" : "none" }}
@@ -204,12 +262,12 @@ export const TypingBox = (props: typingBoxProps) => {
                                                   (((CPM === 0
                                                       ? 0
                                                       : CPM /
-                                                        getAcuracy(typed)) *
+                                                        getAccuracy(typed)) *
                                                       100) /
                                                       5) *
                                                       100
                                               ) / 100,
-                                          acuracy: getAcuracy(typed),
+                                          accuracy: getAccuracy(typed),
                                           timeUsed: 60 - timeLeft + "s"
                                       }
                                   ]

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend } from "recharts";
-import { DataBoxWrapper } from "./style";
+import { DataBoxWrapper } from "../style";
 
-import { DataBoxType, typedArrayInterface } from "./helpers/interfaces";
+import { DataBoxType, typedArrayInterface } from "../helpers/interfaces";
 
 export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
     return (
@@ -29,9 +29,9 @@ export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
                     dot={<></>}
                 />
                 <Line
-                    name="Acuracy"
+                    name="Accuracy"
                     type="monotone"
-                    dataKey="acuracy"
+                    dataKey="accuracy"
                     stroke="#00a627"
                     dot={<></>}
                 />

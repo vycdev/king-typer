@@ -9,7 +9,7 @@ export const FooterStyled = styled.div`
     color: white;
     padding-top: 10px;
     text-align: center;
-    background: #242424;
+    background: #198cf6;
     & a {
         text-decoration: none;
     }
