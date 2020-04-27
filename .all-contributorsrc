@@ -40,6 +40,15 @@
       "contributions": [
         "userTesting"
       ]
+    },
+    {
+      "login": "maoitsme",
+      "name": "MaoItsMe",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38869813?v=4",
+      "profile": "https://github.com/maoitsme",
+      "contributions": [
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
