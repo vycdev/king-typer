@@ -38,10 +38,6 @@ export const TypingBox = (props: typingBoxProps) => {
     }, []);
 
     const getBestWpm = () => {
-        if (time <= 0 && bestwpm < cpm / 5) {
-            localStorage.setItem("bestwpm", JSON.stringify(cpm / 5));
-            return cpm / 5;
-        }
         if (time <= 0) {
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, "0");
@@ -64,6 +60,10 @@ export const TypingBox = (props: typingBoxProps) => {
                 "previousScores",
                 JSON.stringify(previousScores)
             );
+        }
+        if (time <= 0 && bestwpm < cpm / 5) {
+            localStorage.setItem("bestwpm", JSON.stringify(cpm / 5));
+            return cpm / 5;
         }
         return bestwpm;
     };
