@@ -1,3 +1,23 @@
+# [1.4.0](https://github.com/Vyctor661/king-typer/compare/v1.3.0...v1.4.0) (2020-04-27)
+
+
+### Bug Fixes
+
+* bug where a test wasnt registered if you had a new highscore ([fcf12e9](https://github.com/Vyctor661/king-typer/commit/fcf12e9e239eda564f306f11adbdee7a967110dd))
+* bug where average scores were wrong after 10 tests ([0120e82](https://github.com/Vyctor661/king-typer/commit/0120e82aa07f2ca500ac4cf1d902ec06fd1e8cf0))
+* bug where text was shifting to the right when typing ([ff7821c](https://github.com/Vyctor661/king-typer/commit/ff7821ce279ba62d3a2e13fe3fd760e549cc9559))
+* fixed type error ([f0ddaa4](https://github.com/Vyctor661/king-typer/commit/f0ddaa4c170787e8dba0fce08a084e17b395771b))
+* typo ([ba31cda](https://github.com/Vyctor661/king-typer/commit/ba31cdaef4f2f23f52ad979e37154a0bab82e28c))
+
+
+### Features
+
+* added default values for localstorage vars ([484c412](https://github.com/Vyctor661/king-typer/commit/484c412575e382328d54d6f75437c300a30d01f9))
+* added info for the accuracy for the bottom text at the end of the test ([3275e3f](https://github.com/Vyctor661/king-typer/commit/3275e3fc5692021cd3700bad1c84d29f852014f2))
+* added more types of statistics ([0a9d12d](https://github.com/Vyctor661/king-typer/commit/0a9d12d45b51747201c47dedea67defdc3244ee7))
+* added statistics page, footer now is only on the home page ([6df5895](https://github.com/Vyctor661/king-typer/commit/6df58950b1b974e0e6af9b795ae7573c5f089c2c))
+* the app now stores the best score and past tests in localstorage ([b3fe94f](https://github.com/Vyctor661/king-typer/commit/b3fe94fb10c7fae426a32e5b58b67e0eeae3bf18))
+
 # [1.3.0](https://github.com/Vyctor661/king-typer/compare/v1.2.0...v1.3.0) (2020-04-26)
 
 
