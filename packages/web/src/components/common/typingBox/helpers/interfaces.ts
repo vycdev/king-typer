@@ -19,3 +19,12 @@ export interface typedArrayInterface {
 export interface DataBoxType<T> {
     dataProp: Array<T>;
 }
+
+export interface previousScoresType {
+    date: string;
+    wpm: number;
+    uncorrectedwpm: number;
+    cpm: number;
+    uncorrectedcpm: number;
+    accuracy: number;
+}

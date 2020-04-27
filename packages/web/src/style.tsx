@@ -16,5 +16,5 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-    padding-bottom: 35px;
+    /* padding-bottom: 35px; */
 `;
