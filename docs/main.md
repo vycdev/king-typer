@@ -4,6 +4,7 @@
 - [Assets and code I don't own](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets-%26-code-i-dont-own.md)
 - [Some resources for learning touch typing.](https://github.com/Vyctor661/king-typer/blob/docs/docs/tutorials/touch-typing.md)
 - [Instalation guide](https://github.com/Vyctor661/king-typer/blob/docs/docs/tutorials/instalation.md)
+- [About the app code and architecture](https://github.com/Vyctor661/king-typer/blob/docs/docs/tutorials/about.md)
 
 # Project tree
 
