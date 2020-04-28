@@ -269,8 +269,9 @@ export const TypingBox = (props: typingBoxProps) => {
                             : cpm;
                         // typed array is an array of objects that contans info about every second of the test
                         const typedArray: Array<typedArrayInterface> =
-                            e.target.value[e.target.value.length - 1] === " " ||
-                            time <= 0
+                            e.target.value[e.target.value.length - 1] === " " &&
+                            time >= 0 &&
+                            typed.length < text.length
                                 ? [
                                       ...typed,
                                       {
@@ -321,7 +322,9 @@ export const TypingBox = (props: typingBoxProps) => {
                             )
                         );
                         // setting the time to the time left
-                        setTime(timeLeft);
+                        setTime(
+                            typedArray.length >= text.length ? 0 : timeLeft
+                        );
                         // setting the now cpm
                         setCpm(CPM);
                         // handeling the automatic scrolling of the text
