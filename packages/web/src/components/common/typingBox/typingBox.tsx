@@ -45,7 +45,7 @@ export const TypingBox = (props: typingBoxProps) => {
         const arrayOfText = getText(props.mode);
         const elm = document.getElementById("isBeingTyped");
         if (elm) {
-            textBoxRef.current.scrollTop = elm.offsetTop - 99999999;
+            textBoxRef.current.scrollTop = 0;
         }
         setInput("");
         setTyped([]);
