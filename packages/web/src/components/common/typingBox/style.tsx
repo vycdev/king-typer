@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// File which contains all the styled components used by the typing box page
+
 export const Wrapper = styled.div`
     width: 100%;
     padding: 15px 0px;

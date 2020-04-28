@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// Styled components for the statistics page
+
 export const ThoseArePreviousScores = styled.div`
     font-size: 18px;
     padding-top: 10px;

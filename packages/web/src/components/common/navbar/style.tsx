@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// Style file that contains the styled components for the navbar
+
 export const Fix = styled.div`
     width: 100%;
 `;

@@ -1,3 +1,4 @@
+// Typing box props interface, contains the types for the props of the typing box component
 export interface typingBoxProps {
     mode: "easy" | "hard";
     colorCodes: {
@@ -6,6 +7,8 @@ export interface typingBoxProps {
         notTyped: string;
     };
 }
+
+// typedArrayInterface is the interface for the typedArray variable in the typing box
 export interface typedArrayInterface {
     word: string;
     state: "correct" | "wrong";
@@ -16,6 +19,7 @@ export interface typedArrayInterface {
     uncorrectedwpm: number;
 }
 
+// databox type for prop type of the chart that displays the info after the test
 export interface DataBoxType<T> {
     dataProp: Array<T>;
 }
