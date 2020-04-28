@@ -13,6 +13,7 @@ import {
 import { previousScoresType } from "./helpers/interfaces";
 
 export const StatisticsPage = () => {
+    // Get state for previous scores and the best score that is stored in localStorage
     const [previousScores, setPreviousScores] = useState(
         (): Array<previousScoresType> =>
             JSON.parse(localStorage.getItem("previousScores"))

@@ -12,7 +12,8 @@ import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
 import { TypingBox } from "./components/common/typingBox/typingBox";
 
-export const App = () => {
+// Create the SPA component.
+const App = () => {
     return (
         <>
             <Container>
@@ -45,4 +46,6 @@ export const App = () => {
         </>
     );
 };
+
+// Render the app.
 ReactDOM.render(<App />, document.getElementById("root"));

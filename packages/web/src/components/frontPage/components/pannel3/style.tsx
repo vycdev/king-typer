@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// File that contains styled compoentns for the 3rd pannel of the home page (the pannel with the tutorial about touchtyping)
+
 export const StyledPannel3 = styled.div`
     background: #198cf6;
     height: auto;

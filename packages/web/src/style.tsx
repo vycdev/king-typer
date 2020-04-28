@@ -1,6 +1,9 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 
+// This file contains exports with styled components and css styling for the index.tsx file.
+
+// Global styles that apply to the entire body of the page
 export const globalStyle = css({
     body: {
         margin: 0,

@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+// styled components for the footer
+
 export const FooterStyled = styled.div`
     position: absolute;
     bottom: 0;

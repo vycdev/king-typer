@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { VerticallyCenteredDiv } from "./style";
 
+// Data for the chart (it's hardcoded for now, in the future I will use the data colected from the users to create this chart automatically)
 const data = [
     { percentage: 1, wpmName: "10 WPM" },
     { percentage: 6, wpmName: "20 WPM" },
@@ -29,6 +30,8 @@ const data = [
     { percentage: 0.2, wpmName: "140 WPM" },
     { percentage: 0.1, wpmName: "150 WPM" }
 ];
+
+// 2nd pannel component
 
 export const Pannel2 = () => {
     return (

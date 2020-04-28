@@ -1,3 +1,6 @@
+// This file exports a randomised array with all the texts below
+// This array contains the text for the rotating text animaion on the home page
+
 const randomText = [
     `Hello world!`,
     `Keyboard on fire? Still not enough!`,

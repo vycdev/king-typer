@@ -1,3 +1,7 @@
+// This file contains functions for gettting the random text for the easy and hard mode
+// I dont have a hard mode yet, that mode will be added at the same time I add database functionallity
+
+// Get random text for easy mode
 const getEasyText = () => {
     const text = (
         "the name of very to through and just form in much is great it think you say " +
@@ -46,12 +50,14 @@ const getEasyText = () => {
     return array;
 };
 
+// get hard text function only for testing for now
 const getHardText = () => {
     return `Previously the unofficial distinction between classes and function components was "function components don't have state", so we can't hide behind that one anymore: the difference between function components and classes components can be found spread over several pages in the very well-written react documentation (no shortcut one liner explanation to conveniently misinterpret for you!) which you should read so that you know what you're doing and can thus know whether you picked the best (whatever that means for you) solution to program yourself out of a problem you're having.`.split(
         " "
     );
 };
 
+// getText function
 export const getText = (mode: "easy" | "hard") => {
     return mode === "easy" ? getEasyText() : getHardText();
 };

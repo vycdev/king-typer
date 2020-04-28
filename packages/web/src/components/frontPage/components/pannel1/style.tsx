@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+// File which contains the styled components for the 1st pannel of home page
+// Contains the style for the logo, title, button, wavesvg and the rotating text
+
 //// CONTAINER 1
 export const StyledPannel1 = styled.div`
     position: relative;

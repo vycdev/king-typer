@@ -4,6 +4,9 @@ import { StyledPannel3, Text, TextStyling, FixImage, FixText } from "./style";
 
 import { VerticallyCenteredDiv } from "./style";
 
+// Third pannel of home page
+// It contains the tutorial for touch typing
+
 export const Pannel3 = () => {
     return (
         <StyledPannel3>

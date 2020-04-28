@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { FooterStyled } from "./style";
 
+// Footer component
+
 export const Footer = () => {
     return (
         <FooterStyled>

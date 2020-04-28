@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { Ul, Li, Fix } from "./style";
 
+// Navbar component
+
 export const Navbar = () => {
     return (
         <Fix>

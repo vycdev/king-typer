@@ -20,6 +20,8 @@ import {
     TypeButton
 } from "./style";
 
+// 1st pannel component for home page
+
 export const Pannel1 = () => {
     return (
         <StyledPannel1>

@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+// File with the styled components for the 2nd pannel of home page
+// It contains the chart and the definition of touchtyping
+
 export const StyledPannel2 = styled.div`
     background: white;
     height: auto;
