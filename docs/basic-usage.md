@@ -12,8 +12,8 @@ I will explain a little bit later about every other page in the app.
 
 The first thing that you will see will be the logo of the website, the title the buttons and the rotating text with the cool typing animation. 
 
-Scrolling a little bit down you will see that there is a chart with an explanation about what touch typing is.
-A little bit more down you will find a very useful guide to how to use touch typing that includes the basics and some more advanced tips that you will use everytime you will do touch typing.
+Scrolling further down you will see that there is a chart with an explanation about what touch typing is.
+And further down you will find a very useful guide to how to use touch typing that includes the basics and some more advanced tips that you will use everytime you will do touch typing.
 At the very bottom you will find a footer with a button which redirects the user to this repo.
 
 ### Basically this is the whole home page (from a phone perspective):
@@ -40,8 +40,8 @@ At the very top you will see some simple info about your test:
 
 Under this info you will see a chart that displays the `Accuracy`, `Corrected WPM`, `Uncorrected WPM` for ever second of the test. You can hover over it to see the info in a better way for each second. This way you can see changes in your accuracy, wpm, uncorrected wpm, that took place in the test. Immidiately under the chart you will see the legend for the chart.
 
-Under the chart you will see either of:
-- A congratulations message tellign you that you typed all words correctly and telling you what was your wpm.
+Under all of that you will see either of:
+- A congratulations message tellign you that you typed all words correctly and telling you what was your wpm score.
 - A message telling you what was your uncorrected WPM and corrected WPM along with your Accuracy for that test and the words that you typed wrong and how you typed them.
 
 
@@ -60,4 +60,4 @@ Explaining everything from top to bottom:
 - `Previous scores`: a chart that will show you the previous scores that you had. This chart includes your WPM (corrected wpm) and your Accuracy for each typing test that you have taken in the past. This way you can see how much you have improved.
 - `A list of the previous scores`: a list with the previous scores that is sorted from the most recent to the oldest test score. This list will contain Corrected WPM, Corrected CPM, WPM, CPM, Accuracy and the date of the test.
 
-## King Typer is intended to be used on with a real keyboard, (not with a virtual keyboard for example on the phone or tablet) because it encourages touch typing and not fast typing on the phone or tablet. The webiste is usable on the phone and tablet and it is responsive but it is not intended for that use.
+## King Typer is intended to be used with a real keyboard, (not with a virtual keyboard for example on the phone or tablet) because it encourages touch typing and not fast typing on the phone or tablet. The webiste is usable on the phone and tablet and it is responsive but it is not intended for that use.

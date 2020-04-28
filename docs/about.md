@@ -6,7 +6,14 @@ The developement for King Typer will continue even after the contest until I am 
 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
-You can visit the website here -> [King Typer](https://king-typer.herokuapp.com/)
+- You can visit the website [here](https://king-typer.herokuapp.com/).
+- You can see links for other docs [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
+
+## Why is everything in English?
+
+I chose to write everything in english because this project's main focus is to help as many people as it can to practice touch typing, and writing everything in english will open the project to far more people on the internet.
+
+But don't worry I plan on writing page translations for as many countries as I can in the future, but keep in mind I plan on keeping the typing tests in english because it's the best language in which you can practice touch typing.
 
 ## Architecture
 
@@ -14,13 +21,13 @@ You can visit the website here -> [King Typer](https://king-typer.herokuapp.com/
 The app is written using TypeScript, a strongly-typed superset of Javascript which is combined with React to create a responsive web application.
 
 ### File structure
-The repository is a mono-repository meaning it serves two parts of the app that are connected together, the API and the SPA.
+The repository is a mono-repository meaning it serves two parts of the app that are connected together, the API (application programming interface) and the SPA (single page application).
 
 In the root folder you will find a `packages` folder which contains the `web` folder, A.K.A. the SPA, and the `api` folder. 
 
 #### The `api` folder.
 
-The `api` folder contains a simple api server that not developed yet, but it's planned on being used in the future to manage the accounts, mutiplayer typing tests, everything that is gonna store use the database, etc. The API will be hosted on a different server and it will communicate with the SPA.
+The `api` folder contains a simple api server that not developed yet, but it's planned on being used in the future to manage the accounts, mutiplayer typing tests, everything that is gonna store use the database, etc. The API will be hosted on a different server and it will communicate with the SPA through simple HTTP requests.
 
 #### The `web` folder.
 
@@ -29,7 +36,7 @@ The `web` folder contains everything that has to do with the SPA. In the root of
 The `src` folder is structured in:
 - `index.tsx`: which contains the main app.
 - `style.tsx`: which contains the styling exports for the main app.
-- `server.ts`: which is the server that runs the complied app as a SPA. (heroku needs this)
+- `server.ts`: which is the server that runs the complied app as a SPA.
 - `utils`: a folder that contains imports for the above files.
 - `components`: a folder which contains components that are imported in the main app to be rendered.
 
@@ -59,7 +66,7 @@ I want to mention that a lot of those elements listed below don't make it into t
 
 ## Testing
 
-I don't use integration tests, (yet) because I don't it was necessary since a lot of people tested my app including myself, (you can see who tested my app in the README file), and also with the help of the tools listed above I could avoid most of the error before doing a new release. (I also have github actions set up.)
+I don't use integration tests, (yet) because I don't it was necessary since a lot of people tested my app including myself, (you can see who tested my app in the README file, note the people listed in the README file are not all the people that tested my app, those are just the people that tested my app and have a GitHub account), and also with the help of the tools listed above I could avoid most of the errors before doing a new release. (I also have github actions set up.)
 
 
 

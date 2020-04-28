@@ -54,3 +54,5 @@ Other scripts can be found in the package.json files. ([Root folder](https://git
 - `start`: A script to start the build.
 
 There are also other scripts for linting, semantic-release etc.
+
+All of those scripts were tested on windows powershell as well as on github actions and are guaranteed to be working.
