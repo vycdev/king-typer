@@ -37,10 +37,10 @@ export const TextBox = styled.div`
     justify-content: center;
     font-size: 25px;
 
-    overflow-y: scroll;
     scroll-behavior: smooth;
 
     -ms-overflow-style: none;
+    overflow: hidden;
 
     width: 99%;
     max-height: 200px;
