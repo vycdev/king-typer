@@ -38,9 +38,22 @@ export const TypingBox = (props: typingBoxProps) => {
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
-        setVisibleText(generateVisibleText(input, props.mode, typed));
+        setVisibleText(generateVisibleText(input, props.mode, typed, text));
     }, []);
-
+    // Function for reseting the state to the initial value
+    const resetState = () => {
+        const arrayOfText = getText(props.mode);
+        const elm = document.getElementById("isBeingTyped");
+        if (elm) {
+            textBoxRef.current.scrollTop = elm.offsetTop - 99999999;
+        }
+        setInput("");
+        setTyped([]);
+        setText(arrayOfText);
+        setVisibleText(generateVisibleText("", props.mode, [], arrayOfText));
+        setTime(60);
+        setCpm(0);
+    };
     // Get best wpm function, returns the best wpm and also sets the next score in local storage and the best wpm
     const getBestWpm = () => {
         if (time <= 0) {
@@ -126,7 +139,8 @@ export const TypingBox = (props: typingBoxProps) => {
     const generateVisibleText = (
         input: string,
         mode: string,
-        typedArray: Array<typedArrayInterface>
+        typedArray: Array<typedArrayInterface>,
+        text: Array<string>
     ) => {
         return text.map((value: string, index: number) => {
             return index < typedArray.length ? (
@@ -188,17 +202,13 @@ export const TypingBox = (props: typingBoxProps) => {
                     Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} |
                     CPM: {cpm} | Time: {time}
                     {"  "}
-                    {time > 0 ? (
-                        ""
-                    ) : (
-                        <TryAgainButton
-                            onClick={() => {
-                                history.go(0);
-                            }}
-                        >
-                            Try again
-                        </TryAgainButton>
-                    )}
+                    <TryAgainButton
+                        onClick={() => {
+                            resetState();
+                        }}
+                    >
+                        Try again
+                    </TryAgainButton>
                 </Displayer>
                 {/* Chart with the stats for the test that is rendered only after the time reached 0 + other informative components that do the same*/}
                 {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
@@ -303,7 +313,12 @@ export const TypingBox = (props: typingBoxProps) => {
                         setTyped(typedArray);
                         // generating the visible text and setting it
                         setVisibleText(
-                            generateVisibleText(input, props.mode, typedArray)
+                            generateVisibleText(
+                                input,
+                                props.mode,
+                                typedArray,
+                                text
+                            )
                         );
                         // setting the time to the time left
                         setTime(timeLeft);
