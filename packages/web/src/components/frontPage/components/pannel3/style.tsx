@@ -46,7 +46,9 @@ export const TextStyling = styled.div`
     text-align: center;
     font-size: 20px;
     & ul {
-        list-style-position: inside;
+        /* list-style-position: inside; */
+        /* list-style-type: none; */
+        text-align: left;
     }
 `;
 export const FixText = styled.div`

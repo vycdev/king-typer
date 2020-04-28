@@ -11,17 +11,22 @@ export const Pannel3 = () => {
                 <Text>
                     <TextStyling>
                         <h1>A simple guide for beginners.</h1>
-                        At the very foundation of every great typist is their
-                        ability to hold steady, proper hand placement. You
-                        should always use all of your fingers (never just your
-                        pointer or middle fingers), and approach the keys with
-                        the same general starting point shown in the image. This
-                        is the most important thing you need to know, typing
-                        with the right fingers will increase your speed a lot as
-                        well as following some simple rules that maybe not
-                        everyone follows exactly because even the most advanced
-                        typists have their own unique style of typing, but it’s
-                        good to keep them in mind:
+                        <p>
+                            {" "}
+                            At the very foundation of every great typist is
+                            their ability to hold steady, proper hand placement.
+                            You should always use all of your fingers (never
+                            just your pointer or middle fingers), and approach
+                            the keys with the same general starting point shown
+                            in the image. This is the most important thing you
+                            need to know, typing with the right fingers will
+                            increase your speed a lot as well as following some
+                            simple rules that maybe not everyone follows exactly
+                            because even the most advanced typists have their
+                            own unique style of typing, but it’s good to keep
+                            them in mind:
+                        </p>
+
                         <ul>
                             <li>
                                 Hitting the keys with the rigth fingers, as
@@ -56,9 +61,11 @@ export const Pannel3 = () => {
                                 at the same level with the top of your monitor.
                             </li>
                         </ul>
-                        Now that you know all these rules you can start
-                        practicing, and don't forget, perfect practice makes
-                        perfect.
+                        <p>
+                            Now that you know all these rules you can start
+                            practicing, and don't forget, perfect practice makes
+                            perfect.
+                        </p>
                     </TextStyling>
                 </Text>
             </FixText>
