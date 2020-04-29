@@ -39,7 +39,8 @@ export const TypingBox = (props: typingBoxProps) => {
     // Initialize the visible text that has to be typed.
     useEffect(() => {
         setVisibleText(generateVisibleText(input, props.mode, typed, text));
-    }, []);
+        textBoxRef.current.scrollTop = 0;
+    }, [time === 60]);
     // Function for reseting the state to the initial value
     const resetState = () => {
         const arrayOfText = getText(props.mode);
