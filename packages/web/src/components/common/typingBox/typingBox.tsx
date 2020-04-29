@@ -19,7 +19,6 @@ import {
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
-const bestwpm = JSON.parse(localStorage.getItem("bestwpm"));
 const previousScores: Array<previousScoresType> = JSON.parse(
     localStorage.getItem("previousScores")
 );
@@ -33,6 +32,9 @@ export const TypingBox = (props: typingBoxProps) => {
     const [typed, setTyped] = useState<Array<typedArrayInterface>>([]);
     const [time, setTime] = useState(60);
     const [cpm, setCpm] = useState(0);
+    const [bestwpm, setBestwpm] = useState(
+        JSON.parse(localStorage.getItem("bestwpm"))
+    );
 
     const textBoxRef = useRef(null);
 
@@ -40,6 +42,7 @@ export const TypingBox = (props: typingBoxProps) => {
     useEffect(() => {
         setVisibleText(generateVisibleText(input, props.mode, typed, text));
         textBoxRef.current.scrollTop = 0;
+        setBestwpm(JSON.parse(localStorage.getItem("bestwpm")));
     }, [time === 60]);
     // Function for reseting the state to the initial value
     const resetState = () => {
