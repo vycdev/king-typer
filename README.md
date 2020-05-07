@@ -21,8 +21,8 @@ The developement for King Typer will continue even after the contest until I am 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
 - You can visit the website [here](https://king-typer.herokuapp.com/).
-- You can see links for other docs (EN) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
-- You can see links for other docs (RO) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
+- You can see links for other docs (EN) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/main.md).
+- You can see links for other docs (RO) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/ro/main.md).
 
 ## Why is everything in English?
 

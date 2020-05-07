@@ -1,6 +1,6 @@
 # Cum să utilizați aplicația.
 
-Puteți utiliza versiunea găzduită a aplicației [aici](https://king-typer.herokuapp.com/) sau puteți instala aplicația și o puteți rula folosind [acest tutorial](https://github.com/Vyctor661/king-typer/blob/docs/docs/tutorials/instalation.md)
+Puteți utiliza versiunea găzduită a aplicației [aici](https://king-typer.herokuapp.com/) sau puteți instala aplicația și o puteți rula folosind [acest tutorial](https://github.com/Vyctor661/king-typer/blob/docs/docs/ro/tutoriale/instalare.md)
 
 ## Când deschideți aplicația, veți fi întâmpinat de acest ecran, care este `pagina principală`:
 
