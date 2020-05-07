@@ -30,7 +30,7 @@ export const PreviousScoresChart = (props: DataBoxType<previousScoresType>) => {
                     stroke="#00a627"
                     dot={<></>}
                 />
-                <XAxis dataKey="date" />
+                <XAxis dataKey="date" interval={5} />
                 <YAxis />
                 <Tooltip />
                 <Legend />
