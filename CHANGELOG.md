@@ -1,3 +1,20 @@
+# [1.5.0](https://github.com/Vyctor661/king-typer/compare/v1.4.0...v1.5.0) (2020-05-07)
+
+
+### Bug Fixes
+
+* best wpm not updating unless refreshing page ([ba46e20](https://github.com/Vyctor661/king-typer/commit/ba46e204e00c8da59f23f49e5b393be3cb99bcdb))
+* dates overlapping in statistics page chart ([8923bce](https://github.com/Vyctor661/king-typer/commit/8923bce8029e91ecbb1391526cbc7d0731b44a4f))
+* text not resseting scroll if you used the 'try again' button after you finished the test ([662f064](https://github.com/Vyctor661/king-typer/commit/662f064661b6fa9413acc63e6c8815b184e70b8e))
+* try again button should now properly set the scroll to 0 on all browsers ([d591aaf](https://github.com/Vyctor661/king-typer/commit/d591aaf7a21e140383729a5ef494e54b371f0db6))
+
+
+### Features
+
+* text is no longer manually scrollable ([9c45175](https://github.com/Vyctor661/king-typer/commit/9c45175269f48cff4a926ddea00ca7582d11b4e5))
+* timer now stops if you finish the text ([dd1b16b](https://github.com/Vyctor661/king-typer/commit/dd1b16b0f3fab4eb5ab686e3f7e398ed051d854b))
+* try again button now permanently visible and no longer refreshing the page ([d4a4325](https://github.com/Vyctor661/king-typer/commit/d4a43257ec3c7a4c00e8698fd9b567a831eacf45))
+
 # [1.4.0](https://github.com/Vyctor661/king-typer/compare/v1.3.0...v1.4.0) (2020-04-27)
 
 
