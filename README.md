@@ -21,14 +21,14 @@ The developement for King Typer will continue even after the contest until I am 
 This is a monorepo, containing both the API and the front-end that are hosted separately on heroku.
 
 - You can visit the website [here](https://king-typer.herokuapp.com/).
-- You can see links for other docs [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
+- You can see links for other docs (EN) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
+- You can see links for other docs (RO) [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/main.md).
 
 ## Why is everything in English?
 
 I chose to write everything in english because this project's main focus is to help as many people as it can to practice touch typing, and writing everything in english will open the project to far more people on the internet.
 
 But don't worry I plan on writing page translations for as many countries as I can in the future, but keep in mind I plan on keeping the typing tests in english because it's the best language in which you can practice touch typing.
-
 
 ## Contributors ✨
 
