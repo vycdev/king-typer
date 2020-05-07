@@ -1,6 +1,6 @@
 # How to use the app.
 
-You can use the hosted version of the app [here](https://king-typer.herokuapp.com/) or you can install the app and run it using [this tutorial](https://github.com/Vyctor661/king-typer/blob/docs/docs/tutorials/instalation.md)
+You can use the hosted version of the app [here](https://king-typer.herokuapp.com/) or you can install the app and run it using [this tutorial](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/tutorials/instalation.md)
 
 ## When you open the app you will be welcomed by this screen which is the `home page`: 
 

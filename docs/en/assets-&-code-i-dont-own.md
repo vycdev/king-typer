@@ -12,7 +12,7 @@
 - The typing text animation is made using a dependency called [react-rotating-text](https://www.npmjs.com/package/react-rotating-text)
 - The charts are made using a dependency called [recharts](https://recharts.org/en-US/)
 
-A list with all the dependencies can be found [here](https://github.com/Vyctor661/king-typer/blob/docs/package.json), [here](https://github.com/Vyctor661/king-typer/blob/docs/packages/web/package.json) and [here](https://github.com/Vyctor661/king-typer/blob/docs/packages/api/package.json), of course I don't own any of the dependencies. 
+A list with all the dependencies can be found [here](https://github.com/Vyctor661/king-typer/blob/master/package.json), [here](https://github.com/Vyctor661/king-typer/blob/master/packages/web/package.json) and [here](https://github.com/Vyctor661/king-typer/blob/master/packages/api/package.json), of course I don't own any of the dependencies. 
 
 ## Contributors
 
