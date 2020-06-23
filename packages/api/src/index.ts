@@ -1,12 +1,32 @@
-import koa, { Context } from "koa"
+import Koa from "koa";
+import Router from "koa-router";
 
-const app = new koa()
-const port = process.env.PORT || 8090
+import logger from "koa-logger";
+import json from "koa-json";
+import bodyParser from "koa-bodyparser";
 
-app.use(async (context: Context) => {
-    context.body = "Hello world!"
-})
+import errorHandler from "./common/error/middleware/errorHandler";
 
-app.listen(port, () => {
-    console.log(`App started at port ${port}`);
-})
+import apiRouter from "./modules/apiRouter";
+
+const app = new Koa();
+const router = new Router();
+
+const port = +(process.env.PORT ?? 8090);
+
+app.use(bodyParser());
+app.use(json());
+
+if (process.env.NODE_ENV === "development") {
+    app.use(logger());
+}
+
+app.use(errorHandler());
+
+router.use(apiRouter);
+
+app.use(router.routes()).use(router.allowedMethods());
+
+export const server = app.listen(port, () => {
+    console.info(`Koa app started and listening on port ${port}! 🚀`);
+});
