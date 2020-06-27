@@ -1,4 +1,3 @@
-
 import knex from "../../../../db/knex";
 
 import { Session } from "../types/Session";

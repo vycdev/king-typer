@@ -1,4 +1,3 @@
-
 import Knex from "knex";
 
 export const up = async (knex: Knex) =>

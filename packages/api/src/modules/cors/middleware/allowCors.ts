@@ -1,4 +1,3 @@
-
 import { Middleware } from "koa";
 
 const origin = String(process.env.CORS_ORIGIN);

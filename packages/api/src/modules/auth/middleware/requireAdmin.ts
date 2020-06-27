@@ -1,4 +1,3 @@
-
 import { Middleware, DefaultState, Context } from "koa";
 
 import { HttpError } from "../../../common/error/classes/httpError";

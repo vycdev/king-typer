@@ -10,4 +10,4 @@ export const getCookie = async (key: Session["key"]) => {
 
     if (!cookie) return null;
     return cookie.session;
-
+};

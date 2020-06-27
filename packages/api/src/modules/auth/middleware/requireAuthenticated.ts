@@ -15,4 +15,3 @@ export const requireAuthenticated = (): Middleware<
 
     await next();
 };
-
