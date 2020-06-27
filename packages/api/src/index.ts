@@ -1,5 +1,5 @@
 import Koa from "koa";
-import Router from "koa-router";
+import Router from "./modules/Router";
 
 import logger from "koa-logger";
 import json from "koa-json";
