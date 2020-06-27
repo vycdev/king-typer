@@ -8,6 +8,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
+        "format": "prettier --write \"**/*.+(js|json|ts)\"",
         "start:dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon",
         "start": "node ./dist/index.js",
@@ -15,6 +16,7 @@
     },
     "dependencies": {
         "@hapi/joi": "^17.1.1",
+        "bcrypt": "^5.0.0",
         "dotenv": "^8.2.0",
         "knex": "^0.20.1",
         "koa": "^2.11.0",

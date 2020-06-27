@@ -1,4 +1,4 @@
-interface users {
+interface Users {
     name: string;
     email: string;
     password: string;
@@ -30,4 +30,4 @@ export default [
         password: "JustAGuy",
         description: "But hey, I have a description!"
     }
-] as readonly users[];
+] as readonly Users[];

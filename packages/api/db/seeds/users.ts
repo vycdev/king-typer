@@ -7,7 +7,7 @@ export const seed = async (knex: Knex) => {
     await knex("users").del();
 
     const hashedUsers: typeof users = await Promise.all(
-        users.map(async (u) => ({
+        users.map(async u => ({
             ...u,
             password: await bcrypt.hash(u.password, 12)
         }))

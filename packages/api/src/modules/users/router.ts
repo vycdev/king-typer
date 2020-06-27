@@ -4,7 +4,7 @@ import { createUser } from "./actions/createUser";
 import { HttpError } from "../../common/error/classes/httpError";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import { registerBody } from "./schema/registerBody";
-import { RegisterBody } from "./types/registerBody";
+import { RegisterBody } from "./types/RegisterBody";
 
 const router = new Router({ prefix: "/users" });
 
@@ -19,7 +19,6 @@ router.post(
         if (!user) {
             throw new HttpError(400, "That username seems to be already taken");
         }
-
 
         ctx.session!.user = user.id;
         ctx.status = 201;

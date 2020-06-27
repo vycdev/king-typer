@@ -15,4 +15,3 @@ export default async <T extends keyof Omit<User, "password">>(
 
     return result;
 };
-
