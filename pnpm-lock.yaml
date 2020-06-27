@@ -49,6 +49,7 @@ importers:
       koa-json: 2.0.2
       koa-logger: 3.2.1
       koa-router: 9.0.1
+      koa-session: 6.0.0
       pg: 7.12.1_pg@7.12.1
       sqlite3: 4.1.0
       typescript: 3.7.4
@@ -59,6 +60,7 @@ importers:
       '@types/koa-json': 2.0.18
       '@types/koa-logger': 3.1.1
       '@types/koa-router': 7.4.1
+      '@types/koa-session': 5.10.2
       '@types/mocha': 7.0.2
       chai: 4.2.0
       mocha: 7.2.0
@@ -71,6 +73,7 @@ importers:
       '@types/koa-json': ^2.0.18
       '@types/koa-logger': ^3.1.1
       '@types/koa-router': ^7.4.1
+      '@types/koa-session': ^5.10.2
       '@types/mocha': ^7.0.2
       chai: ^4.2.0
       dotenv: ^8.2.0
@@ -80,6 +83,7 @@ importers:
       koa-json: ^2.0.2
       koa-logger: ^3.2.1
       koa-router: ^9.0.1
+      koa-session: ^6.0.0
       mocha: ^7.2.0
       nodemon: ^1.19.4
       pg: ^7.12.1
@@ -1657,6 +1661,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rfqKIv9bFds39Jxvsp8o3YJLnEQVPVriYA14AuO2OY65IHh/4UX4U/iMs5L0wATpcRmm1bbe0BNk23TRwx3VQQ==
+  /@types/koa-session/5.10.2:
+    dependencies:
+      '@types/cookies': 0.7.4
+      '@types/koa': 2.11.3
+    dev: true
+    resolution:
+      integrity: sha512-BAEiWtYAh0L2PutFkuQgWE6JJHjQiSxtmriLVBbReZmrt3SlMbhjzC3lxhdazjrcHuDSj89DlYIxLMNTMq9Bag==
   /@types/koa-static/4.0.1:
     dependencies:
       '@types/koa': 2.11.0
@@ -2553,7 +2564,6 @@ packages:
     resolution:
       integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==
   /base64-js/1.3.1:
-    dev: true
     resolution:
       integrity: sha512-mLQ4i2QO1ytvGWFWmcngKO//JXAQueZvwEKtjgQFM4jIK0kU+ytMfplL8j+n5mspOfjHwoAg+9yhb7BwAHm36g==
   /batch/0.6.1:
@@ -2772,6 +2782,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-bRu2AbB6TvztlwlBMgkwJ8lbwpg=
+  /buffer/5.6.0:
+    dependencies:
+      base64-js: 1.3.1
+      ieee754: 1.1.13
+    dev: false
+    resolution:
+      integrity: sha512-/gDYp/UtU0eA1ys8bOs9J6a+E/KWIY+DZ+Q2WESNUA0jFRsJOc0SNUO6xJ5SGA1xueg3NL65W6s+NY5l9cunuw==
   /builtin-status-codes/3.0.0:
     dev: true
     resolution:
@@ -3469,6 +3486,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-xb3ZL6+L8b9JLLCx3ZdoZy4+2ECphCMo2PwqgP1tlfVq6M6YReyzBJtvWWtbDSpNr9hn96pkCiZqUcFEc+54Qg==
+  /crc/3.8.0:
+    dependencies:
+      buffer: 5.6.0
+    dev: false
+    resolution:
+      integrity: sha512-iX3mfgcTMIq3ZKLIsVFAbv7+Mc10kxabAGQb8HvjA1o3T1PIYprbakQ65d3I+2HGHt6nSKkM9PYjgoJO2KcFBQ==
   /create-ecdh/4.0.3:
     dependencies:
       bn.js: 4.11.8
@@ -5620,7 +5643,6 @@ packages:
     resolution:
       integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   /ieee754/1.1.13:
-    dev: true
     resolution:
       integrity: sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
   /iferr/0.1.5:
@@ -5926,6 +5948,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-s6tfsaQaQi3JNciBH6shVqEDvhGut0SUXr31ag8Pd8BBbVVlcGfWhpPmEOoM6RJ5TFhbypvf5yyRw/VXW1IiWg==
+  /is-class-hotfix/0.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-0n+pzCC6ICtVr/WXnN2f03TK/3BfXY7me4cjCAqT8TYXEl0+JBRoqBo94JJHXcyDSLUeWbNX8Fvy5g5RJdAstQ==
   /is-data-descriptor/0.1.4:
     dependencies:
       kind-of: 3.2.2
@@ -6207,6 +6233,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-Thqg+1G/vLPpJogAE5cgLBd1tm4=
+  /is-type-of/1.2.1:
+    dependencies:
+      core-util-is: 1.0.2
+      is-class-hotfix: 0.0.6
+      isstream: 0.1.2
+    dev: false
+    resolution:
+      integrity: sha512-uK0kyX9LZYhSDS7H2sVJQJop1UnWPWmo5RvR3q2kFH6AUHYs7sOrVg0b4nyBHw29kRRNFofYN/JbHZDlHiItTA==
   /is-typedarray/1.0.0:
     resolution:
       integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
@@ -6548,6 +6582,17 @@ packages:
       node: '>= 7.6.0'
     resolution:
       integrity: sha512-90ZotV7t0p3uN9sRwW2D484rAaKIsD8tAVtypw/aBU+ryfV+fR2xrcAwhI8Wl6WRkojLUs/cB9SBSCuIb+IanQ==
+  /koa-session/6.0.0:
+    dependencies:
+      crc: 3.8.0
+      debug: 3.2.6
+      is-type-of: 1.2.1
+      uuid: 3.4.0
+    dev: false
+    engines:
+      node: '>=7.6'
+    resolution:
+      integrity: sha512-mEj2ximzLqoypk0Q+/JLu0j7fuMk/fL+yiBM0RKmxBqdImKxq3hfnpHLwpMhwya05z/W8i7vawpFl+lsYTZbAg==
   /koa-static/5.0.0:
     dependencies:
       debug: 3.2.6
@@ -10659,7 +10704,6 @@ packages:
     resolution:
       integrity: sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
   /uuid/3.4.0:
-    dev: true
     hasBin: true
     resolution:
       integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
