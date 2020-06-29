@@ -35,7 +35,7 @@ export const TextBox = styled.div`
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 32px;
 
     scroll-behavior: smooth;
 
@@ -49,7 +49,7 @@ export const TextBox = styled.div`
         display: none;
     }
     .spaced {
-        padding-right: 4px;
+        padding-right: 8px;
     }
     .isBeingTyped {
         display: inline-flex;
@@ -116,4 +116,7 @@ export const TryAgainButton = styled.button`
 
 export const ActuallyTyped = styled.div`
     margin-top: 10px;
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
 `;
