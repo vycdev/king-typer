@@ -15,7 +15,7 @@ export const NavBar = styled.div`
     background-color: #198cf6;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 40px;
+    padding-top: 28px;
 
     a {
         padding: 8px 8px 8px 32px;
@@ -56,7 +56,7 @@ export const OpenButton = styled.span`
 `;
 
 export const Category = styled.div`
-    padding: 8px 8px 8px 32px;
+    padding: 20px 8px 8px 32px;
     color: white;
     border-bottom: 1px dotted #99b4ff;
     font-size: 16px;
