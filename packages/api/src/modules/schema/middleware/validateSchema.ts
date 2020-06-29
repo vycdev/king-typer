@@ -11,7 +11,7 @@ export const validateSchema = (
     field: ValidationField
 ): Middleware => (ctx, next) => {
     const toValidate: Record<ValidationField, unknown> = {
-        body: ctx.request.body,
+        body: ctx.body,
         params: ctx.params,
         query: ctx.query
     };
