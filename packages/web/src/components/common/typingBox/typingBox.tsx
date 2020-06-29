@@ -253,7 +253,11 @@ export const TypingBox = (props: typingBoxProps) => {
                     value={input}
                     onChange={(e: any) => {
                         // On change event, this is the only event in this component and it handles everything about the test.
-
+                        // input is the current value of the input box
+                        const input =
+                            e.target.value[e.target.value.length - 1] === " "
+                                ? ""
+                                : e.target.value;
                         // timeLeft is the calculated remaining time
                         const timeLeft = typed.length
                             ? 60 -
@@ -275,7 +279,8 @@ export const TypingBox = (props: typingBoxProps) => {
                         const typedArray: Array<typedArrayInterface> =
                             e.target.value[e.target.value.length - 1] === " " &&
                             time >= 0 &&
-                            typed.length < text.length
+                            typed.length < text.length &&
+                            e.target.value != " "
                                 ? [
                                       ...typed,
                                       {
@@ -307,11 +312,7 @@ export const TypingBox = (props: typingBoxProps) => {
                                       }
                                   ]
                                 : typed;
-                        // input is the current value of the input box
-                        const input =
-                            e.target.value[e.target.value.length - 1] === " "
-                                ? ""
-                                : e.target.value;
+
                         //   setting the input
                         setInput(input);
                         // setting the typedArray state
