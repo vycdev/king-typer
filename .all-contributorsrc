@@ -18,7 +18,29 @@
       "contributions": [
         "code",
         "design",
-        "infra"
+        "infra",
+        "question",
+        "content",
+        "doc",
+        "ideas",
+        "maintenance",
+        "projectManagement",
+        "review",
+        "tutorial"
+      ]
+    },
+    {
+      "login": "xWafl",
+      "name": "xWafl",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/35458851?v=4",
+      "profile": "http://xwafl.github.io/portfolio",
+      "contributions": [
+        "code",
+        "ideas",
+        "review",
+        "test",
+        "userTesting",
+        "security"
       ]
     },
     {
@@ -29,15 +51,6 @@
       "contributions": [
         "ideas",
         "review",
-        "userTesting"
-      ]
-    },
-    {
-      "login": "xWafl",
-      "name": "xWafl",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/35458851?v=4",
-      "profile": "http://xwafl.github.io/portfolio",
-      "contributions": [
         "userTesting"
       ]
     },
