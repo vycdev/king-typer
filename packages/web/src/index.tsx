@@ -7,6 +7,7 @@ import { Home } from "./components/frontPage/home";
 import { Navbar } from "./components/common/navbar/navBar";
 import { Footer } from "./components/common/footer/footer";
 import { StatisticsPage } from "./components/statisticsPage/statisticsPage";
+import { StartTypingPage } from "./components/startTypingPage/startTypingPage";
 
 import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
@@ -26,15 +27,8 @@ const App = () => {
                                 <Home />
                                 <Footer></Footer>
                             </Route>
-                            <Route exact path="/type">
-                                <TypingBox
-                                    mode="easy"
-                                    colorCodes={{
-                                        wrong: "#f54242",
-                                        correct: "#4290f5",
-                                        notTyped: "#000"
-                                    }}
-                                ></TypingBox>
+                            <Route path="/type">
+                                <StartTypingPage></StartTypingPage>
                             </Route>
                             <Route exact path="/stats">
                                 <StatisticsPage />
