@@ -3,4 +3,6 @@ export default interface User {
     email: string;
     username: string;
     password: string;
+    role?: string | null;
+    description?: string | null;
 }

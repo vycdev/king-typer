@@ -17,6 +17,8 @@ export const createUser = async (
     const encryptedPassword = await bcrypt.hash(user.password, 12);
     return await knex<User>("users").insert({
         ...user,
+	role: undefined,
+	description: undefined,
         password: encryptedPassword
     })[0];
 };
