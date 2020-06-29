@@ -62,6 +62,15 @@
       "contributions": [
         "userTesting"
       ]
+    },
+    {
+      "login": "justlucdewit",
+      "name": "luke",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/37410843?v=4",
+      "profile": "http://justlucdewit.github.io",
+      "contributions": [
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
