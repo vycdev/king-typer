@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 
+import { getTheme, themes } from "../../../utils/getTheme";
 // styled components for the footer
+
+const theme = getTheme();
 
 export const FooterStyled = styled.div`
     position: absolute;
@@ -8,10 +11,10 @@ export const FooterStyled = styled.div`
     width: 100%;
     font-family: Verdana;
     height: 35px;
-    color: white;
+    color: ${theme.text.secondary};
     padding-top: 10px;
     text-align: center;
-    background: #198cf6;
+    background: ${theme.primary};
     & a {
         text-decoration: none;
     }
@@ -19,9 +22,9 @@ export const FooterStyled = styled.div`
     & svg {
         width: 30px;
         height: 30px;
-        fill: white;
+        fill: ${theme.text.secondary};
     }
     & svg:hover {
-        fill: #fde400;
+        fill: ${theme.secondary};
     }
 `;

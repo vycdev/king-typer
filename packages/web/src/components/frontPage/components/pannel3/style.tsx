@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../../utils/getTheme";
 
 // File that contains styled compoentns for the 3rd pannel of the home page (the pannel with the tutorial about touchtyping)
+const theme = getTheme();
 
 export const StyledPannel3 = styled.div`
-    background: #198cf6;
+    background: ${theme.primary};
     height: auto;
     margin-top: 100px;
     display: flex;
@@ -44,7 +46,7 @@ export const Text = styled.div`
 
 export const TextStyling = styled.div`
     font-family: "Verdana";
-    color: white;
+    color: ${theme.text.secondary};
     text-align: center;
     font-size: 20px;
     & ul {

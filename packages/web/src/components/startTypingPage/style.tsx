@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../utils/getTheme";
+
+const theme = getTheme();
 
 export const Wrapper = styled.div`
-    background-color: white;
+    background-color: ${theme.background.primary};
 `;
 
 export const Latest = styled.div`

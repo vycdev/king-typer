@@ -11,6 +11,7 @@ import {
     Tooltip
 } from "recharts";
 import { VerticallyCenteredDiv } from "./style";
+import { getTheme } from "../../../../utils/getTheme";
 
 // Data for the chart (it's hardcoded for now, in the future I will use the data colected from the users to create this chart automatically)
 const data = [
@@ -30,6 +31,7 @@ const data = [
     { percentage: 0.2, wpmName: "140 WPM" },
     { percentage: 0.1, wpmName: "150 WPM" }
 ];
+const theme = getTheme();
 
 // 2nd pannel component
 
@@ -48,12 +50,26 @@ export const Pannel2 = () => {
                             name="Percentage"
                             type="monotone"
                             dataKey="percentage"
-                            stroke="#198cf6"
+                            stroke={theme.primary}
                         />
-                        <CartesianGrid stroke="#cccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="wpmName" interval={2} />
-                        <YAxis />
-                        <Tooltip />
+                        <CartesianGrid
+                            stroke={theme.tertiary}
+                            strokeDasharray="5 5"
+                        />
+                        <XAxis
+                            dataKey="wpmName"
+                            interval={2}
+                            stroke={theme.background.secondary}
+                        />
+                        <YAxis stroke={theme.background.secondary} />
+                        <Tooltip
+                            contentStyle={{
+                                background: theme.background.secondary,
+                                border: "none"
+                            }}
+                            wrapperStyle={{ color: theme.text.secondary }}
+                            itemStyle={{ color: theme.text.secondary }}
+                        />
                     </LineChart>
                 </VerticallyCenteredDiv>
             </FixChart>

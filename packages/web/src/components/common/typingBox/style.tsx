@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../utils/getTheme";
 
 // File which contains all the styled components used by the typing box page
+
+const theme = getTheme();
 
 export const Wrapper = styled.div`
     width: 100%;
     padding: 15px 0px;
     position: relative;
+    color: ${theme.text.primary};
 `;
 
 export const Container = styled.div`
@@ -25,8 +29,8 @@ export const Container = styled.div`
 export const Displayer = styled.div`
     text-align: center;
     width: 100%;
-    height: 25px;
-    border-bottom: 1px solid #9e9e9e;
+    height: 30px;
+    border-bottom: 1px solid ${theme.background.secondary};
 `;
 
 export const TextBox = styled.div`
@@ -62,9 +66,10 @@ export const InputBox = styled.input`
 
     border-style: solid;
     border-width: 0;
-    border-top: 1px solid #9e9e9e;
-    border-bottom: 1px solid #9e9e9e;
-
+    border-top: 1px solid ${theme.background.secondary};
+    border-bottom: 1px solid ${theme.background.secondary};
+    background-color: ${theme.background.primary};
+    color: ${theme.text.primary};
     position: absolute;
     bottom: 0;
     left: 0px;
@@ -79,15 +84,15 @@ export const InputBox = styled.input`
 
 export const DataBoxWrapper = styled.div`
     width: 100%;
-    border-bottom: 1px solid #9e9e9e;
+    border-bottom: 1px solid ${theme.background.secondary};
 `;
 
 export const TryAgainButton = styled.button`
-    background: #198cf6;
+    background: ${theme.primary};
     border: none;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: ${theme.text.secondary};
     padding: 3px 6px;
     margin-left: 5px;
     margin-bottom: 1px;

@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../../utils/getTheme";
+
+const theme = getTheme();
 
 export const Wrapper = styled.div`
-    background-color: white;
+    background-color: ${theme.background.primary};
     font-family: "Verdana";
 `;
 
@@ -12,7 +15,7 @@ export const NavBar = styled.div`
     z-index: 100;
     top: 54px;
     left: 0;
-    background-color: #198cf6;
+    background-color: ${theme.primary};
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 28px;
@@ -21,15 +24,15 @@ export const NavBar = styled.div`
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 20px;
-        color: white;
+        color: ${theme.text.secondary};
         display: block;
-        transition: 0.3s;
     }
 
     a:hover {
-        color: white;
-        border-left: 2px solid white;
-        background: #349dfe;
+        color: ${theme.text.secondary};
+        border-left: 3px solid white;
+        background: ${theme.primary};
+        filter: brightness(${theme.brightness.lighter});
     }
 `;
 
@@ -39,16 +42,17 @@ export const CloseButton = styled.div`
     right: 25px;
     font-size: 30px;
     margin-left: 50px;
-    color: white;
+    color: ${theme.text.secondary};
     cursor: pointer;
     &:hover {
-        color: white;
+        color: ${theme.text.secondary};
     }
 `;
 
 export const OpenButton = styled.span`
     font-size: 30px;
     cursor: pointer;
+    color: ${theme.text.primary};
     position: fixed;
     top: 64px;
     left: 20px;
@@ -57,8 +61,8 @@ export const OpenButton = styled.span`
 
 export const Category = styled.div`
     padding: 20px 8px 8px 32px;
-    color: white;
-    border-bottom: 1px dotted #99b4ff;
+    color: ${theme.text.secondary};
+    border-bottom: 1px dashed ${theme.background.primary};
     font-size: 16px;
     font-family: "Verdana";
     white-space: nowrap;

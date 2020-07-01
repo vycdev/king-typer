@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../../utils/getTheme";
 
 // File which contains the styled components for the 1st pannel of home page
 // Contains the style for the logo, title, button, wavesvg and the rotating text
 
+const theme = getTheme();
+
 //// CONTAINER 1
 export const StyledPannel1 = styled.div`
     position: relative;
-    background-color: #198cf6;
+    background-color: ${theme.primary};
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -44,7 +47,7 @@ export const FixText = styled.div`
 
 export const TitleTextButton = styled.div`
     font-family: "Verdana";
-    color: white;
+    color: ${theme.text.secondary};
     font-weight: bold;
     text-align: center;
     height: auto;
@@ -94,8 +97,8 @@ export const Wave = styled.div`
     bottom: -5px;
 `;
 export const TypeButton = styled.div`
-    background: #fde400;
-    color: black;
+    background: ${theme.secondary};
+    color: ${theme.text.primary};
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -132,6 +135,6 @@ export const ButtonWrapper = styled.div`
     padding-top: 20px;
     a {
         text-decoration: none;
-        color: black;
+        color: ${theme.text.primary};
     }
 `;

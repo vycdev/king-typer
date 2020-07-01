@@ -11,6 +11,9 @@ import {
     TopBar
 } from "./style";
 import { previousScoresType } from "./helpers/interfaces";
+import { getTheme } from "../../utils/getTheme";
+
+const theme = getTheme();
 
 export const StatisticsPage = () => {
     // Get state for previous scores and the best score that is stored in localStorage
@@ -30,7 +33,8 @@ export const StatisticsPage = () => {
                 return (
                     <ListItem
                         style={{
-                            background: index % 2 === 0 ? "#e6e6e6" : "white"
+                            borderTop: `1px solid ${theme.background.secondary}`,
+                            color: theme.text.primary
                         }}
                         key={value.wpm + index.toString()}
                     >

@@ -6,6 +6,9 @@ import { Nav } from "./components/navBar/navBar";
 import { Route } from "react-router-dom";
 
 import { TypingBox } from "../common/typingBox/typingBox";
+import { getTheme } from "../../utils/getTheme";
+
+const theme = getTheme();
 
 export const StartTypingPage = () => {
     return (
@@ -17,21 +20,13 @@ export const StartTypingPage = () => {
             <Route exact path="/type/practice/easy">
                 <TypingBox
                     mode="easy"
-                    colorCodes={{
-                        wrong: "#f54242",
-                        correct: "#4290f5",
-                        notTyped: "#000"
-                    }}
+                    colorCodes={theme.boxColorCodes}
                 ></TypingBox>
             </Route>
             <Route exact path="/type/practice/normal">
                 <TypingBox
                     mode="hard"
-                    colorCodes={{
-                        wrong: "#f54242",
-                        correct: "#4290f5",
-                        notTyped: "#000"
-                    }}
+                    colorCodes={theme.boxColorCodes}
                 ></TypingBox>
             </Route>
             <Route exact path="/type/multiplayer/easy">
