@@ -11,12 +11,6 @@ import users from "../../../db/seeds/examples/users";
 const agent = request.agent(server);
 
 describe("Auth router", () => {
-    before(async function() {
-        this.timeout(5000);
-        await knex.migrate.latest();
-        await knex.seed.run();
-    });
-
     it("Logs-in a user", async () => {
         const { email, name, password } = users[0];
 

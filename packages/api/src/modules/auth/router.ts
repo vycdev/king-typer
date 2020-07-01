@@ -39,3 +39,5 @@ router.post(
         await next();
     }
 );
+
+export default router.routes();

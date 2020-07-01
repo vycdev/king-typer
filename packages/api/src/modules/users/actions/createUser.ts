@@ -15,10 +15,8 @@ export const createUser = async (
     );
     if (isTaken) return null;
     const encryptedPassword = await bcrypt.hash(user.password, 12);
-    return await knex<User>("users").insert({
+    return ( await knex<User>("users").insert({
         ...user,
-	role: undefined,
-	description: undefined,
-        password: encryptedPassword
-    })[0];
+	password: encryptedPassword
+    }, "*"))[0];
 };
