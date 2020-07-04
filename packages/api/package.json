@@ -12,7 +12,7 @@
         "start:dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon",
         "start": "node ./dist/index.js",
-	"fresh-testdb": "dropdb --if-exists test-king-typer && createdb test-king-typer",
+        "fresh-testdb": "dropdb --if-exists test-king-typer && createdb test-king-typer",
         "test": "pnpm run fresh-testdb && cross-env NODE_ENV=test mocha -r ./register.js 'src/**/*.test.ts' --exit",
         "build": "tsc "
     },
