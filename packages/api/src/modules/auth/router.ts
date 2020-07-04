@@ -23,7 +23,7 @@ router.post(
         if (!user)
             throw new HttpError(
                 400,
-                "There seems to be nco user with that email"
+                "There seems to be no user with that email"
             );
 
         const valid = await bcrypt.compare(password, user.password);
@@ -34,14 +34,14 @@ router.post(
         ctx.body = {
             status: 200,
             message: "Successfully log in",
-            user: { username: user.username, role: user.role }
+            user: { name: user.name, role: user.role }
         };
 
         await next();
     }
 );
 
-router.post("/logout", requireAuthenticated(), async (ctx, next) => {
+router.get("/logout", requireAuthenticated(), async (ctx, next) => {
     ctx.session = null;
 
     ctx.status = 200;

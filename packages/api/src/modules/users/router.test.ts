@@ -7,7 +7,7 @@ const agent = request.agent(server);
 
 const newUser = {
     email: "FakeyMcFakerson@fakemail.com",
-    username: "SomeGuy",
+    name: "SomeGuy",
     password: "WhatShouldITypeHere88@"
 };
 

@@ -1,5 +1,5 @@
 export interface RegisterBody {
     email: string;
-    username: string;
+    name: string;
     password: string;
 }

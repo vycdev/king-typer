@@ -4,12 +4,12 @@ import bcrypt from "bcrypt";
 import User from "../types/User";
 
 export const createUser = async (
-    user: Pick<User, "email" | "username" | "password">
+    user: Pick<User, "email" | "name" | "password">
 ) => {
     const isTaken = Boolean(
         await knex<User>("users")
             .select("id")
-            .where({ username: user.username })
+            .where({ name: user.name })
             .orWhere({ email: user.email })
             .first()
     );
