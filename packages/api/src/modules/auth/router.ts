@@ -6,6 +6,7 @@ import { loginBody } from "./schema/loginBody";
 import findUser from "../users/actions/findUser";
 import { LoginBody } from "./types/LoginBody";
 import { HttpError } from "../../common/error/classes/httpError";
+import { requireAuthenticated } from "./middleware/requireAuthenticated";
 
 const router = new Router({ prefix: "/auth" });
 
@@ -39,5 +40,14 @@ router.post(
         await next();
     }
 );
+
+router.post("/logout", requireAuthenticated(), async (ctx, next) => {
+    ctx.session = null;
+
+    ctx.status = 200;
+    ctx.body = "Successfully logged out";
+
+    await next();
+});
 
 export default router.routes();
