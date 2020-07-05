@@ -8,34 +8,46 @@
     "license": "MIT",
     "private": true,
     "scripts": {
+        "format": "prettier --write \"**/*.+(js|json|ts)\"",
         "start:dev": "node -r ./register.js src/index.ts",
         "dev": "nodemon",
         "start": "node ./dist/index.js",
+        "fresh-testdb": "dropdb --if-exists test-king-typer && createdb test-king-typer",
+        "test": "pnpm run fresh-testdb && cross-env NODE_ENV=test mocha -r ./register.js 'src/**/*.test.ts' --exit",
         "build": "tsc "
     },
     "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "bcrypt": "^5.0.0",
         "dotenv": "^8.2.0",
-        "knex": "^0.20.1",
+        "knex": "^0.20.15",
         "koa": "^2.11.0",
         "koa-bodyparser": "^4.3.0",
         "koa-json": "^2.0.2",
         "koa-logger": "^3.2.1",
         "koa-router": "^9.0.1",
+        "koa-session": "^6.0.0",
         "pg": "^7.12.1",
         "sqlite3": "^4.1.0",
         "typescript": "^3.7.4"
     },
     "devDependencies": {
+        "@types/bcrypt": "^3.0.0",
         "@types/chai": "^4.2.11",
-        "@types/koa": "^2.0.51",
+        "@types/hapi__joi": "^17.1.1",
+        "@types/koa": "^2.11.3",
         "@types/koa-bodyparser": "^4.3.0",
         "@types/koa-json": "^2.0.18",
         "@types/koa-logger": "^3.1.1",
         "@types/koa-router": "^7.4.1",
+        "@types/koa-session": "^5.10.2",
         "@types/mocha": "^7.0.2",
+        "@types/supertest": "^2.0.9",
         "chai": "^4.2.0",
+        "cross-env": "^7.0.2",
         "mocha": "^7.2.0",
         "nodemon": "^1.19.4",
+        "supertest": "^4.0.2",
         "ts-node": "^8.4.1"
     }
 }

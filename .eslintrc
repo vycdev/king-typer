@@ -3,6 +3,7 @@
     "extends": [
         "eslint:recommended",
         "prettier/@typescript-eslint",
+	"prettier",
         "plugin:prettier/recommended",
         "plugin:promise/recommended",
         "plugin:@typescript-eslint/recommended",
@@ -19,14 +20,23 @@
     ],
     "env": {
         "browser": true,
-        "node": true
+	"es6": true,
+        "node": true,
+	"mocha": true
     },
     "rules": {
+	"spaced-comment": ["error", "always"],
         "node/no-unsupported-features/es-syntax": 0,
+	"node/no-unpublished-import": 0,
         "node/no-unpublished-require": 0,
         "node/no-missing-import": 0,
+	"prettier/prettier": 2,
+	"promise/always-return": 1,
+        "promise/prefer-await-to-then": 2,
+        "promise/prefer-await-to-callbacks": 2,
         "@typescript-eslint/explicit-function-return-type": 0,
-        "@typescript-eslint/member-delimiter-style": 0
+        "@typescript-eslint/member-delimiter-style": 0,
+	"@typescript-eslint/no-non-null-assertion": 0
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
