@@ -47,7 +47,8 @@ const randomText = [
     `The qwerty layout was designed for manual typewriters initially by Christopher Sholes in 1872. That means that humanity has used virtually the same design for almost 150 years!`,
     `Keyboards were originally the only way to interact with a computer, since they were invented before the invention of the mouse.`,
     `The longest English word that you can type using only your left hand is "stewardesses".`,
-    `The right name for the “#” symbol on your keyboard is “octothorpe”. Not as nice-sounding as “hashtag”.`
+    `The right name for the “#” symbol on your keyboard is “octothorpe”. Not as nice-sounding as “hashtag”.`,
+    `In memory of Reckful, a popular twitch streamer that inspired me the most to learn touchtyping, RIP, dead on 2nd of July 2020.`
 ];
 
 export const getRandomText = (): Array<string> => {

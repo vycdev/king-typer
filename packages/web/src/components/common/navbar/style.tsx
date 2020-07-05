@@ -39,3 +39,23 @@ export const Li = styled.li`
         filter: brightness(${theme.brightness.lighter});
     }
 `;
+export const LoginLi = styled.li`
+    position: absolute;
+    right: 0;
+    a {
+        display: block;
+        color: ${theme.text.secondary};
+        text-align: center;
+        padding: 18px 28px;
+        text-decoration: none;
+        height: 18px;
+    }
+
+    a:hover {
+        border-top: 2px solid ${theme.background.primary};
+        height: 20px;
+        padding-top: 14px;
+        background-color: ${theme.primary};
+        filter: brightness(${theme.brightness.lighter});
+    }
+`;

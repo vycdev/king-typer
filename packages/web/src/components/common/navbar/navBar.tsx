@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Link } from "react-router-dom";
 
-import { Ul, Li, Fix } from "./style";
+import { Ul, Li, Fix, LoginLi } from "./style";
 
 // Navbar component
 
@@ -19,6 +19,10 @@ export const Navbar = () => {
                 <Li>
                     <Link to="/stats">Statistics</Link>
                 </Li>
+                <LoginLi>
+                    {" "}
+                    <Link to="/loginregister/login">Login</Link>
+                </LoginLi>
             </Ul>
         </Fix>
     );
