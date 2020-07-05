@@ -4,9 +4,9 @@ export const up = async (knex: Knex) => {
     return knex.schema.createTable("games", table => {
         table.integer("gameid").notNullable();
         table.integer("userid").notNullable();
-        table.integer("date").notNullable();
+        table.bigInteger("date").notNullable();
         table.integer("wpm").notNullable();
-        table.integer("uncorrectedwpm").notNullable();
+        table.integer("rawwpm").notNullable();
         table.integer("accuracy").notNullable();
     });
 };
