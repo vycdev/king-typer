@@ -32,7 +32,6 @@ router.post(
         session.user = user.id;
         ctx.status = 200;
         ctx.body = {
-            status: 200,
             message: "Successfully log in",
             user: { name: user.name, role: user.role }
         };
