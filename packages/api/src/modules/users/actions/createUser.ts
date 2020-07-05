@@ -19,7 +19,9 @@ export const createUser = async (
         await knex<User>("users").insert(
             {
                 ...user,
-                password: encryptedPassword
+                role: "member",
+                password: encryptedPassword,
+                rank: 0
             },
             "*"
         )

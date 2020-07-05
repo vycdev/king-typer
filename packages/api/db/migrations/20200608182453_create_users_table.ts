@@ -6,7 +6,8 @@ export const up = async (knex: Knex) => {
         table.string("name").notNullable();
         table.string("email").notNullable();
         table.string("password").notNullable();
-        table.string("role");
+        table.string("role").notNullable();
+        table.integer("rank").notNullable();
         table.string("description");
     });
 };
