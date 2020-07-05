@@ -8,6 +8,7 @@ import ValueOf from "../../type/helpers/ValueOf";
 
 const statusCodes = {
     badRequest: 400,
+    unauthorized: 401,
     notFound: 404,
     internalServerError: 500
 } as const;
@@ -16,6 +17,7 @@ type HttpStatus = ValueOf<typeof statusCodes>;
 
 const reasonToCodeMap: Record<HttpStatus, string> = {
     "400": "Bad Request",
+    "401": "Unauthorized",
     "404": "Not Found",
     "500": "Internal Server Error"
 };
