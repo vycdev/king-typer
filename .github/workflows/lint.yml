@@ -35,4 +35,4 @@ jobs:
               run: pnpm i
 
             - name: Lint with pnpm
-              run: pnpm run lint
+              run: pnpm run check
