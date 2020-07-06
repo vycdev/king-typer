@@ -7,6 +7,7 @@ import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import userGames from "./actions/userGames";
+import getPB from "../games/actions/getPB";
 
 const router = new Router({ prefix: "/users" });
 
@@ -60,6 +61,22 @@ router.get("/userGameStats/:id", async (ctx, next) => {
 
     ctx.status = 200;
     ctx.body = { averageAccuracy, averageRawWPM, averageWPM };
+
+    await next();
+});
+
+router.get("/userPB/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const game = await getPB(id);
+
+    if (!game) {
+        ctx.status = 400;
+        return (ctx.body = "That user does not have a PB!");
+    }
+
+    ctx.status = 200;
+    ctx.body = game;
 
     await next();
 });

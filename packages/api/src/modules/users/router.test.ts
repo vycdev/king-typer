@@ -74,4 +74,14 @@ describe("Users routes", async () => {
             averageRawWPM: 90
         });
     });
+
+    it("Gets the PB of a user", async () => {
+        const response = await agent
+            .get(`/api/users/userPB/5`)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200);
+
+        expect(response.body.wpm).to.equal(90);
+    });
 });

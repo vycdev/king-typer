@@ -13,11 +13,6 @@ export default async <T extends keyof Omit<User, "password">>(
         .where({ [property]: value });
     if (!result) return null;
 
-    console.log(result, result.id);
-
-    console.log(await knex<Game>("games").where({ userid: result.id }));
-
     const userGames = await knex<Game>("games").where({ userid: result.id });
-    console.log("User games", userGames);
     return userGames;
 };
