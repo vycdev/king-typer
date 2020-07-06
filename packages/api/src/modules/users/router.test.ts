@@ -42,4 +42,36 @@ describe("Users routes", async () => {
             message: "That username seems to be already taken"
         });
     });
+
+    it("Gets the games of a user", async () => {
+        await agent
+            .post("/api/games/newGame")
+            .send({ wpm: 90, rawwpm: 100, accuracy: 90 });
+
+        await agent
+            .post("/api/games/newGame")
+            .send({ wpm: 60, rawwpm: 80, accuracy: 75 });
+
+        const response = await agent
+            .get(`/api/users/userGames/`)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200);
+
+        expect(response.body.games.length).to.equal(2);
+    });
+
+    it("Gets the game stats of a user", async () => {
+        const response = await agent
+            .get(`/api/users/userGameStats/5`)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200);
+
+        expect(response.body).to.deep.equal({
+            averageAccuracy: 82.5,
+            averageWPM: 75,
+            averageRawWPM: 90
+        });
+    });
 });

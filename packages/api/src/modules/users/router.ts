@@ -5,6 +5,8 @@ import { HttpError } from "../../common/error/classes/httpError";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
+import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
+import userGames from "./actions/userGames";
 
 const router = new Router({ prefix: "/users" });
 
@@ -26,5 +28,40 @@ router.post(
         await next();
     }
 );
+
+router.get("/userGames", requireAuthenticated(), async (ctx, next) => {
+    const { user } = ctx.session!;
+
+    const games = await userGames("id", user);
+
+    ctx.status = 200;
+    ctx.body = { games };
+
+    await next();
+});
+
+router.get("/userGameStats/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const games = await userGames("id", id);
+
+    if (!games) {
+        ctx.status = 400;
+        return (ctx.body = "No user with that ID exists!");
+    }
+
+    const averageWPM =
+        games.map(l => l.wpm).reduce((acc, cur) => acc + cur) / games.length;
+    const averageRawWPM =
+        games.map(l => l.rawwpm).reduce((acc, cur) => acc + cur) / games.length;
+    const averageAccuracy =
+        games.map(l => l.accuracy).reduce((acc, cur) => acc + cur) /
+        games.length;
+
+    ctx.status = 200;
+    ctx.body = { averageAccuracy, averageRawWPM, averageWPM };
+
+    await next();
+});
 
 export default router.routes();
