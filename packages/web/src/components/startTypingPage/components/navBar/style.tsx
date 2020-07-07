@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const NavBar = styled.div`
     height: 100%;
-    width: 200px;
+    width: 0px;
     position: absolute;
     z-index: 100;
     top: 54px;
