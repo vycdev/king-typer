@@ -1,9 +1,7 @@
-name: Build test
+name: Linter
 
 on:
     push:
-        branches: "*"
-    pull_request:
         branches: "*"
 
 jobs:
@@ -35,11 +33,6 @@ jobs:
 
             - name: Install dependencies
               run: pnpm i
-              
-            - name: Build with pnpm
-              run: pnpm run build --if-present
 
-            - name: Release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: pnpx semantic-release
+            - name: Lint with pnpm
+              run: pnpm run check
