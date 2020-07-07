@@ -7,7 +7,7 @@ import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import userGames from "./actions/userGames";
-import getPB from "../games/actions/getPB";
+import getPBs from "../games/actions/getPB";
 
 const router = new Router({ prefix: "/users" });
 
@@ -46,7 +46,7 @@ router.get("/userGameStats/:id", async (ctx, next) => {
 
     const games = await userGames("id", id);
 
-    if (!games) {
+    if (!games || games.length === 0) {
         ctx.status = 400;
         return (ctx.body = "No user with that ID exists!");
     }
@@ -65,14 +65,14 @@ router.get("/userGameStats/:id", async (ctx, next) => {
     await next();
 });
 
-router.get("/userPB/:id", async (ctx, next) => {
+router.get("/userPBs/:id", async (ctx, next) => {
     const { id } = ctx.params;
 
-    const game = await getPB(id);
+    const game = await getPBs(id);
 
     if (!game) {
         ctx.status = 400;
-        return (ctx.body = "That user does not have a PB!");
+        return (ctx.body = "That user does not have any PBs!");
     }
 
     ctx.status = 200;
