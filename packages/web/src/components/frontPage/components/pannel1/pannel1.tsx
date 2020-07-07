@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const ReactRotatingText = require("react-rotating-text");
 
 import { getRandomText } from "../../../../utils/randomText";

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend } from "recharts";
 import { DataBoxWrapper } from "../style";
 
-import { DataBoxType, typedArrayInterface } from "../helpers/interfaces";
+import { DataBoxType, TypedArrayInterface } from "../helpers/interfaces";
 import { getTheme } from "../../../../utils/getTheme";
 
 const theme = getTheme();
 
-export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
+export const DataBox = (props: DataBoxType<TypedArrayInterface>) => {
     return (
         <DataBoxWrapper>
             <LineChart

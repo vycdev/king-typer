@@ -6,7 +6,7 @@ import { getTheme } from "../../../../utils/getTheme";
 
 const theme = getTheme();
 
-//// CONTAINER 1
+// CONTAINER 1
 export const StyledPannel1 = styled.div`
     position: relative;
     background-color: ${theme.primary};
@@ -21,7 +21,7 @@ export const StyledPannel1 = styled.div`
         flex: 1 0 450px;
     }
 `;
-//// CROWN SVG 1
+// CROWN SVG 1
 export const SvgCrown = styled.div`
     min-width: 480px;
 `;
@@ -38,7 +38,7 @@ export const VerticallyCenteredDiv = styled.div`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 `;
-//// TEXT ON THE RIGHT 1
+// TEXT ON THE RIGHT 1
 export const FixText = styled.div`
     position: relative;
     flex: 2 0 750px;

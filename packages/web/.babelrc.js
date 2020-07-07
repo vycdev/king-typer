@@ -1,5 +1,5 @@
 // @ts-check
-const production = process.env.NODE_ENV === "production"
+const production = process.env.NODE_ENV === "production";
 
 /** @type {import('@babel/core').TransformOptions} */
 const config = {
@@ -20,6 +20,6 @@ const config = {
             }
         ]
     ]
-}
+};
 
-module.exports = config
+module.exports = config;

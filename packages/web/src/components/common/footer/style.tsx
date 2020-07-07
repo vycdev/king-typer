@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { getTheme, themes } from "../../../utils/getTheme";
+import { getTheme } from "../../../utils/getTheme";
 // styled components for the footer
 
 const theme = getTheme();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 
 import { Wrapper, NavBar, OpenButton, CloseButton, Category } from "./style";
 import { Link } from "react-router-dom";

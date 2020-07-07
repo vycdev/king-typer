@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { getText } from "./helpers/gettext";
-import { typingBoxProps, typedArrayInterface } from "./helpers/interfaces";
-import { previousScoresType } from "../../statisticsPage/helpers/interfaces";
+import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
+import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
-import { PreviousScoresChart } from "../../statisticsPage/components/previousScoresChart";
 
 import {
     Wrapper,
@@ -19,17 +18,17 @@ import {
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
-const previousScores: Array<previousScoresType> = JSON.parse(
+const previousScores: Array<PreviousScoresType> = JSON.parse(
     localStorage.getItem("previousScores")
 );
 
-export const TypingBox = (props: typingBoxProps) => {
+export const TypingBox = (props: TypingBoxProps) => {
     const [input, setInput] = useState("");
     const [text, setText] = useState(getText(props.mode));
     const [visibleText, setVisibleText] = useState([
         <div key={"default"}></div>
     ]);
-    const [typed, setTyped] = useState<Array<typedArrayInterface>>([]);
+    const [typed, setTyped] = useState<Array<TypedArrayInterface>>([]);
     const [time, setTime] = useState(60);
     const [cpm, setCpm] = useState(0);
     const [bestwpm, setBestwpm] = useState(
@@ -40,6 +39,7 @@ export const TypingBox = (props: typingBoxProps) => {
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setVisibleText(generateVisibleText(input, props.mode, typed, text));
         textBoxRef.current.scrollTop = 0;
         setBestwpm(JSON.parse(localStorage.getItem("bestwpm")));
@@ -54,6 +54,7 @@ export const TypingBox = (props: typingBoxProps) => {
         setInput("");
         setTyped([]);
         setText(arrayOfText);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setVisibleText(generateVisibleText("", props.mode, [], arrayOfText));
         setTime(60);
         setCpm(0);
@@ -63,7 +64,7 @@ export const TypingBox = (props: typingBoxProps) => {
         if (time <= 0) {
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, "0");
-            const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+            const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
             const yyyy = today.getFullYear();
 
             previousScores.push({
@@ -71,10 +72,12 @@ export const TypingBox = (props: typingBoxProps) => {
                 wpm: cpm / 5,
                 uncorrectedwpm:
                     Math.floor(
+                        // eslint-disable-next-line @typescript-eslint/no-use-before-define
                         (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
                             5) *
                             100
                     ) / 100,
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 accuracy: getAccuracy(typed)
             });
 
@@ -93,7 +96,7 @@ export const TypingBox = (props: typingBoxProps) => {
     // These elements are shown after the test in the care that the user didn't type with 100% accuracy
     const getWrongWords = () => {
         const WrongWords = [];
-        typed.map((value: typedArrayInterface, index: number) => {
+        typed.map((value: TypedArrayInterface, index: number) => {
             if (value.state === "wrong") {
                 WrongWords.push(
                     <div key={value.word + index}>
@@ -106,11 +109,11 @@ export const TypingBox = (props: typingBoxProps) => {
     };
     // This function returns the cpm at any given moment of the test
     const getCpm = (
-        array: Array<typedArrayInterface>,
+        array: Array<TypedArrayInterface>,
         time: number
     ): number => {
         const charTyped = array
-            .map((value: typedArrayInterface) => {
+            .map((value: TypedArrayInterface) => {
                 return value.state === "correct" ? value.word.length + 1 : 0;
             })
             .reduce((previous: number, current: number) => {
@@ -121,10 +124,10 @@ export const TypingBox = (props: typingBoxProps) => {
     };
 
     // This function return the accuracy at any given moment of the test
-    const getAccuracy = (array: Array<typedArrayInterface>): number => {
+    const getAccuracy = (array: Array<TypedArrayInterface>): number => {
         let numberOfWrongWords = 0;
         let numberOfCorrectWords = 0;
-        for (let value of array) {
+        for (const value of array) {
             value.state === "correct"
                 ? numberOfCorrectWords++
                 : numberOfWrongWords++;
@@ -143,7 +146,7 @@ export const TypingBox = (props: typingBoxProps) => {
     const generateVisibleText = (
         input: string,
         mode: string,
-        typedArray: Array<typedArrayInterface>,
+        typedArray: Array<TypedArrayInterface>,
         text: Array<string>
     ) => {
         return text.map((value: string, index: number) => {
@@ -251,7 +254,7 @@ export const TypingBox = (props: typingBoxProps) => {
                     readOnly={!(time > 0)}
                     autoFocus
                     value={input}
-                    onChange={(e: any) => {
+                    onChange={(e: React.ChangeEvent<React.HTMLInputEvent>) => {
                         // On change event, this is the only event in this component and it handles everything about the test.
                         // input is the current value of the input box
                         const input =
@@ -276,7 +279,7 @@ export const TypingBox = (props: typingBoxProps) => {
                             ? getCpm(typed, timeLeft)
                             : cpm;
                         // typed array is an array of objects that contans info about every second of the test
-                        const typedArray: Array<typedArrayInterface> =
+                        const typedArray: Array<TypedArrayInterface> =
                             e.target.value[e.target.value.length - 1] === " " &&
                             time >= 0 &&
                             typed.length < text.length &&

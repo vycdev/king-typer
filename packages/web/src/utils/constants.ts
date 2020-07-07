@@ -1,6 +1,6 @@
-import { typingBoxProps } from "../components/common/typingBox/helpers/interfaces";
+import { TypingBoxProps } from "../components/common/typingBox/helpers/interfaces";
 
-export type TypingBoxColorCodes = typingBoxProps["colorCodes"];
+export type TypingBoxColorCodes = TypingBoxProps["colorCodes"];
 
 export interface ThemeType {
     primary: string;

@@ -1,6 +1,13 @@
 import * as React from "react";
 
-import { StyledPannel2, Text, TextStyling, FixChart, FixText } from "./style";
+import {
+    StyledPannel2,
+    Text,
+    TextStyling,
+    FixChart,
+    FixText,
+    VerticallyCenteredDiv
+} from "./style";
 
 import {
     LineChart,
@@ -10,7 +17,6 @@ import {
     YAxis,
     Tooltip
 } from "recharts";
-import { VerticallyCenteredDiv } from "./style";
 import { getTheme } from "../../../../utils/getTheme";
 
 // Data for the chart (it's hardcoded for now, in the future I will use the data colected from the users to create this chart automatically)

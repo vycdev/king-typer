@@ -3,6 +3,7 @@ import knex from "../../../../db/knex";
 import PB from "../types/PB";
 
 export default async (rawGame: Game) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { gameid: _, ...game } = rawGame;
     const playerPBs = await knex<PB>("pbs").where({ userid: game.userid });
     if (playerPBs.length === 0) {

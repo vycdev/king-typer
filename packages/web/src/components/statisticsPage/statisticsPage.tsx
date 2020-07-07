@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { PreviousScoresChart } from "./components/previousScoresChart";
 
@@ -10,20 +10,18 @@ import {
     LooksLike,
     TopBar
 } from "./style";
-import { previousScoresType } from "./helpers/interfaces";
+import { PreviousScoresType } from "./helpers/interfaces";
 import { getTheme } from "../../utils/getTheme";
 
 const theme = getTheme();
 
 export const StatisticsPage = () => {
     // Get state for previous scores and the best score that is stored in localStorage
-    const [previousScores, setPreviousScores] = useState(
-        (): Array<previousScoresType> =>
+    const [previousScores] = useState(
+        (): Array<PreviousScoresType> =>
             JSON.parse(localStorage.getItem("previousScores"))
     );
-    const [bestwpm, setBestwpm] = useState(
-        JSON.parse(localStorage.getItem("bestwpm"))
-    );
+    const [bestwpm] = useState(JSON.parse(localStorage.getItem("bestwpm")));
 
     const listOfPreviousScores = () => {
         return previousScores
@@ -103,8 +101,8 @@ export const StatisticsPage = () => {
             <Content>
                 {previousScores.length === 0 ? (
                     <LooksLike>
-                        Looks like you don't any statistics for now, take some
-                        typing tests and come back.
+                        Looks like you don&apost any statistics for now, take
+                        some typing tests and come back.
                     </LooksLike>
                 ) : (
                     <>

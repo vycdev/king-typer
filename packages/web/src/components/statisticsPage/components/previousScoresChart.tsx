@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from "recharts";
 import { DataBoxWrapper } from "../style";
 
-import { DataBoxType, previousScoresType } from "../helpers/interfaces";
+import { DataBoxType, PreviousScoresType } from "../helpers/interfaces";
 import { getTheme } from "../../../utils/getTheme";
 
 const theme = getTheme();
 
 // Chart that is used for displaying the previous scores of the user.
 
-export const PreviousScoresChart = (props: DataBoxType<previousScoresType>) => {
+export const PreviousScoresChart = (props: DataBoxType<PreviousScoresType>) => {
     return (
         <DataBoxWrapper>
             <LineChart

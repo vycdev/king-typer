@@ -11,7 +11,6 @@ import { StartTypingPage } from "./components/startTypingPage/startTypingPage";
 
 import { LoginRegisterPage } from "./components/loginPage/loginPage";
 
-
 import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
 

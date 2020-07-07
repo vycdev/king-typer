@@ -3,6 +3,8 @@ import { config } from "dotenv";
 
 config();
 
+export type Configs = Record<string, Config>;
+
 const options = {
     client: process.env.DB_CLIENT,
     connection: process.env.CONNECTION
@@ -24,7 +26,7 @@ const options = {
     pool: process.env.DB_CLIENT !== "sqlite3" ? { min: 2, max: 10 } : undefined
 };
 
-const configs: Record<string, Config> = {
+const configs: Configs = {
     development: options,
 
     test: {
@@ -46,4 +48,4 @@ const configs: Record<string, Config> = {
 
 const { development, test, production } = configs;
 
-export { development, test, production };
+export const configuration = { development, test, production };

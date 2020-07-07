@@ -1,9 +1,9 @@
 import Knex, { Config } from "knex";
 
-import * as config from "../knexfile";
+import { Configs, configuration } from "../knexfile";
 
 const environment = process.env.NODE_ENV || "development";
-const environmentConfig = (config as any)[environment];
+const environmentConfig = (configuration as Configs)[environment];
 
 const knex = Knex(environmentConfig as Config);
 

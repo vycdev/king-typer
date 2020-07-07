@@ -1,5 +1,5 @@
 // Typing box props interface, contains the types for the props of the typing box component
-export interface typingBoxProps {
+export interface TypingBoxProps {
     mode: "easy" | "hard";
     colorCodes: {
         wrong: string;
@@ -9,7 +9,7 @@ export interface typingBoxProps {
 }
 
 // typedArrayInterface is the interface for the typedArray variable in the typing box
-export interface typedArrayInterface {
+export interface TypedArrayInterface {
     word: string;
     state: "correct" | "wrong";
     time: number | null;

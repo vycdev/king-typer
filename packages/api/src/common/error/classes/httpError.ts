@@ -4,7 +4,7 @@
  *   https://github.com/Enitoni
  */
 
-import ValueOf from "../../type/helpers/ValueOf";
+import { ValueOf } from "../../type/helpers/ValueOf";
 
 const statusCodes = {
     badRequest: 400,

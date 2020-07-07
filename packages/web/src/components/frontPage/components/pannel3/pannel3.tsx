@@ -1,8 +1,13 @@
 import * as React from "react";
 
-import { StyledPannel3, Text, TextStyling, FixImage, FixText } from "./style";
-
-import { VerticallyCenteredDiv } from "./style";
+import {
+    StyledPannel3,
+    Text,
+    TextStyling,
+    FixImage,
+    FixText,
+    VerticallyCenteredDiv
+} from "./style";
 
 // Third pannel of home page
 // It contains the tutorial for touch typing
@@ -43,9 +48,10 @@ export const Pannel3 = () => {
                             <li>Never look at the keyboard while typing</li>
                             <li>
                                 Try to maintain your rhythm as well as learn
-                                when to slow down. It's better to hit the right
-                                keys a little bit slower than hitting the wrong
-                                ones and wasting time deleting your mistakes.
+                                when to slow down. It&apos;s better to hit the
+                                right keys a little bit slower than hitting the
+                                wrong ones and wasting time deleting your
+                                mistakes.
                             </li>
                             <li>
                                 The SHIFT key is always pressed by the pinky
@@ -66,8 +72,8 @@ export const Pannel3 = () => {
                         </ul>
                         <p>
                             Now that you know all these rules you can start
-                            practicing, and don't forget, perfect practice makes
-                            perfect.
+                            practicing, and don&apos;t forget, perfect practice
+                            makes perfect.
                         </p>
                     </TextStyling>
                 </Text>
