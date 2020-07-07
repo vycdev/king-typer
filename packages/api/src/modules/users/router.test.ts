@@ -2,7 +2,6 @@ import request from "supertest";
 import { expect } from "chai";
 
 import { server } from "../../index";
-import knex from "../../../db/knex";
 
 const agent = request.agent(server);
 
