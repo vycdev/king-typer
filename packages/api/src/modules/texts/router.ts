@@ -14,14 +14,14 @@ router.post("/addText", requireAdmin(), async (ctx, next) => {
     await next();
 });
 
-router.post("/getAllTexts", async (ctx, next) => {
+router.get("/getAllTexts", async (ctx, next) => {
     const texts = await getAllTexts();
     ctx.status = 200;
     ctx.body = texts;
     await next();
 });
 
-router.post("/getRandomText", async (ctx, next) => {
+router.get("/getRandomText", async (ctx, next) => {
     const text = await getRandomText();
     ctx.status = 200;
     ctx.body = text;

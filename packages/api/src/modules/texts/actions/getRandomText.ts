@@ -3,8 +3,10 @@ import knex from "../../../../db/knex";
 
 export default async (typed = false, ordered = false) => {
     if (typed) {
-        return await knex<Text>("texts").where({ ordered });
+        const texts = await knex<Text>("texts").where({ ordered });
+        return texts[Math.floor(Math.random() * texts.length)];
     } else {
-        return await knex<Text>("texts");
+        const texts = await knex<Text>("texts");
+        return texts[Math.floor(Math.random() * texts.length)];
     }
 };
