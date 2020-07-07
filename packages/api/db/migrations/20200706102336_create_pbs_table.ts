@@ -3,7 +3,6 @@ import Knex from "knex";
 export const up = async (knex: Knex) => {
     return knex.schema.createTable("pbs", table => {
         table.integer("userid").notNullable();
-        table.integer("rank").notNullable();
         table.bigInteger("date").notNullable();
         table.integer("wpm").notNullable();
         table.integer("rawwpm").notNullable();
