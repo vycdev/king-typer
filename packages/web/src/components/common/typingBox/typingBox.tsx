@@ -254,7 +254,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                     readOnly={!(time > 0)}
                     autoFocus
                     value={input}
-                    // eslint-disable-next-line @typescript-eslint/no-explicit
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     onChange={(e: any) => {
                         // On change event, this is the only event in this component and it handles everything about the test.
                         // input is the current value of the input box
