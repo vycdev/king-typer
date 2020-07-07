@@ -40,7 +40,7 @@ const configs: Record<string, Config> = {
 
     production: {
         ...options,
-        connection: process.env.DATABASE_URL
+        connection: process.env.DATABASE_URL + "?SSL=no-verify"
     }
 };
 

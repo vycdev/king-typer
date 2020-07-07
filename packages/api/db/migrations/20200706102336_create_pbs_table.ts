@@ -1,8 +1,7 @@
 import Knex from "knex";
 
 export const up = async (knex: Knex) => {
-    return knex.schema.createTable("games", table => {
-        table.integer("gameid").notNullable();
+    return knex.schema.createTable("pbs", table => {
         table.integer("userid").notNullable();
         table.bigInteger("date").notNullable();
         table.integer("wpm").notNullable();
@@ -12,5 +11,5 @@ export const up = async (knex: Knex) => {
 };
 
 export const down = async (knex: Knex) => {
-    return knex.schema.dropTable("games");
+    return knex.schema.dropTable("pbs");
 };

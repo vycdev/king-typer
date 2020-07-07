@@ -2,6 +2,7 @@ import request from "supertest";
 import { expect } from "chai";
 
 import { server } from "../../index";
+import knex from "../../../db/knex";
 
 const agent = request.agent(server);
 
@@ -40,6 +41,52 @@ describe("Users routes", async () => {
         expect(response.body).to.deep.equal({
             status: 400,
             message: "That username seems to be already taken"
+        });
+    });
+
+    describe("Game stats", async () => {
+        before(async () => {
+            await agent
+                .post("/api/games/newGame")
+                .send({ wpm: 60, rawwpm: 80, accuracy: 75 });
+
+            await agent
+                .post("/api/games/newGame")
+                .send({ wpm: 90, rawwpm: 100, accuracy: 90 });
+        });
+
+        it("Gets the games of a user", async () => {
+            const response = await agent
+                .get(`/api/users/userGames/`)
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body.games.length).to.equal(2);
+        });
+
+        it("Gets the game stats of a user", async () => {
+            const response = await agent
+                .get(`/api/users/userGameStats/5`)
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body).to.deep.equal({
+                averageAccuracy: 82.5,
+                averageWPM: 75,
+                averageRawWPM: 90
+            });
+        });
+
+        it("Gets the PB of a user", async () => {
+            const response = await agent
+                .get(`/api/users/userPBs/5`)
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body[0].wpm).to.equal(60);
         });
     });
 });
