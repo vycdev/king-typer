@@ -7,7 +7,7 @@
         "build": "pnpm run build --filter @king-typer/*",
         "start": "pnpm run start --filter @king-typer/*",
         "test": "pnpm run test --filter @king-typer/*",
-        "lint": "eslint './packages/**/*.{ts,tsx}'",
+        "lint": "eslint ./packages/**/*.{ts,tsx}",
         "check": "pnpm run format && pnpm run lint",
         "semantic-release": "semantic-release"
     },
