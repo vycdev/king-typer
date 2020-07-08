@@ -9,7 +9,6 @@ export default async (tutorialid: number, userid: number) => {
             tutorial: true
         })
         .first();
-    console.log(tutorial);
     const user = await knex<User>("users")
         .where({
             id: userid

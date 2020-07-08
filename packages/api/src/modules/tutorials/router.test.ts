@@ -49,8 +49,6 @@ describe("Tutorials routes", async () => {
             })
             .first();
 
-        console.log(user);
-
         expect(user?.tutorials).to.deep.equal([3]);
     });
 });

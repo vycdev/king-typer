@@ -21,12 +21,10 @@ router.post("/completeTutorial", requireAuthenticated(), async (ctx, next) => {
 
 router.get("/:id", async (ctx, next) => {
     const { id } = ctx.params;
-    console.log(`Received ${id}`);
     const tutorial = getTutorial(id);
     if (!tutorial) {
         throw new HttpError(400, "That tutorial does not exist!");
     }
-    console.log(tutorial);
     ctx.status = 200;
     ctx.body = tutorial;
     await next();
