@@ -14,7 +14,7 @@
         "start": "node ./dist/src/index.js",
         "fresh-testdb": "dropdb --if-exists test-king-typer && createdb test-king-typer",
         "test": "pnpm run fresh-testdb && cross-env NODE_ENV=test mocha -r ./register.js 'src/**/*.test.ts' --exit",
-        "build": "tsc "
+        "build": "tsc && knex --cwd ./dist migrate:latest"
     },
     "dependencies": {
         "@hapi/joi": "^17.1.1",
