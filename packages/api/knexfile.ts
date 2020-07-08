@@ -42,7 +42,7 @@ const configs: Configs = {
 
     production: {
         ...options,
-        connection: process.env.DATABASE_URL + "?SSL=no-verify"
+        connection: `${process.env.DATABASE_URL}?ssl=no-verify`
     }
 };
 
