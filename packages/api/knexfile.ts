@@ -3,7 +3,7 @@ import { config } from "dotenv";
 
 config();
 
-export type Configs = Record<string, Config>;
+type Configs = Record<string, Config>;
 
 const options = {
     client: process.env.DB_CLIENT,
@@ -48,4 +48,4 @@ const configs: Configs = {
 
 const { development, test, production } = configs;
 
-export const configuration = { development, test, production };
+export { development, test, production };
