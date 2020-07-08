@@ -7,8 +7,9 @@ import getRandomText from "./actions/getRandomText";
 const router = new Router({ prefix: "/texts" });
 
 router.post("/addText", requireAdmin(), async (ctx, next) => {
-    const { text, ordered } = ctx.request.body;
-    await addText(text, ordered);
+    const { text, difficulty, ordered, tutorial } = ctx.request.body;
+    const { user } = ctx.session!;
+    await addText(text, difficulty, user, ordered, tutorial);
     ctx.status = 201;
     ctx.body = "Successfully added text";
     await next();

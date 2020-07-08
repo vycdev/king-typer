@@ -7,15 +7,21 @@ const agent = request.agent(server);
 
 const newText = {
     text: "This is a text!",
+    difficulty: 1,
+    author: 1,
+    tutorial: false,
     ordered: true
 };
 
 const newRandomText = {
     text: "this is a text",
+    difficulty: 1,
+    author: 1,
+    tutorial: false,
     ordered: false
 };
 
-describe("Users routes", async () => {
+describe("Texts routes", async () => {
     // We don't need to rerun migrations or seeds because we did in the auth route
 
     it("Adds texts", async () => {

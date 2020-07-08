@@ -21,7 +21,8 @@ export const createUser = async (
                 ...user,
                 role: "member",
                 password: encryptedPassword,
-                rank: 0
+                exp: 0,
+                tutorials: []
             },
             "*"
         )

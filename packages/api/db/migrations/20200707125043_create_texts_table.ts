@@ -5,6 +5,9 @@ export const up = async (knex: Knex) => {
         table.increments("id");
         table.string("text").notNullable();
         table.boolean("ordered");
+        table.boolean("tutorial");
+        table.integer("difficulty").notNullable();
+        table.integer("author").notNullable();
     });
 };
 

@@ -4,7 +4,8 @@ interface Users {
     password: string;
     role?: string | null;
     description?: string | null;
-    rank: number;
+    exp: number;
+    tutorials: number[];
 }
 
 export default [
@@ -14,7 +15,8 @@ export default [
         password: "UserPass",
         role: "admin",
         description: null,
-        rank: 8
+        exp: 8,
+        tutorials: []
     },
     {
         name: "MKGUN3",
@@ -22,7 +24,8 @@ export default [
         password: "MaoGay",
         role: "member",
         description: null,
-        rank: 4
+        exp: 4,
+        tutorials: []
     },
     {
         name: "NotAUser",
@@ -30,7 +33,8 @@ export default [
         password: "nothing",
         role: "member",
         description: null,
-        rank: 2
+        exp: 2,
+        tutorials: []
     },
     {
         name: "Guy2",
@@ -38,6 +42,7 @@ export default [
         password: "JustAGuy",
         role: "member",
         description: "But hey, I have a description!",
-        rank: 0
+        exp: 0,
+        tutorials: []
     }
 ] as readonly Users[];
