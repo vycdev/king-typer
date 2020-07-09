@@ -23,8 +23,8 @@ router.get("/getAllTexts", async (ctx, next) => {
 });
 
 router.get("/getRandomText", async (ctx, next) => {
-    const { typed, ordered } = ctx.params.body;
-    const text = await getRandomText(typed, ordered);
+    const { ordered } = ctx.params.body;
+    const text = await getRandomText(ordered);
     ctx.status = 200;
     ctx.body = text;
     await next();
