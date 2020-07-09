@@ -6,6 +6,7 @@ import { server } from "../../index";
 const agent = request.agent(server);
 
 const newText = {
+    title: "le pepp",
     text: "This is a text!",
     difficulty: 1,
     author: 1,
@@ -14,6 +15,7 @@ const newText = {
 };
 
 const newRandomText = {
+    title: "le pepp",
     text: "this is a text",
     difficulty: 1,
     author: 1,

@@ -17,7 +17,7 @@ describe("Tutorials routes", async () => {
             password: "MaoGay"
         });
 
-        await addText("blah", 1, 1, false, true);
+        await addText("blah", "blah", 1, 1, false, true);
         const response = await agent
             .post(`/api/tutorials/completeTutorial/`)
             .send({ id: 3 })
