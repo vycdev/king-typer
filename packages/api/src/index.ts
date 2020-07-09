@@ -31,5 +31,6 @@ router.use(apiRouter);
 app.use(router.routes()).use(router.allowedMethods());
 
 export const server = app.listen(port, () => {
+    console.info(`Running in ${process.env.NODE_ENV} mode;`);
     console.info(`Koa app started and listening on port ${port}! 🚀`);
 });

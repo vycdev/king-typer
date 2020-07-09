@@ -9,8 +9,8 @@ export const createUser = async (
     const isTaken = Boolean(
         await knex<User>("users")
             .select("id")
-            .where({ name: user.name })
-            .orWhere({ email: user.email })
+            .where({ name: user.name || "" })
+            .orWhere({ email: user.email || "" })
             .first()
     );
     if (isTaken) return null;
