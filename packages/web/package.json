@@ -11,6 +11,7 @@
     "scripts": {
         "dev": "webpack-dev-server",
         "build": "cross-env NODE_ENV=production webpack && tsc src/server.ts --outDir ./dist --esModuleInterop true",
+        "build-test": "cross-env NODE_ENV=production webpack && tsc src/server.ts --outDir ./dist --esModuleInterop true",
         "build:dev": "webpack",
         "typecheck": "tsc --noEmit",
         "start": "node ./dist/server.js"
