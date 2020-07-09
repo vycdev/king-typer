@@ -3,7 +3,7 @@ import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import completeTutorial from "./actions/completeTutorial";
 import { HttpError } from "../../common/error/classes/httpError";
 import getTutorial from "./actions/getTutorial";
-import getRandomTutorial from "./actions/getRandomTutorial";
+import getAllTutorials from "./actions/getAllTutorials";
 
 const router = new Router({ prefix: "/tutorials" });
 
@@ -30,10 +30,12 @@ router.get("/:id", async (ctx, next) => {
     await next();
 });
 
-router.get("/random", async (ctx, next) => {
-    const tutorial = getRandomTutorial();
+router.get("/", async (ctx, next) => {
+    const tutorials = (await getAllTutorials()).sort(
+        (a, b) => a.difficulty - b.difficulty
+    );
     ctx.status = 200;
-    ctx.body = tutorial;
+    ctx.body = tutorials;
     await next();
 });
 
