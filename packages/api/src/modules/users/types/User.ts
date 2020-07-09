@@ -3,7 +3,8 @@ export default interface User {
     email: string;
     name: string;
     password: string;
-    rank: number;
+    exp: number;
     role?: string | null;
     description?: string | null;
+    tutorials: number[];
 }

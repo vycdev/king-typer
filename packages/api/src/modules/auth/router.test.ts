@@ -12,7 +12,7 @@ const agent = request.agent(server);
 
 describe("Auth router", () => {
     before(async function() {
-        this.timeout(5000);
+        this.timeout(20000);
         await knex.migrate.latest();
         await knex.seed.run();
     });
