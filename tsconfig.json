@@ -12,7 +12,8 @@
         "strictPropertyInitialization": true,
         "importHelpers": true,
         "sourceMap": true,
-        "jsx": "preserve"
+        "jsx": "preserve",
+        "noImplicitAny": false
     },
     "exclude": ["node_modules"],
     "include": ["packages/**/*", "typings/**/*"]
