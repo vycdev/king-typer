@@ -30,10 +30,10 @@ router.post(
     }
 );
 
-router.get("/userGames", requireAuthenticated(), async (ctx, next) => {
-    const { user } = ctx.session!;
+router.get("/userGames/:id", async (ctx, next) => {
+    const { id } = ctx.params;
 
-    const games = await userGames("id", user);
+    const games = await userGames("id", id);
 
     ctx.status = 200;
     ctx.body = { games };
