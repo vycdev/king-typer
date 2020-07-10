@@ -5,7 +5,6 @@ import { HttpError } from "../../common/error/classes/httpError";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
-import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import userGames from "./actions/userGames";
 import getPBs from "../games/actions/getPB";
 
