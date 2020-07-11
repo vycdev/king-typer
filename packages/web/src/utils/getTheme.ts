@@ -61,7 +61,9 @@ export const themes = {
 
 export type themeName = keyof typeof themes;
 
-export const defaultTheme: themeName = "dark";
+export const defaultTheme: themeName = localStorage.getItem("theme") as
+    | "dark"
+    | "light";
 
 export const getTheme = (theme: themeName = defaultTheme): ThemeType => {
     return themes[theme];
