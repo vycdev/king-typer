@@ -49,4 +49,10 @@ router.get("/logout", requireAuthenticated(), async (ctx, next) => {
     await next();
 });
 
+router.get("/isLoggedIn", async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = !!ctx.session!.user;
+    await next();
+});
+
 export default router.routes();
