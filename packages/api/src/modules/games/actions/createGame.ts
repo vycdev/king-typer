@@ -1,6 +1,9 @@
+import Achievement from "../../achievements/types/Achievement";
 import Game from "../types/Game";
 import { highestGameId } from "./highestGameId";
 import knex from "../../../../db/knex";
+import findAchievementsByRequirement from "../../achievements/actions/findAchievementsByRequirement";
+import userHasAchievement from "../../achievements/actions/userHasAchievement";
 
 export const createGame = async (
     userid: number,
@@ -16,5 +19,23 @@ export const createGame = async (
         accuracy,
         date: Date.now()
     };
+    const possibleAchievements: Achievement[] = await findAchievementsByRequirement(
+        {
+            wpm,
+            rawwpm,
+            acc: accuracy
+        }
+    );
+    const achievements = possibleAchievements.filter(
+        l => !userHasAchievement(userid, l.id)
+    );
+    await knex("users")
+        .update({
+            achievements: knex.raw(
+                "array_append(tutorials, ?)",
+                achievements.map(l => l.id)
+            )
+        })
+        .where({ id: userid });
     return (await knex<Game>("games").insert(newGame, "*"))[0];
 };
