@@ -99,7 +99,7 @@ const RegiserForm = () => {
             registerEmail === "" ||
             registerName === "" ||
             registerPassword === "" ||
-            setRegisterConfirmPassword === ""
+            registerConfirmPassword === ""
         ) {
             statusDiv.current.innerHTML = "Please fill out all the boxes.";
             return false;
