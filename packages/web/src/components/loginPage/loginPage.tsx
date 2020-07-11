@@ -89,7 +89,8 @@ const RegiserForm = () => {
         const regexPassword = new RegExp(
             /^((?=.*[a-z])(?=.*[A-Z\d])(?=.*[a-zA-Z]).{8,})$/
         );
-        const regexEmail = new RegExp(
+
+        const regexEmail = new RegExp( // eslint-disable-next-line no-useless-escape
             /[a-z0-9!#$%&'*+\=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         );
 

@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import React from "react";
 
 import { apiUrl } from "../../utils/constants";
 
