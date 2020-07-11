@@ -29,13 +29,12 @@ export const createGame = async (
     const achievements = possibleAchievements.filter(
         l => !userHasAchievement(userid, l.id)
     );
-    await knex("users")
-        .update({
-            achievements: knex.raw(
-                "array_append(tutorials, ?)",
-                achievements.map(l => l.id)
-            )
-        })
-        .where({ id: userid });
+    achievements.map(async l => {
+        await knex("users")
+            .update({
+                achievements: knex.raw("array_append(achievements, ?)", [l.id])
+            })
+            .where({ id: userid });
+    });
     return (await knex<Game>("games").insert(newGame, "*"))[0];
 };
