@@ -8,7 +8,6 @@ import { RegisterBody } from "./types/RegisterBody";
 import userGames from "./actions/userGames";
 import getPBs from "../games/actions/getPB";
 import userAchievements from "./actions/userAchievements";
-import achievements from "../../../db/seeds/examples/achievements";
 
 const router = new Router({ prefix: "/users" });
 
