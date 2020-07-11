@@ -137,3 +137,18 @@ export const Button = styled.div`
         color: ${theme.text.secondary};
     }
 `;
+
+export const StatusDivWrapper = styled.div`
+    margin: 5px;
+    max-width: 100%;
+    position: relative;
+`;
+
+export const StatusDiv = styled.div`
+    width: 100%;
+    word-wrap: wrap;
+    position: absolute;
+    font-family: "Verdana";
+    font-size: 12px;
+    color: ${theme.status.negative};
+`;
