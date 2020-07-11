@@ -10,6 +10,7 @@ import { StatisticsPage } from "./components/statisticsPage/statisticsPage";
 import { StartTypingPage } from "./components/startTypingPage/startTypingPage";
 
 import { LoginRegisterPage } from "./components/loginPage/loginPage";
+import { ProfilePage } from "./components/profilePage/profilePage";
 
 import { Global } from "@emotion/core";
 import { globalStyle, Container, Content } from "./style";
@@ -33,6 +34,9 @@ const App = () => {
                             </Route>
                             <Route exact path="/stats">
                                 <StatisticsPage />
+                            </Route>
+                            <Route exact path="/profile">
+                                <ProfilePage />
                             </Route>
                             <Route path="/loginregister">
                                 <LoginRegisterPage />

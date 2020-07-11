@@ -51,7 +51,7 @@ router.get("/logout", requireAuthenticated(), async (ctx, next) => {
 
 router.get("/isLoggedIn", async (ctx, next) => {
     ctx.status = 200;
-    ctx.body = !!ctx.session;
+    ctx.body = !!ctx.session!.user;
     await next();
 });
 
