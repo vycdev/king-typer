@@ -6,6 +6,7 @@ interface Users {
     description?: string | null;
     exp: number;
     tutorials: number[];
+    achievements: number[];
 }
 
 export default [
@@ -16,7 +17,8 @@ export default [
         role: "admin",
         description: null,
         exp: 8,
-        tutorials: []
+        tutorials: [],
+        achievements: []
     },
     {
         name: "MKGUN3",
@@ -25,7 +27,8 @@ export default [
         role: "member",
         description: null,
         exp: 4,
-        tutorials: []
+        tutorials: [],
+        achievements: []
     },
     {
         name: "NotAUser",
@@ -34,7 +37,8 @@ export default [
         role: "member",
         description: null,
         exp: 2,
-        tutorials: []
+        tutorials: [],
+        achievements: []
     },
     {
         name: "Guy2",
@@ -43,6 +47,7 @@ export default [
         role: "member",
         description: "But hey, I have a description!",
         exp: 0,
-        tutorials: []
+        tutorials: [],
+        achievements: []
     }
 ] as readonly Users[];
