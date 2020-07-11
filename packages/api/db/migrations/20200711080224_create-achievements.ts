@@ -3,10 +3,10 @@ import Knex from "knex";
 export const up = async (knex: Knex) => {
     return knex.schema.createTable("achievements", table => {
         table.increments("id");
-        table.string("name");
-        table.string("description");
-        table.integer("difficulty");
-        table.jsonb("requirements");
+        table.string("name").notNullable();
+        table.string("description").notNullable();
+        table.integer("difficulty").notNullable();
+        table.jsonb("requirements").notNullable();
     });
 };
 
