@@ -5,7 +5,6 @@ import { HttpError } from "../../common/error/classes/httpError";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
-import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import userGames from "./actions/userGames";
 import getPBs from "../games/actions/getPB";
 
@@ -30,10 +29,10 @@ router.post(
     }
 );
 
-router.get("/userGames", requireAuthenticated(), async (ctx, next) => {
-    const { user } = ctx.session!;
+router.get("/userGames/:id", async (ctx, next) => {
+    const { id } = ctx.params;
 
-    const games = await userGames("id", user);
+    const games = await userGames("id", id);
 
     ctx.status = 200;
     ctx.body = { games };

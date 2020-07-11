@@ -11,9 +11,5 @@ export const registerBody = Joi.object({
     password: Joi.string()
         .required()
         .min(8)
-        .pattern(
-            new RegExp(
-                "^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).*$"
-            )
-        )
+        .pattern(new RegExp("^((?=.*[a-z])(?=.*[A-Zd])(?=.*[a-zA-Z]).{8,})$"))
 });
