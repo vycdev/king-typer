@@ -11,7 +11,9 @@ if (localStorage.getItem("bestwpm") === null) {
 if (localStorage.getItem("previousScores") === null) {
     localStorage.setItem("previousScores", JSON.stringify([]));
 }
-
+if (localStorage.getItem("theme") === null) {
+    localStorage.setItem("theme", JSON.stringify("light"));
+}
 // Home page
 
 export const Home = () => {

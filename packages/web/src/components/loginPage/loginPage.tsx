@@ -32,6 +32,8 @@ const LoginForm = () => {
         });
         if (response.status === 200) {
             location.replace("");
+
+            localStorage.setItem("userid", (await response.json()).user.id);
         } else if (response.status === 401) {
             statusDiv.current.innerHTML = "You are already logged in.";
         } else if (response.status === 400) {
@@ -85,6 +87,27 @@ const RegiserForm = () => {
 
     const statusDiv = useRef(null);
 
+    const getCountry = (): string => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async pos => {
+                const response = await (
+                    await fetch(
+                        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=en`,
+                        {
+                            method: "GET",
+                            headers: { "Content-Type": "application/json" }
+                        }
+                    )
+                ).json();
+                return response.countryCode;
+            });
+        } else {
+            statusDiv.current.innerHTML =
+                "Geolocation is not supported by this browser.";
+        }
+        return "";
+    };
+
     const checkRegisterFields = (): boolean => {
         const regexPassword = new RegExp(
             /^((?=.*[a-z])(?=.*[A-Z\d])(?=.*[a-zA-Z]).{8,})$/
@@ -127,10 +150,24 @@ const RegiserForm = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ email, password, name })
+                body: JSON.stringify({
+                    email,
+                    password,
+                    name,
+                    country: getCountry()
+                })
             });
             if (response.status === 201) {
                 location.replace("");
+                localStorage.setItem("userid", (await response.json()).id);
+                await fetch(`${apiUrl}/users/updateCountry`, {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ country: getCountry() })
+                });
             } else if (response.status === 400) {
                 statusDiv.current.innerHTML =
                     "Username or Email already taken.";
