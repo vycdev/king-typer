@@ -44,7 +44,6 @@ export const Navbar = () => {
                 <LoginLi>
                     <Link
                         onClick={async () => {
-                            console.log(isLogged);
                             isLoggedFunc();
                         }}
                         to={isLogged ? "/profile" : "/loginregister/login"}
