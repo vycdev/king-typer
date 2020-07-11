@@ -27,7 +27,7 @@ export const createGame = async (
         }
     );
     const achievements = possibleAchievements.filter(
-        l => !userHasAchievement(userid, l.id)
+        async l => !(await userHasAchievement(userid, l.id))
     );
     achievements.map(async l => {
         await knex("users")

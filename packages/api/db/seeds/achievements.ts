@@ -1,9 +1,9 @@
 import Knex from "knex";
 
-import achievements from "./examples/users";
+import achievements from "./examples/achievements";
 
 export const seed = async (knex: Knex) => {
     await knex("achievements").del();
 
-    return knex("users").insert(achievements);
+    return knex("achievements").insert(achievements);
 };

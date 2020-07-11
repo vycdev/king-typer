@@ -12,5 +12,5 @@ export default async (userid: number, achievementid: number) => {
     if (!user || !achievement) {
         return null;
     }
-    return user.achievements.includes(achievement.id);
+    return user.achievements.includes(achievementid);
 };
