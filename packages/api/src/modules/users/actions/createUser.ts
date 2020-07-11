@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import User from "../types/User";
 
 export const createUser = async (
-    user: Pick<User, "email" | "name" | "password">
+    user: Pick<User, "email" | "name" | "password" | "country">
 ) => {
     const isTaken = Boolean(
         await knex<User>("users")
