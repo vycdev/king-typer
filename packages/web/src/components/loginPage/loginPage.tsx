@@ -31,7 +31,7 @@ const LoginForm = () => {
             body: JSON.stringify({ email, password })
         });
         if (response.status === 200) {
-            location.reload();
+            location.replace("");
         } else if (response.status === 401) {
             statusDiv.current.innerHTML = "You are already logged in.";
         } else if (response.status === 400) {
@@ -129,7 +129,7 @@ const RegiserForm = () => {
                 body: JSON.stringify({ email, password, name })
             });
             if (response.status === 201) {
-                location.reload();
+                location.replace("");
             } else if (response.status === 400) {
                 statusDiv.current.innerHTML =
                     "Username or Email already taken.";
