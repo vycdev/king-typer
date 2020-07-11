@@ -6,14 +6,14 @@ import { requireAdmin } from "../auth/middleware/requireAdmin";
 import deleteAchievement from "./actions/deleteAchievement";
 import getAchievements from "./actions/getAchievements";
 
-const router = new Router({ prefix: "/achievement" });
+const router = new Router({ prefix: "/achievements" });
 
 router.post("/addAchievement", requireAdmin(), async (ctx, next) => {
     const { name, description, difficulty, requirements } = ctx.request.body;
 
     await addAchievement({ name, description, difficulty, requirements });
 
-    ctx.status = 200;
+    ctx.status = 201;
     ctx.body = "Successfully added achievement";
 
     await next();
