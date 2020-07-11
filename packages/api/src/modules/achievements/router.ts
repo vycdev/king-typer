@@ -4,6 +4,7 @@ import { HttpError } from "../../common/error/classes/httpError";
 import editAchievement from "./actions/editAchievement";
 import { requireAdmin } from "../auth/middleware/requireAdmin";
 import deleteAchievement from "./actions/deleteAchievement";
+import getAchievements from "./actions/getAchievements";
 
 const router = new Router({ prefix: "/achievement" });
 
@@ -34,6 +35,13 @@ router.delete("/deleteAchievement", requireAdmin(), async (ctx, next) => {
     await deleteAchievement(id);
     ctx.status = 200;
     ctx.body = "Successfully deleted achievement";
+    await next();
+});
+
+router.get("/", async (ctx, next) => {
+    const data = await getAchievements();
+    ctx.status = 200;
+    ctx.body = data;
     await next();
 });
 
