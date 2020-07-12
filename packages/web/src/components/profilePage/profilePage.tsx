@@ -16,7 +16,8 @@ import {
     LogoutSwitchButton,
     Description,
     SubmitMessage,
-    Select
+    Select,
+    Id
 } from "./style";
 
 export const ProfilePage = () => {
@@ -58,7 +59,6 @@ export const ProfilePage = () => {
         updateGeneralStats();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         getUserGames(userId);
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
     }, [userData?.data?.country, userData?.data?.xp]);
 
     const updateCountryList = async () => {
@@ -245,6 +245,7 @@ export const ProfilePage = () => {
                     </GeneralStatistics>
                 </ProfileName>
                 <LogoutSwitchThemeWrapper>
+                    <Id>ID: {getUrlUserId()}</Id>
                     {changeFlagEditor ? (
                         <Select
                             name="countryCode"
@@ -281,12 +282,20 @@ export const ProfilePage = () => {
                                 updateCountryFlagUrl();
                                 updateUserData();
                                 setchangeFlagEditor(false);
+                                setCountryValue("AF");
                             }
                         }}
                     >
                         {changeFlagEditor
                             ? `Submit ${countryValue}`
                             : "Change Flag"}
+                    </LogoutSwitchButton>
+                    <LogoutSwitchButton
+                        onClick={() => {
+                            switchTheme();
+                        }}
+                    >
+                        Switch Theme
                     </LogoutSwitchButton>
                     <LogoutSwitchButton
                         onClick={async () => {
@@ -301,13 +310,6 @@ export const ProfilePage = () => {
                         }}
                     >
                         Logout
-                    </LogoutSwitchButton>
-                    <LogoutSwitchButton
-                        onClick={() => {
-                            switchTheme();
-                        }}
-                    >
-                        Switch Theme
                     </LogoutSwitchButton>
                 </LogoutSwitchThemeWrapper>
                 <Description>

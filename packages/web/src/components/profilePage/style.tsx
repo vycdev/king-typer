@@ -61,8 +61,19 @@ export const LogoutSwitchThemeWrapper = styled.div`
     justify-content: flex-end;
 `;
 
+export const Id = styled.div`
+    font-size: 15px;
+    font-style: italic;
+    font-family: "Verdana";
+    color: ${theme.text.primary};
+    margin: 0 auto;
+    width: 75%;
+`;
+
 export const LogoutSwitchButton = styled.div`
-    width: 90px;
+    height: 15px;
+    font-style: normal;
+    min-width: 90px;
     color: ${theme.text.secondary};
     background: ${theme.primary};
     margin: 5px;
