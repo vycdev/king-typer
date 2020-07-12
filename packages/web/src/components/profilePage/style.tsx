@@ -74,4 +74,28 @@ export const LogoutSwitchButton = styled.div`
     &:hover {
         filter: brightness(${theme.brightness.lighter});
     }
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+`;
+
+export const Description = styled.div`
+    border-left: 1px solid ${theme.background.secondary};
+    font-family: "Verdana";
+    font-size: 14px;
+    color: ${theme.text.primary};
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    padding-right: 30px;
+    overflow-wrap: break-word;
+`;
+
+export const SubmitMessage = styled.div`
+    font-family: "Verdana";
+    color: ${theme.status.negative};
+    font-size: 10px;
 `;

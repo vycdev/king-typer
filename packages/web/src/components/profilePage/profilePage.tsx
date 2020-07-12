@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { apiUrl } from "../../utils/constants";
 
@@ -13,7 +13,9 @@ import {
     GeneralStatistics,
     Statistics,
     LogoutSwitchThemeWrapper,
-    LogoutSwitchButton
+    LogoutSwitchButton,
+    Description,
+    SubmitMessage
 } from "./style";
 
 export const ProfilePage = () => {
@@ -32,6 +34,10 @@ export const ProfilePage = () => {
         averageAccuracy: 0,
         averageWpm: 0
     });
+    const [editDescription, setEditDescription] = useState(false);
+    const [descriptionEditorValue, setDescriptionEditorValue] = useState("");
+
+    const submitMessageRef = useRef(null);
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -48,6 +54,10 @@ export const ProfilePage = () => {
         updateBestScore();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateGeneralStats();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        getUserGames(userId);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setDefaultDescriptionEditorValue();
     }, [userData?.data?.country, userData?.data?.xp]);
 
     const updateCountryList = async () => {
@@ -91,6 +101,10 @@ export const ProfilePage = () => {
         });
     };
 
+    const setDefaultDescriptionEditorValue = () => {
+        setDescriptionEditorValue(userData?.data?.description);
+    };
+
     const getUserPBS = async (id: string) => {
         const result = await (
             await fetch(`${apiUrl}/users/userpbs/${id}`, {
@@ -115,6 +129,7 @@ export const ProfilePage = () => {
                 }
             })
         ).json();
+        console.log(result);
 
         return await result;
     };
@@ -180,6 +195,24 @@ export const ProfilePage = () => {
         return location.hash.split("/")[location.hash.split("/").length - 1];
     };
 
+    const setDescription = async () => {
+        if (descriptionEditorValue.length > 250) {
+            submitMessageRef.current.innerHTML =
+                "The description can't be longer than 250 characters.";
+            return;
+        }
+        await fetch(`${apiUrl}/users/updatedescription`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ description: descriptionEditorValue })
+        });
+        updateUserData();
+        setEditDescription(false);
+    };
+
     const switchTheme = () => {
         const currentTheme = localStorage.getItem("theme");
         if (currentTheme === "light") {
@@ -237,7 +270,50 @@ export const ProfilePage = () => {
                         Switch Theme
                     </LogoutSwitchButton>
                 </LogoutSwitchThemeWrapper>
-
+                <Description>
+                    {editDescription ? (
+                        <>
+                            <textarea
+                                rows={6}
+                                cols={40}
+                                value={descriptionEditorValue}
+                                onChange={e => {
+                                    setDescriptionEditorValue(e.target.value);
+                                }}
+                            ></textarea>
+                            <SubmitMessage
+                                ref={submitMessageRef}
+                            ></SubmitMessage>
+                            <LogoutSwitchThemeWrapper>
+                                <LogoutSwitchButton
+                                    onClick={() => {
+                                        setDescription();
+                                    }}
+                                >
+                                    Submit
+                                </LogoutSwitchButton>
+                                <LogoutSwitchButton
+                                    onClick={() => {
+                                        setEditDescription(false);
+                                        setDescriptionEditorValue(
+                                            userData?.data?.description
+                                        );
+                                    }}
+                                >
+                                    Cancel
+                                </LogoutSwitchButton>
+                            </LogoutSwitchThemeWrapper>
+                        </>
+                    ) : (
+                        <div
+                            onClick={() => {
+                                setEditDescription(true);
+                            }}
+                        >
+                            {userData?.data?.description}
+                        </div>
+                    )}
+                </Description>
                 <button
                     onClick={async () => {
                         await (
