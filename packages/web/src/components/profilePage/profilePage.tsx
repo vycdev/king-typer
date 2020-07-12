@@ -21,12 +21,12 @@ import {
     ClickMe,
     ChartsWrapper,
     ChartName,
-    ChartAndTitleWrapper
+    ChartAndTitleWrapper,
+    ListItem,
+    ListItemWrapper
 } from "./style";
-
-import { GamesChart } from "./components/gamesChart";
-
 import { UserGame } from "./helpers/interfaces";
+import { GamesChart } from "./components/gamesChart";
 
 export const ProfilePage = () => {
     const [userId, setUserId] = useState(localStorage.getItem("userid"));
@@ -49,6 +49,16 @@ export const ProfilePage = () => {
     const [changeFlagEditor, setchangeFlagEditor] = useState(false);
     const [userGames, setUserGames] = useState([]);
     const [userPbs, setUserPbs] = useState([]);
+    const [elementsListOfGames, setElementsListOfGames] = useState(
+        <ListItem key="defaultListItem">
+            There seems to be no game data.
+        </ListItem>
+    );
+    const [elementsListOfPBS, setElementsListOfPBS] = useState(
+        <ListItem key="defaultListItemPB">
+            There seems to be no game data.
+        </ListItem>
+    );
 
     const submitMessageRef = useRef(null);
 
@@ -71,7 +81,16 @@ export const ProfilePage = () => {
         updateUserGames();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateDescriptionEditorValue();
-    }, [userData?.data?.country, userData?.data?.xp]);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateElementListOfGames();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateElementListOfPBS();
+    }, [
+        userData?.data?.country,
+        userData?.data?.xp,
+        userGames.length,
+        userPbs.length
+    ]);
 
     const updateDescriptionEditorValue = () => {
         setDescriptionEditorValue(userData?.data?.description);
@@ -104,6 +123,16 @@ export const ProfilePage = () => {
     const updateUserGames = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setUserGames(await getUserGames(userId));
+    };
+
+    const updateElementListOfGames = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setElementsListOfGames(await generateListOfScores(userGames));
+    };
+
+    const updateElementListOfPBS = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setElementsListOfPBS(await generateListOfScores(userPbs));
     };
 
     const updateBestScoreUserPbs = async () => {
@@ -255,8 +284,38 @@ export const ProfilePage = () => {
                 accuracy: value.accuracy
             };
         });
+        console.log(data);
 
         return data;
+    };
+
+    const generateListOfScores = async (data: Array<UserGame>) => {
+        const formattedData = convertUserGamesData(data);
+
+        const returnedData = formattedData
+            .slice(0)
+            .reverse()
+            .map((value, index) => {
+                return (
+                    <ListItem key={value.wpm + index.toString()}>
+                        WPM: {value.wpm}
+                        {"   "}
+                        CPM: {value.wpm * 5}
+                        {"   "}
+                        Raw WPM: {value.uncorrectedwpm}
+                        {"   "}
+                        Raw CPM: {Math.floor(value.uncorrectedwpm * 500) / 100}
+                        {"   "}
+                        Accuracy: {value.accuracy}
+                        {"   "}
+                        Date: {value.date}
+                    </ListItem>
+                );
+            });
+        console.log(1);
+
+        console.log(returnedData);
+        return returnedData;
     };
 
     //  if no flag exists then use :flag_white:
@@ -405,12 +464,14 @@ export const ProfilePage = () => {
                         <GamesChart
                             dataProp={convertUserGamesData(userGames)}
                         ></GamesChart>
+                        <ListItemWrapper>{elementsListOfGames}</ListItemWrapper>
                     </ChartAndTitleWrapper>
                     <ChartAndTitleWrapper>
                         <ChartName>All Personal Bests</ChartName>
                         <GamesChart
                             dataProp={convertUserGamesData(userPbs)}
                         ></GamesChart>
+                        <ListItemWrapper>{elementsListOfPBS}</ListItemWrapper>
                     </ChartAndTitleWrapper>
                 </ChartsWrapper>
             </InsideWrapper>

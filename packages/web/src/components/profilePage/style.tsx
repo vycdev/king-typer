@@ -131,9 +131,10 @@ export const ChartsWrapper = styled.div`
     flex-wrap: wrap;
     display: inline-flex;
     width: 100%;
+    margin-bottom: 20px;
 `;
 export const ChartAndTitleWrapper = styled.div`
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
 `;
 
@@ -150,4 +151,22 @@ export const ChartNamesWrapper = styled.div`
     width: 100%;
     border-top: 1px dashed ${theme.background.secondary};
     display: inline-flex;
+`;
+export const ListItem = styled.div`
+    margin: 0 auto;
+    padding: 5px;
+    color: ${theme.text.primary};
+
+    font-family: "Verdana";
+    font-size: 14px;
+    vertical-align: middle;
+
+    border-top: 1px solid ${theme.background.secondary};
+    color: ${theme.text.primary};
+`;
+
+export const ListItemWrapper = styled.div`
+    margin: 30px auto;
+    max-height: 300px;
+    overflow: auto;
 `;
