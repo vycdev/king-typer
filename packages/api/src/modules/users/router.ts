@@ -5,7 +5,6 @@ import Router from "../Router";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import { createUser } from "./actions/createUser";
 import getUserData from "./actions/getUserData";
-// import userCountry from "./actions/userCountry";
 import userAchievements from "./actions/userAchievements";
 import updateCountry from "./actions/updateCountry";
 import updateDescription from "./actions/updateDescription";
@@ -91,24 +90,13 @@ router.get("/userPBs/:id", async (ctx, next) => {
     await next();
 });
 
-// router.get("/userCountry/:id", async (ctx, next) => {
-//     const { id } = ctx.params;
-
-//     const country = await userCountry("id", id);
-
-//     ctx.status = 200;
-//     ctx.body = { country };
-
-//     await next();
-// });
-
 router.get("/userData/:id", async (ctx, next) => {
     const { id } = ctx.params;
 
     const data = await getUserData("id", id);
 
     ctx.status = 200;
-    ctx.body = { data };
+    ctx.body = data;
 
     await next();
 });
@@ -127,7 +115,7 @@ router.get("/achievements/:id", async (ctx, next) => {
     await next();
 });
 
-router.post(
+router.patch(
     "/updateCountry",
     requireAuthenticated(),
     validateSchema(UpdateCountry, "body"),
@@ -144,8 +132,8 @@ router.post(
     }
 );
 
-router.post(
-    "/updatedescription",
+router.patch(
+    "/updateDescription",
     requireAuthenticated(),
     validateSchema(UpdateCountry, "body"),
     async (ctx, next) => {
@@ -154,7 +142,7 @@ router.post(
 
         await updateDescription("id", user, description);
 
-        ctx.status = 201;
+        ctx.status = 200;
         ctx.body = "Successfully updated description!";
 
         await next();

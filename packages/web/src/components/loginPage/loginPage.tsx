@@ -165,7 +165,7 @@ const RegiserForm = () => {
                 location.replace("");
                 localStorage.setItem("userid", (await response.json()).id);
                 await fetch(`${apiUrl}/users/updateCountry`, {
-                    method: "POST",
+                    method: "PATCH",
                     credentials: "include",
                     headers: {
                         "Content-Type": "application/json"

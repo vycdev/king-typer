@@ -35,18 +35,16 @@ export const ProfilePage = () => {
     ]);
     const [countryValue, setCountryValue] = useState("AF");
     const [userData, setUserData] = useState({
-        data: {
-            achievements: [],
-            country: "",
-            description: "",
-            email: "",
-            exp: 0,
-            role: "",
-            id: 0,
-            name: "",
-            totaltests: 0,
-            tutorials: []
-        }
+        achievements: [],
+        country: "",
+        description: "",
+        email: "",
+        exp: 0,
+        role: "",
+        id: 0,
+        name: "",
+        totaltests: 0,
+        tutorials: []
     });
     const [countryFlagUrl, setCountryFlagUrl] = useState(
         "https://restcountries.eu/data/usa.svg"
@@ -98,15 +96,10 @@ export const ProfilePage = () => {
         updateElementListOfGames();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateElementListOfPBS();
-    }, [
-        userData?.data?.country,
-        userData?.data?.exp,
-        userGames.length,
-        userPbs.length
-    ]);
+    }, [userData?.country, userData?.exp, userGames.length, userPbs.length]);
 
     const updateDescriptionEditorValue = () => {
-        setDescriptionEditorValue(userData?.data?.description);
+        setDescriptionEditorValue(userData?.description);
     };
 
     const updateCountryList = async () => {
@@ -130,7 +123,7 @@ export const ProfilePage = () => {
     };
 
     const updateLevel = () => {
-        setLevel(Math.sqrt(userData?.data?.exp / 10));
+        setLevel(Math.sqrt(userData?.exp / 10));
     };
 
     const updateUserGames = async () => {
@@ -211,7 +204,7 @@ export const ProfilePage = () => {
     const getCountryUrlFlag = async () => {
         const data = await (
             await fetch(
-                `https://restcountries.eu/rest/v2/alpha/${userData?.data?.country}`,
+                `https://restcountries.eu/rest/v2/alpha/${userData?.country}`,
                 {
                     method: "GET"
                 }
@@ -262,7 +255,7 @@ export const ProfilePage = () => {
             return;
         }
         await fetch(`${apiUrl}/users/updatedescription`, {
-            method: "POST",
+            method: "PATCH",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json"
@@ -332,13 +325,13 @@ export const ProfilePage = () => {
                 <ProfileName>
                     <FlagNameGroup>
                         <FlagImage src={countryFlagUrl}></FlagImage>
-                        <Name>{userData?.data?.name}</Name>
+                        <Name>{userData?.name}</Name>
                     </FlagNameGroup>
 
                     <GeneralStatistics>
                         <UnderName>
-                            {userData?.data?.role?.charAt(0)?.toUpperCase() +
-                                userData?.data?.role?.slice(1)}{" "}
+                            {userData?.role?.charAt(0)?.toUpperCase() +
+                                userData?.role?.slice(1)}{" "}
                             Level: {level}
                         </UnderName>
 
@@ -346,8 +339,8 @@ export const ProfilePage = () => {
                             Best Score: {bestScore} Average WPM:{" "}
                             {gameGeneralStats.averageWpm} Average Accuracy:{" "}
                             {gameGeneralStats.averageAccuracy} Total Tests
-                            Taken: {userData?.data?.totaltests} Tutorials
-                            Completed: {userData?.data?.tutorials?.length}
+                            Taken: {userData?.totaltests} Tutorials Completed:{" "}
+                            {userData?.tutorials?.length}
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>
@@ -374,7 +367,7 @@ export const ProfilePage = () => {
                                     await fetch(
                                         `${apiUrl}/users/updateCountry`,
                                         {
-                                            method: "POST",
+                                            method: "PATCH",
                                             credentials: "include",
                                             headers: {
                                                 "Content-Type":
@@ -445,7 +438,7 @@ export const ProfilePage = () => {
                                     onClick={() => {
                                         setEditDescription(false);
                                         setDescriptionEditorValue(
-                                            userData?.data?.description
+                                            userData?.description
                                         );
                                     }}
                                 >
@@ -459,7 +452,7 @@ export const ProfilePage = () => {
                                 setEditDescription(true);
                             }}
                         >
-                            {userData?.data?.description}
+                            {userData?.description}
                             <ClickMe>Click me!</ClickMe>
                         </div>
                     )}
