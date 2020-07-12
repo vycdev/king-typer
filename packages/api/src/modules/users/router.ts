@@ -7,6 +7,7 @@ import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
 import userGames from "./actions/userGames";
 import getPBs from "../games/actions/getPB";
+import userAchievements from "./actions/userAchievements";
 import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
@@ -86,6 +87,21 @@ router.get("/userPBs/:id", async (ctx, next) => {
     ctx.status = 200;
     ctx.body = game;
 
+    await next();
+});
+
+
+router.get("/achievements/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const achievements = await userAchievements(id);
+
+    if (achievements === null) {
+        throw new HttpError(400, "That user does not exist!");
+    }
+
+    ctx.status = 200;
+    ctx.body = achievements;
     await next();
 });
 

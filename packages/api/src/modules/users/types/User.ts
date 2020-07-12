@@ -7,5 +7,6 @@ export default interface User {
     role?: string | null;
     description?: string | null;
     tutorials: number[];
+    achievements: number[];
     country: string;
 }

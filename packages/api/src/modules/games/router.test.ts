@@ -40,27 +40,36 @@ describe("Game routes", async () => {
     it("Deletes games past 10 games", async function() {
         this.timeout(5000);
 
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
-        await createGame(13, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0);
 
         await Promise.all([
-            removeOldGame(13),
-            removeOldGame(13),
-            removeOldGame(13)
+            removeOldGame(4),
+            removeOldGame(4),
+            removeOldGame(4)
         ]);
 
-        const games = await knex<Game>("games").where({ userid: 13 });
+        const games = await knex<Game>("games").where({ userid: 4 });
 
         expect(games.length).to.equal(10);
+    });
+
+    it("Checks for achievements", async () => {
+        await createGame(4, 32, 40, 80);
+        await removeOldGame(4);
+
+        const achievements = await agent.get("/api/users/achievements/4");
+
+        expect(achievements.body.length).to.equal(2);
     });
 });

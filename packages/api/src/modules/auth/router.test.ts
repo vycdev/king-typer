@@ -11,12 +11,6 @@ import users from "../../../db/seeds/examples/users";
 const agent = request.agent(server);
 
 describe("Auth router", () => {
-    before(async function() {
-        this.timeout(20000);
-        await knex.migrate.latest();
-        await knex.seed.run();
-    });
-
     it("Logs-in a user", async () => {
         const { email, name, password } = users[0];
 
@@ -28,7 +22,7 @@ describe("Auth router", () => {
 
         expect(response.body).to.deep.equal({
             message: "Successfully log in",
-            user: { name, role: "admin" }
+            user: { name, role: "admin", id: 1 }
         });
     });
 

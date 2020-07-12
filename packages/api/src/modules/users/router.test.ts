@@ -24,6 +24,7 @@ describe("Users routes", async () => {
             .expect(201);
 
         expect(response.body).to.deep.equal({
+            id: 5,
             status: 201,
             message: "Successfully created"
         });
@@ -56,7 +57,7 @@ describe("Users routes", async () => {
 
         it("Gets the games of a user", async () => {
             const response = await agent
-                .get(`/api/users/userGames/`)
+                .get(`/api/users/userGames/5`)
                 .set("Accept", "application/json")
                 .expect("Content-Type", /json/)
                 .expect(200);
@@ -84,7 +85,6 @@ describe("Users routes", async () => {
                 .set("Accept", "application/json")
                 .expect("Content-Type", /json/)
                 .expect(200);
-
             expect(response.body[0].wpm).to.equal(60);
         });
     });
