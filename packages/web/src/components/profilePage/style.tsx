@@ -100,7 +100,8 @@ export const Description = styled.div`
     color: ${theme.text.primary};
     max-width: 500px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    margin-top: 20px;
     padding-right: 30px;
     overflow-wrap: break-word;
 `;
@@ -120,4 +121,30 @@ export const ClickMe = styled.div`
     color: grey;
     width: 100%;
     text-align: right;
+`;
+
+export const DataBoxWrapper = styled.div`
+    margin: 0 auto;
+`;
+
+export const ChartsWrapper = styled.div`
+    flex-wrap: wrap;
+    display: inline-flex;
+    width: 100%;
+`;
+
+export const ChartName = styled.div`
+    font-size: 20px;
+    color: ${theme.text.primary};
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    font-family: "Verdana";
+    padding-top: 15px;
+`;
+
+export const ChartNamesWrapper = styled.div`
+    width: 100%;
+    border-top: 1px dashed ${theme.background.secondary};
+    display: inline-flex;
 `;

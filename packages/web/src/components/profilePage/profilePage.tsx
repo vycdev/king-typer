@@ -18,8 +18,15 @@ import {
     SubmitMessage,
     Select,
     Id,
-    ClickMe
+    ClickMe,
+    ChartsWrapper,
+    ChartName,
+    ChartNamesWrapper
 } from "./style";
+
+import { GamesChart } from "./components/gamesChart";
+
+import { UserGame } from "./helpers/interfaces";
 
 export const ProfilePage = () => {
     const [userId, setUserId] = useState(localStorage.getItem("userid"));
@@ -40,6 +47,8 @@ export const ProfilePage = () => {
     const [editDescription, setEditDescription] = useState(false);
     const [descriptionEditorValue, setDescriptionEditorValue] = useState("");
     const [changeFlagEditor, setchangeFlagEditor] = useState(false);
+    const [userGames, setUserGames] = useState([]);
+    const [userPbs, setUserPbs] = useState([]);
 
     const submitMessageRef = useRef(null);
 
@@ -55,11 +64,11 @@ export const ProfilePage = () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateLevel();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        updateBestScore();
+        updateBestScoreUserPbs();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateGeneralStats();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        getUserGames(userId);
+        updateUserGames();
     }, [userData?.data?.country, userData?.data?.xp]);
 
     const updateCountryList = async () => {
@@ -86,12 +95,18 @@ export const ProfilePage = () => {
         setLevel(Math.sqrt(userData?.data?.exp / 10));
     };
 
-    const updateBestScore = async () => {
+    const updateUserGames = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setUserGames(await getUserGames(userId));
+    };
+
+    const updateBestScoreUserPbs = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const userPBS = await getUserPBS(userId);
 
         console.log(userPBS);
 
+        setUserPbs(userPBS);
         setBestScore(userPBS[userPBS.length - 1]?.wpm);
     };
 
@@ -131,7 +146,7 @@ export const ProfilePage = () => {
         ).json();
         console.log(result);
 
-        return await result;
+        return await result?.games;
     };
 
     const getUserGameStats = async (id: string) => {
@@ -222,6 +237,22 @@ export const ProfilePage = () => {
         }
         location.reload();
     };
+
+    const convertUserGamesData = (dataobject: Array<UserGame>) => {
+        const data = dataobject.map(value => {
+            const date = new Date(Math.floor(parseInt(value.date)));
+            return {
+                date: `${date.getDate()}/${date.getMonth() +
+                    1}/${date.getFullYear()}`,
+                wpm: value.wpm,
+                uncorrectedwpm: value.rawwpm,
+                accuracy: value.accuracy
+            };
+        });
+
+        return data;
+    };
+
     //  if no flag exists then use :flag_white:
     return (
         <Wrapper>
@@ -360,15 +391,19 @@ export const ProfilePage = () => {
                         </div>
                     )}
                 </Description>
-                <button
-                    onClick={() => {
-                        console.log(getUrlUserId());
-                        console.log(userData);
-                        console.log(level);
-                    }}
-                >
-                    Test State
-                </button>
+                <ChartNamesWrapper>
+                    <ChartName>Last 10 Games</ChartName>
+                    <ChartName>All Personal Bests</ChartName>
+                </ChartNamesWrapper>
+
+                <ChartsWrapper>
+                    <GamesChart
+                        dataProp={convertUserGamesData(userGames)}
+                    ></GamesChart>
+                    <GamesChart
+                        dataProp={convertUserGamesData(userPbs)}
+                    ></GamesChart>
+                </ChartsWrapper>
             </InsideWrapper>
         </Wrapper>
     );
