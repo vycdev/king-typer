@@ -20,6 +20,10 @@ const lightTheme: ThemeType = {
         wrong: "#f54242",
         correct: "#4290f5",
         notTyped: "#111"
+    },
+    status: {
+        positive: "#0f4f00",
+        negative: "#cc0000"
     }
 };
 
@@ -43,6 +47,10 @@ const darkTheme: ThemeType = {
         wrong: "#f54242",
         correct: "#4290f5",
         notTyped: "#f7f7f7"
+    },
+    status: {
+        positive: "#37ff0a",
+        negative: "#ff5252"
     }
 };
 
@@ -53,7 +61,9 @@ export const themes = {
 
 export type themeName = keyof typeof themes;
 
-export const defaultTheme: themeName = "dark";
+export const defaultTheme: themeName = localStorage.getItem("theme") as
+    | "dark"
+    | "light";
 
 export const getTheme = (theme: themeName = defaultTheme): ThemeType => {
     return themes[theme];

@@ -33,7 +33,7 @@ router.post(
         ctx.status = 200;
         ctx.body = {
             message: "Successfully log in",
-            user: { name: user.name, role: user.role }
+            user: { name: user.name, role: user.role, id: user.id }
         };
 
         await next();
@@ -51,7 +51,7 @@ router.get("/logout", requireAuthenticated(), async (ctx, next) => {
 
 router.get("/isLoggedIn", async (ctx, next) => {
     ctx.status = 200;
-    ctx.body = !!ctx.session;
+    ctx.body = !!ctx.session!.user;
     await next();
 });
 

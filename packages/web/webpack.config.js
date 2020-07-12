@@ -56,6 +56,9 @@ const baseConfig = {
         children: false,
         entrypoints: false,
         modules: false
+    },
+    node: {
+        fs: "empty"
     }
 };
 

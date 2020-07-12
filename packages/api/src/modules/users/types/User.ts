@@ -8,4 +8,5 @@ export default interface User {
     description?: string | null;
     tutorials: number[];
     achievements: number[];
+    country: string;
 }
