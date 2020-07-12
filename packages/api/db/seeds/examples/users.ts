@@ -21,7 +21,7 @@ export default [
         exp: 8,
         tutorials: [],
         country: "RO",
-        totaltests: 0
+        totaltests: 0,
         achievements: []
     },
     {
@@ -33,7 +33,7 @@ export default [
         exp: 4,
         tutorials: [],
         country: "USA",
-        totaltests: 5
+        totaltests: 5,
         achievements: []
     },
     {
@@ -45,7 +45,7 @@ export default [
         exp: 2,
         tutorials: [],
         country: "LY",
-        totaltests: 100
+        totaltests: 100,
         achievements: []
     },
     {
@@ -57,7 +57,7 @@ export default [
         exp: 0,
         tutorials: [],
         country: "FR",
-        totaltests: 20
+        totaltests: 20,
         achievements: []
     }
 ] as readonly Users[];
