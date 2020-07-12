@@ -28,6 +28,7 @@
         "koa-logger": "^3.2.1",
         "koa-router": "^9.0.1",
         "koa-session": "^6.0.0",
+        "nodemailer": "^6.4.10",
         "pg": "^7.12.1",
         "sqlite3": "^4.1.0",
         "typescript": "^3.7.4"

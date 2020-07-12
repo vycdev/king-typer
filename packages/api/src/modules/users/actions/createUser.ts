@@ -3,6 +3,16 @@ import bcrypt from "bcrypt";
 
 import User from "../types/User";
 
+const genNewKey = () =>
+    Array(16)
+        .fill(0)
+        .map((_) =>
+            Math.random()
+                .toString(36)
+                .charAt(2)
+        )
+        .join("");
+
 export const createUser = async (
     user: Pick<User, "email" | "name" | "password" | "country">
 ) => {
@@ -23,6 +33,7 @@ export const createUser = async (
                 password: encryptedPassword,
                 exp: 0,
                 tutorials: [],
+                emailKey: genNewKey(),
                 totaltests: 0,
                 achievements: []
             },

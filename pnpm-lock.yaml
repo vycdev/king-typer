@@ -52,6 +52,7 @@ importers:
       koa-logger: 3.2.1
       koa-router: 9.0.1
       koa-session: 6.0.0
+      nodemailer: 6.4.10
       pg: 7.12.1_pg@7.12.1
       sqlite3: 4.1.0
       typescript: 3.7.4
@@ -98,6 +99,7 @@ importers:
       koa-router: ^9.0.1
       koa-session: ^6.0.0
       mocha: ^7.2.0
+      nodemailer: ^6.4.10
       nodemon: ^1.19.4
       pg: ^7.12.1
       sqlite3: ^4.1.0
@@ -7582,6 +7584,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-8MRC/ErwNCHOlAFycy9OPca46fQYUjbJRDcZTHVWIGXIjYLM73k70vv3WkYutVnM4cCo4hE0MqBVVZjP6vjISA==
+  /nodemailer/6.4.10:
+    dev: false
+    engines:
+      node: '>=6.0.0'
+    requiresBuild: true
+    resolution:
+      integrity: sha512-j+pS9CURhPgk6r0ENr7dji+As2xZiHSvZeVnzKniLOw1eRAyM/7flP0u65tCnsapV8JFu+t0l/5VeHsCZEeh9g==
   /nodemon/1.19.4:
     dependencies:
       chokidar: 2.1.8

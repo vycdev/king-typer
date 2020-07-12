@@ -1,14 +1,17 @@
+type Role = "unverified" | "member" | "admin";
+
 interface Users {
     name: string;
     email: string;
     password: string;
-    role?: string | null;
+    role?: Role;
     description?: string | null;
     exp: number;
     tutorials: number[];
     country: string;
     totaltests: number;
     achievements: number[];
+    emailKey?: string;
 }
 
 export default [
@@ -40,13 +43,14 @@ export default [
         name: "NotAUser",
         email: "none@nope.com",
         password: "nothing",
-        role: "member",
+        role: "unverified",
         description: null,
         exp: 2,
         tutorials: [],
+        achievements: [],
+        emailKey: "blah",
         country: "LY",
-        totaltests: 100,
-        achievements: []
+        totaltests: 100
     },
     {
         name: "Guy2",
