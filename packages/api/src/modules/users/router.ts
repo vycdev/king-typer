@@ -1,17 +1,17 @@
-import Router from "../Router";
-
-import { createUser } from "./actions/createUser";
 import { HttpError } from "../../common/error/classes/httpError";
-import { validateSchema } from "../schema/middleware/validateSchema";
-import { registerBody } from "./schema/registerBody";
-import { RegisterBody } from "./types/RegisterBody";
-import userGames from "./actions/userGames";
+import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import getPBs from "../games/actions/getPB";
+import Router from "../Router";
+import { validateSchema } from "../schema/middleware/validateSchema";
+import { createUser } from "./actions/createUser";
+import getUserData from "./actions/getUserData";
 // import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
-import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
+import updateDescription from "./actions/updateDescription";
+import userGames from "./actions/userGames";
+import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
-import getUserData from "./actions/getUserData";
+import { RegisterBody } from "./types/RegisterBody";
 
 const router = new Router({ prefix: "/users" });
 
@@ -124,6 +124,23 @@ router.post(
 
         ctx.status = 201;
         ctx.body = "Successfully updated countrycode!";
+
+        await next();
+    }
+);
+
+router.post(
+    "/updatedescription",
+    requireAuthenticated(),
+    validateSchema(UpdateCountry, "body"),
+    async (ctx, next) => {
+        const { description } = ctx.request.body;
+        const { user } = ctx.session!;
+
+        await updateDescription("id", user, description);
+
+        ctx.status = 201;
+        ctx.body = "Successfully updated description!";
 
         await next();
     }
