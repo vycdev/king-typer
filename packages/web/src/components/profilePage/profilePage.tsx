@@ -30,9 +30,9 @@ import { GamesChart } from "./components/gamesChart";
 
 export const ProfilePage = () => {
     const [userId, setUserId] = useState(localStorage.getItem("userid"));
-    const [countryList, setCountryList] = useState(
+    const [countryList, setCountryList] = useState([
         <option key={"default"}>Loading...</option>
-    );
+    ]);
     const [countryValue, setCountryValue] = useState("AF");
     const [userData, setUserData] = useState({
         data: {
@@ -62,16 +62,16 @@ export const ProfilePage = () => {
     const [changeFlagEditor, setchangeFlagEditor] = useState(false);
     const [userGames, setUserGames] = useState([]);
     const [userPbs, setUserPbs] = useState([]);
-    const [elementsListOfGames, setElementsListOfGames] = useState(
+    const [elementsListOfGames, setElementsListOfGames] = useState([
         <ListItem key="defaultListItem">
             There seems to be no game data.
         </ListItem>
-    );
-    const [elementsListOfPBS, setElementsListOfPBS] = useState(
+    ]);
+    const [elementsListOfPBS, setElementsListOfPBS] = useState([
         <ListItem key="defaultListItemPB">
             There seems to be no game data.
         </ListItem>
-    );
+    ]);
 
     const submitMessageRef = useRef(null);
 
@@ -100,7 +100,7 @@ export const ProfilePage = () => {
         updateElementListOfPBS();
     }, [
         userData?.data?.country,
-        userData?.data?.xp,
+        userData?.data?.exp,
         userGames.length,
         userPbs.length
     ]);
