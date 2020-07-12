@@ -34,7 +34,20 @@ export const ProfilePage = () => {
         <option key={"default"}>Loading...</option>
     );
     const [countryValue, setCountryValue] = useState("AF");
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState({
+        data: {
+            achievements: [],
+            country: "",
+            description: "",
+            email: "",
+            exp: 0,
+            role: "",
+            id: 0,
+            name: "",
+            totaltests: 0,
+            tutorials: []
+        }
+    });
     const [countryFlagUrl, setCountryFlagUrl] = useState(
         "https://restcountries.eu/data/usa.svg"
     );
@@ -324,8 +337,8 @@ export const ProfilePage = () => {
 
                     <GeneralStatistics>
                         <UnderName>
-                            {userData?.data?.role.charAt(0).toUpperCase() +
-                                userData?.data?.role.slice(1)}{" "}
+                            {userData?.data?.role?.charAt(0)?.toUpperCase() +
+                                userData?.data?.role?.slice(1)}{" "}
                             Level: {level}
                         </UnderName>
 
