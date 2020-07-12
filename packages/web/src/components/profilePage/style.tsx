@@ -98,7 +98,7 @@ export const Description = styled.div`
     font-family: "Verdana";
     font-size: 14px;
     color: ${theme.text.primary};
-    max-width: 300px;
+    max-width: 500px;
     padding: 10px;
     margin-bottom: 20px;
     padding-right: 30px;
@@ -113,4 +113,11 @@ export const SubmitMessage = styled.div`
 
 export const Select = styled.select`
     width: 200px;
+`;
+
+export const ClickMe = styled.div`
+    font-size: 9px;
+    color: grey;
+    width: 100%;
+    text-align: right;
 `;

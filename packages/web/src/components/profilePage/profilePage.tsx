@@ -17,7 +17,8 @@ import {
     Description,
     SubmitMessage,
     Select,
-    Id
+    Id,
+    ClickMe
 } from "./style";
 
 export const ProfilePage = () => {
@@ -88,6 +89,8 @@ export const ProfilePage = () => {
     const updateBestScore = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const userPBS = await getUserPBS(userId);
+
+        console.log(userPBS);
 
         setBestScore(userPBS[userPBS.length - 1]?.wpm);
     };
@@ -317,7 +320,7 @@ export const ProfilePage = () => {
                         <>
                             <textarea
                                 rows={6}
-                                cols={40}
+                                cols={68}
                                 value={descriptionEditorValue}
                                 onChange={e => {
                                     setDescriptionEditorValue(e.target.value);
@@ -353,6 +356,7 @@ export const ProfilePage = () => {
                             }}
                         >
                             {userData?.data?.description}
+                            <ClickMe>Click me!</ClickMe>
                         </div>
                     )}
                 </Description>
