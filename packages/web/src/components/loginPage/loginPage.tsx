@@ -136,6 +136,10 @@ const RegiserForm = () => {
             statusDiv.current.innerHTML =
                 "Password must at least 8 characters long and have at least 1 lowercase letter, 1 uppercase letter and 1 number.";
             return false;
+        } else if (registerName.length < 2 && registerName.length > 32) {
+            statusDiv.current.innerHTML =
+                "Username must be between 2 and 32 characters long.";
+            return false;
         }
 
         statusDiv.current.innerHTML = "";
