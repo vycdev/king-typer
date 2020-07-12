@@ -1,12 +1,15 @@
+type Role = "none" | "member" | "admin";
+
 interface Users {
     name: string;
     email: string;
     password: string;
-    role?: string | null;
+    role?: Role;
     description?: string | null;
     exp: number;
     tutorials: number[];
     achievements: number[];
+    emailKey?: string;
 }
 
 export default [
@@ -34,11 +37,12 @@ export default [
         name: "NotAUser",
         email: "none@nope.com",
         password: "nothing",
-        role: "member",
+        role: "none",
         description: null,
         exp: 2,
         tutorials: [],
-        achievements: []
+        achievements: [],
+        emailKey: "blah"
     },
     {
         name: "Guy2",
