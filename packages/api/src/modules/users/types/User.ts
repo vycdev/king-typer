@@ -9,4 +9,5 @@ export default interface User {
     tutorials: number[];
     achievements: number[];
     country: string;
+    totaltests: number;
 }

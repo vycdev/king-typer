@@ -105,7 +105,7 @@ const RegiserForm = () => {
             statusDiv.current.innerHTML =
                 "Geolocation is not supported by this browser.";
         }
-        return "";
+        return "us";
     };
 
     const checkRegisterFields = (): boolean => {
@@ -136,6 +136,10 @@ const RegiserForm = () => {
             statusDiv.current.innerHTML =
                 "Password must at least 8 characters long and have at least 1 lowercase letter, 1 uppercase letter and 1 number.";
             return false;
+        } else if (registerName.length < 2 && registerName.length > 32) {
+            statusDiv.current.innerHTML =
+                "Username must be between 2 and 32 characters long.";
+            return false;
         }
 
         statusDiv.current.innerHTML = "";
@@ -161,7 +165,7 @@ const RegiserForm = () => {
                 location.replace("");
                 localStorage.setItem("userid", (await response.json()).id);
                 await fetch(`${apiUrl}/users/updateCountry`, {
-                    method: "POST",
+                    method: "PATCH",
                     credentials: "include",
                     headers: {
                         "Content-Type": "application/json"

@@ -46,7 +46,11 @@ export const Navbar = () => {
                         onClick={async () => {
                             isLoggedFunc();
                         }}
-                        to={isLogged ? "/profile" : "/loginregister/login"}
+                        to={
+                            isLogged
+                                ? `/profile/${localStorage.getItem("userid")}`
+                                : "/loginregister/login"
+                        }
                     >
                         {isLogged ? "Profile" : "Login"}
                     </Link>
