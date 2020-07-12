@@ -69,7 +69,13 @@ export const ProfilePage = () => {
         updateGeneralStats();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUserGames();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateDescriptionEditorValue();
     }, [userData?.data?.country, userData?.data?.xp]);
+
+    const updateDescriptionEditorValue = () => {
+        setDescriptionEditorValue(userData?.data?.description);
+    };
 
     const updateCountryList = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
