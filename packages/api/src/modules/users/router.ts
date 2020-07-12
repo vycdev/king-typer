@@ -102,6 +102,8 @@ router.get("/achievements/:id", async (ctx, next) => {
 
     ctx.status = 200;
     ctx.body = achievements;
+    await next();
+});
 
 router.get("/userCountry/:id", async (ctx, next) => {
     const { id } = ctx.params;
@@ -110,7 +112,7 @@ router.get("/userCountry/:id", async (ctx, next) => {
 
     ctx.status = 200;
     ctx.body = { country };
-  
+
     await next();
 });
 
@@ -130,5 +132,5 @@ router.post(
         await next();
     }
 );
-  
+
 export default router.routes();
