@@ -7,7 +7,6 @@ import { createUser } from "./actions/createUser";
 import getUserData from "./actions/getUserData";
 // import userCountry from "./actions/userCountry";
 import userAchievements from "./actions/userAchievements";
-import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
 import updateDescription from "./actions/updateDescription";
 import userGames from "./actions/userGames";
