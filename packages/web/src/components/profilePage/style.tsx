@@ -99,3 +99,7 @@ export const SubmitMessage = styled.div`
     color: ${theme.status.negative};
     font-size: 10px;
 `;
+
+export const Select = styled.select`
+    width: 200px;
+`;

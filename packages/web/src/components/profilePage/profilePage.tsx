@@ -15,7 +15,8 @@ import {
     LogoutSwitchThemeWrapper,
     LogoutSwitchButton,
     Description,
-    SubmitMessage
+    SubmitMessage,
+    Select
 } from "./style";
 
 export const ProfilePage = () => {
@@ -36,6 +37,7 @@ export const ProfilePage = () => {
     });
     const [editDescription, setEditDescription] = useState(false);
     const [descriptionEditorValue, setDescriptionEditorValue] = useState("");
+    const [changeFlagEditor, setchangeFlagEditor] = useState(false);
 
     const submitMessageRef = useRef(null);
 
@@ -57,7 +59,6 @@ export const ProfilePage = () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         getUserGames(userId);
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        setDefaultDescriptionEditorValue();
     }, [userData?.data?.country, userData?.data?.xp]);
 
     const updateCountryList = async () => {
@@ -99,10 +100,6 @@ export const ProfilePage = () => {
             averageAccuracy: generalStats?.averageAccuracy,
             averageWpm: generalStats?.averageWPM
         });
-    };
-
-    const setDefaultDescriptionEditorValue = () => {
-        setDescriptionEditorValue(userData?.data?.description);
     };
 
     const getUserPBS = async (id: string) => {
@@ -248,6 +245,49 @@ export const ProfilePage = () => {
                     </GeneralStatistics>
                 </ProfileName>
                 <LogoutSwitchThemeWrapper>
+                    {changeFlagEditor ? (
+                        <Select
+                            name="countryCode"
+                            onChange={e => {
+                                setCountryValue(e.target.value);
+                            }}
+                        >
+                            {countryList}
+                        </Select>
+                    ) : (
+                        ""
+                    )}
+                    <LogoutSwitchButton
+                        onClick={async () => {
+                            if (!changeFlagEditor) {
+                                setchangeFlagEditor(true);
+                            } else {
+                                await (
+                                    await fetch(
+                                        `${apiUrl}/users/updateCountry`,
+                                        {
+                                            method: "POST",
+                                            credentials: "include",
+                                            headers: {
+                                                "Content-Type":
+                                                    "application/json"
+                                            },
+                                            body: JSON.stringify({
+                                                country: countryValue
+                                            })
+                                        }
+                                    )
+                                ).text();
+                                updateCountryFlagUrl();
+                                updateUserData();
+                                setchangeFlagEditor(false);
+                            }
+                        }}
+                    >
+                        {changeFlagEditor
+                            ? `Submit ${countryValue}`
+                            : "Change Flag"}
+                    </LogoutSwitchButton>
                     <LogoutSwitchButton
                         onClick={async () => {
                             await fetch(`${apiUrl}/auth/logout`, {
@@ -314,32 +354,6 @@ export const ProfilePage = () => {
                         </div>
                     )}
                 </Description>
-                <button
-                    onClick={async () => {
-                        await (
-                            await fetch(`${apiUrl}/users/updateCountry`, {
-                                method: "POST",
-                                credentials: "include",
-                                headers: {
-                                    "Content-Type": "application/json"
-                                },
-                                body: JSON.stringify({ country: countryValue })
-                            })
-                        ).text();
-                        updateCountryFlagUrl();
-                        updateUserData();
-                    }}
-                >
-                    UpdateCountry to {countryValue}
-                </button>
-                <select
-                    name="countryCode"
-                    onChange={e => {
-                        setCountryValue(e.target.value);
-                    }}
-                >
-                    {countryList}
-                </select>
                 <button
                     onClick={() => {
                         console.log(getUrlUserId());
