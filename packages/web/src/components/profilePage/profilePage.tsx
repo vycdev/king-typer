@@ -454,7 +454,7 @@ export const ProfilePage = () => {
 
                 <ChartsWrapper>
                     <ChartAndTitleWrapper>
-                        <ChartName>Last 10 Games</ChartName>
+                        <ChartName>Last {userGames.length} Games</ChartName>
                         <GamesChart
                             dataProp={convertUserGamesData(userGames)}
                         ></GamesChart>
