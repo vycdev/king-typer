@@ -19,7 +19,7 @@ export const ProfileName = styled.div`
     color: ${theme.text.primary};
     font-style: italic;
     font-family: "Verdana";
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 `;
 
 export const FlagImage = styled.img`
@@ -53,4 +53,25 @@ export const GeneralStatistics = styled.div`
     padding: 5px;
     display: inline-flex;
     width: 100%;
+`;
+
+export const LogoutSwitchThemeWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+`;
+
+export const LogoutSwitchButton = styled.div`
+    width: 90px;
+    color: ${theme.text.secondary};
+    background: ${theme.primary};
+    margin: 5px;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+    font-family: "Verdana";
+    cursor: pointer;
+    &:hover {
+        filter: brightness(${theme.brightness.lighter});
+    }
 `;

@@ -11,7 +11,9 @@ import {
     FlagNameGroup,
     UnderName,
     GeneralStatistics,
-    Statistics
+    Statistics,
+    LogoutSwitchThemeWrapper,
+    LogoutSwitchButton
 } from "./style";
 
 export const ProfilePage = () => {
@@ -212,27 +214,30 @@ export const ProfilePage = () => {
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>
-                <button
-                    onClick={async () => {
-                        await fetch(`${apiUrl}/auth/logout`, {
-                            method: "GET",
-                            credentials: "include",
-                            headers: {
-                                "Content-Type": "application/json"
-                            }
-                        });
-                        location.replace("");
-                    }}
-                >
-                    Logout
-                </button>
-                <button
-                    onClick={() => {
-                        switchTheme();
-                    }}
-                >
-                    Switch Theme
-                </button>
+                <LogoutSwitchThemeWrapper>
+                    <LogoutSwitchButton
+                        onClick={async () => {
+                            await fetch(`${apiUrl}/auth/logout`, {
+                                method: "GET",
+                                credentials: "include",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            });
+                            location.replace("");
+                        }}
+                    >
+                        Logout
+                    </LogoutSwitchButton>
+                    <LogoutSwitchButton
+                        onClick={() => {
+                            switchTheme();
+                        }}
+                    >
+                        Switch Theme
+                    </LogoutSwitchButton>
+                </LogoutSwitchThemeWrapper>
+
                 <button
                     onClick={async () => {
                         await (
