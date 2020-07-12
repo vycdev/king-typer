@@ -7,7 +7,7 @@ export const verifyUserEmail = async (userid: User["id"], emailKey: string) => {
     const result = await knex<User>("users")
         .where({
             id: userid,
-            role: "none",
+            role: "unverified",
             emailKey
         })
         .first();

@@ -1,4 +1,4 @@
-type Role = "none" | "member" | "admin";
+type Role = "unverified" | "member" | "admin";
 
 export default interface User {
     id: number;

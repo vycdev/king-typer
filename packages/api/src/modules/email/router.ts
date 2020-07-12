@@ -32,10 +32,10 @@ router.get("/sendVerificationEmail/:userid", async (ctx, next) => {
     const user = await findUser("id", userid);
 
     if (!user) {
-        throw new HttpError(400, "That user doesn't exist");
+        throw new HttpError(400, "That user doesn't exist xd");
     }
 
-    if (user.role === "none") {
+    if (user.role === "unverified") {
         await sendVerificationEmail(
             user.email,
             (await generateVerification(userid))!

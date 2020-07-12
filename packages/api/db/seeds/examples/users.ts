@@ -1,4 +1,4 @@
-type Role = "none" | "member" | "admin";
+type Role = "unverified" | "member" | "admin";
 
 interface Users {
     name: string;
@@ -37,7 +37,7 @@ export default [
         name: "NotAUser",
         email: "none@nope.com",
         password: "nothing",
-        role: "none",
+        role: "unverified",
         description: null,
         exp: 2,
         tutorials: [],
