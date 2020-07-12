@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { apiUrl } from "../../utils/constants";
 
@@ -17,25 +16,33 @@ export const ProfilePage = () => {
     );
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateCountryList();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUserId();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUserData();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateCountryFlagUrl();
     }, [userData?.data?.country]);
 
     const updateCountryList = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setCountryList(await generateCountryOptions());
     };
 
     const updateUserData = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setUserData(await getUserData(userId));
     };
 
     const updateUserId = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setUserId(localStorage.getItem("userid"));
     };
 
     const updateCountryFlagUrl = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setCountryFlagUrl(await getCountryUrlFlag());
     };
 

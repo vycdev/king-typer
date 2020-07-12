@@ -13,6 +13,7 @@ export default async <T extends keyof Omit<User, "password">>(
         .where({ [property]: value });
     if (!result) return null;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...data } = result;
 
     return data;
