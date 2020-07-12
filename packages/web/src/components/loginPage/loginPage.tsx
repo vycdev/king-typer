@@ -105,7 +105,7 @@ const RegiserForm = () => {
             statusDiv.current.innerHTML =
                 "Geolocation is not supported by this browser.";
         }
-        return "";
+        return "us";
     };
 
     const checkRegisterFields = (): boolean => {
