@@ -11,6 +11,7 @@ import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import { UpdateCountry } from "./schema/updateCountry";
+import getUserData from "./actions/getUserData";
 
 const router = new Router({ prefix: "/users" });
 
@@ -96,6 +97,17 @@ router.get("/userCountry/:id", async (ctx, next) => {
 
     ctx.status = 200;
     ctx.body = { country };
+
+    await next();
+});
+
+router.get("/userData/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const data = await getUserData("id", id);
+
+    ctx.status = 200;
+    ctx.body = { data };
 
     await next();
 });
