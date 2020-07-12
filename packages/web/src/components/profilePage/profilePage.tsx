@@ -21,7 +21,7 @@ import {
     ClickMe,
     ChartsWrapper,
     ChartName,
-    ChartNamesWrapper
+    ChartAndTitleWrapper
 } from "./style";
 
 import { GamesChart } from "./components/gamesChart";
@@ -397,18 +397,20 @@ export const ProfilePage = () => {
                         </div>
                     )}
                 </Description>
-                <ChartNamesWrapper>
-                    <ChartName>Last 10 Games</ChartName>
-                    <ChartName>All Personal Bests</ChartName>
-                </ChartNamesWrapper>
 
                 <ChartsWrapper>
-                    <GamesChart
-                        dataProp={convertUserGamesData(userGames)}
-                    ></GamesChart>
-                    <GamesChart
-                        dataProp={convertUserGamesData(userPbs)}
-                    ></GamesChart>
+                    <ChartAndTitleWrapper>
+                        <ChartName>Last 10 Games</ChartName>
+                        <GamesChart
+                            dataProp={convertUserGamesData(userGames)}
+                        ></GamesChart>
+                    </ChartAndTitleWrapper>
+                    <ChartAndTitleWrapper>
+                        <ChartName>All Personal Bests</ChartName>
+                        <GamesChart
+                            dataProp={convertUserGamesData(userPbs)}
+                        ></GamesChart>
+                    </ChartAndTitleWrapper>
                 </ChartsWrapper>
             </InsideWrapper>
         </Wrapper>

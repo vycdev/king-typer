@@ -132,11 +132,14 @@ export const ChartsWrapper = styled.div`
     display: inline-flex;
     width: 100%;
 `;
+export const ChartAndTitleWrapper = styled.div`
+    margin: auto;
+    text-align: center;
+`;
 
 export const ChartName = styled.div`
     font-size: 20px;
     color: ${theme.text.primary};
-    width: 50%;
     margin: auto;
     text-align: center;
     font-family: "Verdana";
