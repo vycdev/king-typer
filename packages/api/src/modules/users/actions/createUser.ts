@@ -24,6 +24,7 @@ export const createUser = async (
                 exp: 0,
                 tutorials: [],
                 totaltests: 0
+                achievements: []
             },
             "*"
         )

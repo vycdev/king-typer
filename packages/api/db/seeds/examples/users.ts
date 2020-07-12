@@ -8,6 +8,7 @@ interface Users {
     tutorials: number[];
     country: string;
     totaltests: number;
+    achievements: number[];
 }
 
 export default [
@@ -21,6 +22,7 @@ export default [
         tutorials: [],
         country: "RO",
         totaltests: 0
+        achievements: []
     },
     {
         name: "MKGUN3",
@@ -32,6 +34,7 @@ export default [
         tutorials: [],
         country: "USA",
         totaltests: 5
+        achievements: []
     },
     {
         name: "NotAUser",
@@ -43,6 +46,7 @@ export default [
         tutorials: [],
         country: "LY",
         totaltests: 100
+        achievements: []
     },
     {
         name: "Guy2",
@@ -54,5 +58,6 @@ export default [
         tutorials: [],
         country: "FR",
         totaltests: 20
+        achievements: []
     }
 ] as readonly Users[];

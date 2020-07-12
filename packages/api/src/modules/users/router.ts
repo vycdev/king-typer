@@ -6,6 +6,8 @@ import { validateSchema } from "../schema/middleware/validateSchema";
 import { createUser } from "./actions/createUser";
 import getUserData from "./actions/getUserData";
 // import userCountry from "./actions/userCountry";
+import userAchievements from "./actions/userAchievements";
+import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
 import updateDescription from "./actions/updateDescription";
 import userGames from "./actions/userGames";
@@ -109,6 +111,20 @@ router.get("/userData/:id", async (ctx, next) => {
     ctx.status = 200;
     ctx.body = { data };
 
+    await next();
+});
+
+router.get("/achievements/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const achievements = await userAchievements(id);
+
+    if (achievements === null) {
+        throw new HttpError(400, "That user does not exist!");
+    }
+
+    ctx.status = 200;
+    ctx.body = achievements;
     await next();
 });
 
