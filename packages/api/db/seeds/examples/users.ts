@@ -6,6 +6,8 @@ interface Users {
     description?: string | null;
     exp: number;
     tutorials: number[];
+    country: string;
+    totaltests: number;
 }
 
 export default [
@@ -16,7 +18,9 @@ export default [
         role: "admin",
         description: null,
         exp: 8,
-        tutorials: []
+        tutorials: [],
+        country: "RO",
+        totaltests: 0
     },
     {
         name: "MKGUN3",
@@ -25,7 +29,9 @@ export default [
         role: "member",
         description: null,
         exp: 4,
-        tutorials: []
+        tutorials: [],
+        country: "USA",
+        totaltests: 5
     },
     {
         name: "NotAUser",
@@ -34,7 +40,9 @@ export default [
         role: "member",
         description: null,
         exp: 2,
-        tutorials: []
+        tutorials: [],
+        country: "LY",
+        totaltests: 100
     },
     {
         name: "Guy2",
@@ -43,6 +51,8 @@ export default [
         role: "member",
         description: "But hey, I have a description!",
         exp: 0,
-        tutorials: []
+        tutorials: [],
+        country: "FR",
+        totaltests: 20
     }
 ] as readonly Users[];
