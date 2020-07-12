@@ -67,7 +67,7 @@ export const Id = styled.div`
     font-family: "Verdana";
     color: ${theme.text.primary};
     margin: 0 auto;
-    width: 75%;
+    width: 100%;
 `;
 
 export const LogoutSwitchButton = styled.div`

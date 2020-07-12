@@ -280,7 +280,8 @@ export const ProfilePage = () => {
                             Best Score: {bestScore} Average WPM:{" "}
                             {gameGeneralStats.averageWpm} Average Accuracy:{" "}
                             {gameGeneralStats.averageAccuracy} Total Tests
-                            Taken: {userData?.data?.totaltests}
+                            Taken: {userData?.data?.totaltests} Tutorials
+                            Completed: {userData?.data?.tutorials?.length}
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>
