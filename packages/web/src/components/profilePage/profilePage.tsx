@@ -139,8 +139,6 @@ export const ProfilePage = () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const userPBS = await getUserPBS(userId);
 
-        console.log(userPBS);
-
         setUserPbs(userPBS);
         setBestScore(userPBS[userPBS.length - 1]?.wpm);
     };
@@ -179,7 +177,6 @@ export const ProfilePage = () => {
                 }
             })
         ).json();
-        console.log(result);
 
         return await result?.games;
     };
@@ -284,7 +281,6 @@ export const ProfilePage = () => {
                 accuracy: value.accuracy
             };
         });
-        console.log(data);
 
         return data;
     };
@@ -312,9 +308,7 @@ export const ProfilePage = () => {
                     </ListItem>
                 );
             });
-        console.log(1);
 
-        console.log(returnedData);
         return returnedData;
     };
 
