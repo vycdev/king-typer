@@ -35,7 +35,7 @@ const App = () => {
                             <Route exact path="/stats">
                                 <StatisticsPage />
                             </Route>
-                            <Route exact path="/profile">
+                            <Route exact path="/profile/:id">
                                 <ProfilePage />
                             </Route>
                             <Route path="/loginregister">

@@ -12,4 +12,5 @@ export default interface User {
     achievements: number[];
     country: string;
     emailKey?: string;
+    totaltests: number;
 }

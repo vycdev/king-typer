@@ -33,8 +33,9 @@ export const createUser = async (
                 password: encryptedPassword,
                 exp: 0,
                 tutorials: [],
-                achievements: [],
-                emailKey: genNewKey()
+                emailKey: genNewKey(),
+                totaltests: 0,
+                achievements: []
             },
             "*"
         )

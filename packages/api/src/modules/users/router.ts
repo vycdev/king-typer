@@ -1,17 +1,17 @@
-import Router from "../Router";
-
-import { createUser } from "./actions/createUser";
 import { HttpError } from "../../common/error/classes/httpError";
-import { validateSchema } from "../schema/middleware/validateSchema";
-import { registerBody } from "./schema/registerBody";
-import { RegisterBody } from "./types/RegisterBody";
-import userGames from "./actions/userGames";
-import getPBs from "../games/actions/getPB";
-import userAchievements from "./actions/userAchievements";
-import userCountry from "./actions/userCountry";
-import updateCountry from "./actions/updateCountry";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
+import getPBs from "../games/actions/getPB";
+import Router from "../Router";
+import { validateSchema } from "../schema/middleware/validateSchema";
+import { createUser } from "./actions/createUser";
+import getUserData from "./actions/getUserData";
+import userAchievements from "./actions/userAchievements";
+import updateCountry from "./actions/updateCountry";
+import updateDescription from "./actions/updateDescription";
+import userGames from "./actions/userGames";
+import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
+import { RegisterBody } from "./types/RegisterBody";
 
 const router = new Router({ prefix: "/users" });
 
@@ -90,6 +90,16 @@ router.get("/userPBs/:id", async (ctx, next) => {
     await next();
 });
 
+router.get("/userData/:id", async (ctx, next) => {
+    const { id } = ctx.params;
+
+    const data = await getUserData("id", id);
+
+    ctx.status = 200;
+    ctx.body = data;
+
+    await next();
+});
 
 router.get("/achievements/:id", async (ctx, next) => {
     const { id } = ctx.params;
@@ -105,18 +115,7 @@ router.get("/achievements/:id", async (ctx, next) => {
     await next();
 });
 
-router.get("/userCountry/:id", async (ctx, next) => {
-    const { id } = ctx.params;
-
-    const country = await userCountry("id", id);
-
-    ctx.status = 200;
-    ctx.body = { country };
-
-    await next();
-});
-
-router.post(
+router.patch(
     "/updateCountry",
     requireAuthenticated(),
     validateSchema(UpdateCountry, "body"),
@@ -128,6 +127,23 @@ router.post(
 
         ctx.status = 201;
         ctx.body = "Successfully updated countrycode!";
+
+        await next();
+    }
+);
+
+router.patch(
+    "/updateDescription",
+    requireAuthenticated(),
+    validateSchema(UpdateCountry, "body"),
+    async (ctx, next) => {
+        const { description } = ctx.request.body;
+        const { user } = ctx.session!;
+
+        await updateDescription("id", user, description);
+
+        ctx.status = 200;
+        ctx.body = "Successfully updated description!";
 
         await next();
     }

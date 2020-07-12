@@ -8,6 +8,8 @@ interface Users {
     description?: string | null;
     exp: number;
     tutorials: number[];
+    country: string;
+    totaltests: number;
     achievements: number[];
     emailKey?: string;
 }
@@ -21,6 +23,8 @@ export default [
         description: null,
         exp: 8,
         tutorials: [],
+        country: "RO",
+        totaltests: 0,
         achievements: []
     },
     {
@@ -31,6 +35,8 @@ export default [
         description: null,
         exp: 4,
         tutorials: [],
+        country: "USA",
+        totaltests: 5,
         achievements: []
     },
     {
@@ -42,7 +48,9 @@ export default [
         exp: 2,
         tutorials: [],
         achievements: [],
-        emailKey: "blah"
+        emailKey: "blah",
+        country: "LY",
+        totaltests: 100
     },
     {
         name: "Guy2",
@@ -52,6 +60,8 @@ export default [
         description: "But hey, I have a description!",
         exp: 0,
         tutorials: [],
+        country: "FR",
+        totaltests: 20,
         achievements: []
     }
 ] as readonly Users[];
