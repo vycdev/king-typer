@@ -10,18 +10,47 @@ export const Wrapper = styled.div`
     min-height: 100vh;
     margin: auto;
 `;
+
 export const InsideWrapper = styled.div`
     padding: 30px;
 `;
 
 export const ProfileName = styled.div`
     color: ${theme.text.primary};
-    font-size: 48px;
     font-style: italic;
     font-family: "Verdana";
     padding-bottom: 20px;
 `;
+
 export const FlagImage = styled.img`
     max-height: 24px;
     margin-right: 10px;
+`;
+
+export const Name = styled.div`
+    font-size: 48px;
+    margin-top: -24px;
+`;
+
+export const UnderName = styled.div`
+    font-size: 15px;
+    white-space: nowrap;
+`;
+
+export const FlagNameGroup = styled.div`
+    display: inline-flex;
+    height: 48px;
+`;
+
+export const Statistics = styled.div`
+    text-align: right;
+    width: 100%;
+`;
+
+export const GeneralStatistics = styled.div`
+    font-size: 15px;
+    border-bottom: 1px dashed ${theme.background.secondary};
+    padding: 5px;
+    display: inline-flex;
+    width: 100%;
 `;
