@@ -22,7 +22,7 @@ describe("Auth router", () => {
 
         expect(response.body).to.deep.equal({
             message: "Successfully log in",
-            user: { name, role: "admin" }
+            user: { name, role: "admin", id: 1 }
         });
     });
 

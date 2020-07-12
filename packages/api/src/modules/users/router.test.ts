@@ -24,6 +24,7 @@ describe("Users routes", async () => {
             .expect(201);
 
         expect(response.body).to.deep.equal({
+            id: 5,
             status: 201,
             message: "Successfully created"
         });
