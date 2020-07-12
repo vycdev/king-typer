@@ -7,7 +7,7 @@ import { registerBody } from "./schema/registerBody";
 import { RegisterBody } from "./types/RegisterBody";
 import userGames from "./actions/userGames";
 import getPBs from "../games/actions/getPB";
-import userCountry from "./actions/userCountry";
+// import userCountry from "./actions/userCountry";
 import updateCountry from "./actions/updateCountry";
 import { requireAuthenticated } from "../auth/middleware/requireAuthenticated";
 import { UpdateCountry } from "./schema/updateCountry";
@@ -90,16 +90,16 @@ router.get("/userPBs/:id", async (ctx, next) => {
     await next();
 });
 
-router.get("/userCountry/:id", async (ctx, next) => {
-    const { id } = ctx.params;
+// router.get("/userCountry/:id", async (ctx, next) => {
+//     const { id } = ctx.params;
 
-    const country = await userCountry("id", id);
+//     const country = await userCountry("id", id);
 
-    ctx.status = 200;
-    ctx.body = { country };
+//     ctx.status = 200;
+//     ctx.body = { country };
 
-    await next();
-});
+//     await next();
+// });
 
 router.get("/userData/:id", async (ctx, next) => {
     const { id } = ctx.params;
