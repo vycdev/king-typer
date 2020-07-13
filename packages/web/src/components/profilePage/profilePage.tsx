@@ -507,7 +507,7 @@ export const ProfilePage = () => {
                     </LogoutSwitchButton>
                 </LogoutSwitchThemeWrapper>
                 <Description>
-                    {editDescription && isThisTheLoggedUser ? (
+                    {editDescription ? (
                         <>
                             <textarea
                                 rows={6}
@@ -545,7 +545,7 @@ export const ProfilePage = () => {
                     ) : (
                         <div
                             onClick={() => {
-                                setEditDescription(true);
+                                setEditDescription(true && isThisTheLoggedUser);
                             }}
                         >
                             {userData?.description === null
