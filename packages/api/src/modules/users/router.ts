@@ -12,6 +12,7 @@ import userGames from "./actions/userGames";
 import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
 import { RegisterBody } from "./types/RegisterBody";
+import changePassword from "./actions/changePassword";
 
 const router = new Router({ prefix: "/users" });
 
@@ -152,5 +153,22 @@ router.patch(
         await next();
     }
 );
+
+router.patch("/changePassword", requireAuthenticated(), async (ctx, next) => {
+    const { user } = ctx.session!;
+
+    const { oldPassword, newPassword } = ctx.request.body;
+
+    const response = await changePassword(user, oldPassword, newPassword);
+
+    if (response) {
+        throw new HttpError(400, response);
+    }
+
+    ctx.status = 200;
+    ctx.body = { message: "Successfully changed password" };
+
+    await next();
+});
 
 export default router.routes();
