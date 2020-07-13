@@ -29,7 +29,7 @@ router.get("/getAllTexts", async (ctx, next) => {
     await next();
 });
 
-router.get("/getRandomText", async (ctx, next) => {
+router.get("/getRandomText/:ordered", async (ctx, next) => {
     const { ordered = undefined } = ctx.params;
     const text = await getRandomText(ordered);
     ctx.status = 200;
