@@ -10,7 +10,7 @@ const agent = request.agent(server);
 
 describe("Verification email", async () => {
     it("Send verification email", async () => {
-        sendVerificationEmail("73sampleperson@gmail.com", "https://google.com");
+        // sendVerificationEmail("73sampleperson@gmail.com", "https://google.com");
         // I commented this out because I don't want to be emailed every time I run the tests.
     });
 

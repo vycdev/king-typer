@@ -33,20 +33,24 @@ describe("Achievements router", () => {
         const response = await agent
             .post(`/api/achievements/addAchievement`)
             .send(myCheevo)
-            .set("Accept", "application/text")
+            .set("Accept", "application/json")
             .expect(201);
 
-        expect(response.text).to.equal("Successfully added achievement");
+        expect(response.body.message).to.equal(
+            "Successfully added achievement"
+        );
     });
 
     it("Edits an achievement", async () => {
         const response = await agent
             .patch(`/api/achievements/editAchievement`)
             .send({ id: 3, details: { name: "Edited cheevo" } })
-            .set("Accept", "application/text")
+            .set("Accept", "application/json")
             .expect(200);
 
-        expect(response.text).to.equal("Successfully edited achievement");
+        expect(response.body.message).to.equal(
+            "Successfully edited achievement"
+        );
     });
 
     it("Cannot edit nonexistent achievement", async () => {
@@ -54,6 +58,7 @@ describe("Achievements router", () => {
             .patch(`/api/achievements/editAchievement`)
             .send({ id: 4, details: { name: "Edited cheevo 2" } })
             .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(400);
 
         expect(response.body.message).to.equal(
@@ -65,16 +70,18 @@ describe("Achievements router", () => {
         const response = await agent
             .delete(`/api/achievements/deleteAchievement`)
             .send({ id: 3 })
-            .set("Accept", "application/text")
+            .set("Accept", "application/json")
             .expect(200);
 
-        expect(response.text).to.equal("Successfully deleted achievement");
+        expect(response.body.message).to.equal(
+            "Successfully deleted achievement"
+        );
     });
 
     it("Gets the cheevo list", async () => {
         const response = await agent
             .get("/api/achievements/")
-            .set("Accept", "application/text")
+            .set("Accept", "application/json")
             .expect(200);
 
         expect(response.body).to.deep.equal([

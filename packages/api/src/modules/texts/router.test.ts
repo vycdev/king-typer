@@ -35,18 +35,18 @@ describe("Texts routes", async () => {
         await agent
             .post(`/api/texts/addText/`)
             .send(newText)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
         const response = await agent
             .post(`/api/texts/addText/`)
             .send(newRandomText)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
-        expect(response.text).to.deep.equal("Successfully added text");
+        expect(response.body.message).to.deep.equal("Successfully added text");
     });
 
     it("Gets all texts", async () => {

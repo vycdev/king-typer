@@ -21,11 +21,13 @@ describe("Tutorials routes", async () => {
         const response = await agent
             .post(`/api/tutorials/completeTutorial/`)
             .send({ id: 3 })
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(200);
 
-        expect(response.text).to.deep.equal("Successfully completed tutorial");
+        expect(response.body.message).to.equal(
+            "Successfully completed tutorial"
+        );
     });
 
     it("Cannot complete a non-existent tutorial", async () => {
@@ -36,10 +38,7 @@ describe("Tutorials routes", async () => {
             .expect("Content-Type", /json/)
             .expect(400);
 
-        expect(response.body).to.deep.equal({
-            status: 400,
-            message: "That tutorial does not exist!"
-        });
+        expect(response.body.message).to.equal("That tutorial does not exist!");
     });
 
     it("Gets tutorials completed for the user", async () => {

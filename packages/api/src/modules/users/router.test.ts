@@ -38,10 +38,9 @@ describe("Users routes", async () => {
             .expect("Content-Type", /json/)
             .expect(400);
 
-        expect(response.body).to.deep.equal({
-            status: 400,
-            message: "That username seems to be already taken"
-        });
+        expect(response.body.message).to.equal(
+            "That username seems to be already taken"
+        );
     });
 
     describe("Game stats", async () => {

@@ -6,7 +6,7 @@ import User from "../types/User";
 const genNewKey = () =>
     Array(16)
         .fill(0)
-        .map((_) =>
+        .map(_ =>
             Math.random()
                 .toString(36)
                 .charAt(2)

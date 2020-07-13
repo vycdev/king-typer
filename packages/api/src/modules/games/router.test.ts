@@ -30,11 +30,13 @@ describe("Game routes", async () => {
         const response = await agent
             .post(`/api/games/newGame/`)
             .send(newGame)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
-        expect(response.text).to.deep.equal("Successfully created a game!");
+        expect(response.body.message).to.deep.equal(
+            "Successfully created a game!"
+        );
     });
 
     it("Deletes games past 10 games", async function() {

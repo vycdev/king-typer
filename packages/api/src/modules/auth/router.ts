@@ -44,7 +44,9 @@ router.get("/logout", requireAuthenticated(), async (ctx, next) => {
     ctx.session = null;
 
     ctx.status = 200;
-    ctx.body = "Successfully logged out";
+    ctx.body = {
+        message: "Successfully logged out"
+    };
 
     await next();
 });

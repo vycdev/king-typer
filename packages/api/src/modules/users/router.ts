@@ -126,7 +126,9 @@ router.patch(
         await updateCountry("id", user, country);
 
         ctx.status = 201;
-        ctx.body = "Successfully updated countrycode!";
+        ctx.body = {
+            message: "Successfully updated countrycode!"
+        };
 
         await next();
     }
@@ -143,7 +145,9 @@ router.patch(
         await updateDescription("id", user, description);
 
         ctx.status = 200;
-        ctx.body = "Successfully updated description!";
+        ctx.body = {
+            message: "Successfully updated description!"
+        };
 
         await next();
     }
