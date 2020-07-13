@@ -30,7 +30,7 @@ import { UserGame } from "./helpers/interfaces";
 import { GamesChart } from "./components/gamesChart";
 
 export const ProfilePage = () => {
-    const [userId, setUserId] = useState(localStorage.getItem("userid"));
+    const [userId, setUserId] = useState("0");
     const [countryList, setCountryList] = useState([
         <option key={"default"}>Loading...</option>
     ]);
@@ -72,14 +72,24 @@ export const ProfilePage = () => {
         </ListItem>
     ]);
     const [verificationIsSent, setVerificationIsSent] = useState(false);
+    const [isThisTheLoggedUser, setIsThisTheLoggedUser] = useState(false);
+    const [urlUserId, setUrlUserId] = useState("0");
+    const [toBeUsedId, setToBeUsedId] = useState("0");
+    const [userExists, setUserExists] = useState(false);
 
     const submitMessageRef = useRef(null);
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        updateCountryList();
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUserId();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateIsThisTheLoggedUser();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateUrlUserId();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateToBeUsedId();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateCountryList();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUserData();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -98,7 +108,20 @@ export const ProfilePage = () => {
         updateElementListOfGames();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateElementListOfPBS();
-    }, [userData?.country, userData?.exp, userGames.length, userPbs.length]);
+    }, [userData?.country, userData?.exp, userGames?.length, userPbs?.length]);
+
+    const updateToBeUsedId = async () => {
+        setToBeUsedId((isThisTheLoggedUser ? userId : urlUserId).toString());
+    };
+
+    const updateIsThisTheLoggedUser = async () => {
+        setIsThisTheLoggedUser(localStorage.getItem("userid") === urlUserId);
+    };
+
+    const updateUrlUserId = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setUrlUserId(getUrlUserId().toString());
+    };
 
     const updateDescriptionEditorValue = () => {
         setDescriptionEditorValue(
@@ -112,8 +135,10 @@ export const ProfilePage = () => {
     };
 
     const updateUserData = async () => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        setUserData(await getUserData(userId));
+        setUserData(
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            await getUserData(toBeUsedId)
+        );
     };
 
     const updateUserId = async () => {
@@ -131,8 +156,10 @@ export const ProfilePage = () => {
     };
 
     const updateUserGames = async () => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        setUserGames(await getUserGames(userId));
+        setUserGames(
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            await getUserGames(toBeUsedId)
+        );
     };
 
     const updateElementListOfGames = async () => {
@@ -147,7 +174,7 @@ export const ProfilePage = () => {
 
     const updateBestScoreUserPbs = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const userPBS = await getUserPBS(userId);
+        const userPBS = await getUserPBS(toBeUsedId);
 
         setUserPbs(userPBS);
         setBestScore(userPBS[userPBS.length - 1]?.wpm);
@@ -155,7 +182,7 @@ export const ProfilePage = () => {
 
     const updateGeneralStats = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const generalStats = await getUserGameStats(userId);
+        const generalStats = await getUserGameStats(toBeUsedId);
 
         setGameGeneralStats({
             averageAccuracy: generalStats?.averageAccuracy,
@@ -215,7 +242,7 @@ export const ProfilePage = () => {
             )
         ).json();
 
-        return data.flag;
+        return data?.flag || "https://restcountries.eu/data/usa.svg";
     };
 
     const getUserData = async (id: string) => {
@@ -226,6 +253,8 @@ export const ProfilePage = () => {
                 "Content-Type": "application/json"
             }
         });
+        setUserExists(userData.status != 404);
+        console.log(userExists);
 
         return await userData.json();
     };
@@ -281,18 +310,22 @@ export const ProfilePage = () => {
     };
 
     const convertUserGamesData = (dataobject: Array<UserGame>) => {
-        const data = dataobject.map(value => {
-            const date = new Date(Math.floor(parseInt(value.date)));
-            return {
-                date: `${date.getDate()}/${date.getMonth() +
-                    1}/${date.getFullYear()}`,
-                wpm: value.wpm,
-                uncorrectedwpm: value.rawwpm,
-                accuracy: value.accuracy
-            };
-        });
+        if (!(dataobject instanceof Array)) {
+            return [];
+        } else {
+            const data = dataobject.map(value => {
+                const date = new Date(Math.floor(parseInt(value.date)));
+                return {
+                    date: `${date.getDate()}/${date.getMonth() +
+                        1}/${date.getFullYear()}`,
+                    wpm: value.wpm,
+                    uncorrectedwpm: value.rawwpm,
+                    accuracy: value.accuracy
+                };
+            });
 
-        return data;
+            return data;
+        }
     };
 
     const generateListOfScores = async (data: Array<UserGame>) => {
@@ -487,10 +520,12 @@ export const ProfilePage = () => {
                 </Description>
                 <ChartsWrapper>
                     <NoGameData hidden={userData?.totaltests}>
-                        Looks like there is no game data.
+                        {userExists
+                            ? "Looks like there is no game data."
+                            : "404 user doesn't exist."}
                     </NoGameData>
                     <ChartAndTitleWrapper hidden={!userData?.totaltests}>
-                        <ChartName>Last {userGames.length} Games</ChartName>
+                        <ChartName>Last {userGames?.length} Games</ChartName>
                         <GamesChart
                             dataProp={convertUserGamesData(userGames)}
                         ></GamesChart>
