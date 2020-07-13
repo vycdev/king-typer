@@ -19,7 +19,7 @@ router.post(
         await removeOldGame(user);
         await checkPB(newGame);
         ctx.status = 201;
-        ctx.body = "Successfully created a game!";
+        ctx.body = { message: "Successfully created a game!" };
         await next();
     }
 );

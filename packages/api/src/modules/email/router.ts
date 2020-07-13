@@ -45,7 +45,7 @@ router.get("/sendVerificationEmail/:userid", async (ctx, next) => {
     }
 
     ctx.status = 200;
-    ctx.body = "Success!";
+    ctx.body = { message: "Success!" };
 
     await next();
 });

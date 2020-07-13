@@ -17,7 +17,7 @@ router.post(
         const { user } = ctx.session!;
         await addText(title, text, difficulty, user, ordered, tutorial);
         ctx.status = 201;
-        ctx.body = "Successfully added text";
+        ctx.body = { message: "Successfully added text" };
         await next();
     }
 );

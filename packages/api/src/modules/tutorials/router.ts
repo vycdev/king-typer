@@ -15,7 +15,7 @@ router.post("/completeTutorial", requireAuthenticated(), async (ctx, next) => {
         throw new HttpError(400, "That tutorial does not exist!");
     }
     ctx.status = 200;
-    ctx.body = "Successfully completed tutorial";
+    ctx.body = { message: "Successfully completed tutorial" };
     await next();
 });
 
