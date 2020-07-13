@@ -57,7 +57,7 @@ router.get("/userGameStats/:id", async (ctx, next) => {
 
     if (!games || games.length === 0) {
         ctx.status = 400;
-        return (ctx.body = "No user with that ID exists!");
+        return (ctx.body = { message: "No user with that ID exists!" });
     }
 
     const averageWPM =
@@ -81,7 +81,7 @@ router.get("/userPBs/:id", async (ctx, next) => {
 
     if (!game) {
         ctx.status = 400;
-        return (ctx.body = "That user does not have any PBs!");
+        return (ctx.body = { message: "That user does not have any PBs!" });
     }
 
     ctx.status = 200;
@@ -94,6 +94,11 @@ router.get("/userData/:id", async (ctx, next) => {
     const { id } = ctx.params;
 
     const data = await getUserData("id", id);
+
+    if (!data) {
+        ctx.status = 404;
+        return (ctx.body = { message: "That users doesn't exist." });
+    }
 
     ctx.status = 200;
     ctx.body = data;
@@ -126,7 +131,7 @@ router.patch(
         await updateCountry("id", user, country);
 
         ctx.status = 201;
-        ctx.body = "Successfully updated countrycode!";
+        ctx.body = { message: "Successfully updated countrycode!" };
 
         await next();
     }
@@ -143,7 +148,7 @@ router.patch(
         await updateDescription("id", user, description);
 
         ctx.status = 200;
-        ctx.body = "Successfully updated description!";
+        ctx.body = { message: "Successfully updated description!" };
 
         await next();
     }
