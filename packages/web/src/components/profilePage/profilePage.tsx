@@ -558,7 +558,7 @@ export const ProfilePage = () => {
                     )}
                 </Description>
                 <ChartsWrapper>
-                    <NoGameData hidden={userData?.totaltests}>
+                    <NoGameData hidden={Boolean(userData?.totaltests)}>
                         {userExists
                             ? "Looks like there is no game data."
                             : "404 user doesn't exist."}
