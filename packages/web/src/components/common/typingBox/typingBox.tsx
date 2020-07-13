@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { getText } from "./helpers/gettext";
+import { randomizeEasyText, getDataBaseTextInfo } from "./helpers/gettext";
 import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
 import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
@@ -15,6 +15,14 @@ import {
     ActuallyTyped
 } from "./style";
 
+interface TextInfo {
+    id: number;
+    title: string;
+    text: string;
+    ordered?: boolean;
+    tutorial: boolean;
+}
+
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
@@ -24,7 +32,7 @@ const previousScores: Array<PreviousScoresType> = JSON.parse(
 
 export const TypingBox = (props: TypingBoxProps) => {
     const [input, setInput] = useState("");
-    const [text, setText] = useState(getText(props.mode));
+    const [text, setText] = useState("");
     const [visibleText, setVisibleText] = useState([
         <div key={"default"}></div>
     ]);
@@ -34,29 +42,67 @@ export const TypingBox = (props: TypingBoxProps) => {
     const [bestwpm, setBestwpm] = useState(
         JSON.parse(localStorage.getItem("bestwpm"))
     );
+    const [textInfo, setTextInfo] = useState<TextInfo>({
+        id: 0,
+        title: "",
+        text: "",
+        tutorial: false
+    });
 
     const textBoxRef = useRef(null);
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        setVisibleText(generateVisibleText(input, props.mode, typed, text));
+
         textBoxRef.current.scrollTop = 0;
         setBestwpm(JSON.parse(localStorage.getItem("bestwpm")));
-    }, [time === 60]);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateText();
+
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    }, [time >= 60]);
+
+    const updateText = async (forceUpdate = false) => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        const gotTextInfo =
+            time >= 60 ? await getDataBaseTextInfo(props.mode) : textInfo;
+
+        const info =
+            (time >= 60 && textInfo.title != gotTextInfo.title) || forceUpdate
+                ? gotTextInfo
+                : textInfo;
+
+        const arrayOfText =
+            props.mode === "easy"
+                ? time >= 60
+                    ? randomizeEasyText(info.text.split(" "))
+                    : info.text.split(" ")
+                : info.text.split(" ");
+
+        setTextInfo(time >= 60 ? info : textInfo);
+        setText(time >= 60 ? arrayOfText : text);
+
+        setVisibleText(
+            time >= 60
+                ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                  generateVisibleText("", props.mode, [], arrayOfText)
+                : visibleText
+        );
+    };
+
     // Function for reseting the state to the initial value
-    const resetState = () => {
-        const arrayOfText = getText(props.mode);
+    const resetState = async () => {
+        setTime(60);
+
+        await updateText(true);
+
         const elm = document.getElementById("isBeingTyped");
         if (elm) {
             textBoxRef.current.scrollTop = 0;
         }
         setInput("");
         setTyped([]);
-        setText(arrayOfText);
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        setVisibleText(generateVisibleText("", props.mode, [], arrayOfText));
-        setTime(60);
         setCpm(0);
     };
     // Get best wpm function, returns the best wpm and also sets the next score in local storage and the best wpm
@@ -149,54 +195,57 @@ export const TypingBox = (props: TypingBoxProps) => {
         typedArray: Array<TypedArrayInterface>,
         text: Array<string>
     ) => {
-        return text.map((value: string, index: number) => {
-            return index < typedArray.length ? (
-                <div
-                    className="spaced"
-                    key={value + index}
-                    style={{
-                        color:
-                            typedArray[index].state === "correct"
-                                ? props.colorCodes.correct
-                                : props.colorCodes.wrong
-                    }}
-                >
-                    {text[index]}
-                </div>
-            ) : index === typedArray.length ? (
-                <div
-                    className="spaced isBeingTyped"
-                    id="isBeingTyped"
-                    key={value + index}
-                >
-                    {text[index].split("").map((v: string, i: number) => {
-                        return (
-                            <div
-                                key={v + i + v}
-                                style={{
-                                    color:
-                                        i <= input.length - 1
-                                            ? v === input[i]
-                                                ? props.colorCodes.correct
-                                                : props.colorCodes.wrong
-                                            : props.colorCodes.notTyped
-                                }}
-                            >
-                                {v}
-                            </div>
-                        );
-                    })}
-                </div>
-            ) : (
-                <div
-                    className="spaced"
-                    key={value + index}
-                    style={{ color: props.colorCodes.notTyped }}
-                >
-                    {text[index]}
-                </div>
-            );
-        });
+        if (!(text instanceof Array)) {
+            return [];
+        } else
+            return text.map((value: string, index: number) => {
+                return index < typedArray.length ? (
+                    <div
+                        className="spaced"
+                        key={value + index}
+                        style={{
+                            color:
+                                typedArray[index].state === "correct"
+                                    ? props.colorCodes.correct
+                                    : props.colorCodes.wrong
+                        }}
+                    >
+                        {text[index]}
+                    </div>
+                ) : index === typedArray.length ? (
+                    <div
+                        className="spaced isBeingTyped"
+                        id="isBeingTyped"
+                        key={value + index}
+                    >
+                        {text[index].split("").map((v: string, i: number) => {
+                            return (
+                                <div
+                                    key={v + i + v}
+                                    style={{
+                                        color:
+                                            i <= input.length - 1
+                                                ? v === input[i]
+                                                    ? props.colorCodes.correct
+                                                    : props.colorCodes.wrong
+                                                : props.colorCodes.notTyped
+                                    }}
+                                >
+                                    {v}
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div
+                        className="spaced"
+                        key={value + index}
+                        style={{ color: props.colorCodes.notTyped }}
+                    >
+                        {text[index]}
+                    </div>
+                );
+            });
     };
 
     return (
