@@ -32,7 +32,7 @@ const previousScores: Array<PreviousScoresType> = JSON.parse(
 
 export const TypingBox = (props: TypingBoxProps) => {
     const [input, setInput] = useState("");
-    const [text, setText] = useState("");
+    const [text, setText] = useState([""]);
     const [visibleText, setVisibleText] = useState([
         <div key={"default"}></div>
     ]);
