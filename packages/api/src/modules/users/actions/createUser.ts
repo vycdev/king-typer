@@ -30,7 +30,7 @@ export const createUser = async (
         await knex<User>("users").insert(
             {
                 ...user,
-                role: "member",
+                role: "unverified",
                 password: encryptedPassword,
                 exp: 0,
                 tutorials: [],
