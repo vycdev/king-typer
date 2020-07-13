@@ -222,6 +222,7 @@ export const ProfilePage = () => {
     };
 
     const getUserPBS = async (id: string) => {
+        if (id === "0") return [];
         const result = await (
             await fetch(`${apiUrl}/users/userpbs/${id}`, {
                 method: "GET",
@@ -236,6 +237,7 @@ export const ProfilePage = () => {
     };
 
     const getUserGames = async (id: string) => {
+        if (id === "0") return [];
         const result = await (
             await fetch(`${apiUrl}/users/usergames/${id}`, {
                 method: "GET",
@@ -250,6 +252,7 @@ export const ProfilePage = () => {
     };
 
     const getUserGameStats = async (id: string) => {
+        if (id === "0") return {};
         const result = await (
             await fetch(`${apiUrl}/users/usergamestats/${id}`, {
                 method: "GET",
@@ -264,6 +267,7 @@ export const ProfilePage = () => {
     };
 
     const getCountryUrlFlag = async () => {
+        if (!userData?.country) return "https://restcountries.eu/data/usa.svg";
         const data = await (
             await fetch(
                 `https://restcountries.eu/rest/v2/alpha/${userData?.country}`,
@@ -277,6 +281,7 @@ export const ProfilePage = () => {
     };
 
     const getUserData = async (id: string) => {
+        if (id === "0") return {};
         const userData = await fetch(`${apiUrl}/users/userData/${id}`, {
             method: "GET",
             credentials: "include",
