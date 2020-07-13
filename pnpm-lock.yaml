@@ -1078,15 +1078,8 @@ packages:
   /@babel/runtime/7.10.4:
     dependencies:
       regenerator-runtime: 0.13.5
-    dev: true
     resolution:
       integrity: sha512-UpTN5yUJr9b4EX2CnGNWIvER7Ab83ibv0pcvvHc4UOdrBI5jb8bj+32cCwPX6xu0mt2daFNjYhoi+X7beH0RSw==
-  /@babel/runtime/7.6.3:
-    dependencies:
-      regenerator-runtime: 0.13.3
-    dev: false
-    resolution:
-      integrity: sha512-kq6anf9JGjW8Nt5rYfEuGRaEAaH1mkv3Bbu6rYvLOpPh/RusSJXuKPEAoZ7L7gybZkchE8+NV5g9vKF4AGAtsA==
   /@babel/runtime/7.7.2:
     dependencies:
       regenerator-runtime: 0.13.3
@@ -5531,10 +5524,10 @@ packages:
       integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
   /history/4.10.1:
     dependencies:
-      '@babel/runtime': 7.6.3
+      '@babel/runtime': 7.10.4
       loose-envify: 1.4.0
       resolve-pathname: 3.0.0
-      tiny-invariant: 1.0.6
+      tiny-invariant: 1.1.0
       tiny-warning: 1.0.3
       value-equal: 1.0.1
     dev: false
@@ -5550,7 +5543,7 @@ packages:
       integrity: sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
   /hoist-non-react-statics/3.3.2:
     dependencies:
-      react-is: 16.12.0
+      react-is: 16.13.1
     dev: false
     resolution:
       integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -10418,6 +10411,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FOyLWWVjG+aC0UqG76V53yAWdXfH8bO6FNmyZOuUrzDzK8DI3/JRY25UD7+g49JWM1LXwymsKERB+DzI0dTEQA==
+  /tiny-invariant/1.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
   /tiny-warning/1.0.3:
     dev: false
     resolution:

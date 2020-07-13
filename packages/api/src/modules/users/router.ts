@@ -57,7 +57,7 @@ router.get("/userGameStats/:id", async (ctx, next) => {
 
     if (!games || games.length === 0) {
         ctx.status = 400;
-        return (ctx.body = { message: "No user with that ID exists!" });
+        return (ctx.body = { message: "No game stats." });
     }
 
     const averageWPM =
