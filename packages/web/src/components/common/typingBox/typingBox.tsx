@@ -309,7 +309,12 @@ export const TypingBox = (props: TypingBoxProps) => {
                         // input is the current value of the input box
                         const input =
                             e.target.value[e.target.value.length - 1] === " "
-                                ? ""
+                                ? props.mode === "hard"
+                                    ? e.target.value.replace(/ +/g, "") ===
+                                      text[typed.length]
+                                        ? ""
+                                        : e.target.value
+                                    : ""
                                 : e.target.value;
                         // timeLeft is the calculated remaining time
                         const timeLeft = typed.length
@@ -333,7 +338,11 @@ export const TypingBox = (props: TypingBoxProps) => {
                             e.target.value[e.target.value.length - 1] === " " &&
                             time >= 0 &&
                             typed.length < text.length &&
-                            e.target.value != " "
+                            e.target.value != " " &&
+                            (props.mode === "hard"
+                                ? e.target.value.replace(/ +/g, "") ===
+                                  text[typed.length]
+                                : true)
                                 ? [
                                       ...typed,
                                       {
