@@ -3,6 +3,10 @@ import { getTheme } from "../../utils/getTheme";
 
 const theme = getTheme();
 
+interface HiddenProps {
+    hidden?: boolean;
+}
+
 export const Wrapper = styled.div`
     border-left: 1px solid ${theme.background.secondary};
     border-right: 1px solid ${theme.background.secondary};
@@ -71,9 +75,11 @@ export const Id = styled.div`
 `;
 
 export const LogoutSwitchButton = styled.div`
+    display: ${(props: HiddenProps) =>
+        props.hidden === true ? "none" : "block"};
     height: 15px;
     font-style: normal;
-    min-width: 90px;
+    min-width: 120px;
     color: ${theme.text.secondary};
     background: ${theme.primary};
     margin: 5px;
@@ -128,6 +134,7 @@ export const DataBoxWrapper = styled.div`
 `;
 
 export const ChartsWrapper = styled.div`
+    border-top: 1px solid ${theme.background.secondary};
     flex-wrap: wrap;
     display: inline-flex;
     width: 100%;
@@ -169,4 +176,15 @@ export const ListItemWrapper = styled.div`
     margin: 30px auto;
     max-height: 300px;
     overflow: auto;
+`;
+
+export const NoGameData = styled.div`
+    font-size: 20px;
+    color: ${theme.background.secondary};
+    border-bottom: 1px solid ${theme.background.secondary};
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-family: "Verdana";
+    padding: 15px;
 `;

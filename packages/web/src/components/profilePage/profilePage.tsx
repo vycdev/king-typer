@@ -23,7 +23,8 @@ import {
     ChartName,
     ChartAndTitleWrapper,
     ListItem,
-    ListItemWrapper
+    ListItemWrapper,
+    NoGameData
 } from "./style";
 import { UserGame } from "./helpers/interfaces";
 import { GamesChart } from "./components/gamesChart";
@@ -70,6 +71,7 @@ export const ProfilePage = () => {
             There seems to be no game data.
         </ListItem>
     ]);
+    const [verificationIsSent, setVerificationIsSent] = useState(false);
 
     const submitMessageRef = useRef(null);
 
@@ -99,7 +101,9 @@ export const ProfilePage = () => {
     }, [userData?.country, userData?.exp, userGames.length, userPbs.length]);
 
     const updateDescriptionEditorValue = () => {
-        setDescriptionEditorValue(userData?.description);
+        setDescriptionEditorValue(
+            userData?.description === null ? "" : userData?.description
+        );
     };
 
     const updateCountryList = async () => {
@@ -346,6 +350,26 @@ export const ProfilePage = () => {
                 </ProfileName>
                 <LogoutSwitchThemeWrapper>
                     <Id>ID: {getUrlUserId()}</Id>
+                    <LogoutSwitchButton
+                        hidden={
+                            userData?.role != "unverified" || verificationIsSent
+                        }
+                        onClick={async () => {
+                            await fetch(
+                                `${apiUrl}/email/sendVerificationEmail/${userId}`,
+                                {
+                                    method: "GET",
+                                    credentials: "include",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                }
+                            );
+                            setVerificationIsSent(true);
+                        }}
+                    >
+                        Resend Verification
+                    </LogoutSwitchButton>
                     {changeFlagEditor ? (
                         <Select
                             name="countryCode"
@@ -438,7 +462,9 @@ export const ProfilePage = () => {
                                     onClick={() => {
                                         setEditDescription(false);
                                         setDescriptionEditorValue(
-                                            userData?.description
+                                            userData?.description === null
+                                                ? ""
+                                                : userData?.description
                                         );
                                     }}
                                 >
@@ -452,21 +478,25 @@ export const ProfilePage = () => {
                                 setEditDescription(true);
                             }}
                         >
-                            {userData?.description}
+                            {userData?.description === null
+                                ? "There seems to be no description set."
+                                : userData?.description}
                             <ClickMe>Click me!</ClickMe>
                         </div>
                     )}
                 </Description>
-
                 <ChartsWrapper>
-                    <ChartAndTitleWrapper>
+                    <NoGameData hidden={userData?.totaltests}>
+                        Looks like there is no game data.
+                    </NoGameData>
+                    <ChartAndTitleWrapper hidden={!userData?.totaltests}>
                         <ChartName>Last {userGames.length} Games</ChartName>
                         <GamesChart
                             dataProp={convertUserGamesData(userGames)}
                         ></GamesChart>
                         <ListItemWrapper>{elementsListOfGames}</ListItemWrapper>
                     </ChartAndTitleWrapper>
-                    <ChartAndTitleWrapper>
+                    <ChartAndTitleWrapper hidden={!userData?.totaltests}>
                         <ChartName>All Personal Bests</ChartName>
                         <GamesChart
                             dataProp={convertUserGamesData(userPbs)}
