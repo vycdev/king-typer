@@ -113,7 +113,8 @@ export const ProfilePage = () => {
         userData?.country,
         userGames?.length,
         urlUserId,
-        isThisTheLoggedUser
+        isThisTheLoggedUser,
+        userId
     ]);
 
     const updateIsThisTheLoggedUser = async () => {
@@ -153,6 +154,9 @@ export const ProfilePage = () => {
     };
 
     const updateUserId = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        localStorage.setItem("userid", await getUserId());
+
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         setUserId(localStorage.getItem("userid"));
     };
@@ -219,6 +223,22 @@ export const ProfilePage = () => {
                 : generalStats?.averageAccuracy,
             averageWpm: generalStats.message ? 0 : generalStats?.averageWPM
         });
+    };
+
+    const getUserId = async () => {
+        const result = await (
+            await fetch(`${apiUrl}/auth/isloggedin`, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        ).json();
+        if (result.islogged === false) {
+            return "0";
+        }
+        return result.userid;
     };
 
     const getUserPBS = async (id: string) => {

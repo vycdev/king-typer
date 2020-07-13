@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { Ul, Li, Fix, LoginLi } from "./style";
 
@@ -9,7 +9,7 @@ import { apiUrl } from "../../../utils/constants";
 // Navbar component
 
 export const Navbar = () => {
-    const [isLogged, setIsLogged] = useState(false);
+    const [isLoggedIn, setIsLoggedin] = useState(false);
 
     const isLoggedFunc = async () => {
         const response = await (
@@ -21,12 +21,15 @@ export const Navbar = () => {
                 }
             })
         ).json();
-        setIsLogged(response);
+        localStorage.setItem("userid", response.userid);
+        setIsLoggedin(response.islogged);
     };
+
+    const locatione = useLocation();
 
     useEffect(() => {
         isLoggedFunc();
-    }, []);
+    }, [locatione.pathname]);
 
     return (
         <Fix>
@@ -47,12 +50,12 @@ export const Navbar = () => {
                             isLoggedFunc();
                         }}
                         to={
-                            isLogged
+                            isLoggedIn
                                 ? `/profile/${localStorage.getItem("userid")}`
                                 : "/loginregister/login"
                         }
                     >
-                        {isLogged ? "Profile" : "Login"}
+                        {isLoggedIn ? "Profile" : "Login"}
                     </Link>
                 </LoginLi>
             </Ul>
