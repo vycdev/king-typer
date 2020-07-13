@@ -21,7 +21,7 @@ router.get("/verify/:userid/:key", async (ctx, next) => {
     await updateUserRole(userid, "member");
 
     ctx.status = 200;
-    ctx.redirect(`${process.env.CORS_ORIGIN}/#/profiles/${userid}`);
+    ctx.redirect(`${process.env.CORS_ORIGIN}/#/profile/${userid}`);
 
     await next();
 });
