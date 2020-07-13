@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
 import { apiUrl } from "../../utils/constants";
 
@@ -74,10 +75,11 @@ export const ProfilePage = () => {
     const [verificationIsSent, setVerificationIsSent] = useState(false);
     const [isThisTheLoggedUser, setIsThisTheLoggedUser] = useState(false);
     const [urlUserId, setUrlUserId] = useState("0");
-    const [toBeUsedId, setToBeUsedId] = useState("0");
     const [userExists, setUserExists] = useState(false);
 
     const submitMessageRef = useRef(null);
+
+    const locatione = useLocation();
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -86,8 +88,6 @@ export const ProfilePage = () => {
         updateIsThisTheLoggedUser();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateUrlUserId();
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        updateToBeUsedId();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateCountryList();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -108,14 +108,19 @@ export const ProfilePage = () => {
         updateElementListOfGames();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateElementListOfPBS();
-    }, [userData?.country, userData?.exp, userGames?.length, userPbs?.length]);
-
-    const updateToBeUsedId = async () => {
-        setToBeUsedId((isThisTheLoggedUser ? userId : urlUserId).toString());
-    };
+    }, [
+        locatione.pathname,
+        userData?.country,
+        userGames?.length,
+        urlUserId,
+        isThisTheLoggedUser
+    ]);
 
     const updateIsThisTheLoggedUser = async () => {
-        setIsThisTheLoggedUser(localStorage.getItem("userid") === urlUserId);
+        setIsThisTheLoggedUser(
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            localStorage.getItem("userid") === getUrlUserId()
+        );
     };
 
     const updateUrlUserId = async () => {
@@ -137,7 +142,13 @@ export const ProfilePage = () => {
     const updateUserData = async () => {
         setUserData(
             // eslint-disable-next-line @typescript-eslint/no-use-before-define
-            await getUserData(toBeUsedId)
+            await getUserData(
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                localStorage.getItem("userid") === getUrlUserId()
+                    ? userId
+                    : // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                      getUrlUserId()
+            )
         );
     };
 
@@ -158,7 +169,13 @@ export const ProfilePage = () => {
     const updateUserGames = async () => {
         setUserGames(
             // eslint-disable-next-line @typescript-eslint/no-use-before-define
-            await getUserGames(toBeUsedId)
+            await getUserGames(
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                localStorage.getItem("userid") === getUrlUserId()
+                    ? userId
+                    : // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                      getUrlUserId()
+            )
         );
     };
 
@@ -174,19 +191,33 @@ export const ProfilePage = () => {
 
     const updateBestScoreUserPbs = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const userPBS = await getUserPBS(toBeUsedId);
+        const userPBS = await getUserPBS(
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            localStorage.getItem("userid") === getUrlUserId()
+                ? userId
+                : // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                  getUrlUserId()
+        );
 
         setUserPbs(userPBS);
-        setBestScore(userPBS[userPBS.length - 1]?.wpm);
+        setBestScore(userPBS.message ? 0 : userPBS[userPBS.length - 1]?.wpm);
     };
 
     const updateGeneralStats = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const generalStats = await getUserGameStats(toBeUsedId);
+        const generalStats = await getUserGameStats(
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            localStorage.getItem("userid") === getUrlUserId()
+                ? userId
+                : // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                  getUrlUserId()
+        );
 
         setGameGeneralStats({
-            averageAccuracy: generalStats?.averageAccuracy,
-            averageWpm: generalStats?.averageWPM
+            averageAccuracy: generalStats.message
+                ? 0
+                : generalStats?.averageAccuracy,
+            averageWpm: generalStats.message ? 0 : generalStats?.averageWPM
         });
     };
 
@@ -254,7 +285,6 @@ export const ProfilePage = () => {
             }
         });
         setUserExists(userData.status != 404);
-        console.log(userExists);
 
         return await userData.json();
     };
@@ -278,7 +308,9 @@ export const ProfilePage = () => {
     };
 
     const getUrlUserId = () => {
-        return location.hash.split("/")[location.hash.split("/").length - 1];
+        return locatione.pathname.split("/")[
+            locatione.pathname.split("/").length - 1
+        ];
     };
 
     const setDescription = async () => {
@@ -376,8 +408,8 @@ export const ProfilePage = () => {
                             Best Score: {bestScore} Average WPM:{" "}
                             {gameGeneralStats.averageWpm} Average Accuracy:{" "}
                             {gameGeneralStats.averageAccuracy} Total Tests
-                            Taken: {userData?.totaltests} Tutorials Completed:{" "}
-                            {userData?.tutorials?.length}
+                            Taken: {userData?.totaltests || 0} Tutorials
+                            Completed: {userData?.tutorials?.length || 0}
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>
@@ -385,7 +417,9 @@ export const ProfilePage = () => {
                     <Id>ID: {getUrlUserId()}</Id>
                     <LogoutSwitchButton
                         hidden={
-                            userData?.role != "unverified" || verificationIsSent
+                            userData?.role != "unverified" ||
+                            verificationIsSent ||
+                            !isThisTheLoggedUser
                         }
                         onClick={async () => {
                             await fetch(
@@ -416,6 +450,7 @@ export const ProfilePage = () => {
                         ""
                     )}
                     <LogoutSwitchButton
+                        hidden={!isThisTheLoggedUser}
                         onClick={async () => {
                             if (!changeFlagEditor) {
                                 setchangeFlagEditor(true);
@@ -448,6 +483,7 @@ export const ProfilePage = () => {
                             : "Change Flag"}
                     </LogoutSwitchButton>
                     <LogoutSwitchButton
+                        hidden={!isThisTheLoggedUser}
                         onClick={() => {
                             switchTheme();
                         }}
@@ -455,6 +491,7 @@ export const ProfilePage = () => {
                         Switch Theme
                     </LogoutSwitchButton>
                     <LogoutSwitchButton
+                        hidden={!isThisTheLoggedUser}
                         onClick={async () => {
                             await fetch(`${apiUrl}/auth/logout`, {
                                 method: "GET",
@@ -470,7 +507,7 @@ export const ProfilePage = () => {
                     </LogoutSwitchButton>
                 </LogoutSwitchThemeWrapper>
                 <Description>
-                    {editDescription ? (
+                    {editDescription && isThisTheLoggedUser ? (
                         <>
                             <textarea
                                 rows={6}
@@ -514,7 +551,9 @@ export const ProfilePage = () => {
                             {userData?.description === null
                                 ? "There seems to be no description set."
                                 : userData?.description}
-                            <ClickMe>Click me!</ClickMe>
+                            <ClickMe hidden={!isThisTheLoggedUser}>
+                                Click me!
+                            </ClickMe>
                         </div>
                     )}
                 </Description>
