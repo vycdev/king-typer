@@ -2,6 +2,7 @@ import request from "supertest";
 import { expect } from "chai";
 
 import { server } from "../../index";
+import knex from "../../../db/knex";
 
 const agent = request.agent(server);
 
@@ -113,6 +114,53 @@ describe("Users routes", async () => {
                 .expect("Content-Type", /json/)
                 .expect(200);
             expect(response.body[0].wpm).to.equal(60);
+        });
+    });
+
+    describe("Forgotten password", () => {
+        it("Can send an email", async () => {
+            const response = await agent
+                .post("/api/users/requestForgotPassword")
+                .send({ email: "UserUser@fake.com" })
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body.message).to.equal(
+                "Success, an email has been sent to your email address"
+            );
+        });
+
+        it("Can hit forgot password link", async () => {
+            const { key } = await knex("forgottenpasswords")
+                .where({ email: "UserUser@fake.com" })
+                .first();
+
+            const response = await agent
+                .get(`/api/users/forgotPassword/${key}`)
+                .send({ email: "UserUser@fake.com" })
+                .set("Accept", "application/text")
+                .expect("Content-Type", /text/)
+                .expect(302);
+
+            expect(response.text).to.equal("Redirecting to success url.");
+        });
+
+        it("Can reset the password", async () => {
+            const { key } = await knex("forgottenpasswords")
+                .where({ email: "UserUser@fake.com" })
+                .first();
+
+            const response = await agent
+                .post(`/api/users/resetPassword`)
+                .send({ key, oldPassword: "newPass", newPassword: "newPass" })
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body.message).to.equal(
+                "Successfully reset password"
+            );
         });
     });
 });
