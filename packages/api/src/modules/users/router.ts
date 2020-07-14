@@ -13,8 +13,16 @@ import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
 import { RegisterBody } from "./types/RegisterBody";
 import changePassword from "./actions/changePassword";
+import { requireAdmin } from "../auth/middleware/requireAdmin";
+import getAllUsers from "./actions/getAllUsers";
 
 const router = new Router({ prefix: "/users" });
+
+router.get("/", requireAdmin(), async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = await getAllUsers();
+    await next();
+});
 
 router.post(
     "/createUser",
