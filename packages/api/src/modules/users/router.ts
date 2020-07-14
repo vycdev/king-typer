@@ -15,12 +15,23 @@ import { RegisterBody } from "./types/RegisterBody";
 import changePassword from "./actions/changePassword";
 import { requireAdmin } from "../auth/middleware/requireAdmin";
 import getAllUsers from "./actions/getAllUsers";
+import deleteUser from "./actions/deleteUser";
 
 const router = new Router({ prefix: "/users" });
 
 router.get("/", requireAdmin(), async (ctx, next) => {
     ctx.status = 200;
     ctx.body = await getAllUsers();
+    await next();
+});
+
+router.delete("/deleteUser", requireAdmin(), async (ctx, next) => {
+    const { id } = ctx.request.body;
+    await deleteUser(id);
+    ctx.status = 200;
+    ctx.body = {
+        message: "User deleted"
+    };
     await next();
 });
 
