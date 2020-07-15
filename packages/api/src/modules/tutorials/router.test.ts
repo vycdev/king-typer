@@ -17,10 +17,10 @@ describe("Tutorials routes", async () => {
             password: "MaoGay"
         });
 
-        await addText("blah", "blah", 1, 1, false, true);
+        await addText("blah", "blah", 1, 1, false, true, { wpm: 100 });
         const response = await agent
             .post(`/api/tutorials/completeTutorial/`)
-            .send({ id: 3 })
+            .send({ id: 3, requirements: { wpm: 110 } })
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200);
@@ -30,15 +30,17 @@ describe("Tutorials routes", async () => {
         );
     });
 
-    it("Cannot complete a non-existent tutorial", async () => {
+    it("Cannot complete a tutorial without meeting requirements", async () => {
         const response = await agent
             .post(`/api/tutorials/completeTutorial/`)
-            .send({ id: 1 })
+            .send({ id: 3, requirements: { wpm: 90 } })
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(400);
 
-        expect(response.body.message).to.equal("That tutorial does not exist!");
+        expect(response.body.message).to.equal(
+            "You do not meet the requirements for this tutorial"
+        );
     });
 
     it("Gets tutorials completed for the user", async () => {

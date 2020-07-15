@@ -18,8 +18,35 @@ import {
     forgotPassword,
     resetPassword
 } from "./actions/forgotPassword";
+import { requireAdmin } from "../auth/middleware/requireAdmin";
+import getAllUsers from "./actions/getAllUsers";
+import deleteUser from "./actions/deleteUser";
+import editUser from "./actions/editUser";
 
 const router = new Router({ prefix: "/users" });
+
+router.get("/", requireAdmin(), async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = await getAllUsers();
+    await next();
+});
+
+router.delete("/deleteUser", requireAdmin(), async (ctx, next) => {
+    const { id } = ctx.request.body;
+    await deleteUser(id);
+    ctx.status = 200;
+    ctx.body = {
+        message: "User deleted"
+    };
+    await next();
+});
+
+// TODO: Add schema validation for this
+router.patch("/editUser", requireAdmin(), async (ctx, next) => {
+    const { property, id, newValue } = ctx.request.body;
+    await editUser(property, id, newValue);
+    await next();
+});
 
 router.post(
     "/createUser",

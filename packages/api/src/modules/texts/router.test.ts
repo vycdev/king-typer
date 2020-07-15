@@ -57,8 +57,8 @@ describe("Texts routes", async () => {
             .expect(200);
 
         expect(response.body).to.deep.equal([
-            { ...newText, id: 1 },
-            { ...newRandomText, id: 2 }
+            { ...newText, id: 1, requirements: null },
+            { ...newRandomText, id: 2, requirements: null }
         ]);
     });
 
@@ -70,8 +70,8 @@ describe("Texts routes", async () => {
             .expect(200);
 
         expect([
-            { ...newText, id: 1 },
-            { ...newRandomText, id: 2 }
+            { ...newText, id: 1, requirements: null },
+            { ...newRandomText, id: 2, requirements: null }
         ]).to.deep.include(response.body);
     });
 });

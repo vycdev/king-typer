@@ -7,7 +7,8 @@ export default async (
     difficulty: number,
     author: number,
     ordered = true,
-    tutorial = false
+    tutorial = false,
+    requirements
 ) => {
     await knex<Text>("texts").insert({
         title,
@@ -15,6 +16,7 @@ export default async (
         difficulty,
         author,
         ordered,
-        tutorial
+        tutorial,
+        requirements
     });
 };
