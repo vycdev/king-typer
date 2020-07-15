@@ -5,6 +5,7 @@ import getAllTexts from "./actions/getAllTexts";
 import getRandomText from "./actions/getRandomText";
 import { addTextBody } from "./schema/addTextBody";
 import { validateSchema } from "../schema/middleware/validateSchema";
+import deleteText from "./actions/deleteText";
 
 const router = new Router({ prefix: "/texts" });
 
@@ -23,6 +24,14 @@ router.post(
         await next();
     }
 );
+
+router.delete("/deleteText", requireAdmin(), async (ctx, next) => {
+    const { id } = ctx.request.body;
+    await deleteText(id);
+    ctx.status = 200;
+    ctx.body = { message: "Successfully deleted text" };
+    await next();
+});
 
 router.get("/getAllTexts", async (ctx, next) => {
     const texts = await getAllTexts();
