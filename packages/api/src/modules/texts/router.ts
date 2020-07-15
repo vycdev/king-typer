@@ -6,6 +6,7 @@ import getRandomText from "./actions/getRandomText";
 import { addTextBody } from "./schema/addTextBody";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import deleteText from "./actions/deleteText";
+import editText from "./actions/editText";
 
 const router = new Router({ prefix: "/texts" });
 
@@ -24,6 +25,13 @@ router.post(
         await next();
     }
 );
+
+// TODO: Add schema validation for this
+router.patch("/editUser", requireAdmin(), async (ctx, next) => {
+    const { property, id, newValue } = ctx.request.body;
+    await editText(property, id, newValue);
+    await next();
+});
 
 router.delete("/deleteText", requireAdmin(), async (ctx, next) => {
     const { id } = ctx.request.body;
