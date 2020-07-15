@@ -7,6 +7,7 @@ import { addTextBody } from "./schema/addTextBody";
 import { validateSchema } from "../schema/middleware/validateSchema";
 import deleteText from "./actions/deleteText";
 import editText from "./actions/editText";
+import { HttpError } from "../../common/error/classes/httpError";
 
 const router = new Router({ prefix: "/texts" });
 
@@ -16,8 +17,23 @@ router.post(
     validateSchema(addTextBody, "body"),
     async (ctx, next) => {
         const { title, text, difficulty, ordered, tutorial } = ctx.request.body;
+        const requirements = ctx.request.body.requirements;
+        if (tutorial && !requirements) {
+            throw new HttpError(
+                400,
+                "You need to have requirements for a tutorial!"
+            );
+        }
         const { user } = ctx.session!;
-        await addText(title, text, difficulty, user, ordered, tutorial);
+        await addText(
+            title,
+            text,
+            difficulty,
+            user,
+            ordered,
+            tutorial,
+            requirements
+        );
         ctx.status = 201;
         ctx.body = {
             message: "Successfully added text"
