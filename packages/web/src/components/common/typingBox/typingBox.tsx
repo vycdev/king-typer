@@ -15,7 +15,8 @@ import {
     InputBox,
     TryAgainButton,
     ActuallyTyped,
-    BlockOfFinishedText
+    BlockOfFinishedText,
+    TextInfo
 } from "./style";
 
 interface TextInfo {
@@ -52,6 +53,18 @@ export const TypingBox = (props: TypingBoxProps) => {
         tutorial: false
     });
     const [wasTypedWrong, setWasTypedWrong] = useState(false);
+    const [textUserData, setTextUserData] = useState({
+        achievements: [],
+        country: "",
+        description: "",
+        email: "",
+        exp: 0,
+        role: "",
+        id: 0,
+        name: "",
+        totaltests: 0,
+        tutorials: []
+    });
 
     const textBoxRef = useRef(null);
 
@@ -64,6 +77,9 @@ export const TypingBox = (props: TypingBoxProps) => {
 
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateBestScore();
+
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateTextUserData();
     }, [time >= 60]);
 
     const getUserBestScore = async (id: string) => {
@@ -79,6 +95,25 @@ export const TypingBox = (props: TypingBoxProps) => {
         ).json();
 
         return (await result.message) ? 0 : result[result.length - 1]?.wpm;
+    };
+
+    const updateTextUserData = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        const textUserDataResponse = await getUserData(textInfo.author);
+        setTextUserData(textUserDataResponse);
+    };
+
+    const getUserData = async (id: string) => {
+        if (id === "" || id === undefined) return {};
+        const userData = await fetch(`${apiUrl}/users/userData/${id}`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        return await userData.json();
     };
 
     const updateBestScore = async () => {
@@ -365,6 +400,11 @@ export const TypingBox = (props: TypingBoxProps) => {
                     ""
                 ) : (
                     <div>
+                        <TextInfo>
+                            Id: {textInfo.id}, {textInfo.title} added by user{" "}
+                            {textUserData.name}, Difficulty:{" "}
+                            {textInfo.difficulty}
+                        </TextInfo>
                         <ActuallyTyped>
                             {Math.floor(cpm / 5) ===
                                 Math.floor(

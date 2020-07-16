@@ -133,3 +133,7 @@ export const BlockOfFinishedText = styled.div`
         padding-right: 2px;
     }
 `;
+
+export const TextInfo = styled.div`
+    border-bottom: 1px solid ${theme.secondary};
+`;
