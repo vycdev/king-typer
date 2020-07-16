@@ -1,3 +1,5 @@
+type Requirement = "wpm" | "rawwpm" | "acc";
+
 export default interface Text {
     id: number;
     title: string;
@@ -6,4 +8,5 @@ export default interface Text {
     tutorial: boolean;
     difficulty: number;
     author: number;
+    requirements?: Record<Requirement, number>;
 }

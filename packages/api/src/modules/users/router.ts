@@ -12,8 +12,36 @@ import userGames from "./actions/userGames";
 import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
 import { RegisterBody } from "./types/RegisterBody";
+import changePassword from "./actions/changePassword";
+import { requireAdmin } from "../auth/middleware/requireAdmin";
+import getAllUsers from "./actions/getAllUsers";
+import deleteUser from "./actions/deleteUser";
+import editUser from "./actions/editUser";
 
 const router = new Router({ prefix: "/users" });
+
+router.get("/", requireAdmin(), async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = await getAllUsers();
+    await next();
+});
+
+router.delete("/deleteUser", requireAdmin(), async (ctx, next) => {
+    const { id } = ctx.request.body;
+    await deleteUser(id);
+    ctx.status = 200;
+    ctx.body = {
+        message: "User deleted"
+    };
+    await next();
+});
+
+// TODO: Add schema validation for this
+router.patch("/editUser", requireAdmin(), async (ctx, next) => {
+    const { property, id, newValue } = ctx.request.body;
+    await editUser(property, id, newValue);
+    await next();
+});
 
 router.post(
     "/createUser",
@@ -131,7 +159,9 @@ router.patch(
         await updateCountry("id", user, country);
 
         ctx.status = 201;
-        ctx.body = { message: "Successfully updated countrycode!" };
+        ctx.body = {
+            message: "Successfully updated countrycode!"
+        };
 
         await next();
     }
@@ -148,10 +178,29 @@ router.patch(
         await updateDescription("id", user, description);
 
         ctx.status = 200;
-        ctx.body = { message: "Successfully updated description!" };
+        ctx.body = {
+            message: "Successfully updated description!"
+        };
 
         await next();
     }
 );
+
+router.patch("/changePassword", requireAuthenticated(), async (ctx, next) => {
+    const { user } = ctx.session!;
+
+    const { oldPassword, newPassword } = ctx.request.body;
+
+    const response = await changePassword(user, oldPassword, newPassword);
+
+    if (response) {
+        throw new HttpError(400, response);
+    }
+
+    ctx.status = 200;
+    ctx.body = { message: "Successfully changed password" };
+
+    await next();
+});
 
 export default router.routes();

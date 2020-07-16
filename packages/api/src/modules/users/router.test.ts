@@ -38,10 +38,37 @@ describe("Users routes", async () => {
             .expect("Content-Type", /json/)
             .expect(400);
 
-        expect(response.body).to.deep.equal({
-            status: 400,
-            message: "That username seems to be already taken"
-        });
+        expect(response.body.message).to.equal(
+            "That username seems to be already taken"
+        );
+    });
+
+    it("Changes the password of a user", async () => {
+        const response = await agent
+            .patch("/api/users/changePassword")
+            .send({
+                oldPassword: "WhatShouldITypeHere88@",
+                newPassword: "WhatShouldITypeHere99@"
+            })
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200);
+
+        expect(response.body.message).to.equal("Successfully changed password");
+    });
+
+    it("Can't change if the password provided is wrong", async () => {
+        const response = await agent
+            .patch("/api/users/changePassword")
+            .send({
+                oldPassword: "WhatShouldITypeHere88@",
+                newPassword: "WhatShouldITypeHere44@"
+            })
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(400);
+
+        expect(response.body.message).to.equal("Password does not match");
     });
 
     describe("Game stats", async () => {

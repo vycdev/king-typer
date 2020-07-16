@@ -14,7 +14,9 @@ router.post("/addAchievement", requireAdmin(), async (ctx, next) => {
     await addAchievement({ name, description, difficulty, requirements });
 
     ctx.status = 201;
-    ctx.body = { message: "Successfully added achievement" };
+    ctx.body = {
+        message: "Successfully added achievement"
+    };
 
     await next();
 });
@@ -26,7 +28,9 @@ router.patch("/editAchievement", requireAdmin(), async (ctx, next) => {
         throw new HttpError(400, "No achievement with that ID exists");
     }
     ctx.status = 200;
-    ctx.body = { message: "Successfully edited achievement" };
+    ctx.body = {
+        message: "Successfully edited achievement"
+    };
     await next();
 });
 
@@ -34,7 +38,9 @@ router.delete("/deleteAchievement", requireAdmin(), async (ctx, next) => {
     const { id } = ctx.request.body;
     await deleteAchievement(id);
     ctx.status = 200;
-    ctx.body = { message: "Successfully deleted achievement" };
+    ctx.body = {
+        message: "Successfully deleted achievement"
+    };
     await next();
 });
 

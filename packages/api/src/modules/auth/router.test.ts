@@ -27,9 +27,9 @@ describe("Auth router", () => {
     it("Logs-out a user", async () => {
         const response = await agent
             .get(`/api/auth/logout`)
-            .set("Accept", "application/text")
+            .set("Accept", "application/json")
             .expect(200);
 
-        expect(response.text).to.equal("Successfully logged out");
+        expect(response.body.message).to.equal("Successfully logged out");
     });
 });

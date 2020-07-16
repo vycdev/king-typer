@@ -20,8 +20,8 @@ router.get("/verify/:userid/:key", async (ctx, next) => {
 
     await updateUserRole(userid, "member");
 
-    ctx.status = 200;
-    ctx.redirect(`${process.env.CORS_ORIGIN}/#/profile/${userid}`);
+    ctx.status = 302;
+    ctx.redirect(`${process.env.CORS_ORIGIN}/#/profiles/${userid}`);
 
     await next();
 });
@@ -45,7 +45,9 @@ router.get("/sendVerificationEmail/:userid", async (ctx, next) => {
     }
 
     ctx.status = 200;
-    ctx.body = { message: "Success!" };
+    ctx.body = {
+        message: "Success!"
+    };
 
     await next();
 });

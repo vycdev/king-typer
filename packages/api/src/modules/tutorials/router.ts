@@ -8,14 +8,19 @@ import getAllTutorials from "./actions/getAllTutorials";
 const router = new Router({ prefix: "/tutorials" });
 
 router.post("/completeTutorial", requireAuthenticated(), async (ctx, next) => {
-    const { id } = ctx.request.body;
+    const { id, requirements } = ctx.request.body;
     const { user } = ctx.session!;
-    const success = await completeTutorial(id, user);
+    const success = await completeTutorial(id, user, requirements);
     if (!success) {
-        throw new HttpError(400, "That tutorial does not exist!");
+        throw new HttpError(
+            400,
+            "You do not meet the requirements for this tutorial"
+        );
     }
     ctx.status = 200;
-    ctx.body = { message: "Successfully completed tutorial" };
+    ctx.body = {
+        message: "Successfully completed tutorial"
+    };
     await next();
 });
 
