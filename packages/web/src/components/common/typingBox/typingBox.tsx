@@ -5,6 +5,8 @@ import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
 import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
 
+import { apiUrl } from "../../../utils/constants";
+
 import {
     Wrapper,
     Container,
@@ -61,7 +63,52 @@ export const TypingBox = (props: TypingBoxProps) => {
         updateText();
 
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateBestScore();
     }, [time >= 60]);
+
+    const getUserBestScore = async (id: string) => {
+        if (id === "0") return [];
+        const result = await (
+            await fetch(`${apiUrl}/users/userpbs/${id}`, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        ).json();
+
+        return (await result.message) ? 0 : result[result.length - 1]?.wpm;
+    };
+
+    const updateBestScore = async () => {
+        setBestwpm(await getUserBestScore(localStorage.getItem("userid")));
+    };
+
+    const addGameToDb = async (
+        wpm: number,
+        rawwpm: number,
+        accuracy: number,
+        difficulty: number,
+        textid: number
+    ) => {
+        const newGame = await fetch(`${apiUrl}/games/newGame`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                wpm,
+                rawwpm,
+                accuracy,
+                difficulty,
+                textid
+            })
+        });
+
+        console.log(await newGame.json());
+    };
 
     const updateText = async (forceUpdate = false) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -126,6 +173,26 @@ export const TypingBox = (props: TypingBoxProps) => {
                 // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 accuracy: getAccuracy(typed)
             });
+
+            addGameToDb(
+                props.mode === "easy"
+                    ? cpm / 5
+                    : Math.floor(
+                          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                          (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
+                              5) *
+                              100
+                      ) / 100,
+                Math.floor(
+                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                    (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) / 5) *
+                        100
+                ) / 100,
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                getAccuracy(typed),
+                parseInt(textInfo.difficulty),
+                parseInt(textInfo.id)
+            );
 
             localStorage.setItem(
                 "previousScores",
@@ -376,8 +443,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                                 : true)
                         )
                             setWasTypedWrong(false);
-
-                        console.log(wasTypedWrong);
 
                         // typed array is an array of objects that contans info about every second of the test
                         const typedArray: Array<TypedArrayInterface> =
