@@ -69,8 +69,8 @@ export const FormWrapper = styled.div`
     position: relative;
     display: block;
     width: 60%;
-    height: 100%;
     color: ${theme.text.primary};
+    margin: auto 0;
 
     form {
         width: 80%;
@@ -81,8 +81,8 @@ export const FormWrapper = styled.div`
     select {
         width: 100%;
         padding: 12px 20px;
-        margin: auto;
-        margin-top: 40px;
+        margin: 20px auto;
+
         display: inline-block;
         border-radius: 2px;
         box-sizing: border-box;
@@ -142,6 +142,7 @@ export const StatusDivWrapper = styled.div`
     margin: 5px;
     max-width: 100%;
     position: relative;
+    margin-top: -10px;
 `;
 
 export const StatusDiv = styled.div`
@@ -150,5 +151,32 @@ export const StatusDiv = styled.div`
     position: absolute;
     font-family: "Verdana";
     font-size: 12px;
-    color: ${theme.status.negative};
+    color: ${(props: { status: "positive" | "negative" }) =>
+        props.status === "positive"
+            ? theme.status.positive
+            : theme.status.negative};
+`;
+
+export const ForgotPasswordLink = styled.div`
+    font-family: "Verdana";
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+    a {
+        text-decoration: none;
+        color: ${theme.text.secondary};
+        &:hover {
+            color: ${theme.secondary};
+        }
+    }
+`;
+
+export const LinkExpiredDiv = styled.div`
+    color: ${theme.text.primary};
+    font-size: 26px;
+    text-align: center;
+    font-family: "Verdana";
+    margin: auto;
 `;

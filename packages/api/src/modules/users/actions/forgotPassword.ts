@@ -64,7 +64,7 @@ export const forgotPassword = async (providedEmail: string) => {
 export const keyValid = async (key: string) => {
     const userWithKey = await knex("forgottenpasswords")
         .where({ key })
-        .andWhere("expiration", "<", Date.now())
+        .andWhere("expiration", ">", Date.now())
         .first();
 
     return !!userWithKey;

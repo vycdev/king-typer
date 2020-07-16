@@ -62,6 +62,7 @@ export const ChangePassword = props => {
 
             return false;
         } else {
+            statusDiv.current.innerHTML = "";
             return true;
         }
     };

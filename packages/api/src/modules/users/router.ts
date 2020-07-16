@@ -241,9 +241,9 @@ router.get("/forgotPassword/:key", async (ctx, next) => {
 });
 
 router.post("/resetPassword", async (ctx, next) => {
-    const { key, oldPassword, newPassword } = ctx.request.body;
+    const { key, password, confirmPassword } = ctx.request.body;
 
-    const response = await resetPassword(key, oldPassword, newPassword);
+    const response = await resetPassword(key, password, confirmPassword);
 
     if (response) {
         throw new HttpError(400, response);
