@@ -29,6 +29,7 @@ import {
 } from "./style";
 import { UserGame } from "./helpers/interfaces";
 import { GamesChart } from "./components/gamesChart";
+import { ChangePassword } from "./components/changePassword/changePassword";
 
 export const ProfilePage = () => {
     const [userId, setUserId] = useState("0");
@@ -76,6 +77,7 @@ export const ProfilePage = () => {
     const [isThisTheLoggedUser, setIsThisTheLoggedUser] = useState(false);
     const [urlUserId, setUrlUserId] = useState("0");
     const [userExists, setUserExists] = useState(false);
+    const [changePassword, setChangePassword] = useState(true);
 
     const submitMessageRef = useRef(null);
 
@@ -416,6 +418,7 @@ export const ProfilePage = () => {
     return (
         <Wrapper>
             <InsideWrapper>
+                <ChangePassword hidden={changePassword}></ChangePassword>
                 <ProfileName>
                     <FlagNameGroup>
                         <FlagImage src={countryFlagUrl}></FlagImage>
@@ -440,28 +443,7 @@ export const ProfilePage = () => {
                 </ProfileName>
                 <LogoutSwitchThemeWrapper>
                     <Id>ID: {getUrlUserId()}</Id>
-                    <LogoutSwitchButton
-                        hidden={
-                            userData?.role != "unverified" ||
-                            verificationIsSent ||
-                            !isThisTheLoggedUser
-                        }
-                        onClick={async () => {
-                            await fetch(
-                                `${apiUrl}/email/sendVerificationEmail/${userId}`,
-                                {
-                                    method: "GET",
-                                    credentials: "include",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    }
-                                }
-                            );
-                            setVerificationIsSent(true);
-                        }}
-                    >
-                        Resend Verification
-                    </LogoutSwitchButton>
+
                     {changeFlagEditor ? (
                         <Select
                             name="countryCode"
@@ -506,6 +488,36 @@ export const ProfilePage = () => {
                         {changeFlagEditor
                             ? `Submit ${countryValue}`
                             : "Change Flag"}
+                    </LogoutSwitchButton>
+                    <LogoutSwitchButton
+                        hidden={!isThisTheLoggedUser}
+                        onClick={async () => {
+                            setChangePassword(!changePassword);
+                        }}
+                    >
+                        Change Password
+                    </LogoutSwitchButton>
+                    <LogoutSwitchButton
+                        hidden={
+                            userData?.role != "unverified" ||
+                            verificationIsSent ||
+                            !isThisTheLoggedUser
+                        }
+                        onClick={async () => {
+                            await fetch(
+                                `${apiUrl}/email/sendVerificationEmail/${userId}`,
+                                {
+                                    method: "GET",
+                                    credentials: "include",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                }
+                            );
+                            setVerificationIsSent(true);
+                        }}
+                    >
+                        Resend Verification
                     </LogoutSwitchButton>
                     <LogoutSwitchButton
                         hidden={!isThisTheLoggedUser}
