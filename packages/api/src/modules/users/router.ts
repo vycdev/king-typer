@@ -13,6 +13,11 @@ import { registerBody } from "./schema/registerBody";
 import { UpdateCountry } from "./schema/updateCountry";
 import { RegisterBody } from "./types/RegisterBody";
 import changePassword from "./actions/changePassword";
+import {
+    keyValid,
+    forgotPassword,
+    resetPassword
+} from "./actions/forgotPassword";
 import { requireAdmin } from "../auth/middleware/requireAdmin";
 import getAllUsers from "./actions/getAllUsers";
 import deleteUser from "./actions/deleteUser";
@@ -199,6 +204,53 @@ router.patch("/changePassword", requireAuthenticated(), async (ctx, next) => {
 
     ctx.status = 200;
     ctx.body = { message: "Successfully changed password" };
+
+    await next();
+});
+
+router.post("/requestForgotPassword", async (ctx, next) => {
+    const { email } = ctx.request.body;
+
+    const emailExists = await forgotPassword(email);
+
+    if (!emailExists) {
+        throw new HttpError(400, "The provided email does not have an account");
+    }
+
+    ctx.status = 200;
+    ctx.body = {
+        message: "Success, an email has been sent to your email address"
+    };
+
+    await next();
+});
+
+router.get("/forgotPassword/:key", async (ctx, next) => {
+    const { key } = ctx.params;
+
+    if (keyValid(key)) {
+        ctx.status = 200;
+        ctx.redirect("success url");
+    } else {
+        ctx.status = 400;
+        ctx.redirect("failure url");
+    }
+    await next();
+});
+
+router.post("/resetPassword", async (ctx, next) => {
+    const { key, oldPassword, newPassword } = ctx.request.body;
+
+    const response = await resetPassword(key, oldPassword, newPassword);
+
+    if (response) {
+        throw new HttpError(400, response);
+    }
+
+    ctx.status = 200;
+    ctx.body = {
+        message: "Successfully reset password"
+    };
 
     await next();
 });
