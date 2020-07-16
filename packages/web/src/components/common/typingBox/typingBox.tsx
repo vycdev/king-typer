@@ -12,7 +12,8 @@ import {
     TextBox,
     InputBox,
     TryAgainButton,
-    ActuallyTyped
+    ActuallyTyped,
+    BlockOfFinishedText
 } from "./style";
 
 interface TextInfo {
@@ -152,6 +153,28 @@ export const TypingBox = (props: TypingBoxProps) => {
         });
         return WrongWords;
     };
+
+    const generateFinishedBlockOfText = () => {
+        const arrayOfText = typed.map(
+            (value: TypedArrayInterface, index: number) => {
+                return (
+                    <span
+                        key={index + value.state + value.word}
+                        style={{
+                            color:
+                                value.state === "correct"
+                                    ? props.colorCodes.correct
+                                    : props.colorCodes.wrong
+                        }}
+                    >
+                        {value.word}{" "}
+                    </span>
+                );
+            }
+        );
+
+        return <BlockOfFinishedText>{arrayOfText}</BlockOfFinishedText>;
+    };
     // This function returns the cpm at any given moment of the test
     const getCpm = (
         array: Array<TypedArrayInterface>,
@@ -205,6 +228,8 @@ export const TypingBox = (props: TypingBoxProps) => {
                         style={{
                             color:
                                 typedArray[index].state === "correct"
+                                    ? props.colorCodes.correct
+                                    : props.mode === "hard"
                                     ? props.colorCodes.correct
                                     : props.colorCodes.wrong
                         }}
@@ -283,11 +308,16 @@ export const TypingBox = (props: TypingBoxProps) => {
                                 : `You typed ${
                                       typed[typed.length - 1].uncorrectedwpm
                                   } WPM out of which
-                            ${cpm /
-                                5} WPM were correct and you had ${getAccuracy(
+                            ${cpm / 5} WPM were ${
+                                      props.mode === "easy"
+                                          ? "correct"
+                                          : "typed with 100% accuracy"
+                                  } and you had ${getAccuracy(
                                       typed
                                   )}% accuracy.`}
-                            {getWrongWords()}
+                            {props.mode === "easy"
+                                ? getWrongWords()
+                                : generateFinishedBlockOfText()}
                         </ActuallyTyped>
                     </div>
                 )}

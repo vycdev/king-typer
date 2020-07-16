@@ -125,3 +125,11 @@ export const ActuallyTyped = styled.div`
     max-height: 200px;
     overflow: auto;
 `;
+
+export const BlockOfFinishedText = styled.div`
+    margin-top: 20px;
+    display: block;
+    & div {
+        padding-right: 2px;
+    }
+`;
