@@ -20,7 +20,9 @@ export const ChangePassword = props => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isHidden, setIsHidden] = useState(props.hidden);
     const [propsHidden, setPropsHidden] = useState(props.hidden);
-    const [statusDivStatus, setStatusDivStatus] = useState("negative");
+    const [statusDivStatus, setStatusDivStatus] = useState<
+        "positive" | "negative"
+    >("negative");
 
     useEffect(() => {
         setIsHidden(propsHidden);
