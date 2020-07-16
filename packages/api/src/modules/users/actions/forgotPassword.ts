@@ -6,6 +6,7 @@ import nodemailer from "nodemailer";
 const genNewKey = () =>
     Array(16)
         .fill(0)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .map(_ =>
             Math.random()
                 .toString(36)
@@ -21,7 +22,7 @@ const sendForgotEmail = async (email: string, id: number, key: string) => {
             pass: process.env.GMAIL_PASS
         }
     });
-    const url = `${process.env.SERVER_URL}/api/users/forgotPassword/${id}/${key}`;
+    const url = `${process.env.SERVER_URL}/api/users/forgotPassword/${key}`;
     await transporter.sendMail({
         from: '"King typer" <kingtyper.noreply@gmail.com>', // sender address
         to: email, // list of receivers
@@ -35,7 +36,7 @@ const sendForgotEmail = async (email: string, id: number, key: string) => {
                 <a href="${url}">${url}</a>
                 <br/><br/>
                 <h3>Not expecting this email?</h3>
-                <p>If you received this email by mistake or weren't expecting it, please disregard this email.</p>` // html body
+                <p>If you received this email by mistake or weren't expecting it, please disregard this.</p>` // html body
     });
 };
 
@@ -65,6 +66,7 @@ export const keyValid = async (key: string) => {
         .where({ key })
         .andWhere("expiration", "<", Date.now())
         .first();
+
     return !!userWithKey;
 };
 
@@ -76,7 +78,7 @@ export const resetPassword = async (
     if (oldPassword !== newPassword) {
         return "The passwords provided do not match";
     }
-    if (!keyValid(key)) {
+    if (!(await keyValid(key))) {
         return "The key is no longer valid";
     }
     const { email } = await knex("forgottenpasswords")
