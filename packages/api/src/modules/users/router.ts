@@ -228,12 +228,14 @@ router.post("/requestForgotPassword", async (ctx, next) => {
 router.get("/forgotPassword/:key", async (ctx, next) => {
     const { key } = ctx.params;
 
-    if (keyValid(key)) {
+    if (await keyValid(key)) {
         ctx.status = 200;
-        ctx.redirect("success url");
+        ctx.redirect(
+            `${process.env.CORS_ORIGIN}/#/loginregister/resetPassword/${key}`
+        );
     } else {
         ctx.status = 400;
-        ctx.redirect("failure url");
+        ctx.redirect(`${process.env.CORS_ORIGIN}/#/loginregister/invalidKey`);
     }
     await next();
 });
