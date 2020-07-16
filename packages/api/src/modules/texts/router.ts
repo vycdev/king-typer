@@ -64,9 +64,10 @@ router.get("/getAllTexts", async (ctx, next) => {
     await next();
 });
 
-router.get("/getRandomText", async (ctx, next) => {
-    const { ordered = undefined } = ctx.params;
-    const text = await getRandomText(ordered);
+router.get("/getRandomText/:ordered", async (ctx, next) => {
+    const { ordered } = ctx.params;
+
+    const text = await getRandomText(ordered === "true");
     ctx.status = 200;
     ctx.body = text;
     await next();

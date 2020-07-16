@@ -2,8 +2,6 @@ import request from "supertest";
 
 import { expect } from "chai";
 
-import knex from "../../../db/knex";
-
 import { server } from "../../";
 
 import users from "../../../db/seeds/examples/users";

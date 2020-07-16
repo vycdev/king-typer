@@ -90,7 +90,7 @@ router.get("/userGameStats/:id", async (ctx, next) => {
 
     if (!games || games.length === 0) {
         ctx.status = 400;
-        return (ctx.body = "No user with that ID exists!");
+        return (ctx.body = { message: "No game stats." });
     }
 
     const averageWPM =
@@ -114,7 +114,7 @@ router.get("/userPBs/:id", async (ctx, next) => {
 
     if (!game) {
         ctx.status = 400;
-        return (ctx.body = "That user does not have any PBs!");
+        return (ctx.body = { message: "That user does not have any PBs!" });
     }
 
     ctx.status = 200;
@@ -127,6 +127,11 @@ router.get("/userData/:id", async (ctx, next) => {
     const { id } = ctx.params;
 
     const data = await getUserData("id", id);
+
+    if (!data) {
+        ctx.status = 404;
+        return (ctx.body = { message: "That users doesn't exist." });
+    }
 
     ctx.status = 200;
     ctx.body = data;
@@ -223,20 +228,22 @@ router.post("/requestForgotPassword", async (ctx, next) => {
 router.get("/forgotPassword/:key", async (ctx, next) => {
     const { key } = ctx.params;
 
-    if (keyValid(key)) {
+    if (await keyValid(key)) {
         ctx.status = 200;
-        ctx.redirect("success url");
+        ctx.redirect(
+            `${process.env.CORS_ORIGIN}/#/loginregister/resetPassword/${key}`
+        );
     } else {
         ctx.status = 400;
-        ctx.redirect("failure url");
+        ctx.redirect(`${process.env.CORS_ORIGIN}/#/loginregister/invalidKey`);
     }
     await next();
 });
 
 router.post("/resetPassword", async (ctx, next) => {
-    const { key, oldPassword, newPassword } = ctx.request.body;
+    const { key, password, confirmPassword } = ctx.request.body;
 
-    const response = await resetPassword(key, oldPassword, newPassword);
+    const response = await resetPassword(key, password, confirmPassword);
 
     if (response) {
         throw new HttpError(400, response);
