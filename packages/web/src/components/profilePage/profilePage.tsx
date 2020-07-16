@@ -169,7 +169,7 @@ export const ProfilePage = () => {
     };
 
     const updateLevel = () => {
-        setLevel(Math.sqrt(userData?.exp / 10));
+        setLevel(Math.floor(Math.sqrt(userData?.exp / 10) * 100) / 100);
     };
 
     const updateUserGames = async () => {
