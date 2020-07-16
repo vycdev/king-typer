@@ -13,9 +13,15 @@ router.post(
     requireAuthenticated(),
     validateSchema(newGameBody, "body"),
     async (ctx, next) => {
-        const { wpm, rawwpm, accuracy } = ctx.request.body;
+        const { wpm, rawwpm, accuracy, difficulty } = ctx.request.body;
         const { user } = ctx.session!;
-        const newGame = await createGame(user, wpm, rawwpm, accuracy);
+        const newGame = await createGame(
+            user,
+            wpm,
+            rawwpm,
+            accuracy,
+            difficulty
+        );
         await removeOldGame(user);
         await checkPB(newGame);
         ctx.status = 201;
