@@ -42,18 +42,18 @@ describe("Game routes", async () => {
     it("Deletes games past 10 games", async function() {
         this.timeout(5000);
 
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
-        await createGame(4, 0, 0, 0, 1);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
 
         await Promise.all([
             removeOldGame(4),
@@ -67,7 +67,7 @@ describe("Game routes", async () => {
     });
 
     it("Checks for achievements", async () => {
-        await createGame(4, 32, 40, 80, 5);
+        await createGame(4, 32, 40, 80, 5, 11);
         await removeOldGame(4);
 
         const achievements = await agent.get("/api/users/achievements/4");
