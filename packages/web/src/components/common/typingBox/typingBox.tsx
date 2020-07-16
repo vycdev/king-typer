@@ -423,7 +423,10 @@ export const TypingBox = (props: TypingBoxProps) => {
                                           : "typed with 100% accuracy"
                                   } and you had ${getAccuracy(
                                       typed
-                                  )}% accuracy.`}
+                                  )}% accuracy. Exp gained:
+                                  ${Math.floor(
+                                      ((cpm / 5) * textInfo.difficulty) / 10
+                                  )}`}
                             {props.mode === "easy"
                                 ? getWrongWords()
                                 : generateFinishedBlockOfText()}
