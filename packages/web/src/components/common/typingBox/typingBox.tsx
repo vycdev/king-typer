@@ -48,13 +48,12 @@ export const TypingBox = (props: TypingBoxProps) => {
         text: "",
         tutorial: false
     });
+    const [wasTypedWrong, setWasTypedWrong] = useState(false);
 
     const textBoxRef = useRef(null);
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-
         textBoxRef.current.scrollTop = 0;
         setBestwpm(JSON.parse(localStorage.getItem("bestwpm")));
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -219,6 +218,8 @@ export const TypingBox = (props: TypingBoxProps) => {
                         key={value + index}
                     >
                         {text[index].split("").map((v: string, i: number) => {
+                            if (i <= input.length - 1 && v != input[i])
+                                setWasTypedWrong(true);
                             return (
                                 <div
                                     key={v + i + v}
@@ -333,6 +334,21 @@ export const TypingBox = (props: TypingBoxProps) => {
                         const CPM = typed.length
                             ? getCpm(typed, timeLeft)
                             : cpm;
+
+                        if (
+                            e.target.value[e.target.value.length - 1] === " " &&
+                            time >= 0 &&
+                            typed.length < text.length &&
+                            e.target.value != " " &&
+                            (props.mode === "hard"
+                                ? e.target.value.replace(/ +/g, "") ===
+                                  text[typed.length]
+                                : true)
+                        )
+                            setWasTypedWrong(false);
+
+                        console.log(wasTypedWrong);
+
                         // typed array is an array of objects that contans info about every second of the test
                         const typedArray: Array<TypedArrayInterface> =
                             e.target.value[e.target.value.length - 1] === " " &&
@@ -351,10 +367,14 @@ export const TypingBox = (props: TypingBoxProps) => {
                                               ""
                                           ),
                                           state:
-                                              e.target.value.replace(
-                                                  / +/g,
-                                                  ""
-                                              ) === text[typed.length]
+                                              props.mode === "hard"
+                                                  ? wasTypedWrong
+                                                      ? "wrong"
+                                                      : "correct"
+                                                  : e.target.value.replace(
+                                                        / +/g,
+                                                        ""
+                                                    ) === text[typed.length]
                                                   ? "correct"
                                                   : "wrong",
                                           time: performance.now() / 1000,
@@ -374,7 +394,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                                       }
                                   ]
                                 : typed;
-
                         //   setting the input
                         setInput(input);
                         // setting the typedArray state
