@@ -19,10 +19,12 @@ import {
     TextInfo
 } from "./style";
 
-interface TextInfo {
+interface TextInfoInterface {
     id: number;
     title: string;
     text: string;
+    difficulty: number;
+    author: number;
     ordered?: boolean;
     tutorial: boolean;
 }
@@ -46,11 +48,13 @@ export const TypingBox = (props: TypingBoxProps) => {
     const [bestwpm, setBestwpm] = useState(
         JSON.parse(localStorage.getItem("bestwpm"))
     );
-    const [textInfo, setTextInfo] = useState<TextInfo>({
+    const [textInfo, setTextInfo] = useState<TextInfoInterface>({
         id: 0,
         title: "",
         text: "",
-        tutorial: false
+        tutorial: false,
+        difficulty: 1,
+        author: 0
     });
     const [wasTypedWrong, setWasTypedWrong] = useState(false);
     const [textUserData, setTextUserData] = useState({
@@ -127,7 +131,7 @@ export const TypingBox = (props: TypingBoxProps) => {
         difficulty: number,
         textid: number
     ) => {
-        const newGame = await fetch(`${apiUrl}/games/newGame`, {
+        await fetch(`${apiUrl}/games/newGame`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -141,8 +145,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                 textid
             })
         });
-
-        console.log(await newGame.json());
     };
 
     const updateText = async (forceUpdate = false) => {
