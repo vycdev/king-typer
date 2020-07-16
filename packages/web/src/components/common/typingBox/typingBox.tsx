@@ -103,7 +103,9 @@ export const TypingBox = (props: TypingBoxProps) => {
 
     const updateTextUserData = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const textUserDataResponse = await getUserData(textInfo.author);
+        const textUserDataResponse = await getUserData(
+            textInfo.author.toString()
+        );
         setTextUserData(textUserDataResponse);
     };
 
@@ -227,8 +229,8 @@ export const TypingBox = (props: TypingBoxProps) => {
                 ) / 100,
                 // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 getAccuracy(typed),
-                parseInt(textInfo.difficulty),
-                parseInt(textInfo.id)
+                textInfo.difficulty,
+                textInfo.id
             );
 
             localStorage.setItem(
