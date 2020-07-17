@@ -4,6 +4,7 @@ import { randomizeEasyText, getDataBaseTextInfo } from "./helpers/gettext";
 import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
 import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
+import { ProgressBar } from "./components/progressbar/progressBar";
 
 import { apiUrl } from "../../../utils/constants";
 
@@ -383,21 +384,37 @@ export const TypingBox = (props: TypingBoxProps) => {
     return (
         // wrapper component of the page
         <Wrapper>
+            {/* component that displays the current statistics for the test, including time, wpm and cpm, also the try again button that is shown at the end of the test*/}
+            <Displayer>
+                Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} | CPM:{" "}
+                {cpm} | Time: {time}
+                {"  "}
+                <TryAgainButton
+                    onClick={() => {
+                        resetState();
+                    }}
+                >
+                    Try again
+                </TryAgainButton>
+            </Displayer>
+            <ProgressBar
+                userid={
+                    !props.multiplayer
+                        ? localStorage.getItem("userid") === "undefined"
+                            ? 0
+                            : parseInt(localStorage.getItem("userid"))
+                        : 3
+                }
+                percentage={
+                    props.mode === "easy"
+                        ? ((60 - time) / 60) * 100
+                        : (typed.length / text.length) * 100
+                }
+                place={1}
+                multiplayer={props.multiplayer}
+            ></ProgressBar>
             {/* container of typing box */}
             <Container>
-                {/* component that displays the current statistics for the test, including time, wpm and cpm, also the try again button that is shown at the end of the test*/}
-                <Displayer>
-                    Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} |
-                    CPM: {cpm} | Time: {time}
-                    {"  "}
-                    <TryAgainButton
-                        onClick={() => {
-                            resetState();
-                        }}
-                    >
-                        Try again
-                    </TryAgainButton>
-                </Displayer>
                 {/* Chart with the stats for the test that is rendered only after the time reached 0 + other informative components that do the same*/}
                 {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
                 {time > 0 ? (
