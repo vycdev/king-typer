@@ -1,1 +1,1 @@
-export type Category = "ping";
+export type Category = "ping" | "joinResponse";
