@@ -1,5 +1,6 @@
 import Koa from "koa";
 import Router from "./modules/Router";
+import WebSocket from "ws";
 
 import logger from "koa-logger";
 import json from "koa-json";
@@ -10,6 +11,7 @@ import errorHandler from "./common/error/middleware/errorHandler";
 import apiRouter from "./modules/apiRouter";
 import { allowCors } from "./modules/cors/middleware/allowCors";
 import { useSession } from "./modules/session/helpers/useSession";
+import { setWsHeartbeat } from "ws-heartbeat/server";
 
 const app = new Koa();
 const router = new Router();
@@ -33,4 +35,15 @@ app.use(router.routes()).use(router.allowedMethods());
 export const server = app.listen(port, () => {
     console.info(`Running in ${process.env.NODE_ENV} mode;`);
     console.info(`Koa app started and listening on port ${port}! 🚀`);
+});
+
+const wss = new WebSocket.Server({ server });
+wss.on("connection", (ws: WebSocket) => {
+    ws.on("message", _ => websocketRoutes(wss, ws, _));
+    ws.send(sendSocket("greeting", `Welcome!`));
+});
+setWsHeartbeat(wss, (ws: WebSocket, data: unknown) => {
+    if (data === '{"category":"ping"}') {
+        ws.send('{"category":"pong"}');
+    }
 });
