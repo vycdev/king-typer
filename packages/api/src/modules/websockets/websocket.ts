@@ -6,6 +6,7 @@ import HandlerResponse from "./types/HandlerResponse";
 
 const wsRoutes: Record<
     string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (data: any, ws: WebSocket) => HandlerResponse
 > = {
     joinQueue,
