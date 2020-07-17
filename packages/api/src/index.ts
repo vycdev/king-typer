@@ -40,7 +40,7 @@ export const server = app.listen(port, () => {
 
 const wss = new WebSocket.Server({ server });
 wss.on("connection", (ws: WebSocket) => {
-    ws.on("message", _ => websocket(wss, ws, _));
+    ws.on("message", _ => websocket(wss, ws, _.toString()));
 });
 setWsHeartbeat(wss, (ws: WebSocket, data: unknown) => {
     if (data === '{"category":"ping"}') {

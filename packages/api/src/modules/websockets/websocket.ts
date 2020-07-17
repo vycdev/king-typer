@@ -6,7 +6,7 @@ import HandlerResponse from "./types/HandlerResponse";
 
 const wsRoutes: Record<
     string,
-    (data: any, ws: WebSocket, wss: WebSocket.Server) => HandlerResponse
+    (data: any, ws: WebSocket) => HandlerResponse
 > = {
     joinQueue,
     leaveQueue
@@ -15,7 +15,7 @@ const wsRoutes: Record<
 export default (wss: WebSocket.Server, ws: WebSocket, message: string) => {
     const { category, data } = categoryParser(message.toString());
     if (Object.keys(wsRoutes).includes(category)) {
-        const response = wsRoutes[category](data, ws, wss);
+        const response = wsRoutes[category](data, ws);
         const { category: respCategory } = response;
         response.data.map(l => {
             l.client.send(
