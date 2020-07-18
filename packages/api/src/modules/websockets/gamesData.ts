@@ -3,7 +3,7 @@ import WebSocket from "ws";
 interface Queueling {
     id: number;
     ws: WebSocket | null;
-    changeWSKey: number;
+    key: number;
 }
 
 export type GamePlayer = Queueling & {

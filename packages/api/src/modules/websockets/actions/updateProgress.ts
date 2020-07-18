@@ -4,11 +4,17 @@ import gameFinished from "./gameFinished";
 import HandlerResponse from "../types/HandlerResponse";
 
 export default async (
-    data: { key: number; progress: number },
+    data: {
+        key: number;
+        progress: number;
+        wpm: number;
+        rawwpm: number;
+        acc: number;
+    },
     ws: WebSocket
 ): Promise<HandlerResponse> => {
     const gameWithKey = Object.values(games).find(l =>
-        l.players.some(j => j.changeWSKey === data.key)
+        l.players.some(j => j.key === data.key)
     );
     if (!gameWithKey) {
         return {
@@ -23,8 +29,8 @@ export default async (
             ]
         };
     }
-    gameWithKey.players.find(l => l.changeWSKey === data.key)!.progress =
-        data.progress;
+    const player = gameWithKey.players.find(l => l.key === data.key);
+    Object.assign(player, data);
     await gameFinished(gameWithKey);
     return {
         category: "updateResponse",
@@ -33,10 +39,11 @@ export default async (
                 client: ws,
                 data: {
                     success: true,
-                    data: gameWithKey.players.map(l => ({
-                        progress: l.progress,
-                        resigned: l.resigned
-                    }))
+                    data: gameWithKey.players.map(l => {
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                        const { key, ws, gameKey, ...data } = l;
+                        return data;
+                    })
                 }
             }
         ]

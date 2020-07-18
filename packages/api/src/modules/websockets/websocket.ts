@@ -17,7 +17,13 @@ interface WsRoutesData {
     joinQueue: number;
     leaveQueue: number;
     switchQueueLocation: number;
-    updateProgress: { key: number; progress: number };
+    updateProgress: {
+        key: number;
+        progress: number;
+        wpm: number;
+        rawwpm: number;
+        acc: number;
+    };
 }
 
 const wsRoutes: WsRoutes<WsRoutesData> = {

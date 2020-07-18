@@ -6,5 +6,7 @@ export default async (game: Game) => {
     if (game.players.every(l => l.progress >= 100)) {
         await createGames(game.players);
         await Promise.all(game.players.map(l => removeOldGame(l.id)));
+        return true;
     }
+    return false;
 };
