@@ -1,4 +1,4 @@
-import { Category } from "./Category";
+import { ResponseCategory } from "./Category";
 import WebSocket from "ws";
 
 interface HandlerUserData {
@@ -7,6 +7,6 @@ interface HandlerUserData {
 }
 
 export default interface HandlerResponse {
-    category: Category;
+    category: ResponseCategory;
     data: HandlerUserData[];
 }

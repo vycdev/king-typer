@@ -5,12 +5,13 @@ import leaveQueue from "./actions/leaveQueue";
 import HandlerResponse from "./types/HandlerResponse";
 import switchQueueLocation from "./actions/switchQueueLocation";
 import updateProgress from "./actions/updateProgress";
+import { IncomingCategory } from "./types/Category";
 
-const wsRoutes: Record<
-    string,
+const wsRoutes: Partial<Record<
+    IncomingCategory,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (data: any, ws: WebSocket) => HandlerResponse | Promise<HandlerResponse>
-> = {
+>> = {
     joinQueue,
     leaveQueue,
     switchQueueLocation,
@@ -26,7 +27,7 @@ export default async (
     if (Object.keys(wsRoutes).includes(category)) {
         const response = await wsRoutes[category](data, ws);
         const { category: respCategory } = response;
-        response.data.map(l => {
+        response.data.map((l: HandlerResponse["data"][0]) => {
             l.client.send(
                 JSON.stringify({ category: respCategory, data: l.data })
             );
