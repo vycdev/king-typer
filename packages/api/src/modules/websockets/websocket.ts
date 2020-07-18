@@ -5,13 +5,22 @@ import leaveQueue from "./actions/leaveQueue";
 import HandlerResponse from "./types/HandlerResponse";
 import switchQueueLocation from "./actions/switchQueueLocation";
 import updateProgress from "./actions/updateProgress";
-import { IncomingCategory } from "./types/Category";
 
-const wsRoutes: Partial<Record<
-    IncomingCategory,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (data: any, ws: WebSocket) => HandlerResponse | Promise<HandlerResponse>
->> = {
+type WsRoutes<T> = {
+    [K in keyof T]?: (
+        data: T[K],
+        ws: WebSocket
+    ) => HandlerResponse | Promise<HandlerResponse>;
+};
+
+interface WsRoutesData {
+    joinQueue: number;
+    leaveQueue: number;
+    switchQueueLocation: number;
+    updateProgress: { key: number; progress: number };
+}
+
+const wsRoutes: WsRoutes<WsRoutesData> = {
     joinQueue,
     leaveQueue,
     switchQueueLocation,
