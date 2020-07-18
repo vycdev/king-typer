@@ -6,6 +6,20 @@ interface Queueling {
     changeWSKey: number;
 }
 
-export const games = {};
+export type GamePlayer = Queueling & {
+    progress: number;
+    resigned: boolean;
+    gameKey: number;
+    wpm: number;
+    rawwpm: number;
+    acc: number;
+};
+
+export interface Game {
+    players: GamePlayer[];
+    textid: number;
+}
+
+export const games: Record<number, Game> = {};
 
 export const queue: Queueling[] = [];

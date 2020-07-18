@@ -1,1 +1,6 @@
-export type Category = "ping" | "joinResponse";
+export type Category =
+    | "ping"
+    | "joinResponse"
+    | "leaveResponse"
+    | "switchQueueResponse"
+    | "updateResponse";

@@ -5,7 +5,7 @@ import WebSocket from "ws";
 export default (id: number, ws: WebSocket): HandlerResponse => {
     queue.splice(queue.findIndex(l => l.id === id));
     return {
-        category: "joinResponse",
+        category: "leaveResponse",
         data: [{ client: ws, data: { success: true } }]
     };
 };
