@@ -21,14 +21,12 @@ export const StartTypingPage = () => {
                 <TypingBox
                     mode="easy"
                     colorCodes={theme.boxColorCodes}
-                    multiplayer={false}
                 ></TypingBox>
             </Route>
             <Route exact path="/type/practice/normal">
                 <TypingBox
                     mode="hard"
                     colorCodes={theme.boxColorCodes}
-                    multiplayer={false}
                 ></TypingBox>
             </Route>
             <Route exact path="/type/multiplayer/easy">

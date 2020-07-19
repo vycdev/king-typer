@@ -169,7 +169,7 @@ export const ProfilePage = () => {
     };
 
     const updateLevel = () => {
-        setLevel(Math.floor(Math.sqrt(userData?.exp / 10) * 100) / 100);
+        setLevel(Math.sqrt(userData?.exp / 10));
     };
 
     const updateUserGames = async () => {
@@ -379,9 +379,7 @@ export const ProfilePage = () => {
                         1}/${date.getFullYear()}`,
                     wpm: value.wpm,
                     uncorrectedwpm: value.rawwpm,
-                    accuracy: value.accuracy,
-                    difficulty: value.difficulty,
-                    textid: value.textid
+                    accuracy: value.accuracy
                 };
             });
 
@@ -398,15 +396,15 @@ export const ProfilePage = () => {
             .map((value, index) => {
                 return (
                     <ListItem key={value.wpm + index.toString()}>
-                        WPM: {Math.floor(value.wpm * 100) / 100}
+                        WPM: {value.wpm}
                         {"   "}
-                        CPM: {Math.floor(value.wpm * 5 * 100) / 100}
+                        CPM: {value.wpm * 5}
                         {"   "}
-                        Accuracy: {Math.floor(value.accuracy * 100) / 100}
+                        Raw WPM: {value.uncorrectedwpm}
                         {"   "}
-                        Difficulty: {value.difficulty}
+                        Raw CPM: {Math.floor(value.uncorrectedwpm * 500) / 100}
                         {"   "}
-                        Text Id: {value.textid}
+                        Accuracy: {value.accuracy}
                         {"   "}
                         Date: {value.date}
                     </ListItem>
@@ -436,15 +434,10 @@ export const ProfilePage = () => {
 
                         <Statistics>
                             Best Score: {bestScore} Average WPM:{" "}
-                            {Math.floor(gameGeneralStats.averageWpm * 100) /
-                                100}{" "}
-                            Average Accuracy:{" "}
-                            {Math.floor(
-                                gameGeneralStats.averageAccuracy * 100
-                            ) / 100}{" "}
-                            Total Tests Taken: {userData?.totaltests || 0}{" "}
-                            Tutorials Completed:{" "}
-                            {userData?.tutorials?.length || 0}
+                            {gameGeneralStats.averageWpm} Average Accuracy:{" "}
+                            {gameGeneralStats.averageAccuracy} Total Tests
+                            Taken: {userData?.totaltests || 0} Tutorials
+                            Completed: {userData?.tutorials?.length || 0}
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>
