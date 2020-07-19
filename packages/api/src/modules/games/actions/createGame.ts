@@ -41,7 +41,7 @@ export const createGame = async (
     await knex("users")
         .where({ id: userid })
         .update({
-            totaltests: user.totaltests + 1,
+            totaltests: user.totaltests ? user.totaltests + 1 : 1,
             exp: Math.floor(user.exp + (wpm * difficulty) / 10)
         });
 

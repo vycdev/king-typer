@@ -74,13 +74,21 @@ describe("Users routes", async () => {
 
     describe("Game stats", async () => {
         before(async () => {
-            await agent
-                .post("/api/games/newGame")
-                .send({ wpm: 60, rawwpm: 80, accuracy: 75 });
+            await agent.post("/api/games/newGame").send({
+                wpm: 60,
+                rawwpm: 80,
+                accuracy: 75,
+                difficulty: 3,
+                textid: 1
+            });
 
-            await agent
-                .post("/api/games/newGame")
-                .send({ wpm: 90, rawwpm: 100, accuracy: 90 });
+            await agent.post("/api/games/newGame").send({
+                wpm: 90,
+                rawwpm: 100,
+                accuracy: 90,
+                difficulty: 3,
+                textid: 1
+            });
         });
 
         it("Gets the games of a user", async () => {

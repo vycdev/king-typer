@@ -10,14 +10,6 @@ import { removeOldGame } from "./actions/removeOldGame";
 
 const agent = request.agent(server);
 
-const newGame = {
-    userid: 1,
-    wpm: 90,
-    rawwpm: 100,
-    accuracy: 90,
-    seconds: 60
-};
-
 describe("Game routes", async () => {
     // We don't need to rerun migrations or seeds because we did in the auth route
 
@@ -27,8 +19,16 @@ describe("Game routes", async () => {
 
         await agent.post(`/api/auth/login`).send({ email, password });
 
+        const newGame = {
+            wpm: 90,
+            rawwpm: 100,
+            accuracy: 90,
+            textid: 0,
+            difficulty: 2
+        };
+
         const response = await agent
-            .post(`/api/games/newGame/`)
+            .post(`/api/games/newGame`)
             .send(newGame)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
