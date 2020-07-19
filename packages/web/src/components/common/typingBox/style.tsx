@@ -18,8 +18,6 @@ export const Container = styled.div`
     position: relative;
     text-align: center;
 
-    border-top: 1px dashed ${theme.background.secondary};
-
     margin: auto;
 
     @import url("https://fonts.googleapis.com/css?family=Hind&display=swap");
@@ -32,8 +30,7 @@ export const Displayer = styled.div`
     text-align: center;
     width: 100%;
     height: 30px;
-
-    font-family: "Verdana";
+    border-bottom: 1px solid ${theme.background.secondary};
 `;
 
 export const TextBox = styled.div`
@@ -127,35 +124,4 @@ export const ActuallyTyped = styled.div`
     height: 200px;
     max-height: 200px;
     overflow: auto;
-    /* width */
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    /* Track */
-    &::-webkit-scrollbar-track {
-        background: ${theme.primary};
-    }
-
-    /* Handle */
-    &::-webkit-scrollbar-thumb {
-        background: ${theme.background.secondary};
-    }
-
-    /* Handle on hover */
-    &::-webkit-scrollbar-thumb:hover {
-        background: ${theme.tertiary};
-    }
-`;
-
-export const BlockOfFinishedText = styled.div`
-    margin-top: 20px;
-    display: block;
-    & div {
-        padding-right: 2px;
-    }
-`;
-
-export const TextInfo = styled.div`
-    border-bottom: 1px solid ${theme.background.secondary};
 `;
