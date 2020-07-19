@@ -9,9 +9,7 @@ export const createGame = async (
     userid: number,
     wpm: number,
     rawwpm: number,
-    accuracy: number,
-    difficulty: number,
-    textid: number
+    accuracy: number
 ): Promise<Game> => {
     const newGame = {
         gameid: (await highestGameId()) + 1,
@@ -19,8 +17,6 @@ export const createGame = async (
         wpm,
         rawwpm,
         accuracy,
-        difficulty,
-        textid,
         date: Date.now()
     };
     const possibleAchievements: Achievement[] = await findAchievementsByRequirement(
@@ -33,18 +29,6 @@ export const createGame = async (
     const achievements = possibleAchievements.filter(
         async l => !(await userHasAchievement(userid, l.id))
     );
-
-    const user = await knex("users")
-        .where({ id: userid })
-        .first();
-
-    await knex("users")
-        .where({ id: userid })
-        .update({
-            totaltests: user.totaltests + 1,
-            exp: Math.floor(user.exp + (wpm * difficulty) / 10)
-        });
-
     achievements.map(async l => {
         await knex("users")
             .update({
