@@ -127,17 +127,17 @@ describe("Users routes", async () => {
 
     describe("Forgotten password", () => {
         it("Can send an email", async () => {
-            // const response = await agent
-            //     .post("/api/users/requestForgotPassword")
-            //     .send({ email: "UserUser@fake.com" })
-            //     .set("Accept", "application/json")
-            //     .expect("Content-Type", /json/)
-            //     .expect(200);
-            // expect(response.body.message).to.equal(
-            //     "Success, an email has been sent to your email address"
-            // );
+            const response = await agent
+                .post("/api/users/requestForgotPassword")
+                .send({ email: "UserUser@fake.com" })
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+            expect(response.body.message).to.equal(
+                "Success, an email has been sent to your email address"
+            );
             // I commented this out because I don't want to get spammed with "that email does not exist" emails.
-        });
+        }).timeout(5000);
 
         it("Can hit forgot password link", async () => {
             const { key } = await knex("forgottenpasswords")
@@ -151,7 +151,9 @@ describe("Users routes", async () => {
                 .expect("Content-Type", /text/)
                 .expect(302);
 
-            expect(response.text).to.equal("Redirecting to success url.");
+            expect(response.text).to.equal(
+                `Redirecting to ${process.env.SERVER_URL}/#/loginregister/resetPassword/${key}.`
+            );
         });
 
         it("Can reset the password", async () => {
@@ -161,7 +163,7 @@ describe("Users routes", async () => {
 
             const response = await agent
                 .post(`/api/users/resetPassword`)
-                .send({ key, oldPassword: "newPass", newPassword: "newPass" })
+                .send({ key, password: "newPass", confirmPassword: "newPass" })
                 .set("Accept", "application/json")
                 .expect("Content-Type", /json/)
                 .expect(200);

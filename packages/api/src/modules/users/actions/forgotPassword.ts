@@ -84,7 +84,10 @@ export const resetPassword = async (
     const { email } = await knex("forgottenpasswords")
         .where({ key })
         .first();
+
+    const hashedPW = await bcrypt.hash(oldPassword, 12);
+
     await knex<User>("users")
-        .update({ password: await bcrypt.hash(oldPassword, 12) })
+        .update({ password: hashedPW })
         .where({ email });
 };

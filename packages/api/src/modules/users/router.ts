@@ -231,11 +231,11 @@ router.get("/forgotPassword/:key", async (ctx, next) => {
     if (await keyValid(key)) {
         ctx.status = 200;
         ctx.redirect(
-            `${process.env.CORS_ORIGIN}/#/loginregister/resetPassword/${key}`
+            `${process.env.SERVER_URL}/#/loginregister/resetPassword/${key}`
         );
     } else {
         ctx.status = 400;
-        ctx.redirect(`${process.env.CORS_ORIGIN}/#/loginregister/invalidKey`);
+        ctx.redirect(`${process.env.SERVER_URL}/#/loginregister/invalidKey`);
     }
     await next();
 });
