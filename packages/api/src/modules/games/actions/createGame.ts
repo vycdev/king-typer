@@ -9,7 +9,9 @@ export const createGame = async (
     userid: number,
     wpm: number,
     rawwpm: number,
-    accuracy: number
+    accuracy: number,
+    difficulty: number,
+    textid: number
 ): Promise<Game> => {
     const newGame = {
         gameid: (await highestGameId()) + 1,
@@ -17,6 +19,8 @@ export const createGame = async (
         wpm,
         rawwpm,
         accuracy,
+        difficulty,
+        textid,
         date: Date.now()
     };
     const possibleAchievements: Achievement[] = await findAchievementsByRequirement(

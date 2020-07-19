@@ -14,6 +14,9 @@ if (localStorage.getItem("previousScores") === null) {
 if (localStorage.getItem("theme") === null) {
     localStorage.setItem("theme", JSON.stringify("light"));
 }
+if (localStorage.getItem("userid") === null) {
+    localStorage.setItem("userid", JSON.stringify("undefined"));
+}
 // Home page
 
 export const Home = () => {
