@@ -152,7 +152,7 @@ describe("Users routes", async () => {
                 .expect(302);
 
             expect(response.text).to.equal(
-                `Redirecting to ${process.env.SERVER_URL}/#/loginregister/resetPassword/${key}.`
+                `Redirecting to ${process.env.CORS_ORIGIN}/#/loginregister/resetPassword/${key}.`
             );
         });
 
