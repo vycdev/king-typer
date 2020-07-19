@@ -4,9 +4,6 @@ import { randomizeEasyText, getDataBaseTextInfo } from "./helpers/gettext";
 import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
 import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
-import { ProgressBar } from "./components/progressbar/progressBar";
-
-import { apiUrl } from "../../../utils/constants";
 
 import {
     Wrapper,
@@ -15,17 +12,13 @@ import {
     TextBox,
     InputBox,
     TryAgainButton,
-    ActuallyTyped,
-    BlockOfFinishedText,
-    TextInfo
+    ActuallyTyped
 } from "./style";
 
-interface TextInfoInterface {
+interface TextInfo {
     id: number;
     title: string;
     text: string;
-    difficulty: number;
-    author: number;
     ordered?: boolean;
     tutorial: boolean;
 }
@@ -49,106 +42,26 @@ export const TypingBox = (props: TypingBoxProps) => {
     const [bestwpm, setBestwpm] = useState(
         JSON.parse(localStorage.getItem("bestwpm"))
     );
-    const [textInfo, setTextInfo] = useState<TextInfoInterface>({
+    const [textInfo, setTextInfo] = useState<TextInfo>({
         id: 0,
         title: "",
         text: "",
-        tutorial: false,
-        difficulty: 1,
-        author: 0
-    });
-    const [wasTypedWrong, setWasTypedWrong] = useState(false);
-    const [textUserData, setTextUserData] = useState({
-        achievements: [],
-        country: "",
-        description: "",
-        email: "",
-        exp: 0,
-        role: "",
-        id: 0,
-        name: "",
-        totaltests: 0,
-        tutorials: []
+        tutorial: false
     });
 
     const textBoxRef = useRef(null);
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+
         textBoxRef.current.scrollTop = 0;
         setBestwpm(JSON.parse(localStorage.getItem("bestwpm")));
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateText();
 
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        updateBestScore();
-
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        updateTextUserData();
     }, [time >= 60]);
-
-    const getUserBestScore = async (id: string) => {
-        if (id === "0") return [];
-        const result = await (
-            await fetch(`${apiUrl}/users/userpbs/${id}`, {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-        ).json();
-
-        return (await result.message) ? 0 : result[result.length - 1]?.wpm;
-    };
-
-    const updateTextUserData = async () => {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const textUserDataResponse = await getUserData(
-            textInfo.author.toString()
-        );
-        setTextUserData(textUserDataResponse);
-    };
-
-    const getUserData = async (id: string) => {
-        if (id === "" || id === undefined) return {};
-        const userData = await fetch(`${apiUrl}/users/userData/${id}`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        return await userData.json();
-    };
-
-    const updateBestScore = async () => {
-        setBestwpm(await getUserBestScore(localStorage.getItem("userid")));
-    };
-
-    const addGameToDb = async (
-        wpm: number,
-        rawwpm: number,
-        accuracy: number,
-        difficulty: number,
-        textid: number
-    ) => {
-        await fetch(`${apiUrl}/games/newGame`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                wpm,
-                rawwpm,
-                accuracy,
-                difficulty,
-                textid
-            })
-        });
-    };
 
     const updateText = async (forceUpdate = false) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -214,26 +127,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                 accuracy: getAccuracy(typed)
             });
 
-            addGameToDb(
-                props.mode === "easy"
-                    ? cpm / 5
-                    : Math.floor(
-                          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                          (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
-                              5) *
-                              100
-                      ) / 100,
-                Math.floor(
-                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                    (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) / 5) *
-                        100
-                ) / 100,
-                // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                getAccuracy(typed),
-                textInfo.difficulty,
-                textInfo.id
-            );
-
             localStorage.setItem(
                 "previousScores",
                 JSON.stringify(previousScores)
@@ -259,28 +152,6 @@ export const TypingBox = (props: TypingBoxProps) => {
             }
         });
         return WrongWords;
-    };
-
-    const generateFinishedBlockOfText = () => {
-        const arrayOfText = typed.map(
-            (value: TypedArrayInterface, index: number) => {
-                return (
-                    <span
-                        key={index + value.state + value.word}
-                        style={{
-                            color:
-                                value.state === "correct"
-                                    ? props.colorCodes.correct
-                                    : props.colorCodes.wrong
-                        }}
-                    >
-                        {value.word}{" "}
-                    </span>
-                );
-            }
-        );
-
-        return <BlockOfFinishedText>{arrayOfText}</BlockOfFinishedText>;
     };
     // This function returns the cpm at any given moment of the test
     const getCpm = (
@@ -336,8 +207,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                             color:
                                 typedArray[index].state === "correct"
                                     ? props.colorCodes.correct
-                                    : props.mode === "hard"
-                                    ? props.colorCodes.correct
                                     : props.colorCodes.wrong
                         }}
                     >
@@ -350,8 +219,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                         key={value + index}
                     >
                         {text[index].split("").map((v: string, i: number) => {
-                            if (i <= input.length - 1 && v != input[i])
-                                setWasTypedWrong(true);
                             return (
                                 <div
                                     key={v + i + v}
@@ -384,48 +251,27 @@ export const TypingBox = (props: TypingBoxProps) => {
     return (
         // wrapper component of the page
         <Wrapper>
-            {/* component that displays the current statistics for the test, including time, wpm and cpm, also the try again button that is shown at the end of the test*/}
-            <Displayer>
-                Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} | CPM:{" "}
-                {cpm} | Time: {time}
-                {"  "}
-                <TryAgainButton
-                    onClick={() => {
-                        resetState();
-                    }}
-                >
-                    Try again
-                </TryAgainButton>
-            </Displayer>
-            <ProgressBar
-                userid={
-                    !props.multiplayer
-                        ? localStorage.getItem("userid") === "undefined"
-                            ? 0
-                            : parseInt(localStorage.getItem("userid"))
-                        : 3
-                }
-                percentage={
-                    props.mode === "easy"
-                        ? ((60 - time) / 60) * 100
-                        : (typed.length / text.length) * 100
-                }
-                place={1}
-                multiplayer={props.multiplayer}
-            ></ProgressBar>
             {/* container of typing box */}
             <Container>
+                {/* component that displays the current statistics for the test, including time, wpm and cpm, also the try again button that is shown at the end of the test*/}
+                <Displayer>
+                    Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} |
+                    CPM: {cpm} | Time: {time}
+                    {"  "}
+                    <TryAgainButton
+                        onClick={() => {
+                            resetState();
+                        }}
+                    >
+                        Try again
+                    </TryAgainButton>
+                </Displayer>
                 {/* Chart with the stats for the test that is rendered only after the time reached 0 + other informative components that do the same*/}
                 {time > 0 ? "" : <DataBox dataProp={typed}></DataBox>}
                 {time > 0 ? (
                     ""
                 ) : (
                     <div>
-                        <TextInfo>
-                            Id: {textInfo.id}, {textInfo.title} added by user{" "}
-                            {textUserData.name}, Difficulty:{" "}
-                            {textInfo.difficulty}
-                        </TextInfo>
                         <ActuallyTyped>
                             {Math.floor(cpm / 5) ===
                                 Math.floor(
@@ -436,19 +282,11 @@ export const TypingBox = (props: TypingBoxProps) => {
                                 : `You typed ${
                                       typed[typed.length - 1].uncorrectedwpm
                                   } WPM out of which
-                            ${cpm / 5} WPM were ${
-                                      props.mode === "easy"
-                                          ? "correct"
-                                          : "typed with 100% accuracy"
-                                  } and you had ${getAccuracy(
+                            ${cpm /
+                                5} WPM were correct and you had ${getAccuracy(
                                       typed
-                                  )}% accuracy. Exp gained:
-                                  ${Math.floor(
-                                      ((cpm / 5) * textInfo.difficulty) / 10
-                                  )}`}
-                            {props.mode === "easy"
-                                ? getWrongWords()
-                                : generateFinishedBlockOfText()}
+                                  )}% accuracy.`}
+                            {getWrongWords()}
                         </ActuallyTyped>
                     </div>
                 )}
@@ -495,19 +333,6 @@ export const TypingBox = (props: TypingBoxProps) => {
                         const CPM = typed.length
                             ? getCpm(typed, timeLeft)
                             : cpm;
-
-                        if (
-                            e.target.value[e.target.value.length - 1] === " " &&
-                            time >= 0 &&
-                            typed.length < text.length &&
-                            e.target.value != " " &&
-                            (props.mode === "hard"
-                                ? e.target.value.replace(/ +/g, "") ===
-                                  text[typed.length]
-                                : true)
-                        )
-                            setWasTypedWrong(false);
-
                         // typed array is an array of objects that contans info about every second of the test
                         const typedArray: Array<TypedArrayInterface> =
                             e.target.value[e.target.value.length - 1] === " " &&
@@ -526,14 +351,10 @@ export const TypingBox = (props: TypingBoxProps) => {
                                               ""
                                           ),
                                           state:
-                                              props.mode === "hard"
-                                                  ? wasTypedWrong
-                                                      ? "wrong"
-                                                      : "correct"
-                                                  : e.target.value.replace(
-                                                        / +/g,
-                                                        ""
-                                                    ) === text[typed.length]
+                                              e.target.value.replace(
+                                                  / +/g,
+                                                  ""
+                                              ) === text[typed.length]
                                                   ? "correct"
                                                   : "wrong",
                                           time: performance.now() / 1000,
@@ -553,6 +374,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                                       }
                                   ]
                                 : typed;
+
                         //   setting the input
                         setInput(input);
                         // setting the typedArray state

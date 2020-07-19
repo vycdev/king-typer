@@ -1,7 +1,6 @@
 // Typing box props interface, contains the types for the props of the typing box component
 export interface TypingBoxProps {
     mode: "easy" | "hard";
-    multiplayer: boolean;
     colorCodes: {
         wrong: string;
         correct: string;
