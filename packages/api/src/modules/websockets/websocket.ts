@@ -5,6 +5,7 @@ import leaveQueue from "./actions/leaveQueue";
 import HandlerResponse from "./types/HandlerResponse";
 import switchQueueLocation from "./actions/switchQueueLocation";
 import updateProgress from "./actions/updateProgress";
+import { Difficulty } from "./gamesData";
 
 type WsRoutes<T> = {
     [K in keyof T]?: (
@@ -14,7 +15,7 @@ type WsRoutes<T> = {
 };
 
 interface WsRoutesData {
-    joinQueue: number;
+    joinQueue: { id: number; difficulty: Difficulty };
     leaveQueue: number;
     switchQueueLocation: number;
     updateProgress: {
