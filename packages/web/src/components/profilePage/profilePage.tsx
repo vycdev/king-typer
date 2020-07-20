@@ -169,7 +169,7 @@ export const ProfilePage = () => {
     };
 
     const updateLevel = () => {
-        setLevel(Math.sqrt(userData?.exp / 10));
+        setLevel(Math.floor(Math.sqrt(userData?.exp / 10) * 100) / 100);
     };
 
     const updateUserGames = async () => {
@@ -238,7 +238,7 @@ export const ProfilePage = () => {
             })
         ).json();
         if (result.islogged === false) {
-            return "0";
+            return "undefined";
         }
         return result.userid;
     };
@@ -379,7 +379,9 @@ export const ProfilePage = () => {
                         1}/${date.getFullYear()}`,
                     wpm: value.wpm,
                     uncorrectedwpm: value.rawwpm,
-                    accuracy: value.accuracy
+                    accuracy: value.accuracy,
+                    difficulty: value.difficulty,
+                    textid: value.textid
                 };
             });
 
@@ -396,15 +398,15 @@ export const ProfilePage = () => {
             .map((value, index) => {
                 return (
                     <ListItem key={value.wpm + index.toString()}>
-                        WPM: {value.wpm}
+                        WPM: {Math.floor(value.wpm * 100) / 100}
                         {"   "}
-                        CPM: {value.wpm * 5}
+                        CPM: {Math.floor(value.wpm * 5 * 100) / 100}
                         {"   "}
-                        Raw WPM: {value.uncorrectedwpm}
+                        Accuracy: {Math.floor(value.accuracy * 100) / 100}
                         {"   "}
-                        Raw CPM: {Math.floor(value.uncorrectedwpm * 500) / 100}
+                        Difficulty: {value.difficulty}
                         {"   "}
-                        Accuracy: {value.accuracy}
+                        Text Id: {value.textid}
                         {"   "}
                         Date: {value.date}
                     </ListItem>
@@ -434,10 +436,15 @@ export const ProfilePage = () => {
 
                         <Statistics>
                             Best Score: {bestScore} Average WPM:{" "}
-                            {gameGeneralStats.averageWpm} Average Accuracy:{" "}
-                            {gameGeneralStats.averageAccuracy} Total Tests
-                            Taken: {userData?.totaltests || 0} Tutorials
-                            Completed: {userData?.tutorials?.length || 0}
+                            {Math.floor(gameGeneralStats.averageWpm * 100) /
+                                100}{" "}
+                            Average Accuracy:{" "}
+                            {Math.floor(
+                                gameGeneralStats.averageAccuracy * 100
+                            ) / 100}{" "}
+                            Total Tests Taken: {userData?.totaltests || 0}{" "}
+                            Tutorials Completed:{" "}
+                            {userData?.tutorials?.length || 0}
                         </Statistics>
                     </GeneralStatistics>
                 </ProfileName>

@@ -64,14 +64,13 @@ describe("Texts routes", async () => {
 
     it("Gets a random text", async () => {
         const response = await agent
-            .get(`/api/texts/getRandomText/`)
+            .get(`/api/texts/getRandomText/true`)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200);
 
-        expect([
-            { ...newText, id: 1, requirements: null },
-            { ...newRandomText, id: 2, requirements: null }
-        ]).to.deep.include(response.body);
+        expect({ ...newText, id: 1, requirements: null }).to.deep.equal(
+            response.body
+        );
     });
 });
