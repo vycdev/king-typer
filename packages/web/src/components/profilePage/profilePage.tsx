@@ -3,6 +3,10 @@ import { useLocation } from "react-router-dom";
 
 import { apiUrl } from "../../utils/constants";
 
+import { getTheme } from "../../utils/getTheme";
+
+const theme = getTheme();
+
 import {
     Wrapper,
     InsideWrapper,
@@ -25,7 +29,9 @@ import {
     ChartAndTitleWrapper,
     ListItem,
     ListItemWrapper,
-    NoGameData
+    NoGameData,
+    InsideAchievementListItem,
+    AchievementsTitle
 } from "./style";
 import { UserGame } from "./helpers/interfaces";
 import { GamesChart } from "./components/gamesChart";
@@ -73,6 +79,11 @@ export const ProfilePage = () => {
             There seems to be no game data.
         </ListItem>
     ]);
+    const [listOfAchievements, setListOfAchievements] = useState([
+        <ListItem key="defaultListItemAchievemetns">
+            There seems to be no achievements data.
+        </ListItem>
+    ]);
     const [verificationIsSent, setVerificationIsSent] = useState(false);
     const [isThisTheLoggedUser, setIsThisTheLoggedUser] = useState(false);
     const [urlUserId, setUrlUserId] = useState("0");
@@ -110,6 +121,8 @@ export const ProfilePage = () => {
         updateElementListOfGames();
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateElementListOfPBS();
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        updateListOfAchievements();
     }, [
         locatione.pathname,
         userData?.country,
@@ -118,6 +131,11 @@ export const ProfilePage = () => {
         isThisTheLoggedUser,
         userId
     ]);
+
+    const updateListOfAchievements = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        setListOfAchievements(await generateListOfAchievements());
+    };
 
     const updateIsThisTheLoggedUser = async () => {
         setIsThisTheLoggedUser(
@@ -389,6 +407,51 @@ export const ProfilePage = () => {
         }
     };
 
+    const generateListOfAchievements = async () => {
+        const achievements = await (
+            await fetch(`${apiUrl}/achievements`, {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        ).json();
+        const sortedAchievements = achievements.sort((a, b) =>
+            a.difficulty < b.difficulty
+                ? -1
+                : a.difficulty === b.difficulty
+                ? 0
+                : 1
+        );
+
+        const listOfAchievements = sortedAchievements.map((value, index) => {
+            return (
+                <ListItem
+                    key={index + value.name}
+                    style={{
+                        border: "none",
+                        borderLeft: `30px solid ${
+                            sortedAchievements.some(
+                                (r, index) =>
+                                    userData.achievements[index] === value.id
+                            )
+                                ? theme.primary
+                                : theme.background.secondary
+                        }`,
+                        margin: "5px auto"
+                    }}
+                >
+                    <InsideAchievementListItem>
+                        {value.name} - {value.description} Difficulty:{" "}
+                        {value.difficulty}
+                    </InsideAchievementListItem>
+                </ListItem>
+            );
+        });
+        return listOfAchievements;
+    };
+
     const generateListOfScores = async (data: Array<UserGame>) => {
         const formattedData = convertUserGamesData(data);
 
@@ -622,6 +685,8 @@ export const ProfilePage = () => {
                         <ListItemWrapper>{elementsListOfPBS}</ListItemWrapper>
                     </ChartAndTitleWrapper>
                 </ChartsWrapper>
+                <AchievementsTitle>Achievements</AchievementsTitle>
+                {listOfAchievements}
             </InsideWrapper>
         </Wrapper>
     );

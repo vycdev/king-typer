@@ -188,3 +188,22 @@ export const NoGameData = styled.div`
     font-family: "Verdana";
     padding: 15px;
 `;
+
+export const InsideAchievementListItem = styled.div`
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    font-family: "Verdana";
+    margin: auto;
+`;
+
+export const AchievementsTitle = styled.div`
+    font-size: 22px;
+    text-align: center;
+    font-family: "Verdana";
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+    color: ${theme.text.primary};
+    border-top: 1px solid ${theme.background.secondary};
+`;
