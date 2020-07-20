@@ -424,8 +424,6 @@ export const ProfilePage = () => {
                 ? 0
                 : 1
         );
-        console.log(sortedAchievements);
-        console.log(userData);
 
         const listOfAchievements = sortedAchievements.map((value, index) => {
             return (
