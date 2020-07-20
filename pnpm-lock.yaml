@@ -56,6 +56,8 @@ importers:
       pg: 7.12.1_pg@7.12.1
       sqlite3: 4.1.0
       typescript: 3.7.4
+      ws: 7.3.1
+      ws-heartbeat: 1.1.0
     devDependencies:
       '@types/bcrypt': 3.0.0
       '@types/chai': 4.2.11
@@ -68,6 +70,7 @@ importers:
       '@types/koa-session': 5.10.2
       '@types/mocha': 7.0.2
       '@types/supertest': 2.0.9
+      '@types/ws': 7.2.6
       chai: 4.2.0
       cross-env: 7.0.2
       mocha: 7.2.0
@@ -87,6 +90,7 @@ importers:
       '@types/koa-session': ^5.10.2
       '@types/mocha': ^7.0.2
       '@types/supertest': ^2.0.9
+      '@types/ws': ^7.2.6
       bcrypt: ^5.0.0
       chai: ^4.2.0
       cross-env: ^7.0.2
@@ -106,6 +110,8 @@ importers:
       supertest: ^4.0.2
       ts-node: ^8.4.1
       typescript: ^3.7.4
+      ws: ^7.3.1
+      ws-heartbeat: ^1.1.0
   packages/web:
     dependencies:
       '@emotion/core': 10.0.22_react@16.11.0
@@ -1909,6 +1915,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-lkJvwNJQUPW2SbVwAZW9s9whJp02nzLf2yTNwMULa4LloED9MYS1aNnGeoBCifpAI1pEBkTpLhuyRmBnLEOZAA==
+  /@types/ws/7.2.6:
+    dependencies:
+      '@types/node': 14.0.14
+    dev: true
+    resolution:
+      integrity: sha512-Q07IrQUSNpr+cXU4E4LtkSIBPie5GLZyyMC1QtQYRLWz701+XcoVygGUZgvLqElq1nU4ICldMYPnexlBsg3dqQ==
   /@typescript-eslint/eslint-plugin/2.34.0_3787943315ebc5ea524d5c102dc9e452:
     dependencies:
       '@typescript-eslint/experimental-utils': 2.34.0_eslint@6.8.0+typescript@3.9.6
@@ -2504,7 +2516,6 @@ packages:
     resolution:
       integrity: sha512-z/WhQ5FPySLdvREByI2vZiTWwCnF0moMJ1hK9YQwDTHKh6I7/uSckMetoRGb5UBZPC1z0jlw+n/XCgjeH7y1AQ==
   /async-limiter/1.0.1:
-    dev: true
     resolution:
       integrity: sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
   /async/2.6.3:
@@ -11208,12 +11219,31 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-/lg70HAjtkUgWPVZhZcm+T4hkL8Zbtp1nFNOn3lRrxnlv50SRBv7cR7RqR+GMsd3hUXy9hWBo4CHTbFTcOYwig==
+  /ws-heartbeat/1.1.0:
+    dependencies:
+      ws: 6.2.1
+    dev: false
+    resolution:
+      integrity: sha512-OM24BT52L58vHd9BkKanurOlAKYZCEDM917GVTqQEAlU/bXkJIHJOqL5GPWEcKd+R5frla26BDSlRKrilhiImA==
   /ws/6.2.1:
     dependencies:
       async-limiter: 1.0.1
-    dev: true
     resolution:
       integrity: sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
+  /ws/7.3.1:
+    dev: false
+    engines:
+      node: '>=8.3.0'
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    resolution:
+      integrity: sha512-D3RuNkynyHmEJIpD2qrgVkc9DQ23OrN/moAwZX4L8DfvszsJxpjQuUq3LMx6HoYji9fbIOBY18XWBsAux1ZZUA==
   /xdg-basedir/3.0.0:
     dev: true
     engines:
