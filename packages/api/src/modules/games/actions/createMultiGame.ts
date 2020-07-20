@@ -6,8 +6,17 @@ import findAchievementsByRequirement from "../../achievements/actions/findAchiev
 import userHasAchievement from "../../achievements/actions/userHasAchievement";
 import { GamePlayer } from "../../websockets/gamesData";
 
-export const createGames = async (players: GamePlayer[]): Promise<Game> => {
+export const createGames = async (
+    players: GamePlayer[],
+    difficulty: number
+): Promise<Game> => {
     const newHighestGame = (await highestGameId()) + 1;
+    const sortedPlayers = players
+        .sort((a, b) => a.wpm - b.wpm)
+        .reduce((acc, cur, idx, arr) => ({
+            ...acc,
+            [cur.id]: arr.length - idx
+        }));
     const newGames = await Promise.all(
         players.map(async l => {
             const newGame = {
@@ -18,6 +27,21 @@ export const createGames = async (players: GamePlayer[]): Promise<Game> => {
                 acc: l.acc,
                 date: Date.now()
             };
+
+            const user = await knex("users")
+                .where({ id: l.id })
+                .first();
+
+            await knex("users")
+                .where({ id: l.id })
+                .update({
+                    totaltests: user.totaltests ? user.totaltests + 1 : 1,
+                    exp: Math.floor(
+                        (user.exp + (l.wpm * difficulty) / 10) *
+                            ((1 + sortedPlayers[l.id]) / 10)
+                    )
+                });
+
             const possibleAchievements: Achievement[] = await findAchievementsByRequirement(
                 {
                     wpm: l.wpm,
@@ -29,7 +53,7 @@ export const createGames = async (players: GamePlayer[]): Promise<Game> => {
                 possibleAchievements.map(j => userHasAchievement(l.id, j.id))
             );
             const achievements = possibleAchievements.filter(
-                (j, idx) => !achievementMatches[idx]
+                (_, idx) => !achievementMatches[idx]
             );
             achievements.map(async j => {
                 await knex("users")
