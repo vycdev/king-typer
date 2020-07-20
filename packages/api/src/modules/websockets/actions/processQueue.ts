@@ -1,4 +1,4 @@
-import { queue, games } from "../gamesData";
+import { queue, games, Difficulty } from "../gamesData";
 import getRandomText from "../../texts/actions/getRandomText";
 
 const newMaxId = () => {
@@ -7,11 +7,12 @@ const newMaxId = () => {
         : Math.max(...Object.keys(games).map(Number)) + 1;
 };
 
-export default async () => {
-    if (queue.length >= 4) {
-        const players = queue.slice(0, 4);
+export default async (category: Difficulty) => {
+    const currQueue = queue[category];
+    if (currQueue.length >= 4) {
+        const players = currQueue.slice(0, 4);
         for (let i = 0; i < 4; i++) {
-            queue.shift();
+            currQueue.shift();
         }
         const userGameKeys = Array(4)
             .fill(null)
@@ -26,7 +27,7 @@ export default async () => {
                 rawwpm: 0,
                 acc: 0
             })),
-            textid: (await getRandomText(false)).id
+            textid: (await getRandomText(category === "easy")).id
         };
         games[newMaxId()] = newGame;
         return {

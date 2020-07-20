@@ -3,7 +3,9 @@ import { queue } from "../gamesData";
 import HandlerResponse from "../types/HandlerResponse";
 
 export default (data: number, ws: WebSocket): HandlerResponse => {
-    const queueling = queue.find(l => l.key === data);
+    const queueling =
+        queue.easy.find(l => l.key === data) ||
+        queue.normal.find(l => l.key === data);
     if (!queueling) {
         return {
             category: "switchQueueResponse",
