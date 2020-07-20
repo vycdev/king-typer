@@ -16,4 +16,6 @@ export interface UserGame {
     rawwpm: number;
     userid: number;
     wpm: number;
+    difficulty: number;
+    textid: number;
 }
