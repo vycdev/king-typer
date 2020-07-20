@@ -30,8 +30,14 @@ export const createGame = async (
             acc: accuracy
         }
     );
+
+    const achiev = await Promise.all(
+        possibleAchievements.map(
+            async item => await userHasAchievement(userid, item.id)
+        )
+    );
     const achievements = possibleAchievements.filter(
-        async l => !(await userHasAchievement(userid, l.id))
+        (l, index) => !achiev[index]
     );
 
     const user = await knex("users")

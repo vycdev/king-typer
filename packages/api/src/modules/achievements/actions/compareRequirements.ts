@@ -8,5 +8,5 @@ export default (
 ) => {
     return typesafeKeys(base)
         .map(l => [base[l], head[l]])
-        .every(l => l[1] > l[0]);
+        .every(l => l[1] >= l[0]);
 };
