@@ -25,8 +25,11 @@ export const createGames = async (players: GamePlayer[]): Promise<Game> => {
                     acc: l.acc
                 }
             );
+            const achievementMatches = await Promise.all(
+                possibleAchievements.map(j => userHasAchievement(l.id, j.id))
+            );
             const achievements = possibleAchievements.filter(
-                async j => !(await userHasAchievement(l.id, j.id))
+                (j, idx) => !achievementMatches[idx]
             );
             achievements.map(async j => {
                 await knex("users")
