@@ -20,6 +20,8 @@ export interface Game {
     textid: number;
 }
 
+export type Difficulty = "easy" | "normal";
+
 export const games: Record<number, Game> = {};
 
-export const queue: Queueling[] = [];
+export const queue: Record<Difficulty, Queueling[]> = { easy: [], normal: [] };
