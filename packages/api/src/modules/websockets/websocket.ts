@@ -11,7 +11,7 @@ type WsRoutes<T> = {
     [K in keyof T]?: (
         data: T[K],
         ws: WebSocket
-    ) => HandlerResponse | Promise<HandlerResponse>;
+    ) => HandlerResponse[] | Promise<HandlerResponse[]>;
 };
 
 interface WsRoutesData {
@@ -43,10 +43,12 @@ export default async (
     if (Object.keys(wsRoutes).includes(category)) {
         const response = await wsRoutes[category](data, ws);
         const { category: respCategory } = response;
-        response.data.map((l: HandlerResponse["data"][0]) => {
-            l.client.send(
-                JSON.stringify({ category: respCategory, data: l.data })
-            );
-        });
+        response.map(j =>
+            j.data.map((l: HandlerResponse["data"][0]) => {
+                l.client.send(
+                    JSON.stringify({ category: respCategory, data: l.data })
+                );
+            })
+        );
     }
 };

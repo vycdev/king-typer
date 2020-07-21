@@ -2,6 +2,7 @@ export type ResponseCategory =
     | "ping"
     | "joinResponse"
     | "leaveResponse"
+    | "joinGame"
     | "switchQueueResponse"
     | "updateResponse";
 

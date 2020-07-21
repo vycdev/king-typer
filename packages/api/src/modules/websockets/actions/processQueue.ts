@@ -1,5 +1,6 @@
 import { queue, games, Difficulty } from "../gamesData";
 import getRandomText from "../../texts/actions/getRandomText";
+import HandlerResponse from "../types/HandlerResponse";
 
 const newMaxId = () => {
     return Object.keys(games).length === 0
@@ -9,7 +10,9 @@ const newMaxId = () => {
 
 const GameSize = 2;
 
-export default async (category: Difficulty) => {
+export default async (
+    category: Difficulty
+): Promise<HandlerResponse | void> => {
     const currQueue = queue[category];
     if (currQueue.length >= GameSize) {
         const players = currQueue.slice(0, GameSize);
@@ -35,7 +38,7 @@ export default async (category: Difficulty) => {
         return {
             category: "joinGame",
             data: players.map((l, idx) => ({
-                client: l.ws,
+                client: l.ws!,
                 data: newGame.players[idx].gameKey
             }))
         };

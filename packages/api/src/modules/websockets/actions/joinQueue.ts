@@ -3,15 +3,20 @@ import HandlerResponse from "../types/HandlerResponse";
 import WebSocket from "ws";
 import processQueue from "./processQueue";
 
-export default (
+export default async (
     data: { id: number; difficulty: Difficulty },
     ws: WebSocket
-): HandlerResponse => {
+): Promise<HandlerResponse[]> => {
     const key = Math.floor(Math.random() * 899999) + 100000;
     queue[data.difficulty].push({ id: data.id, ws, key });
-    processQueue(data.difficulty);
-    return {
+    const processResp = await processQueue(data.difficulty);
+    const joinResp: HandlerResponse = {
         category: "joinResponse",
         data: [{ client: ws, data: { success: true, key } }]
     };
+    if (processResp) {
+        return [joinResp, processResp];
+    } else {
+        return [joinResp];
+    }
 };

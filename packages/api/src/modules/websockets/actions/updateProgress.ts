@@ -11,41 +11,46 @@ export default async (
         rawwpm: number;
         acc: number;
     },
+
     ws: WebSocket
-): Promise<HandlerResponse> => {
+): Promise<HandlerResponse[]> => {
     const gameWithKey = Object.values(games).find(l =>
         l.players.some(j => j.key === data.key)
     );
     if (!gameWithKey) {
-        return {
+        return [
+            {
+                category: "updateResponse",
+                data: [
+                    {
+                        client: ws,
+                        data: {
+                            success: false
+                        }
+                    }
+                ]
+            }
+        ];
+    }
+    const player = gameWithKey.players.find(l => l.key === data.key);
+    Object.assign(player, data);
+    await gameFinished(gameWithKey);
+    return [
+        {
             category: "updateResponse",
             data: [
                 {
                     client: ws,
                     data: {
-                        success: false
+                        success: true,
+                        data: gameWithKey.players.map(l => {
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            const { key, ws, gameKey, ...data } = l;
+                            return data;
+                        })
                     }
                 }
             ]
-        };
-    }
-    const player = gameWithKey.players.find(l => l.key === data.key);
-    Object.assign(player, data);
-    await gameFinished(gameWithKey);
-    return {
-        category: "updateResponse",
-        data: [
-            {
-                client: ws,
-                data: {
-                    success: true,
-                    data: gameWithKey.players.map(l => {
-                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                        const { key, ws, gameKey, ...data } = l;
-                        return data;
-                    })
-                }
-            }
-        ]
-    };
+        }
+    ];
 };
