@@ -42,13 +42,13 @@ export default async (
     const { category, data } = categoryParser(message.toString());
     if (Object.keys(wsRoutes).includes(category)) {
         const response = await wsRoutes[category](data, ws);
-        const { category: respCategory } = response;
-        response.map(j =>
+        response.map(j => {
+            const { category: respCategory } = j;
             j.data.map((l: HandlerResponse["data"][0]) => {
                 l.client.send(
                     JSON.stringify({ category: respCategory, data: l.data })
                 );
-            })
-        );
+            });
+        });
     }
 };
