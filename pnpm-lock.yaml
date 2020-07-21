@@ -129,6 +129,7 @@ importers:
       react-router-dom: 5.1.2_react@16.11.0
       recharts: 1.8.5_react-dom@16.11.0+react@16.11.0
       typescript: 3.7.4
+      ws-heartbeat: 1.1.0
     devDependencies:
       '@babel/core': 7.6.4
       '@babel/plugin-proposal-class-properties': 7.5.5_@babel+core@7.6.4
@@ -196,6 +197,7 @@ importers:
       webpack-cli: ^3.3.10
       webpack-dev-server: ^3.9.0
       webpack-merge: ^4.2.2
+      ws-heartbeat: ^1.1.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.10.4:

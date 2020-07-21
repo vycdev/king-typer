@@ -43,7 +43,7 @@ wss.on("connection", (ws: WebSocket) => {
     ws.on("message", _ => websocket(wss, ws, _.toString()));
 });
 setWsHeartbeat(wss, (ws: WebSocket, data: unknown) => {
-    if (data === '{"category":"ping"}') {
-        ws.send('{"category":"pong"}');
+    if (data === '{"category": "ping"}') {
+        ws.send('{"category": "pong"}');
     }
 });

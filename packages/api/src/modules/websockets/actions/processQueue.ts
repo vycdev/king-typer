@@ -7,14 +7,16 @@ const newMaxId = () => {
         : Math.max(...Object.keys(games).map(Number)) + 1;
 };
 
+const GameSize = 2;
+
 export default async (category: Difficulty) => {
     const currQueue = queue[category];
-    if (currQueue.length >= 4) {
-        const players = currQueue.slice(0, 4);
-        for (let i = 0; i < 4; i++) {
+    if (currQueue.length >= GameSize) {
+        const players = currQueue.slice(0, GameSize);
+        for (let i = 0; i < GameSize; i++) {
             currQueue.shift();
         }
-        const userGameKeys = Array(4)
+        const userGameKeys = Array(GameSize)
             .fill(null)
             .map(() => Math.floor(Math.random() * 899999) + 100000);
         const newGame = {
