@@ -13,6 +13,7 @@ import { allowCors } from "./modules/cors/middleware/allowCors";
 import { useSession } from "./modules/session/helpers/useSession";
 import { setWsHeartbeat } from "ws-heartbeat/server";
 import websocket from "./modules/websockets/websocket";
+import processClose from "./modules/websockets/actions/processClose";
 
 const app = new Koa();
 const router = new Router();
@@ -42,6 +43,7 @@ const wss = new WebSocket.Server({ server });
 wss.on("connection", (ws: WebSocket) => {
     ws.on("message", _ => websocket(wss, ws, _.toString()));
 });
+wss.on("close", processClose);
 setWsHeartbeat(wss, (ws: WebSocket, data: unknown) => {
     if (data === '{"category": "ping"}') {
         ws.send('{"category": "pong"}');
