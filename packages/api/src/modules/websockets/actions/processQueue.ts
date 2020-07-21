@@ -34,12 +34,23 @@ export default async (
             })),
             textid: (await getRandomText(category === "easy")).id
         };
+        const censoredGame = {
+            textid: newGame.textid,
+            players: newGame.players.map(l => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { gameKey, ...data } = l;
+                return data;
+            })
+        };
         games[newMaxId()] = newGame;
         return {
             category: "joinGame",
             data: players.map((l, idx) => ({
                 client: l.ws!,
-                data: newGame.players[idx].gameKey
+                data: {
+                    key: newGame.players[idx].gameKey,
+                    game: censoredGame
+                }
             }))
         };
     }
