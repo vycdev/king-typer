@@ -32,7 +32,8 @@ export default async (
                 rawwpm: 0,
                 acc: 0
             })),
-            textid: (await getRandomText(category === "easy")).id
+            textid: (await getRandomText(category === "easy")).id,
+            endTime: Date.now() + 120000
         };
         const censoredGame = {
             textid: newGame.textid,
