@@ -8,9 +8,11 @@ import { GamePlayer } from "../../websockets/gamesData";
 
 export const createGames = async (
     players: GamePlayer[],
-    difficulty: number
+    difficulty: number,
+    textid: number
 ): Promise<Game> => {
     const newHighestGame = (await highestGameId()) + 1;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const sortedPlayers = players
         .sort((a, b) => a.wpm - b.wpm)
         .reduce((acc, cur, idx, arr) => ({
@@ -21,10 +23,12 @@ export const createGames = async (
         players.map(async l => {
             const newGame = {
                 gameid: newHighestGame,
-                id: l.id,
+                userid: l.id,
                 wpm: l.wpm,
                 rawwpm: l.rawwpm,
-                acc: l.acc,
+                accuracy: l.acc,
+                difficulty,
+                textid,
                 date: Date.now()
             };
 
@@ -36,10 +40,7 @@ export const createGames = async (
                 .where({ id: l.id })
                 .update({
                     totaltests: user.totaltests ? user.totaltests + 1 : 1,
-                    exp: Math.floor(
-                        (user.exp + (l.wpm * difficulty) / 10) *
-                            ((1 + sortedPlayers[l.id]) / 10)
-                    )
+                    exp: Math.floor(user.exp + (l.wpm * difficulty) / 10)
                 });
 
             const possibleAchievements: Achievement[] = await findAchievementsByRequirement(
