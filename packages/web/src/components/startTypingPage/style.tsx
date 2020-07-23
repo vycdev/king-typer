@@ -6,7 +6,3 @@ const theme = getTheme();
 export const Wrapper = styled.div`
     background-color: ${theme.background.primary};
 `;
-
-export const Latest = styled.div`
-    text-align: center;
-`;

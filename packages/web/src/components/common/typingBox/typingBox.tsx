@@ -394,7 +394,7 @@ export const TypingBox = (props: TypingBoxProps) => {
     };
     // Get best wpm function, returns the best wpm and also sets the next score in local storage and the best wpm
     const getBestWpm = () => {
-        if (time <= 0) {
+        if (time <= 0 && !props.multiplayer) {
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, "0");
             const mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
