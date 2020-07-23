@@ -34,7 +34,7 @@ export default async (
     }
     const player = gameWithKey[1].players.find(l => l.key === data.key);
     Object.assign(player, data);
-    await gameFinished(gameWithKey[0], gameWithKey[1]);
+    await gameFinished((gameWithKey[0] as unknown) as number, gameWithKey[1]);
     return [
         {
             category: "updateResponse",

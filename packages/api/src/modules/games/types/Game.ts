@@ -5,4 +5,6 @@ export default interface Game {
     wpm: number;
     rawwpm: number;
     accuracy: number;
+    difficulty: number;
+    textid: number;
 }
