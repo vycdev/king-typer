@@ -1,4 +1,4 @@
-import { Game, games } from "../gamesData";
+import { Game } from "../gamesData";
 import { createGames } from "../../games/actions/createMultiGame";
 import { removeOldGame } from "../../games/actions/removeOldGame";
 import knex from "../../../../db/knex";
