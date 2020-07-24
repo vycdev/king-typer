@@ -8,6 +8,8 @@ import { Route } from "react-router-dom";
 import { TypingBox } from "../common/typingBox/typingBox";
 import { getTheme } from "../../utils/getTheme";
 
+import { Tutorials } from "./components/tutorials/tutorials";
+
 const theme = getTheme();
 
 export const StartTypingPage = () => {
@@ -29,6 +31,17 @@ export const StartTypingPage = () => {
                     mode="hard"
                     colorCodes={theme.boxColorCodes}
                     multiplayer={false}
+                ></TypingBox>
+            </Route>
+            <Route exact path="/type/practice/tutorials">
+                <Tutorials></Tutorials>
+            </Route>
+            <Route exact path="/type/practice/tutorial/:id">
+                <TypingBox
+                    mode="easy"
+                    colorCodes={theme.boxColorCodes}
+                    multiplayer={false}
+                    tutorial={true}
                 ></TypingBox>
             </Route>
             <Route exact path="/type/multiplayer/easy">

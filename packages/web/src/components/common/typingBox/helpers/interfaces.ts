@@ -2,6 +2,7 @@
 export interface TypingBoxProps {
     mode: "easy" | "hard";
     multiplayer: boolean;
+    tutorial?: boolean;
     colorCodes: {
         wrong: string;
         correct: string;
