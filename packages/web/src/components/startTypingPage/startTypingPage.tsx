@@ -38,7 +38,7 @@ export const StartTypingPage = () => {
             </Route>
             <Route exact path="/type/practice/tutorial/:id">
                 <TypingBox
-                    mode="easy"
+                    mode="hard"
                     colorCodes={theme.boxColorCodes}
                     multiplayer={false}
                     tutorial={true}

@@ -35,3 +35,15 @@ export const getDataBaseTextInfo = async (mode: "easy" | "hard") => {
 
     return result;
 };
+
+export const getTutorial = async (id: string) => {
+    const result = await await fetch(`${apiUrl}/tutorials/${id}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    return result.json();
+};

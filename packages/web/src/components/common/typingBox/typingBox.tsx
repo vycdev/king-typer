@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { randomizeEasyText, getDataBaseTextInfo } from "./helpers/gettext";
+import {
+    randomizeEasyText,
+    getDataBaseTextInfo,
+    getTutorial
+} from "./helpers/gettext";
 import { TypingBoxProps, TypedArrayInterface } from "./helpers/interfaces";
 import { PreviousScoresType } from "../../statisticsPage/helpers/interfaces";
 import { DataBox } from "./components/testChart";
 import { ProgressBar } from "./components/progressbar/progressBar";
 
 import { apiUrl } from "../../../utils/constants";
+import { useLocation } from "react-router-dom";
 
 import {
     Wrapper,
@@ -38,13 +43,15 @@ const previousScores: Array<PreviousScoresType> = JSON.parse(
 );
 
 export const TypingBox = (props: TypingBoxProps) => {
+    const MaxTime = props.tutorial ? 240 : 60;
+
     const [input, setInput] = useState("");
     const [text, setText] = useState([""]);
     const [visibleText, setVisibleText] = useState([
         <div key={"default"}></div>
     ]);
     const [typed, setTyped] = useState<Array<TypedArrayInterface>>([]);
-    const [time, setTime] = useState(60);
+    const [time, setTime] = useState(MaxTime);
     const [cpm, setCpm] = useState(0);
     const [bestwpm, setBestwpm] = useState(
         JSON.parse(localStorage.getItem("bestwpm"))
@@ -72,6 +79,7 @@ export const TypingBox = (props: TypingBoxProps) => {
     });
 
     const textBoxRef = useRef(null);
+    const locatione = useLocation();
 
     // Initialize the visible text that has to be typed.
     useEffect(() => {
@@ -85,7 +93,7 @@ export const TypingBox = (props: TypingBoxProps) => {
 
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateTextUserData();
-    }, [time >= 60]);
+    }, [time >= MaxTime]);
 
     const getUserBestScore = async (id: string) => {
         if (id === "0") return [];
@@ -150,28 +158,57 @@ export const TypingBox = (props: TypingBoxProps) => {
         });
     };
 
+    const completeTutorial = async (
+        id: number,
+        wpm: number,
+        accuracy: number
+    ) => {
+        await fetch(`${apiUrl}/tutorials/completeTutorial`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id,
+                requirements: { acc: accuracy, wpm }
+            })
+        });
+    };
+
+    const getUrlId = () => {
+        return locatione.pathname.split("/")[
+            locatione.pathname.split("/").length - 1
+        ];
+    };
     const updateText = async (forceUpdate = false) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        const gotTextInfo =
-            time >= 60 ? await getDataBaseTextInfo(props.mode) : textInfo;
+        const gotTextInfo = props.tutorial
+            ? time >= MaxTime
+                ? await getTutorial(getUrlId())
+                : textInfo
+            : time >= MaxTime
+            ? await getDataBaseTextInfo(props.mode)
+            : textInfo;
 
         const info =
-            (time >= 60 && textInfo.title != gotTextInfo.title) || forceUpdate
+            (time >= MaxTime && textInfo.title != gotTextInfo.title) ||
+            forceUpdate
                 ? gotTextInfo
                 : textInfo;
 
         const arrayOfText =
             props.mode === "easy"
-                ? time >= 60
+                ? time >= MaxTime
                     ? randomizeEasyText(info.text.split(" "))
                     : info.text.split(" ")
                 : info.text.split(" ");
 
-        setTextInfo(time >= 60 ? info : textInfo);
-        setText(time >= 60 ? arrayOfText : text);
+        setTextInfo(time >= MaxTime ? info : textInfo);
+        setText(time >= MaxTime ? arrayOfText : text);
 
         setVisibleText(
-            time >= 60
+            time >= MaxTime
                 ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
                   generateVisibleText("", props.mode, [], arrayOfText)
                 : visibleText
@@ -180,7 +217,7 @@ export const TypingBox = (props: TypingBoxProps) => {
 
     // Function for reseting the state to the initial value
     const resetState = async () => {
-        setTime(60);
+        setTime(MaxTime);
 
         await updateText(true);
 
@@ -213,26 +250,31 @@ export const TypingBox = (props: TypingBoxProps) => {
                 // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 accuracy: getAccuracy(typed)
             });
-
-            addGameToDb(
-                props.mode === "easy"
-                    ? cpm / 5
-                    : Math.floor(
-                          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                          (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
-                              5) *
-                              100
-                      ) / 100,
-                Math.floor(
+            if (!props.tutorial)
+                addGameToDb(
+                    props.mode === "easy"
+                        ? cpm / 5
+                        : Math.floor(
+                              // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                              (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) *
+                                  100) /
+                                  5) *
+                                  100
+                          ) / 100,
+                    Math.floor(
+                        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                        (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) /
+                            5) *
+                            100
+                    ) / 100,
                     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                    (((cpm === 0 ? 0 : cpm / getAccuracy(typed)) * 100) / 5) *
-                        100
-                ) / 100,
+                    getAccuracy(typed),
+                    textInfo.difficulty,
+                    textInfo.id
+                );
+            if (props.tutorial)
                 // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                getAccuracy(typed),
-                textInfo.difficulty,
-                textInfo.id
-            );
+                completeTutorial(textInfo.id, cpm / 5, getAccuracy(typed));
 
             localStorage.setItem(
                 "previousScores",
@@ -295,7 +337,9 @@ export const TypingBox = (props: TypingBoxProps) => {
                 return previous + current;
             }, 0);
 
-        return Math.floor(charTyped / ((60 - time === 0 ? 1 : 60 - time) / 60));
+        return Math.floor(
+            (charTyped / (MaxTime - time === 0 ? 1 : MaxTime - time)) * 60
+        );
     };
 
     // This function return the accuracy at any given moment of the test
@@ -407,7 +451,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                 }
                 percentage={
                     props.mode === "easy"
-                        ? ((60 - time) / 60) * 100
+                        ? ((MaxTime - time) / MaxTime) * 100
                         : (typed.length / text.length) * 100
                 }
                 place={1}
@@ -480,17 +524,17 @@ export const TypingBox = (props: TypingBoxProps) => {
                                 : e.target.value;
                         // timeLeft is the calculated remaining time
                         const timeLeft = typed.length
-                            ? 60 -
+                            ? MaxTime -
                                   Math.floor(
                                       performance.now() / 1000 - typed[0].time
                                   ) >
                               0
-                                ? 60 -
+                                ? MaxTime -
                                   Math.floor(
                                       performance.now() / 1000 - typed[0].time
                                   )
                                 : 0
-                            : 60;
+                            : MaxTime;
                         // CPM is the now cpm
                         const CPM = typed.length
                             ? getCpm(typed, timeLeft)
@@ -549,7 +593,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                                                       100
                                               ) / 100,
                                           accuracy: getAccuracy(typed),
-                                          timeUsed: 60 - timeLeft + "s"
+                                          timeUsed: MaxTime - timeLeft + "s"
                                       }
                                   ]
                                 : typed;
