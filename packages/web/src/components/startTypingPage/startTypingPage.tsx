@@ -25,8 +25,7 @@ export const StartTypingPage = () => {
     useEffect(() => {
         if (
             locatione.pathname === "/type/multiplayer/easy" ||
-            (locatione.pathname === "/type/multiplayer/normal" &&
-                ws.readyState === ws.OPEN)
+            locatione.pathname === "/type/multiplayer/normal"
         ) {
             setWsHeartbeat(ws, '{"category": "ping"}');
             ws.onopen = () => {

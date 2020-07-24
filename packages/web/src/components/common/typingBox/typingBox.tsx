@@ -483,7 +483,9 @@ export const TypingBox = (props: TypingBoxProps) => {
             localStorage.setItem("bestwpm", JSON.stringify(cpm / 5));
             return cpm / 5;
         }
-        return bestwpm;
+        return bestwpm.length === 0
+            ? JSON.parse(localStorage.getItem("bestwpm"))
+            : bestwpm;
     };
     // Function to generate the array of elements which contains the words that were typed wrong
     // These elements are shown after the test in the care that the user didn't type with 100% accuracy
@@ -628,8 +630,8 @@ export const TypingBox = (props: TypingBoxProps) => {
         <Wrapper>
             {/* component that displays the current statistics for the test, including time, wpm and cpm, also the try again button that is shown at the end of the test*/}
             <Displayer>
-                Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} | CPM:{" "}
-                {cpm} | Time: {time}
+                Your best: {getBestWpm() || 0} | WPM: {Math.floor(cpm / 5)} |
+                CPM: {cpm} | Time: {time}
                 {"  "}
                 {props.multiplayer ? (
                     time > 0 ? (

@@ -32,14 +32,14 @@ export default async (
                 rawwpm: 0,
                 acc: 0
             })),
-            textid: (await getRandomText(category === "easy")).id,
+            textid: (await getRandomText(category != "easy")).id,
             endTime: Date.now() + 120000
         };
         const censoredGame = {
             textid: newGame.textid,
             players: newGame.players.map(l => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { gameKey, ...data } = l;
+                const { gameKey, ws, ...data } = l;
                 return data;
             })
         };
