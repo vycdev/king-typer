@@ -3,6 +3,7 @@
         "module": "commonjs",
         "outDir": "./dist",
         "target": "ES6",
+        "lib": ["ESNext", "DOM", "ESNext.Array"],
         "strict": true,
         "strictNullChecks": true,
         "noImplicitThis": true,

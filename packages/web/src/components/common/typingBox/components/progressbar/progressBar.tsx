@@ -21,6 +21,7 @@ interface PropsProgressBar {
     userid: number;
     place: number;
     multiplayer: boolean;
+    wpm?: number;
 }
 
 const array = [
@@ -76,7 +77,8 @@ export const ProgressBar = (props: PropsProgressBar) => {
     };
 
     const getUserData = async (id: string) => {
-        if (id === "0") return {};
+        if (id === "0" || id === "undefined" || id === "-1" || id === "NaN")
+            return {};
         const userData = await fetch(`${apiUrl}/users/userData/${id}`, {
             method: "GET",
             credentials: "include",
@@ -110,24 +112,44 @@ export const ProgressBar = (props: PropsProgressBar) => {
                     {userData.exp
                         ? Math.floor(Math.sqrt(userData?.exp / 10) * 100) / 100
                         : 0}
+                    <span>
+                        {props.wpm ? " WPM: " : ""}
+                        {props.wpm ? props.wpm : ""}
+                    </span>
                 </LevelDisplay>
             </NameFlag>
+
             <PlaceProgressWrapper>
-                <ProgressOutside color={color} multiplayer={props.multiplayer}>
+                <ProgressOutside
+                    color={
+                        props.multiplayer
+                            ? props.userid % array.length === -1
+                                ? array[1]
+                                : array[props.userid % array.length]
+                            : color
+                    }
+                    multiplayer={props.multiplayer}
+                >
                     <ProgressInside
                         progress={percentage}
-                        color={color}
+                        color={
+                            props.multiplayer
+                                ? props.userid % array.length === -1
+                                    ? array[1]
+                                    : array[props.userid % array.length]
+                                : color
+                        }
                     ></ProgressInside>
                 </ProgressOutside>
                 {props.multiplayer
                     ? place === 1
-                        ? place + "st"
+                        ? place + "st "
                         : place === 2
-                        ? place + "nd"
+                        ? place + "nd "
                         : place === 3
-                        ? place + "rd"
-                        : place + "th"
-                    : ""}
+                        ? place + "rd "
+                        : place + "th "
+                    : ""}{" "}
             </PlaceProgressWrapper>
         </Wrapper>
     );

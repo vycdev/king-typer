@@ -8,6 +8,7 @@ export interface TypingBoxProps {
         correct: string;
         notTyped: string;
     };
+    ws?: WebSocket;
 }
 
 // typedArrayInterface is the interface for the typedArray variable in the typing box
