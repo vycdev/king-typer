@@ -7,15 +7,22 @@ export default async (
     data: { id: number; difficulty: Difficulty },
     ws: WebSocket
 ): Promise<HandlerResponse[]> => {
-    const falseJoinResponse: HandlerResponse[] = [
-        {
-            category: "joinResponse",
-            data: [{ client: ws, data: { success: false } }]
-        }
-    ];
     const key = Math.floor(Math.random() * 899999) + 100000;
     if (queue[data.difficulty].some(l => l.id === data.id)) {
-        return falseJoinResponse;
+        return [
+            {
+                category: "joinResponse",
+                data: [
+                    {
+                        client: ws,
+                        data: {
+                            status: false,
+                            queue: queue[data.difficulty]
+                        }
+                    }
+                ]
+            }
+        ];
     }
 
     queue[data.difficulty].push({ id: data.id, ws, key });
