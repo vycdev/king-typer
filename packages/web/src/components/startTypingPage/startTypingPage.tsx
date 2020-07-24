@@ -25,9 +25,6 @@ export const StartTypingPage = () => {
         console.log("Connected");
     };
     ws.onclose = () => {
-        sendWebsocket(ws, "leaveQueue", {
-            id: 3
-        });
         console.log("Disconnected");
     };
     setWsHeartbeat(ws, '{"category": "ping"}');
