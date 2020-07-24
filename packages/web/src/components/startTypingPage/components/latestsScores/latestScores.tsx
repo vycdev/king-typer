@@ -93,7 +93,7 @@ export const LatestScores = () => {
                 );
             })
         );
-        return list as Element[];
+        return list as JSX.Element[];
     };
 
     const UpdateLatest = async () => {
