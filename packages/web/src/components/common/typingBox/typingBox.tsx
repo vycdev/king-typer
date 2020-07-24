@@ -191,6 +191,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                                 parseInt(localStorage.getItem("userid")) || -1
                             )
                         );
+                    console.log(parsedData);
                 };
             }
             if (

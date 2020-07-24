@@ -23,23 +23,24 @@ export const StartTypingPage = () => {
     const ws = CreateNewWS();
 
     useEffect(() => {
-        if (
-            locatione.pathname === "/type/multiplayer/easy" ||
-            locatione.pathname === "/type/multiplayer/normal"
-        ) {
-            setWsHeartbeat(ws, '{"category": "ping"}');
-            ws.onopen = () => {
-                console.log("Connected");
-            };
-            ws.onclose = () => {
-                sendWebsocket(ws, "leaveQueue", {
-                    id: 3
-                });
-                console.log("Disconnected");
-            };
-        } else {
-            ws.close();
-        }
+        if (ws.readyState === ws.OPEN)
+            if (
+                locatione.pathname === "/type/multiplayer/easy" ||
+                locatione.pathname === "/type/multiplayer/normal"
+            ) {
+                setWsHeartbeat(ws, '{"category": "ping"}');
+                ws.onopen = () => {
+                    console.log("Connected");
+                };
+                ws.onclose = () => {
+                    sendWebsocket(ws, "leaveQueue", {
+                        id: 3
+                    });
+                    console.log("Disconnected");
+                };
+            } else {
+                ws.close();
+            }
         return () => {
             ws.close();
         };
