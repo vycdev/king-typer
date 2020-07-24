@@ -370,14 +370,12 @@ export const TypingBox = (props: TypingBoxProps) => {
         setText(time >= 60 ? arrayOfText : text);
 
         setVisibleText(
-            props.multiplayer && waitingForPlayers ? (
-                <div></div>
-            ) : time >= 60 ? (
-                // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                generateVisibleText("", props.mode, [], arrayOfText)
-            ) : (
-                visibleText
-            )
+            props.multiplayer && waitingForPlayers
+                ? [<div key="default234"></div>]
+                : time >= 60
+                ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                  generateVisibleText("", props.mode, [], arrayOfText)
+                : visibleText
         );
     };
 
@@ -797,16 +795,14 @@ export const TypingBox = (props: TypingBoxProps) => {
                         setTyped(typedArray);
                         // generating the visible text and setting it
                         setVisibleText(
-                            props.multiplayer && waitingForPlayers ? (
-                                <div></div>
-                            ) : (
-                                generateVisibleText(
-                                    input,
-                                    props.mode,
-                                    typedArray,
-                                    text
-                                )
-                            )
+                            props.multiplayer && waitingForPlayers
+                                ? [<div key="default23524"></div>]
+                                : generateVisibleText(
+                                      input,
+                                      props.mode,
+                                      typedArray,
+                                      text
+                                  )
                         );
                         // setting the time to the time left
                         setTime(
