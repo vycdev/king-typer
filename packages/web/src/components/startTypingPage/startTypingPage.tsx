@@ -21,23 +21,20 @@ export const StartTypingPage = () => {
     const locatione = useLocation();
 
     const ws = CreateNewWS();
-
+    ws.onopen = () => {
+        console.log("Connected");
+    };
+    ws.onclose = () => {
+        console.log("Disconnected");
+    };
+    setWsHeartbeat(ws, '{"category": "ping"}');
     useEffect(() => {
         if (
-            locatione.pathname === "/type/multiplayer/easy" ||
-            locatione.pathname === "/type/multiplayer/normal"
+            !(
+                locatione.pathname === "/type/multiplayer/easy" ||
+                locatione.pathname === "/type/multiplayer/normal"
+            )
         ) {
-            setWsHeartbeat(ws, '{"category": "ping"}');
-            ws.onopen = () => {
-                console.log("Connected");
-            };
-            ws.onclose = () => {
-                sendWebsocket(ws, "leaveQueue", {
-                    id: 3
-                });
-                console.log("Disconnected");
-            };
-        } else {
             ws.close();
         }
         return () => {

@@ -17,13 +17,7 @@ export default async (
     if (queue[data.difficulty].some(l => l.id === data.id)) {
         return falseJoinResponse;
     }
-    if (
-        Object.values(games).some(l =>
-            l.players.map(j => j.id).includes(data.id)
-        )
-    ) {
-        return falseJoinResponse;
-    }
+
     queue[data.difficulty].push({ id: data.id, ws, key });
     const processResp = await processQueue(data.difficulty);
     const joinResp: HandlerResponse = {
