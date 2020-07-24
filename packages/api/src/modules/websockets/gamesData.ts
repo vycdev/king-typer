@@ -18,6 +18,7 @@ export type GamePlayer = Queueling & {
 export interface Game {
     players: GamePlayer[];
     textid: number;
+    endTime: number;
 }
 
 export type Difficulty = "easy" | "normal";

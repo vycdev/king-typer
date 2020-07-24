@@ -8,6 +8,14 @@ export default async (
     ws: WebSocket
 ): Promise<HandlerResponse[]> => {
     const key = Math.floor(Math.random() * 899999) + 100000;
+    if (queue[data.difficulty].some(l => l.id === data.id)) {
+        return [
+            {
+                category: "joinResponse",
+                data: [{ client: ws, data: { success: false } }]
+            }
+        ];
+    }
     queue[data.difficulty].push({ id: data.id, ws, key });
     const processResp = await processQueue(data.difficulty);
     const joinResp: HandlerResponse = {
