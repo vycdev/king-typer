@@ -1,4 +1,4 @@
-import { queue, Difficulty, games } from "../gamesData";
+import { queue, Difficulty } from "../gamesData";
 import HandlerResponse from "../types/HandlerResponse";
 import WebSocket from "ws";
 import processQueue from "./processQueue";
