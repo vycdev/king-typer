@@ -159,3 +159,13 @@ export const BlockOfFinishedText = styled.div`
 export const TextInfo = styled.div`
     border-bottom: 1px solid ${theme.background.secondary};
 `;
+
+export const WaitingPlayers = styled.div`
+    text-align: center;
+    font-size: 20px;
+    color: ${theme.text.primary};
+
+    margin-bottom: 5px;
+
+    font-family: "Verdana";
+`;

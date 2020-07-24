@@ -256,7 +256,7 @@ export const ProfilePage = () => {
             })
         ).json();
         if (result.islogged === false) {
-            return "0";
+            return "undefined";
         }
         return result.userid;
     };

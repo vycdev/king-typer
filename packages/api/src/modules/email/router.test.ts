@@ -3,7 +3,6 @@ import request from "supertest";
 import findUser from "../users/actions/findUser";
 
 import { server } from "../../index";
-import sendVerificationEmail from "./actions/sendVerificationEmail";
 
 const agent = request.agent(server);
 

@@ -17,8 +17,10 @@ import {
     TryAgainButton,
     ActuallyTyped,
     BlockOfFinishedText,
-    TextInfo
+    TextInfo,
+    WaitingPlayers
 } from "./style";
+import { sendWebsocket } from "../../../utils/websocket";
 
 interface TextInfoInterface {
     id: number;
@@ -30,12 +32,64 @@ interface TextInfoInterface {
     tutorial: boolean;
 }
 
+interface WSdata {
+    category: string;
+}
+
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
 const previousScores: Array<PreviousScoresType> = JSON.parse(
     localStorage.getItem("previousScores")
 );
+
+const GenerateMultiplayerProgressBars = (data, userid: number) => {
+    if (
+        (data.category != "updateResponse" && data.category != "joinGame") ||
+        !data.data.data
+    ) {
+        const ProgressBars = (
+            <>
+                <ProgressBar
+                    key={1 + "progressbar"}
+                    userid={userid}
+                    percentage={0}
+                    place={1}
+                    multiplayer={true}
+                    wpm={0}
+                ></ProgressBar>
+                <ProgressBar
+                    key={2 + "progressbar"}
+                    userid={0}
+                    percentage={0}
+                    place={1}
+                    multiplayer={true}
+                    wpm={0}
+                ></ProgressBar>
+            </>
+        );
+
+        return ProgressBars;
+    }
+
+    const getPlace = data.data.data.sort((a, b) =>
+        a.progress < b.progress ? 1 : b.progress < a.progress ? -1 : 0
+    );
+
+    const ProgressBars = data.data.data.map((value, index) => {
+        return (
+            <ProgressBar
+                key={index + "progressbar"}
+                userid={value.id}
+                percentage={value.progress}
+                place={getPlace.indexOf(value) + 1}
+                multiplayer={true}
+                wpm={value.wpm}
+            ></ProgressBar>
+        );
+    });
+    return ProgressBars;
+};
 
 export const TypingBox = (props: TypingBoxProps) => {
     const [input, setInput] = useState("");
@@ -70,6 +124,17 @@ export const TypingBox = (props: TypingBoxProps) => {
         totaltests: 0,
         tutorials: []
     });
+    const [wsData, setWsData] = useState<WSdata>({ category: undefined });
+    const [multiplayerTimer, setMultiplayerTimer] = useState(10);
+    const [gamekey, setGamekey] = useState(0);
+    const [waitingForPlayers, setWaitingForPlayers] = useState(true);
+    const [canJoinQueue, setCanJoinQueue] = useState(true);
+
+    const [multiplayerProgressBar, setMultiplayerProgressBar] = useState(
+        GenerateMultiplayerProgressBars({}, 0)
+    );
+    const [multiplayerTextId, setMultiplayerTextId] = useState(11);
+    const [afterGameProgressUpdate, setAftergameProgressUpdate] = useState(10);
 
     const textBoxRef = useRef(null);
 
@@ -85,10 +150,123 @@ export const TypingBox = (props: TypingBoxProps) => {
 
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         updateTextUserData();
-    }, [time >= 60]);
+    }, [time >= 60, multiplayerTimer === 10]);
+
+    useEffect(() => {
+        if (props.ws) {
+            if (
+                props.ws.readyState === props.ws.OPEN &&
+                (typed.length % 5 === 0 || typed.length === text.length)
+            ) {
+                props.ws.onmessage = e => {
+                    const parsedData = JSON.parse(e.data);
+                    if (parsedData.category != "pong") setWsData(parsedData);
+                    if (parsedData.category === "joinResponse") {
+                        setGamekey(parsedData.data.key);
+                    }
+                    if (parsedData.category === "joinGame") {
+                        setMultiplayerTextId(parsedData.data.game.textid);
+                        setMultiplayerProgressBar(
+                            GenerateMultiplayerProgressBars(
+                                parsedData,
+                                parseInt(localStorage.getItem("userid")) || -1
+                            )
+                        );
+                    }
+                    if (parsedData.category != "pong") {
+                        setCanJoinQueue(false);
+                    }
+                    if (parsedData.category === "updateResponse")
+                        setMultiplayerProgressBar(
+                            GenerateMultiplayerProgressBars(
+                                parsedData,
+                                parseInt(localStorage.getItem("userid")) || -1
+                            )
+                        );
+                };
+            }
+            if (
+                (wsData.category === "joinGame" ||
+                    wsData.category === "updateResponse") &&
+                multiplayerTimer === 0 &&
+                time % 5 === 0
+            ) {
+                const updateProgressObject = {
+                    key: gamekey,
+                    progress: (typed.length / text.length) * 100,
+                    wpm: Math.floor(cpm / 5),
+                    rawwpm: Math.floor(cpm / 5),
+                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                    acc: getAccuracy(typed)
+                };
+
+                sendWebsocket(props.ws, "updateProgress", updateProgressObject);
+            }
+        }
+    }, [
+        typed.length % 5 === 0 || typed.length === text.length,
+        props.ws ? props.ws.readyState : 0,
+        time % 5 === 0
+    ]);
+
+    useEffect(() => {
+        if (props.ws) {
+            if (
+                wsData.category != "joinResponse" &&
+                wsData.category != "joinGame" &&
+                wsData.category != "updateResponse" &&
+                wsData.category != "pong" &&
+                canJoinQueue &&
+                props.ws.readyState === props.ws.OPEN
+            ) {
+                sendWebsocket(props.ws, "joinQueue", {
+                    id: parseInt(localStorage.getItem("userid")) || -1,
+                    difficulty: props.mode === "easy" ? "easy" : "normal"
+                });
+            }
+            if (wsData.category === "joinGame") {
+                setWaitingForPlayers(false);
+
+                if (multiplayerTimer > 0) {
+                    setTimeout(() => {
+                        setMultiplayerTimer(multiplayerTimer - 1);
+                    }, 1000);
+                }
+            }
+        }
+    }, [wsData, multiplayerTimer, props.ws ? props.ws.readyState : 0]);
+
+    useEffect(() => {
+        if (props.ws) {
+            if (wsData.category === "updateResponse" && time === 0) {
+                if (afterGameProgressUpdate > 0) {
+                    setTimeout(() => {
+                        setAftergameProgressUpdate(afterGameProgressUpdate - 1);
+                    }, 3000);
+                }
+            }
+
+            if (
+                wsData.category === "updateResponse" &&
+                multiplayerTimer === 0 &&
+                afterGameProgressUpdate < 30
+            ) {
+                const updateProgressObject = {
+                    key: gamekey,
+                    progress: (typed.length / text.length) * 100,
+                    wpm: Math.floor(cpm / 5),
+                    rawwpm: Math.floor(cpm / 5),
+                    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                    acc: getAccuracy(typed)
+                };
+
+                sendWebsocket(props.ws, "updateProgress", updateProgressObject);
+            }
+        }
+    }, [afterGameProgressUpdate, time === 0]);
 
     const getUserBestScore = async (id: string) => {
-        if (id === "0") return [];
+        if (id === "0" || id === "undefined") return [];
         const result = await (
             await fetch(`${apiUrl}/users/userpbs/${id}`, {
                 method: "GET",
@@ -102,6 +280,14 @@ export const TypingBox = (props: TypingBoxProps) => {
         return (await result.message) ? 0 : result[result.length - 1]?.wpm;
     };
 
+    const WaitingForPlayers = () => {
+        if (waitingForPlayers && props.multiplayer) {
+            return "Waiting for players.";
+        } else {
+            return "";
+        }
+    };
+
     const updateTextUserData = async () => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const textUserDataResponse = await getUserData(
@@ -111,7 +297,7 @@ export const TypingBox = (props: TypingBoxProps) => {
     };
 
     const getUserData = async (id: string) => {
-        if (id === "" || id === undefined) return {};
+        if (id === "" || id === undefined || id === "0") return {};
         const userData = await fetch(`${apiUrl}/users/userData/${id}`, {
             method: "GET",
             credentials: "include",
@@ -134,26 +320,39 @@ export const TypingBox = (props: TypingBoxProps) => {
         difficulty: number,
         textid: number
     ) => {
-        await fetch(`${apiUrl}/games/newGame`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                wpm,
-                rawwpm,
-                accuracy,
-                difficulty,
-                textid
-            })
-        });
+        if (!props.multiplayer)
+            await fetch(`${apiUrl}/games/newGame`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    wpm,
+                    rawwpm,
+                    accuracy,
+                    difficulty,
+                    textid
+                })
+            });
     };
 
     const updateText = async (forceUpdate = false) => {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
         const gotTextInfo =
-            time >= 60 ? await getDataBaseTextInfo(props.mode) : textInfo;
+            time >= 60
+                ? props.multiplayer
+                    ? await getDataBaseTextInfo(
+                          props.mode,
+                          props.mode === "easy" ? 11 : multiplayerTextId
+                      ) // IN PLACE OF 1 PUT THE ID YOU GET FROM THE WEBSOCKET
+                    : await getDataBaseTextInfo(props.mode)
+                : textInfo;
+
+        const splicedtext =
+            props.multiplayer && props.mode === "easy"
+                ? gotTextInfo.text.split(" ").splice(0, 100)
+                : gotTextInfo.text.split(" ");
 
         const info =
             (time >= 60 && textInfo.title != gotTextInfo.title) || forceUpdate
@@ -163,15 +362,17 @@ export const TypingBox = (props: TypingBoxProps) => {
         const arrayOfText =
             props.mode === "easy"
                 ? time >= 60
-                    ? randomizeEasyText(info.text.split(" "))
-                    : info.text.split(" ")
-                : info.text.split(" ");
+                    ? randomizeEasyText(splicedtext)
+                    : splicedtext
+                : splicedtext;
 
         setTextInfo(time >= 60 ? info : textInfo);
         setText(time >= 60 ? arrayOfText : text);
 
         setVisibleText(
-            time >= 60
+            props.multiplayer && waitingForPlayers
+                ? [<div key="default234"></div>]
+                : time >= 60
                 ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
                   generateVisibleText("", props.mode, [], arrayOfText)
                 : visibleText
@@ -180,6 +381,9 @@ export const TypingBox = (props: TypingBoxProps) => {
 
     // Function for reseting the state to the initial value
     const resetState = async () => {
+        if (props.multiplayer) {
+            location.reload();
+        }
         setTime(60);
 
         await updateText(true);
@@ -389,30 +593,56 @@ export const TypingBox = (props: TypingBoxProps) => {
                 Your best: {getBestWpm()} | WPM: {Math.floor(cpm / 5)} | CPM:{" "}
                 {cpm} | Time: {time}
                 {"  "}
-                <TryAgainButton
-                    onClick={() => {
-                        resetState();
-                    }}
-                >
-                    Try again
-                </TryAgainButton>
+                {props.multiplayer ? (
+                    time > 0 ? (
+                        ""
+                    ) : (
+                        <TryAgainButton
+                            onClick={() => {
+                                resetState();
+                            }}
+                        >
+                            Try again
+                        </TryAgainButton>
+                    )
+                ) : (
+                    <TryAgainButton
+                        onClick={() => {
+                            resetState();
+                        }}
+                    >
+                        Try again
+                    </TryAgainButton>
+                )}
             </Displayer>
-            <ProgressBar
-                userid={
-                    !props.multiplayer
-                        ? localStorage.getItem("userid") === "undefined"
-                            ? 0
+            {multiplayerTimer > 0 ? (
+                <ProgressBar
+                    userid={
+                        !props.multiplayer
+                            ? localStorage.getItem("userid") === "undefined"
+                                ? -1
+                                : parseInt(localStorage.getItem("userid"))
+                            : localStorage.getItem("userid") === "undefined"
+                            ? -1
                             : parseInt(localStorage.getItem("userid"))
-                        : 3
-                }
-                percentage={
-                    props.mode === "easy"
-                        ? ((60 - time) / 60) * 100
-                        : (typed.length / text.length) * 100
-                }
-                place={1}
-                multiplayer={props.multiplayer}
-            ></ProgressBar>
+                    }
+                    percentage={
+                        props.multiplayer
+                            ? multiplayerTimer != 0
+                                ? multiplayerTimer * 10
+                                : 0 // progress that you get from the websocket
+                            : props.mode === "easy"
+                            ? ((60 - time) / 60) * 100
+                            : (typed.length / text.length) * 100
+                    }
+                    place={1}
+                    multiplayer={props.multiplayer}
+                ></ProgressBar>
+            ) : (
+                multiplayerProgressBar
+            )}
+            <WaitingPlayers>{WaitingForPlayers()}</WaitingPlayers>
+
             {/* container of typing box */}
             <Container>
                 {/* Chart with the stats for the test that is rendered only after the time reached 0 + other informative components that do the same*/}
@@ -427,25 +657,27 @@ export const TypingBox = (props: TypingBoxProps) => {
                             {textInfo.difficulty}
                         </TextInfo>
                         <ActuallyTyped>
-                            {Math.floor(cpm / 5) ===
-                                Math.floor(
-                                    typed[typed.length - 1].uncorrectedwpm
-                                ) && cpm != 0
-                                ? `Congratulations, you typed with ${cpm /
-                                      5} WPM with no mistakes!`
-                                : `You typed ${
-                                      typed[typed.length - 1].uncorrectedwpm
-                                  } WPM out of which
+                            {!props.multiplayer
+                                ? Math.floor(cpm / 5) ===
+                                      Math.floor(
+                                          typed[typed.length - 1].uncorrectedwpm
+                                      ) && cpm != 0
+                                    ? `Congratulations, you typed with ${cpm /
+                                          5} WPM with no mistakes!`
+                                    : `You typed ${
+                                          typed[typed.length - 1].uncorrectedwpm
+                                      } WPM out of which
                             ${cpm / 5} WPM were ${
-                                      props.mode === "easy"
-                                          ? "correct"
-                                          : "typed with 100% accuracy"
-                                  } and you had ${getAccuracy(
-                                      typed
-                                  )}% accuracy. Exp gained:
+                                          props.mode === "easy"
+                                              ? "correct"
+                                              : "typed with 100% accuracy"
+                                      } and you had ${getAccuracy(
+                                          typed
+                                      )}% accuracy. Exp gained:
                                   ${Math.floor(
                                       ((cpm / 5) * textInfo.difficulty) / 10
-                                  )}`}
+                                  )}`
+                                : ""}
                             {props.mode === "easy"
                                 ? getWrongWords()
                                 : generateFinishedBlockOfText()}
@@ -470,8 +702,12 @@ export const TypingBox = (props: TypingBoxProps) => {
                         // On change event, this is the only event in this component and it handles everything about the test.
                         // input is the current value of the input box
                         const input =
-                            e.target.value[e.target.value.length - 1] === " "
-                                ? props.mode === "hard"
+                            (props.multiplayer && waitingForPlayers) ||
+                            (multiplayerTimer > 0 && props.multiplayer)
+                                ? ""
+                                : e.target.value[e.target.value.length - 1] ===
+                                  " "
+                                ? props.mode === "hard" || props.multiplayer
                                     ? e.target.value.replace(/ +/g, "") ===
                                       text[typed.length]
                                         ? ""
@@ -514,7 +750,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                             time >= 0 &&
                             typed.length < text.length &&
                             e.target.value != " " &&
-                            (props.mode === "hard"
+                            (props.mode === "hard" || props.multiplayer
                                 ? e.target.value.replace(/ +/g, "") ===
                                   text[typed.length]
                                 : true)
@@ -559,12 +795,14 @@ export const TypingBox = (props: TypingBoxProps) => {
                         setTyped(typedArray);
                         // generating the visible text and setting it
                         setVisibleText(
-                            generateVisibleText(
-                                input,
-                                props.mode,
-                                typedArray,
-                                text
-                            )
+                            props.multiplayer && waitingForPlayers
+                                ? [<div key="default23524"></div>]
+                                : generateVisibleText(
+                                      input,
+                                      props.mode,
+                                      typedArray,
+                                      text
+                                  )
                         );
                         // setting the time to the time left
                         setTime(
