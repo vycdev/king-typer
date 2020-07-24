@@ -39,7 +39,7 @@ export default async (
             textid: newGame.textid,
             players: newGame.players.map(l => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { gameKey, ...data } = l;
+                const { gameKey, ws, ...data } = l;
                 return data;
             })
         };
