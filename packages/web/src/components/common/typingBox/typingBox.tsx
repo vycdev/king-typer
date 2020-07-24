@@ -32,6 +32,10 @@ interface TextInfoInterface {
     tutorial: boolean;
 }
 
+interface WSdata {
+    category: string;
+}
+
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
@@ -120,7 +124,7 @@ export const TypingBox = (props: TypingBoxProps) => {
         totaltests: 0,
         tutorials: []
     });
-    const [wsData, setWsData] = useState({});
+    const [wsData, setWsData] = useState<WSdata>({ category: undefined });
     const [multiplayerTimer, setMultiplayerTimer] = useState(10);
     const [gamekey, setGamekey] = useState(0);
     const [waitingForPlayers, setWaitingForPlayers] = useState(true);
@@ -366,12 +370,14 @@ export const TypingBox = (props: TypingBoxProps) => {
         setText(time >= 60 ? arrayOfText : text);
 
         setVisibleText(
-            props.multiplayer && waitingForPlayers
-                ? ""
-                : time >= 60
-                ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
-                  generateVisibleText("", props.mode, [], arrayOfText)
-                : visibleText
+            props.multiplayer && waitingForPlayers ? (
+                <div></div>
+            ) : time >= 60 ? (
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                generateVisibleText("", props.mode, [], arrayOfText)
+            ) : (
+                visibleText
+            )
         );
     };
 
@@ -791,14 +797,16 @@ export const TypingBox = (props: TypingBoxProps) => {
                         setTyped(typedArray);
                         // generating the visible text and setting it
                         setVisibleText(
-                            props.multiplayer && waitingForPlayers
-                                ? ""
-                                : generateVisibleText(
-                                      input,
-                                      props.mode,
-                                      typedArray,
-                                      text
-                                  )
+                            props.multiplayer && waitingForPlayers ? (
+                                <div></div>
+                            ) : (
+                                generateVisibleText(
+                                    input,
+                                    props.mode,
+                                    typedArray,
+                                    text
+                                )
+                            )
                         );
                         // setting the time to the time left
                         setTime(
