@@ -45,6 +45,13 @@ export default async (
         response.map(j => {
             const { category: respCategory } = j;
             j.data.map((l: HandlerResponse["data"][0]) => {
+                console.log(
+                    JSON.stringify({
+                        category: respCategory,
+                        data: l.data
+                    })
+                );
+
                 l.client.send(
                     JSON.stringify({
                         category: respCategory,
