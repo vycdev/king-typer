@@ -5,6 +5,8 @@ import { removeOldGame } from "./actions/removeOldGame";
 import checkPB from "./actions/checkPB";
 import { newGameBody } from "./schema/newGameBody";
 import { validateSchema } from "../schema/middleware/validateSchema";
+import getAllGames from "./actions/getAllGames";
+import getAllPbs from "./actions/getAllPbs";
 
 const router = new Router({ prefix: "/games" });
 
@@ -33,4 +35,15 @@ router.post(
     }
 );
 
+router.get("/", async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = await getAllGames();
+    await next();
+});
+
+router.get("/getAllPbs", async (ctx, next) => {
+    ctx.status = 200;
+    ctx.body = await getAllPbs();
+    await next();
+});
 export default router.routes();

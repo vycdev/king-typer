@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { Route, useLocation } from "react-router-dom";
 
-import { Wrapper, Latest } from "./style";
+import { Wrapper } from "./style";
 
 import { Nav } from "./components/navBar/navBar";
+import { LatestScores } from "./components/latestsScores/latestScores";
 
 import { TypingBox } from "../common/typingBox/typingBox";
 import { getTheme } from "../../utils/getTheme";
@@ -47,7 +48,7 @@ export const StartTypingPage = () => {
         <Wrapper>
             <Nav />
             <Route exact path="/type">
-                <Latest>HERE I WILL PUT THE LATEST HIGHSCORES</Latest>
+                <LatestScores></LatestScores>
             </Route>
             <Route exact path="/type/practice/easy">
                 <TypingBox
