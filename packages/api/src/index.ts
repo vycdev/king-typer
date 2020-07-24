@@ -14,6 +14,7 @@ import { useSession } from "./modules/session/helpers/useSession";
 import { setWsHeartbeat } from "ws-heartbeat/server";
 import websocket from "./modules/websockets/websocket";
 import processClose from "./modules/websockets/actions/processClose";
+import pruneGames from "./modules/websockets/actions/pruneGames";
 
 const app = new Koa();
 const router = new Router();
@@ -49,3 +50,4 @@ setWsHeartbeat(wss, (ws: WebSocket, data: unknown) => {
         ws.send('{"category": "pong"}');
     }
 });
+setInterval(pruneGames, 120000);

@@ -32,6 +32,10 @@ interface TextInfoInterface {
     tutorial: boolean;
 }
 
+interface WSdata {
+    category: string;
+}
+
 // This file contains the page for the typing test.
 
 // Parse the best wpm and the previous scores from local storage
@@ -120,7 +124,7 @@ export const TypingBox = (props: TypingBoxProps) => {
         totaltests: 0,
         tutorials: []
     });
-    const [wsData, setWsData] = useState({});
+    const [wsData, setWsData] = useState<WSdata>({ category: undefined });
     const [multiplayerTimer, setMultiplayerTimer] = useState(10);
     const [gamekey, setGamekey] = useState(0);
     const [waitingForPlayers, setWaitingForPlayers] = useState(true);
@@ -367,7 +371,7 @@ export const TypingBox = (props: TypingBoxProps) => {
 
         setVisibleText(
             props.multiplayer && waitingForPlayers
-                ? ""
+                ? [<div key="default234"></div>]
                 : time >= 60
                 ? // eslint-disable-next-line @typescript-eslint/no-use-before-define
                   generateVisibleText("", props.mode, [], arrayOfText)
@@ -792,7 +796,7 @@ export const TypingBox = (props: TypingBoxProps) => {
                         // generating the visible text and setting it
                         setVisibleText(
                             props.multiplayer && waitingForPlayers
-                                ? ""
+                                ? [<div key="default23524"></div>]
                                 : generateVisibleText(
                                       input,
                                       props.mode,

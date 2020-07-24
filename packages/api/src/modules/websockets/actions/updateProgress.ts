@@ -14,8 +14,8 @@ export default async (
 
     ws: WebSocket
 ): Promise<HandlerResponse[]> => {
-    const gameWithKey = Object.values(games).find(l =>
-        l.players.some(j => j.key === data.key)
+    const gameWithKey = Object.entries(games).find(l =>
+        l[1].players.some(j => j.key === data.key)
     );
     if (!gameWithKey) {
         return [
@@ -32,9 +32,9 @@ export default async (
             }
         ];
     }
-    const player = gameWithKey.players.find(l => l.key === data.key);
+    const player = gameWithKey[1].players.find(l => l.key === data.key);
     Object.assign(player, data);
-    await gameFinished(gameWithKey);
+    await gameFinished((gameWithKey[0] as unknown) as number, gameWithKey[1]);
     return [
         {
             category: "updateResponse",
@@ -43,7 +43,7 @@ export default async (
                     client: ws,
                     data: {
                         success: true,
-                        data: gameWithKey.players.map(l => {
+                        data: gameWithKey[1].players.map(l => {
                             // eslint-disable-next-line @typescript-eslint/no-unused-vars
                             const { key, ws, gameKey, ...data } = l;
                             return data;
