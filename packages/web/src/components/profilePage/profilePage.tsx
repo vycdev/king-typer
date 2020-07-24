@@ -436,8 +436,8 @@ export const ProfilePage = () => {
                                 (r, index) =>
                                     userData.achievements[index] === value.id
                             )
-                                ? theme.primary
-                                : theme.background.secondary
+                                ? theme.tertiary
+                                : theme.secondary
                         }`,
                         margin: "5px auto"
                     }}

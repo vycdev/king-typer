@@ -24,6 +24,9 @@ export default async (
     if (!compareRequirements(tutorial.requirements!, requirements)) {
         return false;
     }
+    if (user.tutorials.includes(tutorialid)) {
+        return false;
+    }
     await knex("users")
         .update({
             tutorials: knex.raw("array_append(tutorials, ?)", [tutorialid])
