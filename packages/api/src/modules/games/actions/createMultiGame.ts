@@ -11,12 +11,6 @@ export const createGames = async (
     difficulty: number,
     textid: number
 ): Promise<Game> => {
-    const sortedPlayers = players
-        .sort((a, b) => a.wpm - b.wpm)
-        .reduce((acc, cur, idx, arr) => ({
-            ...acc,
-            [cur.id]: arr.length - idx
-        }));
     const newGames: Game[] = (
         await Promise.all(
             players.map(async l => {
@@ -50,10 +44,7 @@ export const createGames = async (
                     .where({ id: l.id })
                     .update({
                         totaltests: user.totaltests ? user.totaltests + 1 : 1,
-                        exp: Math.floor(
-                            (user.exp + (l.wpm * difficulty) / 10) *
-                                ((1 + sortedPlayers[user.id]) / 10)
-                        )
+                        exp: user.exp + (difficulty * l.wpm) / 10
                     });
 
                 const possibleAchievements: Achievement[] = await findAchievementsByRequirement(
