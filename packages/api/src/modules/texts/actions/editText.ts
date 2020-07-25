@@ -7,7 +7,7 @@ export default async <T extends keyof Text>(
     id: number,
     newValue: Text[T]
 ) => {
-    if (!property || !id || !newValue) return null;
+    if (!property || !id || newValue === undefined) return null;
     const result = await knex<Text>("texts")
         .select()
         .first()

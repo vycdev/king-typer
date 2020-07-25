@@ -8,6 +8,7 @@ import { Navbar } from "./components/common/navbar/navBar";
 import { Footer } from "./components/common/footer/footer";
 import { StatisticsPage } from "./components/statisticsPage/statisticsPage";
 import { StartTypingPage } from "./components/startTypingPage/startTypingPage";
+import { Dashboard } from "./components/dashboard/dashboard";
 
 import { LoginRegisterPage } from "./components/loginPage/loginPage";
 import { ProfilePage } from "./components/profilePage/profilePage";
@@ -40,6 +41,9 @@ const App = () => {
                             </Route>
                             <Route path="/loginregister">
                                 <LoginRegisterPage />
+                            </Route>
+                            <Route path="/dashboard">
+                                <Dashboard />
                             </Route>
                         </Switch>
                     </HashRouter>

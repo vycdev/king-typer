@@ -598,6 +598,16 @@ export const ProfilePage = () => {
                         Switch Theme
                     </LogoutSwitchButton>
                     <LogoutSwitchButton
+                        hidden={
+                            !(isThisTheLoggedUser && userData.role === "admin")
+                        }
+                        onClick={async () => {
+                            location.replace("#/dashboard");
+                        }}
+                    >
+                        Dashboard
+                    </LogoutSwitchButton>
+                    <LogoutSwitchButton
                         hidden={!isThisTheLoggedUser}
                         onClick={async () => {
                             await fetch(`${apiUrl}/auth/logout`, {
