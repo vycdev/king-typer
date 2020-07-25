@@ -208,7 +208,7 @@ const DeleteText = async (data: Text) => {
     });
 };
 
-const DeleteAchievement = async (data: Text) => {
+const DeleteAchievement = async (data: Achievement) => {
     await fetch(`${apiUrl}/achievements/deleteAchievement`, {
         method: "DELETE",
         credentials: "include",
@@ -280,9 +280,7 @@ const AchievementItemSettings = (props: {
         if (
             data.description.length <= 5 ||
             data.description.length >= 255 ||
-            parseInt(data.difficulty) < 1 ||
-            parseInt(data.difficulty) > 5 ||
-            data.name < 3
+            data.name.length < 3
         ) {
             statusDiv.current.innerHTML =
                 "OOPS looks like you did something wrong!";
@@ -726,9 +724,7 @@ const AddNewAchievement = (props: { hidden: boolean }) => {
         if (
             data.description.length <= 5 ||
             data.description.length >= 255 ||
-            parseInt(data.difficulty) < 1 ||
-            parseInt(data.difficulty) > 5 ||
-            data.name < 3
+            data.name.length < 3
         ) {
             statusDiv.current.innerHTML =
                 "OOPS looks like you did something wrong!";
@@ -1291,7 +1287,7 @@ export const Dashboard = () => {
     );
     const [getsAchievementUpdate, setGetsAchievementUpdate] = useState(-1);
     const [editedAchievement, setEditedAchievement] = useState<Achievement>(
-        InvalidTextData
+        InvalidAchievement
     );
     const [isBeingEditedAchievement, setIsBeingEditedAchievement] = useState(
         false
