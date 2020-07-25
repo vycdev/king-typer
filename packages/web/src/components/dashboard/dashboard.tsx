@@ -280,8 +280,8 @@ const AchievementItemSettings = (props: {
         if (
             data.description.length <= 5 ||
             data.description.length >= 255 ||
-            data.difficulty < 1 ||
-            data.difficulty > 5 ||
+            parseInt(data.difficulty) < 1 ||
+            parseInt(data.difficulty) > 5 ||
             data.name < 3
         ) {
             statusDiv.current.innerHTML =
@@ -726,8 +726,8 @@ const AddNewAchievement = (props: { hidden: boolean }) => {
         if (
             data.description.length <= 5 ||
             data.description.length >= 255 ||
-            data.difficulty < 1 ||
-            data.difficulty > 5 ||
+            parseInt(data.difficulty) < 1 ||
+            parseInt(data.difficulty) > 5 ||
             data.name < 3
         ) {
             statusDiv.current.innerHTML =
@@ -1201,7 +1201,10 @@ const UserItemSettings = (props: { hidden: boolean; data: AllUser }) => {
                                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                                 const { role, ...rest } = data;
                                 const newData = {
-                                    role: e.target.value,
+                                    role: e.target.value as
+                                        | "admin"
+                                        | "member"
+                                        | "unverified",
                                     ...rest
                                 };
                                 setData(newData);
@@ -1266,28 +1269,28 @@ export const Dashboard = () => {
     );
 
     // For users pannel
-    const [allUsersList, setAllUsersList] = useState<Array<JSX.Element>>([
+    const [allUsersList, setAllUsersList] = useState<JSX.Element>(
         <ListItemWrapper key="usersloading"></ListItemWrapper>
-    ]);
+    );
     const [getsUserUpdate, setGetsUserUpdate] = useState(-1);
     const [editedUser, setEditedUser] = useState<AllUser>(InvalidUserData);
     const [isBeingEditedUser, setIsBeingEditedUser] = useState(false);
 
     // For texts pannel
-    const [allTextsList, setAllTextsList] = useState<Array<JSX.Element>>([
+    const [allTextsList, setAllTextsList] = useState<JSX.Element>(
         <ListItemWrapper key="textsloading"></ListItemWrapper>
-    ]);
+    );
     const [getsTextUpdate, setGetsTextUpdate] = useState(-1);
     const [editedText, setEditedText] = useState<Text>(InvalidTextData);
     const [isBeingEditedText, setIsBeingEditedText] = useState(false);
     const [addNewText, setAddNewText] = useState(false);
 
     // For achievements pannel
-    const [allAchievementsList, setAllAchievementsList] = useState<
-        Array<JSX.Element>
-    >([<ListItemWrapper key="textsloading"></ListItemWrapper>]);
+    const [allAchievementsList, setAllAchievementsList] = useState<JSX.Element>(
+        <ListItemWrapper key="textsloading"></ListItemWrapper>
+    );
     const [getsAchievementUpdate, setGetsAchievementUpdate] = useState(-1);
-    const [editedAchievement, setEditedAchievement] = useState<Text>(
+    const [editedAchievement, setEditedAchievement] = useState<Achievement>(
         InvalidTextData
     );
     const [isBeingEditedAchievement, setIsBeingEditedAchievement] = useState(
@@ -1295,7 +1298,9 @@ export const Dashboard = () => {
     );
     const [addNewAchievement, setAddNewAchievement] = useState(false);
 
-    const generateUsersList = async (users: Array<AllUser>) => {
+    const generateUsersList = async (
+        users: Array<AllUser>
+    ): Promise<JSX.Element> => {
         const List = users.map((value, index) => {
             return (
                 <ListItemWrapper
@@ -1329,7 +1334,9 @@ export const Dashboard = () => {
         );
     };
 
-    const generateTextsList = async (texts: Array<Text>) => {
+    const generateTextsList = async (
+        texts: Array<Text>
+    ): Promise<JSX.Element> => {
         const List = texts.map((value, index) => {
             return (
                 <ListItemWrapper
@@ -1365,7 +1372,7 @@ export const Dashboard = () => {
 
     const generateAcheivementsList = async (
         achievements: Array<Achievement>
-    ) => {
+    ): Promise<JSX.Element> => {
         const List = achievements.map((value, index) => {
             return (
                 <ListItemWrapper
