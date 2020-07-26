@@ -23,7 +23,9 @@ import {
     ActuallyTyped,
     BlockOfFinishedText,
     TextInfo,
-    WaitingPlayers
+    WaitingPlayers,
+    ImageWrapper,
+    KeyboardImage
 } from "./style";
 import { sendWebsocket } from "../../../utils/websocket";
 
@@ -858,6 +860,16 @@ export const TypingBox = (props: TypingBoxProps) => {
                     }}
                 ></InputBox>
             </Container>
+            {time > 0 && props.tutorial ? (
+                <ImageWrapper>
+                    <KeyboardImage
+                        src="http://transcribeme.com/wp-content/uploads/2018/02/edu_keyboard@2x-1-1024x411.png"
+                        alt="OOOPS Looks like the image failed to load."
+                    ></KeyboardImage>
+                </ImageWrapper>
+            ) : (
+                ""
+            )}
         </Wrapper>
     );
 };

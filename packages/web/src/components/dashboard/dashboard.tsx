@@ -434,13 +434,12 @@ const AchievementItemSettings = (props: {
                             setIsHidden(true);
                         }}
                     >
-                        Delete Text
+                        Delete Achievement
                     </button>
                     <button
                         onClick={() => {
                             if (verifyForm()) {
                                 UpdateAchievementData(data);
-                                location.reload();
                             }
                         }}
                     >
@@ -688,7 +687,6 @@ const TextItemSettings = (props: { hidden: boolean; data: Text }) => {
                         onClick={() => {
                             if (verifyForm()) {
                                 UpdateTextData(data);
-                                location.reload();
                             }
                         }}
                     >
@@ -874,7 +872,6 @@ const AddNewAchievement = (props: { hidden: boolean }) => {
                         onClick={() => {
                             if (verifyForm()) {
                                 PostNewAchievement(data);
-                                location.reload();
                             }
                         }}
                     >
@@ -1092,7 +1089,6 @@ const AddNewText = (props: { hidden: boolean }) => {
                         onClick={() => {
                             if (verifyForm()) {
                                 PostNewText(data);
-                                location.reload();
                             }
                         }}
                     >
@@ -1124,7 +1120,7 @@ const UserItemSettings = (props: { hidden: boolean; data: AllUser }) => {
                 data.role != "member" &&
                 data.role != "unverified") ||
             data.description.length > 250 ||
-            data.name.length <= 3 ||
+            data.name.length < 2 ||
             data.email.length <= 10
         ) {
             statusDiv.current.innerHTML =
@@ -1247,7 +1243,6 @@ const UserItemSettings = (props: { hidden: boolean; data: AllUser }) => {
                         onClick={() => {
                             if (verifyForm()) {
                                 UpdateUserData(data);
-                                location.reload();
                             }
                         }}
                     >

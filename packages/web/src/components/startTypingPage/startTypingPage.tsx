@@ -14,7 +14,6 @@ import { Tutorials } from "./components/tutorials/tutorials";
 const theme = getTheme();
 
 import { CreateNewWS } from "./helpers/websocket";
-import { sendWebsocket } from "../../utils/websocket";
 import { setWsHeartbeat } from "ws-heartbeat/client";
 
 export const StartTypingPage = () => {

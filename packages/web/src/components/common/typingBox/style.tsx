@@ -169,3 +169,14 @@ export const WaitingPlayers = styled.div`
 
     font-family: "Verdana";
 `;
+
+export const ImageWrapper = styled.div`
+    position: relative;
+    margin: auto;
+    width: 700px;
+    padding-top: 100px;
+`;
+export const KeyboardImage = styled.img`
+    margin: auto;
+    width: 700px;
+`;
