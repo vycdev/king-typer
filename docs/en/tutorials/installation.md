@@ -91,5 +91,3 @@ Other scripts can be found in the package.json files. ([Root folder](../../packa
 - `check`: Runs Prettier, followed by ESLint.
 - `semantic-release`: Runs semantic-release.
 - `test`: Runs unit tests. These are currently only available for the API.
-
-All of those scripts were tested on Windows Powershell as well as on GitHub Actions and are guaranteed to be working.

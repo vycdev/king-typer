@@ -1,6 +1,5 @@
 # Links for all the documentation files:
 
-- [Basic usage of the app.](basic-usage.md)
 - [Assets and code I don't own](assets-%26-code-i-dont-own.md)
 - [Some resources for learning touch typing.](tutorials/touch-typing.md)
 - [Instalation guide](tutorials/instalation.md)

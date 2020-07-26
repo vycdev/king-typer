@@ -1,19 +1,19 @@
 # King Typer
 
-King Typer este un site web creat pentru concursul de infoeducatie și obiectivul principal este să concurezi cu site-urile de dactilografiere actuale care au designuri vechi, UX proaste sau chiar ambele și să devină un mediu plăcut pentru învățarea și practicarea tastării tactile.
+King Typer este un site web creat pentru concursul infoeducatie și are ca obiectivul principal să concureze cu site-urile de dactilografiere actuale care au designuri vechi, UX proaste sau chiar ambele și să devină un mediu plăcut pentru învățarea și practicarea tastării tactile.
 
 Dezvoltarea pentru King Typer va continua chiar și după concurs, până când voi fi mulțumit de rezultate.
 
-Acesta este un monorepo, care conține atât API-ul cât și front-end-ul, care sunt găzduite separat pe heroku.
+Acesta este un monorepo care contine atat API-ul cat si front-end-ul, ele fiind gazduite separat pe heroku.
 
 - Puteți accesa site-ul [aici](https://king-typer.herokuapp.com/).
 - Puteți vedea link-uri pentru alte informatii [aici](main.md).
 
-## De ce este totul în engleză?
+## De ce websiteul este doar în engleză?
 
-Am ales să scriu totul în engleză, deoarece obiectivul principal al acestui proiect este de a ajuta cât mai mulți oameni să poată exersa tastarea tactilă, iar scrierea proiectului în limba engleză va deschide proiectul pentru mult mai multe persoane de pe internet.
+Am ales să scriu totul în engleză deoarece obiectivul principal al acestui proiect este de a ajuta cât mai mulți oameni să poată exersa tastarea tactilă, iar scrierea lui în aceasta limba il va deschide pentru mult mai multe persoane de pe internet.
 
-Dar intenționez să scriu traduceri pe pagini pentru cât mai multe țări în viitor, dar rețineți că intenționez să păstrez testele de dactilografiere în limba engleză, deoarece este cea mai bună limbă în care puteți practica tastarea.
+Intentionez sa traduc website-ul pentru cât mai multe limbi în viitor, totusi voi pastra testele de dactilografiere în limba engleză.
 
 ## Arhitectură
 
@@ -21,17 +21,17 @@ Dar intenționez să scriu traduceri pe pagini pentru cât mai multe țări în 
 Aplicația este scrisă folosind TypeScript, un strongly-typed superset de Javascript care este combinat cu React pentru a crea o aplicație web responsive.
 
 ### Structura fișierelor
-Depozitul este un mono-depozit, ceea ce înseamnă că servește două părți ale aplicației care sunt conectate între ele, API (interfață de programare a aplicației) și SPA (aplicație de o singură pagină).
+Depozitul este un mono-repository, ceea ce înseamnă că servește două părți ale aplicației care sunt conectate între ele, API (interfață de programare a aplicației) și SPA (aplicație de o singură pagină).
 
 În folderul rădăcină veți găsi un dosar `packages` care conține folderul` web`, A.K.A. SPA și folderul `api`.
 
 #### Folderul `api`.
 
-Folderul `api` conține server-ul api, nu numai ca acesta contine rutele care pot fi accesate prin requesturi HTTP, dar contine si migratille si seedurile pentru baza de date.
+Folderul `api` conține server-ul api, nu numai ca acesta contine rutele care pot fi accesate prin requesturi HTTP, dar contine si migratiile si seedurile pentru baza de date.
 
 #### Folderul `web`.
 
-Folderul `web` conține tot ce are legătură cu SPA. În rădăcina acestui folder veți găsi folderul `src` care conține tot codul pentru SPA. Există, de asemenea, un dosar `public` care conține fișierul` index.html`, de asemenea mai este si configurațiile pentru babel, eslint, heroku, typecript și webpack, precum și un fișier `package.json` care ține evidența tuturor dependencyurilor din folder.
+Folderul `web` conține tot ce are legătură cu SPA. În rădăcina acestuia veți găsi folderul `src` care conține tot codul pentru SPA. Există, de asemenea, un dosar `public` care conține fișierul` index.html`, de asemenea mai este si configurațiile pentru babel, eslint, heroku, typecript și webpack, precum și un fișier `package.json` care ține evidența tuturor dependentelor din folder.
 
 Folderul `src` este structurat în:
 - `index.tsx`: care conține aplicația principală.

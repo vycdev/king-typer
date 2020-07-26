@@ -1,6 +1,5 @@
 # Linkuri pentru restul filelor din documentatie:
 
-- [Functiile aplicatiei si utilizare](utilizare.md)
 - [Asseturi si cod pe care nu il detin](assets-%26-cod-pe-care-nu-il-detin.md)
 - [Cateva resurse pentru a invata touch typing](tutoriale/touch-typing.md)
 - [Tutorial pentru instalare](tutoriale/instalare.md)
