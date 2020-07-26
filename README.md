@@ -1,6 +1,6 @@
 # King Typer
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/vyctor661/king-typer?style=flat-square)
@@ -39,10 +39,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://discordapp.com/users/270972671490129921"><img src="https://avatars0.githubusercontent.com/u/49570123?v=4" width="100px;" alt=""/><br /><sub><b>Sandu Victor</b></sub></a><br /><a href="https://github.com/Sandu Victor/King Typer/commits?author=Vyctor661" title="Code">💻</a> <a href="#design-Vyctor661" title="Design">🎨</a> <a href="#infra-Vyctor661" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://discordapp.com/users/270972671490129921"><img src="https://avatars0.githubusercontent.com/u/49570123?v=4" width="100px;" alt=""/><br /><sub><b>Sandu Victor</b></sub></a><br /><a href="https://github.com/Sandu Victor/King Typer/commits?author=Vyctor661" title="Code">💻</a> <a href="#design-Vyctor661" title="Design">🎨</a> <a href="#infra-Vyctor661" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#question-Vyctor661" title="Answering Questions">💬</a> <a href="#content-Vyctor661" title="Content">🖋</a> <a href="https://github.com/Sandu Victor/King Typer/commits?author=Vyctor661" title="Documentation">📖</a> <a href="#ideas-Vyctor661" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-Vyctor661" title="Maintenance">🚧</a> <a href="#projectManagement-Vyctor661" title="Project Management">📆</a> <a href="https://github.com/Sandu Victor/King Typer/pulls?q=is%3Apr+reviewed-by%3AVyctor661" title="Reviewed Pull Requests">👀</a> <a href="#tutorial-Vyctor661" title="Tutorials">✅</a></td>
+    <td align="center"><a href="http://xwafl.github.io/portfolio"><img src="https://avatars2.githubusercontent.com/u/35458851?v=4" width="100px;" alt=""/><br /><sub><b>xWafl</b></sub></a><br /><a href="https://github.com/Sandu Victor/King Typer/commits?author=xWafl" title="Code">💻</a> <a href="#ideas-xWafl" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Sandu Victor/King Typer/pulls?q=is%3Apr+reviewed-by%3AxWafl" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/Sandu Victor/King Typer/commits?author=xWafl" title="Tests">⚠️</a> <a href="#userTesting-xWafl" title="User Testing">📓</a> <a href="#security-xWafl" title="Security">🛡️</a></td>
     <td align="center"><a href="https://github.com/Mateiadrielrafael"><img src="https://avatars0.githubusercontent.com/u/39400800?v=4" width="100px;" alt=""/><br /><sub><b>Matei Adriel</b></sub></a><br /><a href="#ideas-Mateiadrielrafael" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Sandu Victor/King Typer/pulls?q=is%3Apr+reviewed-by%3AMateiadrielrafael" title="Reviewed Pull Requests">👀</a> <a href="#userTesting-Mateiadrielrafael" title="User Testing">📓</a></td>
-    <td align="center"><a href="http://xwafl.github.io/portfolio"><img src="https://avatars2.githubusercontent.com/u/35458851?v=4" width="100px;" alt=""/><br /><sub><b>xWafl</b></sub></a><br /><a href="#userTesting-xWafl" title="User Testing">📓</a></td>
     <td align="center"><a href="https://github.com/maoitsme"><img src="https://avatars2.githubusercontent.com/u/38869813?v=4" width="100px;" alt=""/><br /><sub><b>MaoItsMe</b></sub></a><br /><a href="#userTesting-maoitsme" title="User Testing">📓</a></td>
+    <td align="center"><a href="http://justlucdewit.github.io"><img src="https://avatars3.githubusercontent.com/u/37410843?v=4" width="100px;" alt=""/><br /><sub><b>luke</b></sub></a><br /><a href="#userTesting-justlucdewit" title="User Testing">📓</a></td>
   </tr>
 </table>
 

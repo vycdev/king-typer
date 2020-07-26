@@ -1,5 +1,5 @@
 // inteface for the array that contains objects with previous scores
-export interface previousScoresType {
+export interface PreviousScoresType {
     date: string;
     wpm: number;
     uncorrectedwpm: number;

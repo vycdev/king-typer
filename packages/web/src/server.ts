@@ -20,7 +20,7 @@ app.use(async (ctx, next) => {
         ctx.app.emit("error", err, ctx);
     }
 });
-app.on("error", (err, ctx) => {
+app.on("error", err => {
     console.log(err);
 });
 

@@ -1,2 +1,2 @@
-require("dotenv")
-require("ts-node/register")
+require("dotenv");
+require("ts-node/register");

@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../utils/getTheme";
 
 // File which contains all the styled components used by the typing box page
+
+const theme = getTheme();
 
 export const Wrapper = styled.div`
     width: 100%;
     padding: 15px 0px;
     position: relative;
+    color: ${theme.text.primary};
 `;
 
 export const Container = styled.div`
@@ -13,6 +17,8 @@ export const Container = styled.div`
     height: 250px;
     position: relative;
     text-align: center;
+
+    border-top: 1px dashed ${theme.background.secondary};
 
     margin: auto;
 
@@ -25,8 +31,9 @@ export const Container = styled.div`
 export const Displayer = styled.div`
     text-align: center;
     width: 100%;
-    height: 25px;
-    border-bottom: 1px solid #9e9e9e;
+    height: 30px;
+
+    font-family: "Verdana";
 `;
 
 export const TextBox = styled.div`
@@ -35,7 +42,7 @@ export const TextBox = styled.div`
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: 30px;
 
     scroll-behavior: smooth;
 
@@ -49,7 +56,7 @@ export const TextBox = styled.div`
         display: none;
     }
     .spaced {
-        padding-right: 4px;
+        padding-right: 8px;
     }
     .isBeingTyped {
         display: inline-flex;
@@ -62,9 +69,10 @@ export const InputBox = styled.input`
 
     border-style: solid;
     border-width: 0;
-    border-top: 1px solid #9e9e9e;
-    border-bottom: 1px solid #9e9e9e;
-
+    border-top: 1px solid ${theme.background.secondary};
+    border-bottom: 1px solid ${theme.background.secondary};
+    background-color: ${theme.background.primary};
+    color: ${theme.text.primary};
     position: absolute;
     bottom: 0;
     left: 0px;
@@ -79,15 +87,15 @@ export const InputBox = styled.input`
 
 export const DataBoxWrapper = styled.div`
     width: 100%;
-    border-bottom: 1px solid #9e9e9e;
+    border-bottom: 1px solid ${theme.background.secondary};
 `;
 
 export const TryAgainButton = styled.button`
-    background: #198cf6;
+    background: ${theme.primary};
     border: none;
     text-align: center;
     text-decoration: none;
-    color: white;
+    color: ${theme.text.secondary};
     padding: 3px 6px;
     margin-left: 5px;
     margin-bottom: 1px;
@@ -116,4 +124,59 @@ export const TryAgainButton = styled.button`
 
 export const ActuallyTyped = styled.div`
     margin-top: 10px;
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
+    /* width */
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: ${theme.primary};
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: ${theme.background.secondary};
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: ${theme.tertiary};
+    }
+`;
+
+export const BlockOfFinishedText = styled.div`
+    margin-top: 20px;
+    display: block;
+    & div {
+        padding-right: 2px;
+    }
+`;
+
+export const TextInfo = styled.div`
+    border-bottom: 1px solid ${theme.background.secondary};
+`;
+
+export const WaitingPlayers = styled.div`
+    text-align: center;
+    font-size: 20px;
+    color: ${theme.text.primary};
+
+    margin-bottom: 5px;
+
+    font-family: "Verdana";
+`;
+
+export const ImageWrapper = styled.div`
+    position: relative;
+    margin: auto;
+    width: 700px;
+    padding-top: 100px;
+`;
+export const KeyboardImage = styled.img`
+    margin: auto;
+    width: 700px;
 `;

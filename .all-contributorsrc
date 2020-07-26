@@ -18,7 +18,29 @@
       "contributions": [
         "code",
         "design",
-        "infra"
+        "infra",
+        "question",
+        "content",
+        "doc",
+        "ideas",
+        "maintenance",
+        "projectManagement",
+        "review",
+        "tutorial"
+      ]
+    },
+    {
+      "login": "xWafl",
+      "name": "xWafl",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/35458851?v=4",
+      "profile": "http://xwafl.github.io/portfolio",
+      "contributions": [
+        "code",
+        "ideas",
+        "review",
+        "test",
+        "userTesting",
+        "security"
       ]
     },
     {
@@ -33,19 +55,19 @@
       ]
     },
     {
-      "login": "xWafl",
-      "name": "xWafl",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/35458851?v=4",
-      "profile": "http://xwafl.github.io/portfolio",
+      "login": "maoitsme",
+      "name": "MaoItsMe",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38869813?v=4",
+      "profile": "https://github.com/maoitsme",
       "contributions": [
         "userTesting"
       ]
     },
     {
-      "login": "maoitsme",
-      "name": "MaoItsMe",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/38869813?v=4",
-      "profile": "https://github.com/maoitsme",
+      "login": "justlucdewit",
+      "name": "luke",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/37410843?v=4",
+      "profile": "http://justlucdewit.github.io",
       "contributions": [
         "userTesting"
       ]

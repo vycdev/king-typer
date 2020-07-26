@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { LineChart, XAxis, YAxis, Line, Tooltip, Legend } from "recharts";
 import { DataBoxWrapper } from "../style";
 
-import { DataBoxType, typedArrayInterface } from "../helpers/interfaces";
+import { DataBoxType, TypedArrayInterface } from "../helpers/interfaces";
+import { getTheme } from "../../../../utils/getTheme";
 
-export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
+const theme = getTheme();
+
+export const DataBox = (props: DataBoxType<TypedArrayInterface>) => {
     return (
         <DataBoxWrapper>
             <LineChart
@@ -17,14 +20,14 @@ export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
                     name="Corrected WPM"
                     type="monotone"
                     dataKey="wpm"
-                    stroke="#198cf6"
+                    stroke={theme.primary}
                     dot={<></>}
                 />
                 <Line
                     name="WPM"
                     type="monotone"
                     dataKey="uncorrectedwpm"
-                    stroke="#0064a6"
+                    stroke={theme.primary}
                     strokeDasharray="3 4 5 2"
                     dot={<></>}
                 />
@@ -32,13 +35,20 @@ export const DataBox = (props: DataBoxType<typedArrayInterface>) => {
                     name="Accuracy"
                     type="monotone"
                     dataKey="accuracy"
-                    stroke="#00a627"
+                    stroke={theme.tertiary}
                     dot={<></>}
                 />
 
-                <XAxis dataKey="timeUsed" />
-                <YAxis />
-                <Tooltip />
+                <XAxis dataKey="timeUsed" stroke={theme.background.secondary} />
+                <YAxis stroke={theme.background.secondary} />
+                <Tooltip
+                    contentStyle={{
+                        background: theme.background.secondary,
+                        border: "none"
+                    }}
+                    wrapperStyle={{ color: theme.text.secondary }}
+                    itemStyle={{ color: theme.text.secondary }}
+                />
                 <Legend />
             </LineChart>
         </DataBoxWrapper>

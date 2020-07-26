@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
+import { getTheme } from "../../../../utils/getTheme";
 
 // File with the styled components for the 2nd pannel of home page
 // It contains the chart and the definition of touchtyping
+const theme = getTheme();
 
 export const StyledPannel2 = styled.div`
-    background: white;
+    background: ${theme.background.primary};
     height: auto;
     display: flex;
     position: relative;
@@ -36,7 +38,7 @@ export const Text = styled.div`
 
 export const TextStyling = styled.div`
     font-family: "Verdana";
-    color: #242424;
+    color: ${theme.text.primary};
     text-align: center;
     font-size: 20px;
 `;

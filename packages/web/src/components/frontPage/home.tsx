@@ -11,7 +11,12 @@ if (localStorage.getItem("bestwpm") === null) {
 if (localStorage.getItem("previousScores") === null) {
     localStorage.setItem("previousScores", JSON.stringify([]));
 }
-
+if (localStorage.getItem("theme") === null) {
+    localStorage.setItem("theme", "light");
+}
+if (localStorage.getItem("userid") === null) {
+    localStorage.setItem("userid", "undefined");
+}
 // Home page
 
 export const Home = () => {
