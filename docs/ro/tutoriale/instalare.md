@@ -27,7 +27,7 @@ API-ul este pe localhost:8090 (rețineți că API-ul nu este nici pe aproape de 
 SPA este in localhost:8080
 
 ```
-pnpm run dev 
+pnpm run dev
 ```
 
 2. Ruleaza numai SPA-ul
@@ -48,7 +48,7 @@ Dupa poti sa deschizi localhost:8080 in browser
 
 ### Alte scripturi
 
-Restul scripturilor poate fi gasit in: [Root folder](https://github.com/Vyctor661/king-typer/blob/master/package.json), [SPA Folder](https://github.com/Vyctor661/king-typer/blob/master/packages/web/package.json), [API Folder](https://github.com/Vyctor661/king-typer/blob/master/packages/api/package.json)
+Restul scripturilor poate fi gasit in: [Root folder](blob/master/package.json), [SPA Folder](blob/master/packages/web/package.json), [API Folder](blob/master/packages/api/package.json)
 
 - `build`: Un script pentru a construi aplicația folosind webpack sau tsc sau poate ambele în funcție de folderul în care rulați scriptul. Aplicația va construi în două foldere separate `dist`, unul pentru API și una pentru SPA.
 - `start`: Un script pentru a porni buildul.

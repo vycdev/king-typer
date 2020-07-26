@@ -46,7 +46,7 @@ pnpm run dev
 
 ### Other scripts
 
-Other scripts can be found in the package.json files. ([Root folder](https://github.com/Vyctor661/king-typer/blob/master/package.json), [SPA Folder](https://github.com/Vyctor661/king-typer/blob/master/packages/web/package.json), [API Folder](https://github.com/Vyctor661/king-typer/blob/master/packages/api/package.json))
+Other scripts can be found in the package.json files. ([Root folder](blob/master/package.json), [SPA Folder](blob/master/packages/web/package.json), [API Folder](blob/master/packages/api/package.json))
 
 - `build`: A script to build the app using webpack or tsc or maybe both depending on in what folder you run the script. The app will build in two separate `dist` folders, one for the API and one for the SPA.
 - `start`: A script to start the build.

@@ -1,11 +1,11 @@
 # Cum să utilizați aplicația.
 
-Puteți utiliza versiunea găzduită a aplicației [aici](https://king-typer.herokuapp.com/) sau puteți instala aplicația și o puteți rula folosind [acest tutorial](https://github.com/Vyctor661/king-typer/blob/docs/docs/ro/tutoriale/instalare.md)
+Puteți utiliza versiunea găzduită a aplicației [aici](https://king-typer.herokuapp.com/) sau puteți instala aplicația și o puteți rula folosind [acest tutorial](blob/docs/docs/ro/tutoriale/instalare.md)
 
 ## Când deschideți aplicația, veți fi întâmpinat de acest ecran, care este `pagina principală`:
 
 
-![Files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/homePagePreview.png)
+![Files](blob/docs/docs/assets/homePagePreview.png)
 
 În partea de sus puteți vedea că aveți 3 butoane, precum și un buton sub titlul paginii.
 Voi explica puțin mai târziu despre restul paginilor din aplicatie.
@@ -19,17 +19,17 @@ Iar mai jos veți găsi un ghid foarte util despre cum să utilizați tastarea t
 ### Practic aceasta este întreaga pagină de pornire (din perspectiva unui telefon):
 
 
-![Files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/responsiveness.png)
+![Files](blob/docs/docs/assets/responsiveness.png)
 
 ## Butoanele „Start Typing” vă vor aduce la aceeași pagină unde puteți da un test:
 
 
-![Files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/typingBox.png)
+![Files](blob/docs/docs/assets/typingBox.png)
 
 Este foarte simplu să începi testul, începi doar să tastezi în caseta de input, iar după ce introduci primul cuvânt, timerul va începe și ai 60 de secunde pentru a tasta cât mai multe cuvinte cu cea mai bună precizie pe care o poți avea, iar la sfârșitul testului veți vedea cât de bine v-ați descurcat:
 
 
-![Files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/typingBoxAfterTest.png)
+![Files](blob/docs/docs/assets/typingBoxAfterTest.png)
 
 În partea de sus veți vedea câteva informații simple despre testul dvs.:
 - `Your best`: ceea ce înseamnă cel mai bun scor pe care l-ați avut în WPM (cuvinte pe minut)
@@ -50,7 +50,7 @@ Sub toate acestea, veți vedea unul dintre dintre:
 Dacă nu ați făcut încă niciun test de dactilografiere, veți vedea un mesaj care vă spune că puteți vedea statistici doar dacă ați dat cel putin un test.
 Dacă ați dat cel puțin un test de dactilografiere veți fi întâmpinat de această pagină:
 
-![Files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/statisticsPage.png)
+![Files](blob/docs/docs/assets/statisticsPage.png)
 
 
 Explicand totul de sus în jos:

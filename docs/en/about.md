@@ -6,7 +6,7 @@ The developement for King Typer will continue even after the contest until I am 
 This is a monorepo, containing both the API and the front-end that are hosted separately on Heroku.
 
 - You can visit the website [here](https://king-typer.herokuapp.com/).
-- You can see links for other docs [here](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/main.md).
+- You can see links for other docs [here](blob/docs/docs/en/main.md).
 
 ## Why is everything in English?
 
@@ -42,7 +42,7 @@ The `src` folder is structured in:
 The `components` folder can contain other folders that are used for structuring components files. Those other folders can contain files and folders like: `style.tsx` files `<component>.tsx` files, other `components` folders, `helpers` folders with helper files in them.
 
 This is a graphic representation of the files structure:
-![files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/gourcefiletree.png)
+![files](blob/docs/docs/assets/gourcefiletree.png)
 
 ## Requirements and compatibility
 

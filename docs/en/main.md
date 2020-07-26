@@ -1,10 +1,10 @@
 # Links for all the documentation files:
 
-- [Basic usage of the app.](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/basic-usage.md)
-- [Assets and code I don't own](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/assets-%26-code-i-dont-own.md)
-- [Some resources for learning touch typing.](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/tutorials/touch-typing.md)
-- [Instalation guide](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/tutorials/instalation.md)
-- [About the app code and architecture](https://github.com/Vyctor661/king-typer/blob/docs/docs/en/about.md)
+- [Basic usage of the app.](blob/docs/docs/en/basic-usage.md)
+- [Assets and code I don't own](blob/docs/docs/en/assets-%26-code-i-dont-own.md)
+- [Some resources for learning touch typing.](blob/docs/docs/en/tutorials/touch-typing.md)
+- [Instalation guide](blob/docs/docs/en/tutorials/instalation.md)
+- [About the app code and architecture](blob/docs/docs/en/about.md)
 
 # Project tree
 
@@ -15,7 +15,7 @@
 
 
 ## Old project tree
-![files](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/gourcefiletree.png)
+![files](blob/docs/docs/assets/gourcefiletree.png)
 
 
 

@@ -12,11 +12,11 @@
 - The typing text animation is made using a dependency called [react-rotating-text](https://www.npmjs.com/package/react-rotating-text)
 - The charts are made using a dependency called [recharts](https://recharts.org/en-US/)
 
-A list with all the dependencies can be found [here](https://github.com/Vyctor661/king-typer/blob/master/package.json), [here](https://github.com/Vyctor661/king-typer/blob/master/packages/web/package.json) and [here](https://github.com/Vyctor661/king-typer/blob/master/packages/api/package.json), of course I don't own any of the dependencies. 
+A list with all the dependencies can be found [here](blob/master/package.json), [here](blob/master/packages/web/package.json) and [here](blob/master/packages/api/package.json), of course I don't own any of the dependencies.
 
 ## Contributors
 
 All the code in the repo was written by me.
 
 - The [semantic-release-bot](https://github.com/Vyctor661/king-typer/commits?author=semantic-release-bot) is a bot that creates CHANGELOG files automatically based on my commits and determines the versions of the app. [Semantic-release](https://github.com/semantic-release/semantic-release) is a dependency.
-- If you are wondering why are there contributors in my [README](https://github.com/Vyctor661/king-typer/blob/master/README.md), its because they are people who helped me with ideas, design and coding tips.
+- If you are wondering why are there contributors in my [README](blob/master/README.md), its because they are people who helped me with ideas, design and coding tips.

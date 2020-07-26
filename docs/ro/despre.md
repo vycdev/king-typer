@@ -7,7 +7,7 @@ Dezvoltarea pentru King Typer va continua chiar și după concurs, până când 
 Acesta este un monorepo, care conține atât API-ul cât și front-end-ul, care sunt găzduite separat pe heroku.
 
 - Puteți accesa site-ul [aici](https://king-typer.herokuapp.com/).
-- Puteți vedea link-uri pentru alte informatii [aici](https://github.com/Vyctor661/king-typer/blob/docs/docs/ro/main.md).
+- Puteți vedea link-uri pentru alte informatii [aici](blob/docs/docs/ro/main.md).
 
 ## De ce este totul în engleză?
 
@@ -43,7 +43,7 @@ Folderul `src` este structurat în:
 Folderul `components` poate conține alte foldere utilizate pentru structurarea fișierelor de componente. Aceste alte foldere pot conține fișiere și foldere precum: fișiere `style.tsx` `<component>.tsx`, alte foldere `components ', foldere` helpers` cu fișiere de ajutor.
 
 Aceasta este o reprezentare grafică a structurii fișierelor:
-![File](https://github.com/Vyctor661/king-typer/blob/docs/docs/assets/gourcefiletree.png)
+![File](blob/docs/docs/assets/gourcefiletree.png)
 
 ## Cerințe și compatibilitate
 
