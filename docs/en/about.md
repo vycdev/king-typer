@@ -68,8 +68,11 @@ I want to mention that a lot of those elements listed below don't make it into t
 Likewise, there are many tools that I use on the back end. While these are not compiled away to give the user the best performance they can, they are essential to maintaining the API.
 
 - `koa` - Mentioned in the front end, Koa is the backbone of the API. It creates a dynamic HTTP server from which the API takes life. It is hosted on Heroku.
-- `pg` - PostgreSQL is an SQL-based database, where all the user, texts, and game data are stored.
+- `postgres` - PostgreSQL is an SQL-based database, where all the user, texts, and game data are stored.
 - `knex` - Rather than interacting with the database itself, I use Knex to interact with it. Using Knex, I can write database migrations, seeds, and most importantly, interact with the database. It automatically sanitizes input and makes an easy, function-based way to interact.
+- `mocha/chai` - To write unit tests, I use mocha, which is a testing library similar to Jest. These tests are complemented by chai, an assertions library.
+- `joi` - When performing requests, often times there is a schema required for requests. Joi is a middleware creator that performs schema validation for you, so you can ensure that you are getting the correct schema passed in with little hassle.
+- `ws` - The browser has native websockets built in, but Node.JS doesn't. To implement websockets, we use the ws module. Socket.io is not necessary, and it is bloated so it is not used.
 
 ## Testing
 
