@@ -1,11 +1,11 @@
 # How to use the app.
 
-You can use the hosted version of the app [here](https://king-typer.herokuapp.com/) or you can install the app and run it using [this tutorial](blob/docs/docs/en/tutorials/instalation.md)
+You can use the hosted version of the app [here](https://king-typer.herokuapp.com/) or you can install the app and run it using [this tutorial](tutorials/instalation.md)
 
 ## When you open the app you will be welcomed by this screen which is the `home page`:
 
 
-![files](blob/docs/docs/assets/homePagePreview.png)
+![files](../assets/homePagePreview.png)
 
 At the top you can see you have 3 buttons as well as one button under the title of the page.
 I will explain a little bit later about every other page in the app.
@@ -19,17 +19,17 @@ At the very bottom you will find a footer with a button which redirects the user
 ### Basically this is the whole home page (from a phone perspective):
 
 
-![files](blob/docs/docs/assets/responsiveness.png)
+![files](../assets/responsiveness.png)
 
 ## The `Start Typing` buttons will both bring you to the same page where you can take a typing test:
 
 
-![files](blob/docs/docs/assets/typingBox.png)
+![files](../assets/typingBox.png)
 
 It's very simple to start the typing test, you just start typing in the input box, after you type the first word the timer will begin and you have 60 seconds to type as many words as you can with the best accuracy you can have, and at the end of the test you will see how well you've done:
 
 
-![files](blob/docs/docs/assets/typingBoxAfterTest.png)
+![files](../assets/typingBoxAfterTest.png)
 
 At the very top you will see some simple info about your test:
 - `Your best`: which means the best score you've ever had in WPM (words per minute)
@@ -50,7 +50,7 @@ Under all of that you will see either of:
 If you haven't taken any typing tests yet you will see a message telling you that you can only see statistics if you have taken at least one typing test before.
 If you have taken at least one typing test before you will be welcomed by this page:
 
-![files](blob/docs/docs/assets/statisticsPage.png)
+![files](../assets/statisticsPage.png)
 
 
 Explaining everything from top to bottom:
