@@ -20,3 +20,4 @@ Tot codul din repo a fost scris de mine.
 
 - [semantic-release-bot](https://github.com/Vyctor661/king-typer/commits?author=semantic-release-bot) este un bot care creează automat fișiere CHANGELOG pe baza commiturilor mele și determină versiunea releaseurilor din aplicație [Semantic-release](https://github.com/semantic-release/semantic-release) este un dependency.
 - Dacă vă întrebați de ce există participanți in [README](../../README.md), raspunsul este pentru că sunt oameni care m-au ajutat cu idei, design și sfaturi pentru coding.
+

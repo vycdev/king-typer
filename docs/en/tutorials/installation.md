@@ -16,6 +16,42 @@ I used pnpm to manage all my dependencies. In the root folder run this command t
 pnpm i
 ```
 
+
+### ENV Files
+
+You will need env files for both the api and the frontend.
+
+
+#### For the frontend
+
+```
+    NODE_ENV = ""
+
+    // "development" | "production" this changes different variables you can find in web/src/utils/constants.ts
+```
+
+#### For the api
+
+```
+DB_CLIENT="pg"
+
+DATABASE_URL=""
+    // db url or connection are the same thing you can look in the kenx
+    // file to check them, it only depends on whether or not you are
+    // running in development or production
+CONNECTION=""
+NODE_ENV=""
+
+CORS_ORIGIN="" //Url to where the frontend is hosted
+GMAIL_PASS="" //Password for email account for seinding emails
+
+    // We dont store the username in an env variable.
+    // You should be able to find it pretty easily in the code.
+
+SERVER_URL="" // Url to where the backend is hosted aka the api
+```
+
+
 ### Run the dev command and enjoy
 
 Run the dev command in any way you want:

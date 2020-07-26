@@ -16,6 +16,38 @@ Am folosit pnpm pentru a-mi gestiona toate dependencyurile. În folderul root ru
 pnpm i
 ```
 
+### File env
+
+You will need env files for both the api and the frontend.
+
+
+#### Pentru frontend
+
+```
+    NODE_ENV = ""
+
+    // "development" | "production" aceast variabila schimba diferite constante in web/src/utils/constants.ts
+```
+
+#### Pentru api
+
+```
+DB_CLIENT="pg"
+
+DATABASE_URL=""
+    // database url sau connection sunt aceleasi doar ca databaseurl este pentru production mode iar connection este pentru development
+CONNECTION=""
+NODE_ENV="" // acelasi ca si la front end
+
+CORS_ORIGIN="" //Url-ul unde este hostat frontendul
+GMAIL_PASS="" //Password pentru email,
+
+    // Nu am stocat usernameul intro variabila env
+    // Usernameul nu ar trebuii sa fie greu de gasit in cod
+
+SERVER_URL="" // Url-ul unde se afla hostat server-ul aka api-ul
+```
+
 ### Ruleaza comanda dev.
 
 Ruleaza codul in dev mode in orice mod doresti:
