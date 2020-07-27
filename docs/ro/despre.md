@@ -29,6 +29,22 @@ Depozitul este un mono-repository, ceea ce înseamnă că servește două părț
 
 Folderul `api` conține server-ul api, nu numai ca acesta contine rutele care pot fi accesate prin requesturi HTTP, dar contine si migratiile si seedurile pentru baza de date.
 
+El contine un folder numit `db` si unul numit `src`. `db` este responsabil pentru tot ceea ce tine de baza de date, iar `src` este responsabil pentru restul.
+
+In interiorul folderului `db` vei gasi migratiile, care sunt folosite pentru a structura baza de date si seed-urile care sunt folosite pentru a introduce date pentru testare in baza de date.
+
+Folderul `src` contine un folder numit `common` ce are in interior lucruri comune cum ar fi functii ajutatoare sau middleware pentru erori, si un folder `modules` in care se afla restul serverului.
+
+Fiecare modul poate contine cateva alte foldere. Multe dintre acestea au in comun fisiere cum ar fi `router.ts` sau `router.test.ts`, care contine rutele si testele pentru acestea.
+
+Aceste module pot contine de asemenea o varietate de alte fisiere. Nu toate dintre acestea sunt prezente in fiecare modul.
+* `actions` - functii care sunt folosite pentru a executa diferite actiuni necesare modulului.
+* `helpers` - functii ajutatoare.
+* `middleware` - middleware.
+* `schema` - validari folosite pentru rutele din acel modul.
+* `types` - tipuri de date individuale pentru acel modul.
+
+
 #### Folderul `web`.
 
 Folderul `web` conține tot ce are legătură cu SPA. În rădăcina acestuia veți găsi folderul `src` care conține tot codul pentru SPA. Există, de asemenea, un dosar `public` care conține fișierul` index.html`, de asemenea mai este si configurațiile pentru babel, eslint, heroku, typecript și webpack, precum și un fișier `package.json` care ține evidența tuturor dependentelor din folder.
@@ -136,7 +152,7 @@ Acesta este exact ca si modurile normal si easy doar ca este multiplayer. Despre
 
 Da, acum avem tutorial, care, practic sunt lafel ca si modul easy say normal, dar ai mai mult timp sa termini testul iar continutul este facut special pentru a iti imbunatatii scrierea.
 
-De asemeanea, tutoriale au requirements. Daca nu ai cel putin un anumit scor si accuratete, nu se va pune ca si tutorial completat. Poti sa reincerci tutorialele de cate ori vrei tu.
+De asemenea, tutoriale au requirements. Daca nu ai cel putin un anumit scor si accuratete, nu se va pune ca si tutorial completat. Poti sa reincerci tutorialele de cate ori vrei tu.
 
 ![](https://cdn.discordapp.com/attachments/658679294515478534/737010206797463593/unknown.png)
 ![](https://cdn.discordapp.com/attachments/658679294515478534/737010254482767892/unknown.png)
@@ -191,7 +207,7 @@ Dupa cum poti vedea sunt multe lucruri despre care putem sa vorbim.
 
 # Dashboard
 
-Ultima functionalitate noua adaugata (care este la vedere pe frontend cel putin :) ) este dashboard-ul. Aici ai acces la editarea multor lucruri si de asemeanea poti sa si adaugi si sa stergi.
+Ultima functionalitate noua adaugata (care este la vedere pe frontend cel putin :) ) este dashboard-ul. Aici ai acces la editarea multor lucruri si de asemenea poti sa si adaugi si sa stergi.
 
 ![](https://cdn.discordapp.com/attachments/658679294515478534/737010622159388702/unknown.png)
 ![](https://cdn.discordapp.com/attachments/658679294515478534/737010660520493146/unknown.png)
