@@ -28,6 +28,21 @@ In the root folder you will find a `packages` folder which contains the `web` fo
 
 The `api` folder contains the API as well as the database. This not only contains the routes which can be accessed via HTTP requests, but also the migrations and seeds for the database.
 
+The `api` folder has a `db` and `src` folder. The `db` folder is responsible for the database and the `src` folder is responsible for everything else.
+
+Inside the `db` folder, you find the migrations, which are used to structure the database, as well as the seeds, which are used to make some testing data for the database.
+
+The `src` folder contains `common`, which has some common things like error handlers and helper functions, and `modules`, which is where the server exists.
+
+Each module can contain a few different folders. Most of them have a `router.ts` and `router.test.ts`, which are the router for that module and the testing suite for it, respectively.
+
+Each module may also contain a variety of other folders. Not all of them are present in each module.
+* `actions` - the functions that are used to perform actions in that module
+* `helpers` - helper functions for that module
+* `middleware` - assorted middleware for use in that module or others
+* `schema` - the validation schema used for the routes in that module
+* `types` - individual types used for that module.
+
 #### The `web` folder.
 
 The `web` folder contains everything that has to do with the SPA. In the root of this folder you will find the `src` folder which contains all the code for the SPA. There is also a `public` folder that contains the `index.html` file, the configs for Babel, ESLint, Heroku, TypeScript and Webpack as well as a `package.json` file that keeps track of all the node modules in the folder.
