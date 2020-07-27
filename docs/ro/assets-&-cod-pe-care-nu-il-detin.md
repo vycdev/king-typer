@@ -1,6 +1,6 @@
-# Active și cod pe care nu le-am creat eu:
+# Assets și cod pe care nu le-am creat eu:
 
-- logo-ul github din subsol, este de la [iconfinder](https://www.iconfinder.com/icons/107112/github_six_icon);
+- Logo-ul github din subsol este de la [iconfinder](https://www.iconfinder.com/icons/107112/github_six_icon);
 - Imaginea tastaturii este de la [ratatype](https://www.ratatype.com/learn/)
 - Tutorialul a fost parțial copiat și modificat de pe același site web [ratatype](https://www.ratatype.com/learn/)
 - Definiția tastării tactile este preluată din [wikipedia](https://en.wikipedia.org/wiki/Touch_typing)
@@ -9,14 +9,15 @@
 - Fonturile text sunt prelevate în principal din [Google Fonts](https://fonts.google.com/)
 
 
-- Animarea textului de tipar se face folosind un dependency numit [react-rotating-text](https://www.npmjs.com/package/react-rotating-text)
-- Grafurile sunt realizate folosind un dependency numit [recharts](https://recharts.org/en-US/)
+- Animarea textului de tipar se face folosind o dependenta numita [react-rotating-text](https://www.npmjs.com/package/react-rotating-text)
+- Grafurile sunt realizate folosind o dependenta numita [recharts](https://recharts.org/en-US/)
 
-O listă cu toate dependency-urile poate fi găsită [aici](https://github.com/Vyctor661/king-typer/blob/docs/package.json), [aici](https://github.com/Vyctor661/king-typer/blob/docs/packages/web/package.json) și [aici](https://github.com/Vyctor661/king-typer/blob/docs/packages/api/package.json), desigur Nu dețin nici-un dependency.
+O listă cu toate dependentele poate fi găsită [aici](../../package.json), [aici](../../packages/web/package.json) și [aici](../../packages/api/package.json).
 
 ## Colaboratori
 
 Tot codul din repo a fost scris de mine.
 
-- [semantic-release-bot](https://github.com/Vyctor661/king-typer/commits?author=semantic-release-bot) este un bot care creează automat fișiere CHANGELOG pe baza commiturilor mele și determină versiunea releaseurilor din aplicație [Semantic-release](https://github.com/semantic-release/semantic-release) este un dependency.
-- Dacă vă întrebați de ce există participanți in [README](https://github.com/Vyctor661/king-typer/blob/master/README.md), raspunsul este pentru că sunt oameni care m-au ajutat cu idei, design și sfaturi pentru coding.
+- [Semantic-release-bot](https://github.com/Vyctor661/king-typer/commits?author=semantic-release-bot) este un bot care creează automat fișiere CHANGELOG pe baza commiturilor mele și determină versiunea lansarilor din aplicație. [Semantic-release](https://github.com/semantic-release/semantic-release) este o dependenta.
+- Dacă vă întrebați de ce există participanți in [README](../../README.md), raspunsul este pentru că sunt oameni care m-au ajutat cu idei, design și sfaturi pentru coding.
+
