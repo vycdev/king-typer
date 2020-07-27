@@ -1,7 +1,7 @@
 import Text from "../types/Text";
 import knex from "../../../../db/knex";
 
-export default async (ordered: boolean | undefined) => {
+export default async (ordered: boolean) => {
     if (ordered === true || ordered === false) {
         const texts = await knex<Text>("texts").where({
             ordered,

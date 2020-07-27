@@ -6,7 +6,8 @@ import User from "../types/User";
 const genNewKey = () =>
     Array(16)
         .fill(0)
-        .map((_) =>
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .map(_ =>
             Math.random()
                 .toString(36)
                 .charAt(2)
@@ -29,7 +30,7 @@ export const createUser = async (
         await knex<User>("users").insert(
             {
                 ...user,
-                role: "member",
+                role: "unverified",
                 password: encryptedPassword,
                 exp: 0,
                 tutorials: [],

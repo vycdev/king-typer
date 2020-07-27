@@ -32,3 +32,8 @@ export const apiUrl =
     process.env.NODE_ENV === "development"
         ? "http://localhost:8090/api"
         : "https://king-typer-api.herokuapp.com/api";
+
+export const wsUrl =
+    process.env.NODE_ENV === "development"
+        ? "ws://localhost:8090"
+        : "wss://king-typer-api.herokuapp.com";

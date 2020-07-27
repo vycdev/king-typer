@@ -10,14 +10,6 @@ import { removeOldGame } from "./actions/removeOldGame";
 
 const agent = request.agent(server);
 
-const newGame = {
-    userid: 1,
-    wpm: 90,
-    rawwpm: 100,
-    accuracy: 90,
-    seconds: 60
-};
-
 describe("Game routes", async () => {
     // We don't need to rerun migrations or seeds because we did in the auth route
 
@@ -27,31 +19,41 @@ describe("Game routes", async () => {
 
         await agent.post(`/api/auth/login`).send({ email, password });
 
+        const newGame = {
+            wpm: 90,
+            rawwpm: 100,
+            accuracy: 90,
+            textid: 0,
+            difficulty: 2
+        };
+
         const response = await agent
-            .post(`/api/games/newGame/`)
+            .post(`/api/games/newGame`)
             .send(newGame)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
-        expect(response.text).to.deep.equal("Successfully created a game!");
+        expect(response.body.message).to.deep.equal(
+            "Successfully created a game!"
+        );
     });
 
     it("Deletes games past 10 games", async function() {
         this.timeout(5000);
 
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
-        await createGame(4, 0, 0, 0);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
+        await createGame(4, 0, 0, 0, 1, 11);
 
         await Promise.all([
             removeOldGame(4),
@@ -65,7 +67,7 @@ describe("Game routes", async () => {
     });
 
     it("Checks for achievements", async () => {
-        await createGame(4, 32, 40, 80);
+        await createGame(4, 32, 40, 80, 5, 11);
         await removeOldGame(4);
 
         const achievements = await agent.get("/api/users/achievements/4");

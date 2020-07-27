@@ -2,6 +2,7 @@ import request from "supertest";
 import { expect } from "chai";
 
 import { server } from "../../index";
+import knex from "../../../db/knex";
 
 const agent = request.agent(server);
 
@@ -38,21 +39,56 @@ describe("Users routes", async () => {
             .expect("Content-Type", /json/)
             .expect(400);
 
-        expect(response.body).to.deep.equal({
-            status: 400,
-            message: "That username seems to be already taken"
-        });
+        expect(response.body.message).to.equal(
+            "That username seems to be already taken"
+        );
+    });
+
+    it("Changes the password of a user", async () => {
+        const response = await agent
+            .patch("/api/users/changePassword")
+            .send({
+                oldPassword: "WhatShouldITypeHere88@",
+                newPassword: "WhatShouldITypeHere99@"
+            })
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(200);
+
+        expect(response.body.message).to.equal("Successfully changed password");
+    });
+
+    it("Can't change if the password provided is wrong", async () => {
+        const response = await agent
+            .patch("/api/users/changePassword")
+            .send({
+                oldPassword: "WhatShouldITypeHere88@",
+                newPassword: "WhatShouldITypeHere44@"
+            })
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(400);
+
+        expect(response.body.message).to.equal("Password does not match");
     });
 
     describe("Game stats", async () => {
         before(async () => {
-            await agent
-                .post("/api/games/newGame")
-                .send({ wpm: 60, rawwpm: 80, accuracy: 75 });
+            await agent.post("/api/games/newGame").send({
+                wpm: 60,
+                rawwpm: 80,
+                accuracy: 75,
+                difficulty: 3,
+                textid: 1
+            });
 
-            await agent
-                .post("/api/games/newGame")
-                .send({ wpm: 90, rawwpm: 100, accuracy: 90 });
+            await agent.post("/api/games/newGame").send({
+                wpm: 90,
+                rawwpm: 100,
+                accuracy: 90,
+                difficulty: 3,
+                textid: 1
+            });
         });
 
         it("Gets the games of a user", async () => {
@@ -86,6 +122,55 @@ describe("Users routes", async () => {
                 .expect("Content-Type", /json/)
                 .expect(200);
             expect(response.body[0].wpm).to.equal(60);
+        });
+    });
+
+    describe("Forgotten password", () => {
+        it("Can send an email", async () => {
+            const response = await agent
+                .post("/api/users/requestForgotPassword")
+                .send({ email: "UserUser@fake.com" })
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+            expect(response.body.message).to.equal(
+                "Success, an email has been sent to your email address"
+            );
+            // I commented this out because I don't want to get spammed with "that email does not exist" emails.
+        }).timeout(5000);
+
+        it("Can hit forgot password link", async () => {
+            const { key } = await knex("forgottenpasswords")
+                .where({ email: "UserUser@fake.com" })
+                .first();
+
+            const response = await agent
+                .get(`/api/users/forgotPassword/${key}`)
+                .send({ email: "UserUser@fake.com" })
+                .set("Accept", "application/text")
+                .expect("Content-Type", /text/)
+                .expect(302);
+
+            expect(response.text).to.equal(
+                `Redirecting to ${process.env.CORS_ORIGIN}/#/loginregister/resetPassword/${key}.`
+            );
+        });
+
+        it("Can reset the password", async () => {
+            const { key } = await knex("forgottenpasswords")
+                .where({ email: "UserUser@fake.com" })
+                .first();
+
+            const response = await agent
+                .post(`/api/users/resetPassword`)
+                .send({ key, password: "newPass", confirmPassword: "newPass" })
+                .set("Accept", "application/json")
+                .expect("Content-Type", /json/)
+                .expect(200);
+
+            expect(response.body.message).to.equal(
+                "Successfully reset password"
+            );
         });
     });
 });

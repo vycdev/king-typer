@@ -8,6 +8,7 @@ export const removeOldGame = async (userid: number): Promise<void> => {
         for (const game of removalGames) {
             await knex<Game>("games")
                 .delete()
+                .where({ userid })
                 .where({ gameid: game.gameid });
         }
     }

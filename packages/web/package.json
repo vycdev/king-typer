@@ -31,7 +31,8 @@
         "react-rotating-text": "^1.4.1",
         "react-router-dom": "^5.1.2",
         "recharts": "^1.8.5",
-        "typescript": "^3.7.4"
+        "typescript": "^3.7.4",
+        "ws-heartbeat": "^1.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.6.4",

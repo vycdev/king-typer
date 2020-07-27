@@ -71,14 +71,6 @@ export const Nav = () => {
                 >
                     Normal
                 </Link>
-                <Link
-                    to={`/type/multiplayer/Custom`}
-                    onClick={() => {
-                        closeNav();
-                    }}
-                >
-                    Custom
-                </Link>
             </NavBar>
         </Wrapper>
     );

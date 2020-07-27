@@ -35,18 +35,18 @@ describe("Texts routes", async () => {
         await agent
             .post(`/api/texts/addText/`)
             .send(newText)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
         const response = await agent
             .post(`/api/texts/addText/`)
             .send(newRandomText)
-            .set("Accept", "application/text")
-            .expect("Content-Type", /text/)
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
             .expect(201);
 
-        expect(response.text).to.deep.equal("Successfully added text");
+        expect(response.body.message).to.deep.equal("Successfully added text");
     });
 
     it("Gets all texts", async () => {
@@ -57,21 +57,20 @@ describe("Texts routes", async () => {
             .expect(200);
 
         expect(response.body).to.deep.equal([
-            { ...newText, id: 1 },
-            { ...newRandomText, id: 2 }
+            { ...newText, id: 1, requirements: null },
+            { ...newRandomText, id: 2, requirements: null }
         ]);
     });
 
     it("Gets a random text", async () => {
         const response = await agent
-            .get(`/api/texts/getRandomText/`)
+            .get(`/api/texts/getRandomText/true`)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200);
 
-        expect([
-            { ...newText, id: 1 },
-            { ...newRandomText, id: 2 }
-        ]).to.deep.include(response.body);
+        expect({ ...newText, id: 1, requirements: null }).to.deep.equal(
+            response.body
+        );
     });
 });
