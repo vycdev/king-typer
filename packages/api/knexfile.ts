@@ -7,13 +7,22 @@ type Configs = Record<string, Config>;
 
 const options = {
     client: process.env.DB_CLIENT,
-    connection: process.env.CONNECTION
-        ? {
-              database: process.env.CONNECTION
-          }
-        : {
-              filename: "db/db.sqlite3"
-          },
+    connection:
+        process.env.NODE_ENV === "test-ci"
+            ? {
+                  host: process.env.POSTGRES_HOST!,
+                  port: process.env.POSTGRES_PORT!,
+                  user: "postgres",
+                  password: "postgres",
+                  database: "postgres"
+              }
+            : process.env.CONNECTION
+            ? {
+                  database: process.env.CONNECTION
+              }
+            : {
+                  filename: "db/db.sqlite3"
+              },
     migrations: {
         directory: "db/migrations",
         tableName: "migrations"

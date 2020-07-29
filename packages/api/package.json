@@ -14,6 +14,7 @@
         "start": "node ./dist/src/index.js",
         "fresh-testdb": "dropdb --if-exists test-king-typer && createdb test-king-typer",
         "test": "pnpm run fresh-testdb && cross-env NODE_ENV=test mocha -r ./register.js 'src/**/*.test.ts' --exit",
+        "test-ci": "pnpm run fresh-testdb && cross-env NODE_ENV=test-ci mocha -r ./register.js 'src/**/*.test.ts' --exit",
         "build": "tsc && knex --cwd ./dist migrate:latest",
         "build-test": "tsc"
     },
