@@ -39,6 +39,9 @@ jobs:
             - name: Install PostgreSQL 12 Client
               run: sudo apt-get -yqq install libpq-dev
 
+            - name: Start PostgreSQL service
+              run: sudo systemctl start postgresql
+
             - name: Install pnpm
               run: npm i -g pnpm
 
