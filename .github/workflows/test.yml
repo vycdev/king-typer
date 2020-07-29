@@ -22,6 +22,8 @@ jobs:
                     --health-interval 10s
                     --health-timeout 5s
                     --health-retries 5
+                ports:
+                    - 5432:5432
 
         strategy:
             matrix:
@@ -53,6 +55,6 @@ jobs:
               run: pnpm run test
               env:
                 # The hostname used to communicate with the PostgreSQL service container
-                POSTGRES_HOST: postgres
+                POSTGRES_HOST: localhost
                 # The default PostgreSQL port
                 POSTGRES_PORT: 5432
