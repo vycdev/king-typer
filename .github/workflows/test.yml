@@ -12,7 +12,6 @@ jobs:
             postgres:
             image: postgres:12
             env:
-                POSTGRES_USER: postgres
                 POSTGRES_DB: dev-king-typer
                 POSTGRES_PASSWORD: ""
             ports: ["5432:5432"]
