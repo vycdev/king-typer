@@ -10,9 +10,9 @@ jobs:
 
         services:
             postgres:
-            image: postgres:12
-            env:
-                POSTGRES_PASSWORD: ""
+                image: postgres:12
+                env:
+                    POSTGRES_PASSWORD: ""
 
         strategy:
             matrix:
