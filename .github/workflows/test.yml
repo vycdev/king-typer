@@ -9,13 +9,19 @@ jobs:
         runs-on: ubuntu-latest
 
         services:
+            # Label used to access the service container
             postgres:
-                image: postgres:12
+                # Docker Hub image
+                image: postgres
+                # Provide the password for postgres
                 env:
-                    POSTGRES_USER: postgres
-                    POSTGRES_DB: dev-king-typer
-                    POSTGRES_PASSWORD: ""
-                ports: ["5432:5432"]
+                    POSTGRES_PASSWORD: postgres
+                # Set health checks to wait until postgres has started
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
 
         strategy:
             matrix:
@@ -45,3 +51,8 @@ jobs:
 
             - name: Test with pnpm
               run: pnpm run test
+              env:
+                # The hostname used to communicate with the PostgreSQL service container
+                POSTGRES_HOST: postgres
+                # The default PostgreSQL port
+                POSTGRES_PORT: 5432
