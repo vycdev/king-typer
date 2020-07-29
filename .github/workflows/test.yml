@@ -36,7 +36,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
 
-            - name: Install PostgreSQL 10 Client
+            - name: Install PostgreSQL 12 Client
               run: sudo apt-get -yqq install libpq-dev
 
             - name: Install pnpm
@@ -55,7 +55,7 @@ jobs:
               run: pnpm i
 
             - name: Test with pnpm
-              run: pnpm run test
+              run: pnpm run test-ci
               env:
                 # The hostname used to communicate with the PostgreSQL service container
                 POSTGRES_HOST: localhost
